@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<scan>
+    <packages>
+        <package>com.sap.cloud.s4hana.examples.addressmgr</package>
+        <package>com.sap.cloud.sdk</package>
+        <package>com.fasterxml.jackson</package>
+    </packages>
+</scan>

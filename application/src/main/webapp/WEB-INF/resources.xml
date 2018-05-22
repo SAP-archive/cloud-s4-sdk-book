@@ -1,0 +1,3 @@
+<resources>
+    <Resource id="jdbc/book-project-database" type="javax.sql.DataSource" properties-provider="org.cloudfoundry.reconfiguration.tomee.DelegatingPropertiesProvider"/>
+</resources>

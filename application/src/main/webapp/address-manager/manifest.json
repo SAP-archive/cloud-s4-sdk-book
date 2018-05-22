@@ -13,7 +13,7 @@
 		},
 		"dataSources": {
 			"businessPartners": {
-				"uri": "/api/busiess-partners",
+				"uri": "/api/business-partners",
 				"type": "JSON"
 			}
 		}

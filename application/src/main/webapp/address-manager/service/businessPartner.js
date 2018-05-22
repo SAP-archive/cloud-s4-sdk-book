@@ -6,7 +6,7 @@ sap.ui.define([
         getBusinessPartnerUrl: function (businessPartnerId) {
             var businessPartnerUrl = "/api/business-partners";
             if (businessPartnerId) {
-                return businessPartnerUrl + "?id=" + businessPartnerId;
+                return businessPartnerUrl + "/" + businessPartnerId;
             }
             return businessPartnerUrl;
         },
@@ -16,9 +16,9 @@ sap.ui.define([
         },
 
         getAddressUrl: function (businessPartnerId, addressId) {
-            var addressUrl = "/api/addresses";
-            if (businessPartnerId && addressId) {
-                return addressUrl + "?businessPartnerId=" + businessPartnerId + "&addressId=" + addressId;
+            var addressUrl = this.getBusinessPartnerUrl(businessPartnerId) + "/addresses";
+            if (addressId) {
+                addressUrl += "/" + addressId;
             }
             return addressUrl;
         },
@@ -27,7 +27,7 @@ sap.ui.define([
             delete newAddress.isNew;
             return jQuery.ajax({
                 url: this.getAddressUrl(businessPartnerId, addressId),
-                method: "PATCH",
+                method: "PUT",
                 contentType: "application/json",
                 data: JSON.stringify(newAddress)
             });
@@ -43,7 +43,7 @@ sap.ui.define([
         createAddress: function (address) {
             delete address.isNew;
             return jQuery.ajax({
-                url: this.getAddressUrl(),
+                url: this.getAddressUrl(address.BusinessPartner),
                 method: "POST",
                 contentType: "application/json",
                 data: JSON.stringify(address)
@@ -52,7 +52,7 @@ sap.ui.define([
 
         fetchCSRFToken: function () {
             return jQuery.get({
-                url: "/api/addresses",
+                url: "/api/",
                 headers: { "X-CSRF-Token": "Fetch" }
             }).always(function (response) {
                 var csrfToken = response.getResponseHeader("x-csrf-token");

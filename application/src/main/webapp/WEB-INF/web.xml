@@ -22,7 +22,7 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Read business partners</web-resource-name>
-            <url-pattern>/api/business-partners/*</url-pattern>
+            <url-pattern>/api/business-partners/</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>ViewAddresses</role-name>
@@ -31,7 +31,7 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Write business partners</web-resource-name>
-            <url-pattern>/api/addresses/*</url-pattern>
+            <url-pattern>/api/business-partners/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>WriteAddresses</role-name>
@@ -64,4 +64,12 @@
         <filter-name>HttpCachingHeaderFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <!-- This is necessary to expose the DataSource container-agnostic under JNDI name java:comp/env/jdbc/book-project-database
+     instead of container-specific JNDI name java:openejb/Resources/jdbc/book-project-database -->
+    <resource-ref>
+        <description>DB Connection</description>
+        <res-ref-name>jdbc/book-project-database</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+    </resource-ref>
 </web-app>

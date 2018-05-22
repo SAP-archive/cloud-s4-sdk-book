@@ -18,6 +18,15 @@
         <version>1.0</version>
     </parent>
 
+    <!-- Required for Tomee DataSource Cloud Foundry Binding -->
+    <repositories>
+        <repository>
+            <id>spring</id>
+            <name>Spring Repo</name>
+            <url>http://repo.spring.io/release/</url>
+        </repository>
+    </repositories>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -60,7 +69,6 @@
             <artifactId>slf4j-api</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -71,6 +79,17 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.openejb</groupId>
+            <artifactId>openejb-cxf-rs</artifactId>
+            <version>4.7.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
         </dependency>
 
         <!-- Persistency -->
@@ -84,9 +103,19 @@
             <version>4.2.21.Final</version>
         </dependency>
         <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4.1208-jdbc42-atlassian-hosted</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-cloudfoundry-connector</artifactId>
             <version>2.0.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.cloudfoundry</groupId>
+            <artifactId>tomee-resource-configuration</artifactId>
+            <version>1.4.0.RELEASE</version>
         </dependency>
     </dependencies>
 
@@ -106,6 +135,7 @@
                 <artifactId>tomee-maven-plugin</artifactId>
                 <version>1.7.5</version>
                 <configuration>
+                    <tomeeClassifier>jaxrs</tomeeClassifier>
                     <context>ROOT</context>
                     <libs>
                         <lib>ch.qos.logback:logback-classic:1.2.3</lib>

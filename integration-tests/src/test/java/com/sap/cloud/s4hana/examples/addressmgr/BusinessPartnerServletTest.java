@@ -1,5 +1,8 @@
 package com.sap.cloud.s4hana.examples.addressmgr;
 
+import com.sap.cloud.s4hana.examples.addressmgr.commands.GetAllBusinessPartnersCommand;
+import com.sap.cloud.s4hana.examples.addressmgr.commands.GetSingleBusinessPartnerByIdCommand;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultBusinessPartnerService;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import com.sap.cloud.sdk.cloudplatform.connectivity.ProxyConfiguration;
@@ -30,7 +33,9 @@ public class BusinessPartnerServletTest
     @Deployment
     public static WebArchive createDeployment()
     {
-        return TestUtil.createDeployment(BusinessPartnerServlet.class);
+        return TestUtil.createDeployment(BusinessPartnerRestService.class)
+                .addClasses(GetSingleBusinessPartnerByIdCommand.class, GetAllBusinessPartnersCommand.class)
+                .addClasses(BusinessPartnerLogic.class, DefaultBusinessPartnerService.class);
     }
 
     @BeforeClass
@@ -61,7 +66,7 @@ public class BusinessPartnerServletTest
     @Test
     public void testGetSingle() {
         when()
-                .get("/api/business-partners?id={id}", BUPA_ID)
+                .get("/api/business-partners/{id}", BUPA_ID)
         .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
