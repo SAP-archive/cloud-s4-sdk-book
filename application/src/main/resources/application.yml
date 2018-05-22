@@ -1,0 +1,16 @@
+logging:
+  level:
+    com.sap.cloud.s4hana.examples.addressmgr: DEBUG
+    com.sap.cloud.sdk: INFO
+    root: WARN
+
+server:
+  port: 8080
+
+multitenant:
+  defaultTenant: default-tenant
+
+spring:
+  jpa:
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.H2Dialect

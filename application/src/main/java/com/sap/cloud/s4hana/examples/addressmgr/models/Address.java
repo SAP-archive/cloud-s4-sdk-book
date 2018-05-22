@@ -1,33 +1,24 @@
 package com.sap.cloud.s4hana.examples.addressmgr.models;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@NamedQueries({
-        @NamedQuery(name="Address.findAll",
-                query="SELECT a FROM Address a"),
-        @NamedQuery(name="Address.findByStatus",
-                query="SELECT a FROM Address a WHERE a.status = :status")
-})
 @Accessors(chain = true)
-public class Address
-{
+public class Address {
     @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
