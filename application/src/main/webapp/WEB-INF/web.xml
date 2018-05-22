@@ -37,6 +37,15 @@
             <role-name>WriteAddresses</role-name>
         </auth-constraint>
     </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Write business partners</web-resource-name>
+            <url-pattern>/api/addresses-local/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>WriteAddresses</role-name>
+        </auth-constraint>
+    </security-constraint>
 
     <filter>
         <filter-name>HttpSecurityHeadersFilter</filter-name>
