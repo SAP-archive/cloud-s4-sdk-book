@@ -7,3 +7,7 @@ s4hana_pipeline/
 *.iml
 .vscode/
 node_modules/
+.DS_Store
+**/credentials.*
+**/node_modules
+**/package-lock.json

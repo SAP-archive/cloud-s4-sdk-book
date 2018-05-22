@@ -64,7 +64,6 @@
 
     <build>
         <finalName>${project.artifactId}</finalName>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -74,7 +73,6 @@
                     <attachClasses>true</attachClasses>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.openejb.maven</groupId>
                 <artifactId>tomee-maven-plugin</artifactId>

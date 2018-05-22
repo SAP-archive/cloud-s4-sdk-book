@@ -1,0 +1,22 @@
+<mvc:View
+	controllerName="sap.ui.demo.addressmgr.controller.App"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	busy="{appView>/busy}"
+	xmlns="sap.m">
+	<App>
+		<Page>
+			<customHeader>
+				<Bar>
+					<contentLeft>
+						<Button icon="sap-icon://log" press="onLogout"/>
+					</contentLeft>
+					<contentMiddle>
+						<Title text="{i18n>appTitle}"/>
+					</contentMiddle>
+				</Bar>
+			</customHeader>
+			<SplitContainer id="idAppControl"/>
+		</Page>
+	</App>
+</mvc:View>
