@@ -9,6 +9,6 @@ applications:
   env:
     TARGET_RUNTIME: tomee
     JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:96m..'
-#  services:
-#  - your-application-logs-service
-#  - your-auditlog-service
+  services:
+  - my-xsuaa
+  - my-destination

@@ -1,0 +1,30 @@
+{
+  "xsappname": "address-manager-<subdomain>",
+  "tenant-mode": "shared",
+  "scopes": [
+  {
+    "name": "$XSAPPNAME.ViewAddresses",
+    "description": "Scope to view business addresses"
+  },
+  {
+    "name": "$XSAPPNAME.WriteAddresses",
+    "description": "Scope to write business addresses"
+  }],
+  "role-templates": [
+  {
+    "name": "BusinessPartnerViewer",
+    "description": "Role to view business addresses",
+      "scope-references" : [
+        "$XSAPPNAME.ViewAddresses"
+      ]
+    },
+    {
+      "name": "BusinessPartnerManager",
+      "description": "Role to manage all business addresses",
+      "scope-references" : [
+        "$XSAPPNAME.ViewAddresses",
+        "$XSAPPNAME.WriteAddresses"
+      ]
+    }
+  ]
+}
