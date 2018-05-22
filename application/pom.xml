@@ -66,6 +66,46 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jaxrs</artifactId>
+            <version>1.5.17</version>
+            <!-- we want to use v2 of the jaxrs specification javax.ws.rs-api which is mandatory for the exception mapper -->
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.ws.rs</groupId>
+                    <artifactId>jsr311-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.s4hana.frameworks</groupId>
+            <artifactId>cxf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.s4hana.frameworks</groupId>
+            <artifactId>jaxrs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.openejb</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>6.0-6</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -84,6 +124,7 @@
                 <artifactId>tomee-maven-plugin</artifactId>
                 <version>1.7.5</version>
                 <configuration>
+                    <tomeeClassifier>jaxrs</tomeeClassifier>
                     <context>ROOT</context>
                     <libs>
                         <lib>ch.qos.logback:logback-classic:1.2.3</lib>
@@ -91,6 +132,56 @@
                         <lib>remove:slf4j-jdk14</lib>
                     </libs>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>2.2.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/api/api.yaml</inputSpec>
+                            <language>jaxrs-cxf</language>
+                            <configOptions>
+                                <sourceFolder>src/main/java</sourceFolder>
+                                <additional-properties>
+                                    useAnnotatedBasePath=true
+                                </additional-properties>
+                            </configOptions>
+                            <ignoreFileOverride>
+                            ${project.basedir}/src/main/resources/api/.swagger-codegen-ignore
+                            </ignoreFileOverride>
+                            <generateApiTests>false</generateApiTests>
+                            <output>${project.build.directory}/generated-sources/api</output>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- copy the swagger files to the web folder, so that they are accesible from the ui generator -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/address-manager-application/api/
+                            </outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/resources/api</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

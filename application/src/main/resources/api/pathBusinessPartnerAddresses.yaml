@@ -1,0 +1,56 @@
+addresses:
+    parameters:
+    - $ref: "./parameters.yaml#/businessPartnerId"
+    - $ref: "./parameters.yaml#/address"
+    - $ref: "./parameters.yaml#/location"
+    post:
+      operationId: "createAddress"
+      description: "Create address for business partner"
+      tags:
+      - "businessPartnerAddressService"
+      produces:
+      - "application/json"
+      responses:
+        201:
+          schema:
+            $ref: "./schemas.yaml#/AddressResponse"
+        404:
+          description: "Not found"
+        500:
+          description: "Server side error"
+addressID:
+    parameters:
+    - $ref: "./parameters.yaml#/businessPartnerId"
+    - $ref: "./parameters.yaml#/addressId"
+    patch:
+      operationId: "updateAddress"
+      parameters:
+      - $ref: "./parameters.yaml#/address"
+      description: "Update address for business partner"
+      tags:
+      - "businessPartnerAddressService"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          schema:
+            $ref: "./schemas.yaml#/AddressResponse"
+        404:
+          description: "Not found"
+        500:
+          description: "Server side error"
+    delete:
+      operationId: "deleteAddress"
+      description: "Delete address for business partner"
+      tags:
+      - "businessPartnerAddressService"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          schema:
+            $ref: "./schemas.yaml#/AddressResponse"
+        404:
+          description: "Not found"
+        500:
+          description: "Server side error"

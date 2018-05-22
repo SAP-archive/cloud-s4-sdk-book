@@ -1,0 +1,48 @@
+swagger: "2.0"
+info:
+  description: "Managing addresses associated to business partners."
+  version: "v1"
+  title: "Address Manager API"
+  contact:
+    email: "s4sdk@sap.com"
+basePath: "/api/v1/rest"
+tags:
+  - name: "businessPartnerService"
+  - name: "businessPartnerAddressService"
+paths:
+  /business-partners:
+    get:
+      operationId: "getBusinessPartners"
+      description: "Get all business partners."
+      tags:
+      - "businessPartnerService"
+      produces:
+      - "application/json"
+      responses:
+        '200':
+          schema:
+            $ref: "./schemas.yaml#/BusinessPartnersResponse"
+        '500':
+          description: "Server side error"
+  /business-partners/{businessPartnerId}:
+    parameters:
+    - $ref: "./parameters.yaml#/businessPartnerId"
+    get:
+      operationId: "getBusinessPartnersById"
+      description: "Get business partner by ID"
+      tags:
+      - "businessPartnerService"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          schema:
+            $ref: "./schemas.yaml#/BusinessPartnerResponse"
+        404:
+          description: "Not found"
+        500:
+          description: "Server side error"
+  /business-partners/{businessPartnerId}/addresses:
+    $ref : "./pathBusinessPartnerAddresses.yaml#/addresses"
+  /business-partners/{businessPartnerId}/addresses/{addressId}:
+    $ref : "./pathBusinessPartnerAddresses.yaml#/addressID"

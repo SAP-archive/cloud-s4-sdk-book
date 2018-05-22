@@ -48,6 +48,6 @@ public class GetSingleBusinessPartnerByIdCommand extends ErpCommand<BusinessPart
     @Override
     protected BusinessPartner getFallback() {
         logger.warn("Fallback called because of exception:", getExecutionException());
-        return BusinessPartner.builder().businessPartner(id).build();
+        return null;
     }
 }

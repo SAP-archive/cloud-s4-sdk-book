@@ -1,0 +1,76 @@
+BusinessPartnersResponse:
+  type: object
+  properties:
+    value:
+      $ref: "#/BusinessPartners"
+    error:
+      $ref: "#/Errors"
+BusinessPartnerResponse:
+  type: object
+  properties:
+    value:
+      $ref: "#/BusinessPartner"
+    error:
+      $ref: "#/Errors"
+BusinessPartners:
+  type: array
+  description: "List of Business partners"
+  items:
+    $ref: "#/BusinessPartner"
+BusinessPartner:
+  type: object
+  description: "Business partner object"
+  properties:
+    id:
+      type: string
+    firstName:
+      type: string
+    lastName:
+      type: string
+    addresses:
+      type: array
+      items:
+        $ref: "#/Link"
+Errors:
+  type: array
+  items:
+    $ref: "#/Error"
+Error:
+  type: object
+  description: "Error Object"
+  properties:
+    code:
+      type: integer
+    message:
+      type: string
+AddressResponse:
+  type: object
+  properties:
+    value:
+      $ref: "#/Address"
+    error:
+      $ref: "#/Error"
+Address:
+  type: object
+  description: "Address Object"
+  properties:
+    id:
+      type: string
+    cityName:
+      type: string
+    country:
+      type: string
+    houseNumber:
+      type: string
+    postalCode:
+      type: string
+    streetName:
+      type: string
+Link:
+  type: object
+  description: "Link to an other object"
+  properties:
+    href:
+      type: string
+    meta:
+      type: string

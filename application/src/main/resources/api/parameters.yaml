@@ -1,0 +1,25 @@
+businessPartnerId:
+  name: businessPartnerId
+  in: path
+  description: "Id of business partner"
+  required: true
+  type: string
+addressId:
+  name: addressId
+  in: path
+  description: "Id of address"
+  required: true
+  type: string
+address:
+  name: address
+  in: body
+  description: "Address in Body"
+  required: true
+  schema:
+    $ref : "./schemas.yaml#/Address"
+location:
+  name: Location
+  in: header
+  description: "Location header"
+  required: false
+  type: string
