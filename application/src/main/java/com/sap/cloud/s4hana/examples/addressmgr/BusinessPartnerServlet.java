@@ -1,5 +1,6 @@
 package com.sap.cloud.s4hana.examples.addressmgr;
 
+import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.sap.cloud.s4hana.examples.addressmgr.commands.GetAllBusinessPartnersCommand;
 import com.sap.cloud.s4hana.examples.addressmgr.commands.GetSingleBusinessPartnerByIdCommand;
@@ -35,6 +36,14 @@ public class BusinessPartnerServlet extends HttpServlet {
             final List<BusinessPartner> result = new GetAllBusinessPartnersCommand(service).execute();
             jsonResult = new Gson().toJson(result);
         } else {
+            if (!validateInput(id)) {
+                logger.warn("Invalid request to retrieve a business partner, id: {}.", id);
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                        String.format("Invalid business partner ID '%s'. " +
+                                        "Business partner ID must not be empty or longer than 10 characters.",
+                                id));
+                return;
+            }
             logger.info("Retrieving business partner with id {}", id);
             final BusinessPartner result = new GetSingleBusinessPartnerByIdCommand(service, id).execute();
             jsonResult = new Gson().toJson(result);
@@ -42,5 +51,9 @@ public class BusinessPartnerServlet extends HttpServlet {
 
         response.setContentType("application/json");
         response.getWriter().write(jsonResult);
+    }
+
+    private boolean validateInput(String id) {
+        return !Strings.isNullOrEmpty(id) && id.length() <= 10;
     }
 }
