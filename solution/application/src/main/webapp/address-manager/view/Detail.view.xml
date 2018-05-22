@@ -1,0 +1,81 @@
+<mvc:View
+	controllerName="sap.ui.demo.addressmgr.controller.Detail"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic">
+	<semantic:DetailPage
+		id="page"
+		title="{i18n>detailTitle}"
+		busy="{detailView>/busy}">
+		<semantic:content>
+			<ObjectHeader
+				id="objectHeader"
+				title="{
+					parts: [
+						{ path: 'details>/IsMale' },
+						{ path: 'details>/IsFemale' },
+						{ path: 'details>/FirstName' },
+						{ path: 'details>/LastName' }
+					],
+					formatter: '.formatter.salutation'
+				}">
+				<attributes>
+					<ObjectAttribute text="{
+						path: 'details>/BusinessPartner',
+						formatter: '.formatter.businessPartnerId'
+					}" />
+					<ObjectAttribute text="{
+						path: 'details>/CreationDate',
+						formatter: '.formatter.creationDateValue'
+					}"/>
+				</attributes>
+			</ObjectHeader>
+			<Table
+				id="addressList"
+				width="auto"
+				items="{details>/to_BusinessPartnerAddress}"
+				noDataText="{i18n>noAddressesText}"
+				class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar id="lineItemsToolbar">
+						<Title
+							id="lineItemsHeader"
+							text="{
+								path: 'details>/to_BusinessPartnerAddress',
+								formatter: '.formatter.addressListTitle'
+							}"/>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://add" press="onAddAddress" />
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>street}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>city}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>country}"/>
+					</Column>
+					<Column hAlign="End">
+						<Text text="{i18n>actions}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{details>StreetName} {details>HouseNumber}" />
+							<Text text="{details>PostalCode} {details>CityName}" />
+							<Text text="{details>Country}" />
+							<HBox justifyContent="End">
+								<Button type="Transparent" icon="sap-icon://edit" press="onEditAddress" />
+								<Button type="Transparent" icon="sap-icon://delete" press="onDeleteAddress" />
+							</HBox>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+	</semantic:DetailPage>
+</mvc:View>

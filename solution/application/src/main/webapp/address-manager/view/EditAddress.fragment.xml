@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog title="{= ${editAddress>/isNew} ? ${i18n>createAddress} : ${i18n>editAdress} }">
+        <f:SimpleForm editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="4"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="{i18n>street}" labelFor="streetInput"/>
+				<Input id="streetInput" value="{editAddress>/StreetName}" />
+				<Label text="{i18n>houseNumber}" />
+				<Input id="" value="{editAddress>/HouseNumber}" />
+				<Label text="{i18n>zipCode}" />
+				<Input id="" value="{editAddress>/PostalCode}" />
+				<Label text="{i18n>city}" />
+				<Input id="" value="{editAddress>/CityName}" />
+				<Label text="{i18n>country}" />
+				<Input id="" value="{editAddress>/Country}" />
+			</f:content>
+		</f:SimpleForm>
+        <buttons>
+            <Button text="{i18n>close}" press="onDialogClose" />
+            <Button text="{i18n>submit}" press="onSubmitEditAddress" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>
