@@ -28,8 +28,24 @@
 						path: 'details>/CreationDate',
 						formatter: '.formatter.creationDateValue'
 					}"/>
+					<ObjectAttribute text="{
+						path: 'details>/YY1_AddrLastCheckedBy_bus',
+						formatter: '.formatter.lastCheckedBy'
+					}"/>
+					<ObjectAttribute text="{
+						path: 'details>/YY1_AddrLastCheckedOn_bus',
+						formatter: '.formatter.lastCheckedDateValue'
+					}"/>
 				</attributes>
 			</ObjectHeader>
+			<Button
+				id="checkedAddressesButton"
+				text="{i18n>checkAddressButton}"
+				icon="sap-icon://complete"
+				width="auto"
+				press="onMarkAddressesChecked"
+				class="sapUiResponsiveMargin"
+				/>
 			<Table
 				id="addressList"
 				width="auto"
