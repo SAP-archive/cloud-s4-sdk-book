@@ -15,6 +15,15 @@ sap.ui.define([
             return jQuery.get(this.getBusinessPartnerUrl(businessPartnerId));
         },
 
+        markBusinessPartnerAddressesChecked: function (businessPartnerId) {
+            return jQuery.ajax({
+                url: this.getBusinessPartnerUrl(businessPartnerId),
+                method: "PATCH",
+                contentType: "application/json",
+                data: JSON.stringify({AddressesChecked: true})
+            });
+        },
+
         getAddressUrl: function (businessPartnerId, addressId) {
             var addressUrl = "/api/addresses";
             if (businessPartnerId && addressId) {

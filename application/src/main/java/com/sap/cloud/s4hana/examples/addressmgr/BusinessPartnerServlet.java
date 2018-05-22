@@ -1,10 +1,16 @@
 package com.sap.cloud.s4hana.examples.addressmgr;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
+import com.google.common.io.CharStreams;
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import com.sap.cloud.s4hana.examples.addressmgr.commands.GetAllBusinessPartnersCommand;
 import com.sap.cloud.s4hana.examples.addressmgr.commands.GetSingleBusinessPartnerByIdCommand;
+import com.sap.cloud.s4hana.examples.addressmgr.commands.MarkBusinessPartnerAsCheckedCommand;
+import com.sap.cloud.s4hana.examples.addressmgr.util.HttpServlet;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
+import com.sap.cloud.sdk.cloudplatform.security.user.UserAccessor;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartner;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.BusinessPartnerService;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultBusinessPartnerService;
@@ -12,10 +18,11 @@ import org.slf4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @WebServlet("/api/business-partners")
@@ -55,5 +62,38 @@ public class BusinessPartnerServlet extends HttpServlet {
 
     private boolean validateInput(String id) {
         return !Strings.isNullOrEmpty(id) && id.length() <= 10;
+    }
+
+    @Override
+    protected void doPatch(HttpServletRequest request,
+                           HttpServletResponse response)
+            throws ServletException, IOException {
+        final String id = request.getParameter("id");
+
+        if (!getInputFromBody(request).addressesChecked) {
+            logger.warn("Received request for business partner {} with addresses not marked checked", id);
+            response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+            return;
+        }
+
+        logger.info("Received request to mark addresses of business partner {} as checked", id);
+        // requires authentication
+        new MarkBusinessPartnerAsCheckedCommand(service,
+                id, UserAccessor.getCurrentUser().getName(), new GregorianCalendar())
+                .execute();
+
+        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+    }
+
+    private MarkAddressesCheckedInput getInputFromBody(final HttpServletRequest req)
+            throws IOException {
+        final String body = CharStreams.toString(new InputStreamReader(req.getInputStream(), Charsets.UTF_8));
+        logger.info("Converting body {} to input", body);
+        return new Gson().fromJson(body, MarkAddressesCheckedInput.class);
+    }
+
+    private static class MarkAddressesCheckedInput {
+        @SerializedName("AddressesChecked")
+        private boolean addressesChecked = false;
     }
 }

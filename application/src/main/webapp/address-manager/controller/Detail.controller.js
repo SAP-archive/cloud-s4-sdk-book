@@ -85,6 +85,19 @@ sap.ui.define([
             this.editAddressDialog.close();
         },
 
+        onMarkAddressesChecked: function () {
+            var that = this;
+            var oViewModel = this.getViewModel();
+
+            oViewModel.setProperty("/busy", true);
+
+            businessPartnerService.markBusinessPartnerAddressesChecked(this._getCurrentBusinessPartnerId())
+                .always(function() {
+                    oViewModel.setProperty("/busy", false);
+                    that._reloadDetailsModel();
+                });
+        },
+
         /* =========================================================== */
         /* begin: internal methods                                     */
         /* =========================================================== */
