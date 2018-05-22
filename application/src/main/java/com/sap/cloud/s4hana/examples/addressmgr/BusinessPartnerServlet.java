@@ -1,11 +1,11 @@
 package com.sap.cloud.s4hana.examples.addressmgr;
 
 import com.google.gson.Gson;
+import com.sap.cloud.s4hana.examples.addressmgr.commands.GetAllBusinessPartnersCommand;
+import com.sap.cloud.s4hana.examples.addressmgr.commands.GetSingleBusinessPartnerByIdCommand;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
-import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.helper.Order;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartner;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerAddress;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.BusinessPartnerService;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultBusinessPartnerService;
 import org.slf4j.Logger;
 
@@ -22,7 +22,7 @@ public class BusinessPartnerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = CloudLoggerFactory.getLogger(BusinessPartnerServlet.class);
 
-    private static final String CATEGORY_PERSON = "1";
+    private final BusinessPartnerService service = new DefaultBusinessPartnerService();
 
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
@@ -30,40 +30,14 @@ public class BusinessPartnerServlet extends HttpServlet {
         final String id = request.getParameter("id");
 
         final String jsonResult;
-        try {
-            if (id == null) {
-                final List<BusinessPartner> result = new DefaultBusinessPartnerService()
-                        .getAllBusinessPartner()
-                        .select(BusinessPartner.BUSINESS_PARTNER,
-                                BusinessPartner.LAST_NAME,
-                                BusinessPartner.FIRST_NAME)
-                        .filter(BusinessPartner.BUSINESS_PARTNER_CATEGORY.eq(CATEGORY_PERSON))
-                        .orderBy(BusinessPartner.LAST_NAME, Order.ASC)
-                        .execute();
-                jsonResult = new Gson().toJson(result);
-            } else {
-                final BusinessPartner result = new DefaultBusinessPartnerService()
-                        .getBusinessPartnerByKey(id)
-                        .select(BusinessPartner.BUSINESS_PARTNER,
-                                BusinessPartner.LAST_NAME,
-                                BusinessPartner.FIRST_NAME,
-                                BusinessPartner.IS_MALE,
-                                BusinessPartner.IS_FEMALE,
-                                BusinessPartner.CREATION_DATE,
-                                BusinessPartner.TO_BUSINESS_PARTNER_ADDRESS.select(
-                                        BusinessPartnerAddress.BUSINESS_PARTNER,
-                                        BusinessPartnerAddress.ADDRESS_ID,
-                                        BusinessPartnerAddress.COUNTRY,
-                                        BusinessPartnerAddress.POSTAL_CODE,
-                                        BusinessPartnerAddress.CITY_NAME,
-                                        BusinessPartnerAddress.STREET_NAME,
-                                        BusinessPartnerAddress.HOUSE_NUMBER))
-                        .execute();
-                jsonResult = new Gson().toJson(result);
-            }
-        } catch (ODataException e) {
-            logger.error("Error retrieving business partners", e);
-            throw new ServletException(e);
+        if (id == null) {
+            logger.info("Retrieving all business partners");
+            final List<BusinessPartner> result = new GetAllBusinessPartnersCommand(service).execute();
+            jsonResult = new Gson().toJson(result);
+        } else {
+            logger.info("Retrieving business partner with id {}", id);
+            final BusinessPartner result = new GetSingleBusinessPartnerByIdCommand(service, id).execute();
+            jsonResult = new Gson().toJson(result);
         }
 
         response.setContentType("application/json");
