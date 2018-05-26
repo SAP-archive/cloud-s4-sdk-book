@@ -1,0 +1,66 @@
+swagger: "2.0"
+
+
+info:
+  description: "A simple blacklist without any authorization beyond chain-access. THIS SAMPLE 
+    CODE MAY BE USED SOLELY AS PART OF THE TEST AND EVALUATION OF THE SAP CLOUD PLATFORM 
+    SERVICE (THE “SERVICE”) AND IN ACCORDANCE WITH THE AGREEMENT FOR THE SERVICE. THIS SAMPLE CODE 
+    PROVIDED “AS IS”, WITHOUT ANY WARRANTY, ESCROW, TRAINING, MAINTENANCE, OR SERVICE OBLIGATIONS 
+    WHATSOEVER ON THE PART OF SAP."
+  version: "1.0"
+  title: "Blacklist chaincode"
+
+
+consumes:
+  - application/x-www-form-urlencoded
+
+
+parameters:
+
+  objectType:
+    name: objectType
+    in: path
+    description: objectType of the entry (free text), e.g. email
+    required: true
+    type: string
+    maxLength: 64
+
+  entryValue:
+    name: entryValue
+    in: path
+    description: value of the entry (free text), e.g. someone@somewhere.com
+    required: true
+    type: string
+    maxLength: 256
+
+
+paths:
+
+  /{objectType}/{entryValue}:
+
+    get:
+      operationId: count
+      summary: Count entries for email
+      parameters:
+      - $ref: '#/parameters/objectType'
+      - $ref: '#/parameters/entryValue'
+      produces:
+      - text/plain
+      responses:
+        200:
+          description: OK, result should contain count. Max 100 is returned
+        500:
+          description: Failed
+
+
+    post:
+      operationId: write entry to chain (only one entry per writer)
+      summary: Write an entry into the chain 
+      parameters:
+      - $ref: '#/parameters/objectType'
+      - $ref: '#/parameters/entryValue'
+      responses:
+        200:
+          description: Entry written (or already present)
+        500:
+          description: Failed
