@@ -27,6 +27,8 @@ To inspect the source code of a particular state, either checkout the correspond
 | [08_1_REST](https://github.com/SAP/cloud-s4-sdk-book/tree/08_1_REST) | 8.2 | REST API generated with Swagger | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/08_1_REST.zip) |
 | [15_1_javaee](https://github.com/SAP/cloud-s4-sdk-book/tree/15_1_javaee) | 15.1 | JavaEE-based implementation, including security and multi-tenant persistence | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/15_1_javaee.zip) |
 | [15_2_spring_boot](https://github.com/SAP/cloud-s4-sdk-book/tree/15_2_spring_boot) | 15.2 | Spring Boot-based implementation, including security and multi-tenant persistence | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/15_2_spring_boot.zip) |
+| [17_1_ml](https://github.com/SAP/cloud-s4-sdk-book/tree/17_1_ml) | 17.2 | Integrating machine learning services into the Servlet-based implementation | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/17_1_ml.zip) |
+| [17_2_blockchain](https://github.com/SAP/cloud-s4-sdk-book/tree/17_2_blockchain) | 17.3 | Integrating blockchain services into the Servlet-based implementation | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/17_2_blockchain.zip) |
 | [20_1_integrate_in_app](https://github.com/SAP/cloud-s4-sdk-book/tree/20_1_integrate_in_app) | 20.1 | Integrating in-app extensions into the Servlet-based implementation | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/20_1_integrate_in_app.zip) |
 
 <!--
@@ -54,6 +56,10 @@ The following diagram illustrates how the branches build up on each other, from 
  |\
  | o 08_1_REST
  |\
+ | o 17_1_ml
+ |\
+ | o 17_2_blockchain
+ |\
  | o 20_1_integrate_in_app
  |
  o 05_06_1_security_destinations
@@ -71,7 +77,32 @@ Please consider the following explanations:
 * Chapter 9: each branch already includes the tests, so there is no separate branch. Just check out the `master` branch and look for the tests in the folders `integration-tests` and `unit-tests`.
 * Part III: many of the changes depend on your local setup or are simple enough to be left for your own exercise.
 * Chapter 14: each branch already includes the code for the frontend. If you have checked out the `master` branch, look for the folder `application/src/main/webapp/address-manager`.
-* Chapter 17: stay tuned!
 
 ## Further Notes
 Below you find specific setup instructions for certain branches.
+
+### 17_1_ml
+You need to add an additional destination to access the machine learning API.
+To this end, add a destination called `mlApi` to the `destinations` environment variable and/or the destination service on Cloud Foundry.
+The URL of that destination shall be `https://sandbox.api.sap.com/ml`.
+The destination needs to have an additional property with key `mlApiKey`.
+Supply the API key that you generated on the SAP API Business Hub as the value of the property.
+
+The syntax for the environment variable looks similar to the following (can be supplied as a single line):
+```
+destinations=[... other destinations, e.g., to SAP S/4HANA systems ..., ↩
+   {name: 'mlApi', url: 'https://sandbox.api.sap.com/ml', ↩
+     properties: [{key: 'mlApiKey', value: '<insert API key from SAP API Business Hub>'}]} ↩
+]
+```
+
+To run the integration tests, add your API key also in the file `MachineLearningServletsTest.java` at the specified place.
+
+### 17_2_blockchain
+To run the application including the Blockchain integration on Cloud Foundry, you need to supply the environment variable `BLACKLIST_CHAINCODE_ID`.
+You need to set its value to the chaincode ID from the Hyperledger dashboard, which looks similar to `someguid-with-lett-ersa-nddigits11-com-sap-cloud-sdk-blockchain-example-blacklistChaincode`.
+
+To add an email address to the blacklist, call the URL `/api/blacklistadd?email=example@mail.com`.
+To retrieve the count for an address, call `/api/blackliststatus?email=example@mail.com`.
+Remember that our application as one participant of the blockchain can only add the same email address once.
+Additional calls with the same address will not increase the count beyond 1.
