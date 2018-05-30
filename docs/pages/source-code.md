@@ -27,14 +27,10 @@ To inspect the source code of a particular state, either checkout the correspond
 | [08_1_REST](https://github.com/SAP/cloud-s4-sdk-book/tree/08_1_REST) | 8.2 | REST API generated with Swagger | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/08_1_REST.zip) |
 | [15_1_javaee](https://github.com/SAP/cloud-s4-sdk-book/tree/15_1_javaee) | 15.1 | JavaEE-based implementation, including security and multi-tenant persistence | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/15_1_javaee.zip) |
 | [15_2_spring_boot](https://github.com/SAP/cloud-s4-sdk-book/tree/15_2_spring_boot) | 15.2 | Spring Boot-based implementation, including security and multi-tenant persistence | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/15_2_spring_boot.zip) |
-| [17_1_ml](https://github.com/SAP/cloud-s4-sdk-book/tree/17_1_ml) | 17.2 | Integrating machine learning services into the Servlet-based implementation | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/17_1_ml.zip) |
-| [17_2_blockchain](https://github.com/SAP/cloud-s4-sdk-book/tree/17_2_blockchain) | 17.3 | Integrating blockchain services into the Servlet-based implementation | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/17_2_blockchain.zip) |
+| [17_1_ml](https://github.com/SAP/cloud-s4-sdk-book/tree/17_1_ml) | 17.2 | Integrating machine learning services into the Servlet-based implementation, see [notes below](#17_1_ml) | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/17_1_ml.zip) |
+| [17_2_blockchain](https://github.com/SAP/cloud-s4-sdk-book/tree/17_2_blockchain) | 17.3 | Integrating blockchain services into the Servlet-based implementation, see [notes below](#17_2_blockchain) | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/17_2_blockchain.zip) |
 | [20_1_integrate_in_app](https://github.com/SAP/cloud-s4-sdk-book/tree/20_1_integrate_in_app) | 20.1 | Integrating in-app extensions into the Servlet-based implementation | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/20_1_integrate_in_app.zip) |
 
-<!--
-IMPORTANT: keep the empty line before and after the table!
-| #branch:# |  |  | #zip:# |
--->
 > `*` denotes that this branch is also kept in sync with the `master` branch, that is, it is an alias
 
 > **Understanding the branch name:**
