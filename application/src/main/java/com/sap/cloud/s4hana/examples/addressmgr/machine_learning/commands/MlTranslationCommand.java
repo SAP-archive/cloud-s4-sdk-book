@@ -94,27 +94,31 @@ public class MlTranslationCommand extends Command<List<String>> {
         HttpEntity body = new StringEntity(requestJson, ContentType.APPLICATION_JSON);
         request.setEntity(body);
 
-        // Getting cached http client for base URL, reuse of connection and other resources - and send request
-        final HttpResponse response = HttpClientAccessor.getHttpClient(mlService.getMlDestination()).execute(request);
+        try {
+            // Getting cached http client for base URL, reuse of connection and other resources - and send request
+            final HttpResponse response = HttpClientAccessor.getHttpClient(mlService.getMlDestination()).execute(request);
 
-        // retrieve entity content (requested json with Accept header, so should be text) and close request
-        final String responsePayload = HttpEntityUtil.getResponseBody(response);
+            // retrieve entity content (requested json with Accept header, so should be text) and close request
+            final String responsePayload = HttpEntityUtil.getResponseBody(response);
 
-        final StatusLine statusLine = response.getStatusLine();
-        logger.trace("Response status: {}, content: {}", statusLine, responsePayload);
+            final StatusLine statusLine = response.getStatusLine();
+            logger.trace("Response status: {}, content: {}", statusLine, responsePayload);
 
-        switch (statusLine.getStatusCode()) {
-            case HttpStatus.SC_OK:
-                break;
-            case HttpStatus.SC_REQUEST_TOO_LONG:
-            case HttpStatus.SC_BAD_REQUEST:
-                logger.debug("Received request input problem response: {}. Content: {}", statusLine, responsePayload);
-                throw new HystrixBadRequestException("Malformed request: " + statusLine.getStatusCode());
-            default:
-                logger.error("Service seems unavailable: {}. Content: {}", statusLine, responsePayload);
-                throw new ShouldNotHappenException("Service seems unavailable: Received response: " + statusLine);
+            switch (statusLine.getStatusCode()) {
+                case HttpStatus.SC_OK:
+                    break;
+                case HttpStatus.SC_REQUEST_TOO_LONG:
+                case HttpStatus.SC_BAD_REQUEST:
+                    logger.debug("Received request input problem response: {}. Content: {}", statusLine, responsePayload);
+                    throw new HystrixBadRequestException("Malformed request: " + statusLine.getStatusCode());
+                default:
+                    logger.error("Service seems unavailable: {}. Content: {}", statusLine, responsePayload);
+                    throw new ShouldNotHappenException("Service seems unavailable: Received response: " + statusLine);
+            }
+            return responsePayload;
+        } finally {
+            request.releaseConnection();
         }
-        return responsePayload;
     }
 
     static Map<String, String> parseResponse(String response) {
