@@ -1,10 +1,11 @@
 package com.sap.cloud.s4hana.examples.addressmgr;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
+import com.google.common.base.Strings;
 import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.LanguageDetectServlet;
 import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.TranslateServlet;
 import com.sap.cloud.sdk.testutil.MockUtil;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -15,7 +16,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +27,7 @@ import static org.hamcrest.Matchers.*;
 @RunWith(Arquillian.class)
 public class MachineLearningServletsTest {
     private static final MockUtil mockUtil = new MockUtil();
+    public static final String ML_API_KEY = "ML_API_KEY";
 
     @ArquillianResource
     private URL baseUrl;
@@ -39,15 +40,21 @@ public class MachineLearningServletsTest {
     @BeforeClass
     public static void beforeClass() {
         mockUtil.mockDefaults();
-        try {
-            Map<String, String> properties = new HashMap<>();
-            properties.put("mlApiKey", "<insert API key from SAP API Business Hub>");
-            mockUtil.mockDestination("mlApi", new URI("https://sandbox.api.sap.com/ml"),
-                    null, null, null, null, null, null, true, null, null,
-                    properties);
-        } catch (URISyntaxException e) {
-            throw new IllegalArgumentException(e);
+
+        Map<String, String> properties = new HashMap<>();
+        properties.put("mlApiKey", getMlApiKeyFromEnv());
+        mockUtil.mockDestination("mlApi", URI.create("https://sandbox.api.sap.com/ml"),
+                null, null, null, null, null, null, true, null, null,
+                properties);
+    }
+
+    private static String getMlApiKeyFromEnv()
+    {
+        final String ml_api_key = System.getenv(ML_API_KEY);
+        if (Strings.isNullOrEmpty(ml_api_key)) {
+            throw new IllegalStateException("Please set " + ML_API_KEY + " environment variable");
         }
+        return ml_api_key;
     }
 
     @Before
