@@ -91,7 +91,7 @@ router.route('/A_BusinessPartner')
 .get(retrieveAllBusinessPartners, odata.middlewareForSet())
 .post(bodyParser.json(), createBusinessPartner, odata.sendAsODataResult);
 
-router.route('/A_BusinessPartner\\((BusinessPartner=)?\':id\'\\)')
+router.route('/A_BusinessPartner\\((BusinessPartner=)?(\':id\'|%27:id%27)\\)')
 .get(retrieveSingleBusinessPartner, odata.middlewareForEntity())
 .delete(retrieveSingleBusinessPartner, odata.send404IfNotFound, deleteBusinessPartner, odata.send204NoContent)
 .patch(handlersForBusinessPartnerUpdate).put(handlersForBusinessPartnerUpdate);
@@ -100,7 +100,7 @@ router.route('/A_BusinessPartnerAddress')
 .get(retrieveAllAddresses, odata.middlewareForSet())
 .post(bodyParser.json(), createAddress, odata.sendAsODataResult);
 
-router.route('/A_BusinessPartnerAddress\\((BusinessPartner=)?\':bupaId\',(AddressID=)?\':addressId\'\\)')
+router.route('/A_BusinessPartnerAddress\\((BusinessPartner=)?(\':bupaId\'|%27:bupaId%27),(AddressID=)?(\':addressId\'|%27:addressId%27)\\)')
 .get(retrieveSingleAddress, odata.middlewareForEntity())
 .delete(retrieveSingleAddress, odata.send404IfNotFound, deleteAddress, odata.send204NoContent)
 .patch(handlersForAddressUpdate).put(handlersForAddressUpdate);
