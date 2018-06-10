@@ -1,0 +1,14 @@
+<mvc:View
+        xmlns:mvc="sap.ui.core.mvc"
+        controllerName="sap.ui.demo.addressmgr.controller.DetailMessagePage"
+        xmlns="sap.m">
+    <MessagePage
+            id="page"
+            title="{i18n>detailTitle}"
+            text="{
+			path: 'detailMessageView>/messageType',
+			formatter: '.messageText'
+		}"
+            icon="{sap-icon://account}">
+    </MessagePage>
+</mvc:View>
