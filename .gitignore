@@ -1,0 +1,13 @@
+node_modules/
+target/
+
+.vscode/
+.idea/
+*.iml
+.settings/
+.classpath
+.project
+
+s4hana_pipeline/
+
+business-partner/API_BUSINESS_PARTNER.edmx

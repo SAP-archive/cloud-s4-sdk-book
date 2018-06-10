@@ -1,0 +1,7 @@
+---
+erp:
+  default: "MOCKED_ERP_SYSTEM"
+  systems:
+    - alias: "MOCKED_ERP_SYSTEM"
+      uri: "http://localhost:3000"
+
