@@ -7,7 +7,7 @@ const odata = require('../odata-helpers.js');
 const bupaModel = require('./business-partner-model.js');
 
 function randomSleep() {
-    var duration = Math.floor(Math.random() * 8) + 4;
+    var duration = Math.floor(Math.random() * 8) + 3;
     console.log('Sleeping for ' + duration + (duration === 1 ? ' second' : ' seconds') + '...');
     sleep(duration * 1000);
 }
