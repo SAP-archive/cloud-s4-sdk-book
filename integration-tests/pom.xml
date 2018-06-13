@@ -26,7 +26,7 @@
         <surefire.excludedGroups/>
         <surefire.maxMemorySize>1024m</surefire.maxMemorySize>
         <surefire.maxPermSize>512m</surefire.maxPermSize>
-        <surefire.defaultLogLevel>warn</surefire.defaultLogLevel>
+        <surefire.logLevel>info</surefire.logLevel>
 
         <jacoco.destFile>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.destFile>
         <jacoco.outputDirectory>${project.reporting.outputDirectory}/jacoco</jacoco.outputDirectory>
@@ -38,6 +38,12 @@
             <artifactId>address-manager-application</artifactId>
             <classifier>classes</classifier>
             <version>1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -62,6 +68,22 @@
         </dependency>
 
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
@@ -71,6 +93,12 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -93,6 +121,10 @@
                 <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-jdk14</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -141,7 +173,7 @@
                     <argLine>@{argLine}
                         -Xmx${surefire.maxMemorySize}
                         -XX:MaxPermSize=${surefire.maxPermSize}
-                        -Dorg.slf4j.simpleLogger.defaultLogLevel=${surefire.defaultLogLevel}
+                        -Dorg.slf4j.simpleLogger.defaultLogLevel=${surefire.logLevel}
                         -Djava.io.tmpdir=target/arquillian-working-dir/${surefire.forkNumber}/
                     </argLine>
                     <skipTests>${surefire.skipTests}</skipTests>

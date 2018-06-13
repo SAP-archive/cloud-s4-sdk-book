@@ -20,7 +20,7 @@ The numbers behind each item in the table of contents refer to the book chapters
 * [Source code repository](pages/source-code.html): how to retrieve and navigate the source code for the Business Partner Address Manager application _[All chapters, starting from Chapter 4]_
 * [Dummy OData service](pages/mock-odata.html): how to launch a dummy OData service and use it as a substitute of an SAP S/4HANA system for the purposes of the book _[4.2]_
 * [Frontend code](pages/frontend.html): where to get the code for the frontend _[4.3]_
-<!--* [Go chaincode](): where to get the Go chaincode and how to package it _[17.3]_-->
+* [Blacklist chaincode in Go](pages/chaincode.html): where to get the chaincode for the Blacklist Blockchain and how to package it _[17.3]_
 * [Custom logic in ABAP](pages/custom-logic-abap.html): where to get the ABAP code used for custom logic in in-app extensions _[19]_
 * [Errata](pages/errata.html): what has changed since the writing of the book _[All chapters]_
 
