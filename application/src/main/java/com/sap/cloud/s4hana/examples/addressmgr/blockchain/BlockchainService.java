@@ -1,14 +1,12 @@
 package com.sap.cloud.s4hana.examples.addressmgr.blockchain;
 
-import com.google.gson.*;
-import com.sap.cloud.s4hana.examples.addressmgr.util.CloudPlatformService;
-import com.sap.cloud.sdk.cloudplatform.ScpCfCloudPlatform;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.sap.cloud.sdk.cloudplatform.connectivity.HttpClientAccessor;
 import com.sap.cloud.sdk.cloudplatform.connectivity.HttpEntityUtil;
+import com.sap.cloud.sdk.cloudplatform.connectivity.ScpCfService;
 import com.sap.cloud.sdk.cloudplatform.exception.ShouldNotHappenException;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
-import com.sap.cloud.sdk.cloudplatform.security.BasicAuthHeaderEncoder;
-import com.sap.cloud.sdk.cloudplatform.security.BasicCredentials;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -24,20 +22,10 @@ import java.util.Arrays;
 public class BlockchainService {
     private static final Logger logger = CloudLoggerFactory.getLogger(BlockchainService.class);
 
-    private static final String AUTHORIZATION_HEADER = "Authorization";
-    private static final String BEARER_PREFIX = "Bearer ";
-    private static final String BASIC_PREFIX = "Basic ";
+    private ScpCfService cfService;
 
-    private static final String CLIENT_CREDENTIALS = "client_credentials";
-    private static final String ACCESS_TOKEN = "access_token";
-
-    private String bearerToken;
-
-    private String serviceUrl;
-
-    public BlockchainService(String bearerToken, String serviceUrl) {
-        this.bearerToken = bearerToken;
-        this.serviceUrl = serviceUrl;
+    public BlockchainService(ScpCfService cfService) {
+        this.cfService = cfService;
     }
 
     public static BlockchainService createByGettingTokenViaCfServicesConfig() throws ShouldNotHappenException {
@@ -52,7 +40,7 @@ public class BlockchainService {
                 new URI(getServiceUrl() + "/chaincodes/" + chaincodeId
                         + "/latest/" + invocationType.getPathParamValue()).normalize());
 
-        chaincodeEnpointRequest.setHeader(AUTHORIZATION_HEADER, BEARER_PREFIX + getBearerToken());
+        cfService.addBearerTokenHeader(chaincodeEnpointRequest);
         chaincodeEnpointRequest.setHeader("Accept", "application/json;charset=UTF-8");
         chaincodeEnpointRequest.setHeader("Content-Type", "application/json");
 
@@ -85,92 +73,14 @@ public class BlockchainService {
         }
     }
 
-    static BlockchainService getBlockchainService(final String serviceName)
+    static BlockchainService getBlockchainService(final String serviceType)
             throws ShouldNotHappenException {
-        final ScpCfCloudPlatform cloudPlatform = new CloudPlatformService().getCloudFoundryOrThrow();
-
         try {
-            final JsonArray serviceInstances = cloudPlatform.getVcapServices().get(serviceName);
-            if (serviceInstances == null || serviceInstances.size() < 1) {
-                throw new ShouldNotHappenException("Service " + serviceName + " not bound. " +
-                        "The fabric channel needs to be created, an instance for it needs to be created " +
-                        "and the instance needs to be bound to this application");
-            }
-            final JsonElement serviceInfo = serviceInstances.get(0);
-            checkFabricServicePropertiesPresent("Service info ", serviceInfo, "credentials");
-            JsonElement serviceCredentials = serviceInfo.getAsJsonObject().get("credentials");
+            final ScpCfService cfService = ScpCfService.of(serviceType, null,
+                    "credentials/oAuth/url", "credentials/oAuth/clientId",
+                    "credentials/oAuth/clientSecret", "credentials/serviceUrl");
 
-            checkFabricServicePropertiesPresent("Service credentials ", serviceCredentials, "oAuth", "serviceUrl");
-            final JsonElement oAuthCredentials = serviceCredentials.getAsJsonObject().get("oAuth");
-            final String serviceUrl = serviceCredentials.getAsJsonObject().get("serviceUrl").getAsString();
-
-            checkFabricServicePropertiesPresent("OAuth credentials ", oAuthCredentials, "clientId", "clientSecret",
-                    "url");
-            final BasicCredentials clientCredentials = new BasicCredentials(
-                    oAuthCredentials.getAsJsonObject().get("clientId").getAsString(),
-                    oAuthCredentials.getAsJsonObject().get("clientSecret").getAsString()
-            );
-            final String authUrlPrefix = oAuthCredentials.getAsJsonObject().get("url").getAsString();
-            final String authUrl;
-            if (!authUrlPrefix.endsWith("token")) {
-                authUrl = authUrlPrefix + "/oauth/token"; // ensure it ends with oAuth token endpoint
-            } else {
-                authUrl = authUrlPrefix;
-            }
-
-            final HttpPost tokenRequest = new HttpPost(new URI(authUrl).normalize());
-
-            tokenRequest.setHeader(AUTHORIZATION_HEADER,BASIC_PREFIX + BasicAuthHeaderEncoder.encodeUserPasswordBase64(clientCredentials));
-
-            tokenRequest.setEntity(new StringEntity("client_id="
-                    + clientCredentials.getUsername()
-                    + "&grant_type="
-                    + CLIENT_CREDENTIALS, ContentType.APPLICATION_FORM_URLENCODED));
-
-            final String responsePayload;
-            final HttpResponse response = HttpClientAccessor.getHttpClient().execute(tokenRequest);
-            final StatusLine statusLine = response.getStatusLine();
-            final int statusCode = statusLine.getStatusCode();
-
-            switch (statusCode) {
-                case HttpStatus.SC_OK:
-                    responsePayload = HttpEntityUtil.getResponsePayload(response);
-                    break;
-                case HttpStatus.SC_UNAUTHORIZED:
-                case HttpStatus.SC_FORBIDDEN:
-                    throw new AuthenticationException("Failed to get access token: "
-                            + "Auth service denied token request with HTTP status "
-                            + statusCode
-                            + " ("
-                            + statusLine.getReasonPhrase()
-                            + ").");
-                default:
-                    throw new Exception("Failed to get access token: "
-                            + "Auth service returned HTTP status "
-                            + statusCode
-                            + " ("
-                            + statusLine.getReasonPhrase()
-                            + ").");
-            }
-
-            final JsonElement tokenPayload;
-            try {
-                tokenPayload = new JsonParser().parse(responsePayload);
-                if (
-                        !(tokenPayload.isJsonObject() && tokenPayload.getAsJsonObject().has(ACCESS_TOKEN))
-                        ) {
-                    throw new Exception("Not containing json object or not containing " + ACCESS_TOKEN + " property");
-                }
-
-            } catch (Exception e) {
-                logger.error("Error during authentication at blockchain, unexpected paylod", e);
-                throw new ShouldNotHappenException("Blockchain auth service returned unexpected payload: " + e
-                        .getMessage());
-            }
-            final String token = tokenPayload.getAsJsonObject().get(ACCESS_TOKEN).getAsString();
-
-            return new BlockchainService(token, serviceUrl);
-
+            return new BlockchainService(cfService);
         } catch (ShouldNotHappenException e) {
             throw e;
         } catch (final Exception e) {
@@ -178,35 +88,14 @@ public class BlockchainService {
         }
     }
 
-    private static void checkFabricServicePropertiesPresent(String objectDescription, JsonElement jsonElement,
-                                                            String... properties) {
-        if (!jsonElement.isJsonObject()) {
-            throw new ShouldNotHappenException(objectDescription + " should be a json object. Structure changed?");
-        }
-        final JsonObject jsonObject = jsonElement.getAsJsonObject();
-
-        for (String property : properties) {
-            if (!(jsonObject.has(property) && !jsonObject.get(property).isJsonNull())) {
-                throw new ShouldNotHappenException(objectDescription
-                        + " miss(es) " + property + " property - structure changed? Not the fabric service? " +
-                        "Check cf env -application name- to see the current structure of VCAP_SERVICES");
-            }
-        }
-    }
-
     public String getServiceUrl() {
-        return serviceUrl;
-    }
-
-    public String getBearerToken() {
-        return bearerToken;
+        return cfService.getServiceLocationInfo();
     }
 
     @Override
     public String toString() {
         return "BlockchainService{" +
-                "bearerTokenNotNull='" + (bearerToken != null) + '\'' +
-                ", serviceUrl='" + serviceUrl + '\'' +
+                "cfService=" + cfService +
                 '}';
     }
 
