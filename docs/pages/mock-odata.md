@@ -24,6 +24,7 @@ Before you can launch the mock server, you need to manually put the metadata EDM
 * Click on *Download API* and choose *EDMX*.
 * Store the downloaded file with the name `API_BUSINESS_PARTNER.edmx` in the subfolder `business-partner` of the mock server folder.
 * Open the metadata document and locate the entity type `A_BusinessPartnerType`. Within the `EntityType` item with that name, add the following two lines behind the line that contains `</Key>`:
+
 ```
 <Property Name="YY1_AddrLastCheckedOn_bus" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Addresses Last Checked On"/>
 <Property Name="YY1_AddrLastCheckedBy_bus" Type="Edm.String" MaxLength="50" sap:label="Addresses Last Checked By"/>
