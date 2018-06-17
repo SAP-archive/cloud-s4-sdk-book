@@ -1,9 +1,3 @@
-logging:
-  level:
-    com.sap.cloud.s4hana.examples.addressmgr: DEBUG
-    com.sap.cloud.sdk: INFO
-    root: WARN
-
 server:
   port: 8080
 
