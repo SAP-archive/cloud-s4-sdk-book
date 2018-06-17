@@ -10,7 +10,9 @@ applications:
     TARGET_RUNTIME: main
     JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:128m..'
     SPRING_PROFILES_ACTIVE: cloud
+    SET_LOGGING_LEVEL: '{ROOT: INFO, com.sap.cloud.sdk: INFO}'
   services:
   - my-xsuaa
   - my-destination
   - book-project-database
+

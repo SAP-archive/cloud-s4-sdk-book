@@ -26,7 +26,7 @@
         <surefire.excludedGroups/>
         <surefire.maxMemorySize>1024m</surefire.maxMemorySize>
         <surefire.maxPermSize>512m</surefire.maxPermSize>
-        <surefire.defaultLogLevel>warn</surefire.defaultLogLevel>
+        <surefire.logLevel>info</surefire.logLevel>
 
         <jacoco.destFile>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.destFile>
         <jacoco.outputDirectory>${project.reporting.outputDirectory}/jacoco</jacoco.outputDirectory>
@@ -37,6 +37,12 @@
             <groupId>com.sap.cloud.s4hana.examples</groupId>
             <artifactId>address-manager-application</artifactId>
             <version>1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -57,6 +63,22 @@
         <dependency>
             <groupId>com.sap.cloud.s4hana.quality</groupId>
             <artifactId>listeners-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -121,7 +143,7 @@
                     <argLine>@{argLine}
                         -Xmx${surefire.maxMemorySize}
                         -XX:MaxPermSize=${surefire.maxPermSize}
-                        -Dorg.slf4j.simpleLogger.defaultLogLevel=${surefire.defaultLogLevel}
+                        -Dorg.slf4j.simpleLogger.defaultLogLevel=${surefire.logLevel}
                         -Djava.io.tmpdir=target/arquillian-working-dir/${surefire.forkNumber}/
                     </argLine>
                     <skipTests>${surefire.skipTests}</skipTests>

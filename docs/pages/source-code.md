@@ -8,31 +8,33 @@ If you are familiar with [git / GitHub](https://help.github.com/articles/set-up-
 Otherwise, you can also use the links provided below to download a certain state of the source code as a ZIP archive.
 
 The git repository is organized in branches, where each branch corresponds to the state of the application in a certain chapter of the book.
+As the source code gets updated to [new versions of the SAP S/4HANA Cloud SDK](https://help.sap.com/http.svc/rc/6c02295dfa8f47cf9c08a19f2e172901/1.0/en-US/index.html), the branches do not necessarily reflect the state described in the book.
+For your reference, the state described in the book is tagged accordingly, with tags prefixed `v1/*` as explained below.
 
 ## How to Navigate the Branches
 The following table gives an overview of the branches in the repository.
 It references the related chapters and briefly describes the state reflected in the branch description.
 To inspect the source code of a particular state, either checkout the corresponding branch (if you have cloned the git repository), view the branch on GitHub in your browser via the link in the first column, or download the project as an archive using the links provided in the last column below.
+The links always point to the latest version, incorporating updates of the SAP S/4HANA Cloud SDK.
+If you want to get the state exactly as described in the book, use the last link in each row, labeled *&DoubleDownArrow;v1*.
 
 ### Overview of Branches
 
-| Branch | Chapters | Description | Download as Archive |
+| Branch | Chapters | Description | Download as Archive  |
 |---|---|---|---|
-| [04_1_archetype](https://github.com/SAP/cloud-s4-sdk-book/tree/04_1_archetype) | 4.1 | Plain project generated from archetype | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/04_1_archetype.zip) |
-| [04_2_simple](https://github.com/SAP/cloud-s4-sdk-book/tree/04_2_simple) | 4.2–4.5 | Servlet-based implementation, including frontend | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/04_2_simple.zip) |
-| [04_3_resilient](https://github.com/SAP/cloud-s4-sdk-book/tree/04_3_resilient) | 4.6 | ... with resilience via Hystrix commands | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/04_3_resilient.zip) |
-| [04_4_input_validation](https://github.com/SAP/cloud-s4-sdk-book/tree/04_4_input_validation)`*` | N/A | ... with input validation and error handling (not described in the book, included for reference as a best practice) | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/04_4_input_validation.zip) |
-| [05_06_1_security](https://github.com/SAP/cloud-s4-sdk-book/tree/05_06_1_security) | 5–6 | ... including setup of AppRouter, other security-relevant changes, and use of destination service. *Note that due to the security setup you cannot run this state in a local deployment.* | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/05_06_1_security.zip) |
-| [07_1_multitenancy](https://github.com/SAP/cloud-s4-sdk-book/tree/07_1_multitenancy) | 7 | ... including setup for multi-tenant persistence | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/07_1_multitenancy.zip) |
-| [08_1_REST](https://github.com/SAP/cloud-s4-sdk-book/tree/08_1_REST) | 8.2 | REST API generated with Swagger | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/08_1_REST.zip) |
-| [15_1_javaee](https://github.com/SAP/cloud-s4-sdk-book/tree/15_1_javaee) | 15.1 | JavaEE-based implementation, including security and multi-tenant persistence | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/15_1_javaee.zip) |
-| [15_2_spring_boot](https://github.com/SAP/cloud-s4-sdk-book/tree/15_2_spring_boot) | 15.2 | Spring Boot-based implementation, including security and multi-tenant persistence | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/15_2_spring_boot.zip) |
-| [20_1_integrate_in_app](https://github.com/SAP/cloud-s4-sdk-book/tree/20_1_integrate_in_app) | 20.1 | Integrating in-app extensions into the Servlet-based implementation | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/20_1_integrate_in_app.zip) |
+| [04_1_archetype](https://github.com/SAP/cloud-s4-sdk-book/tree/04_1_archetype) | 4.1 | Plain project generated from archetype | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/04_1_archetype.zip) ([&DoubleDownArrow;v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/04_1_archetype.zip)) |
+| [04_2_simple](https://github.com/SAP/cloud-s4-sdk-book/tree/04_2_simple) | 4.2–4.5 | Servlet-based implementation, including frontend | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/04_2_simple.zip) ([&DoubleDownArrow;v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/04_2_simple.zip)) |
+| [04_3_resilient](https://github.com/SAP/cloud-s4-sdk-book/tree/04_3_resilient) | 4.6 | ... with resilience via Hystrix commands | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/04_3_resilient.zip) ([&DoubleDownArrow;v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/04_3_resilient.zip)) |
+| [04_4_input_validation](https://github.com/SAP/cloud-s4-sdk-book/tree/04_4_input_validation)`*` | N/A | ... with input validation and error handling (not described in the book, included for reference as a best practice) | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/04_4_input_validation.zip) ([&DoubleDownArrow;v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/04_4_input_validation.zip)) |
+| [05_06_1_security](https://github.com/SAP/cloud-s4-sdk-book/tree/05_06_1_security) | 5–6 | ... including setup of AppRouter, other security-relevant changes, and use of destination service. *Note that due to the security setup you cannot run this state in a local deployment.* | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/05_06_1_security.zip) ([&DoubleDownArrow;v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/05_06_1_security.zip)) |
+| [07_1_multitenancy](https://github.com/SAP/cloud-s4-sdk-book/tree/07_1_multitenancy) | 7 | ... including setup for multi-tenant persistence | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/07_1_multitenancy.zip) ([&DoubleDownArrow;v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/07_1_multitenancy.zip)) |
+| [08_1_REST](https://github.com/SAP/cloud-s4-sdk-book/tree/08_1_REST) | 8.2 | REST API generated with Swagger | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/08_1_REST.zip) ([&DoubleDownArrow;v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/08_1_REST.zip)) |
+| [15_1_javaee](https://github.com/SAP/cloud-s4-sdk-book/tree/15_1_javaee) | 15.1 | JavaEE-based implementation, including security and multi-tenant persistence | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/15_1_javaee.zip) ([&DoubleDownArrow;v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/15_1_javaee.zip)) |
+| [15_2_spring_boot](https://github.com/SAP/cloud-s4-sdk-book/tree/15_2_spring_boot) | 15.2 | Spring Boot-based implementation, including security and multi-tenant persistence | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/15_2_spring_boot.zip) ([&DoubleDownArrow;v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/15_2_spring_boot.zip)) |
+| [17_1_ml](https://github.com/SAP/cloud-s4-sdk-book/tree/17_1_ml) | 17.2 | Integrating machine learning services into the Servlet-based implementation, see [notes below](#17_1_ml) | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/17_1_ml.zip) ([&DoubleDownArrow;v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/17_1_ml.zip)) |
+| [17_2_blockchain](https://github.com/SAP/cloud-s4-sdk-book/tree/17_2_blockchain) | 17.3 | Integrating blockchain services into the Servlet-based implementation, see [notes below](#17_2_blockchain) | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/17_2_blockchain.zip) ([&DoubleDownArrow;v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/17_2_blockchain.zip)) |
+| [20_1_integrate_in_app](https://github.com/SAP/cloud-s4-sdk-book/tree/20_1_integrate_in_app) | 20.1 | Integrating in-app extensions into the Servlet-based implementation | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/20_1_integrate_in_app.zip) ([&DoubleDownArrow;v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/20_1_integrate_in_app.zip)) |
 
-<!--
-IMPORTANT: keep the empty line before and after the table!
-| #branch:# |  |  | #zip:# |
--->
 > `*` denotes that this branch is also kept in sync with the `master` branch, that is, it is an alias
 
 > **Understanding the branch name:**
@@ -54,6 +56,10 @@ The following diagram illustrates how the branches build up on each other, from 
  |\
  | o 08_1_REST
  |\
+ | o 17_1_ml
+ |\
+ | o 17_2_blockchain
+ |\
  | o 20_1_integrate_in_app
  |
  o 05_06_1_security_destinations
@@ -71,7 +77,32 @@ Please consider the following explanations:
 * Chapter 9: each branch already includes the tests, so there is no separate branch. Just check out the `master` branch and look for the tests in the folders `integration-tests` and `unit-tests`.
 * Part III: many of the changes depend on your local setup or are simple enough to be left for your own exercise.
 * Chapter 14: each branch already includes the code for the frontend. If you have checked out the `master` branch, look for the folder `application/src/main/webapp/address-manager`.
-* Chapter 17: stay tuned!
 
 ## Further Notes
 Below you find specific setup instructions for certain branches.
+
+### 17_1_ml
+You need to add an additional destination to access the machine learning API.
+To this end, add a destination called `mlApi` to the `destinations` environment variable and/or the destination service on Cloud Foundry.
+The URL of that destination shall be `https://sandbox.api.sap.com/ml`.
+The destination needs to have an additional property with key `mlApiKey`.
+Supply the API key that you generated on the SAP API Business Hub as the value of the property.
+
+The syntax for the environment variable looks similar to the following (can be supplied as a single line):
+```
+destinations=[... other destinations, e.g., to SAP S/4HANA systems ..., ↩
+   {name: 'mlApi', url: 'https://sandbox.api.sap.com/ml', ↩
+     properties: [{key: 'mlApiKey', value: '<insert API key from SAP API Business Hub>'}]} ↩
+]
+```
+
+To run the integration tests, add your API key also in the file `MachineLearningServletsTest.java` at the specified place.
+
+### 17_2_blockchain
+To run the application including the Blockchain integration on Cloud Foundry, you need to supply the environment variable `BLACKLIST_CHAINCODE_ID`.
+You need to set its value to the chaincode ID from the Hyperledger dashboard, which looks similar to `someguid-with-lett-ersa-nddigits11-com-sap-cloud-sdk-blockchain-example-blacklistChaincode`.
+
+To add an email address to the blacklist, call the URL `/api/blacklistadd?email=example@mail.com`.
+To retrieve the count for an address, call `/api/blackliststatus?email=example@mail.com`.
+Remember that our application as one participant of the blockchain can only add the same email address once.
+Additional calls with the same address will not increase the count beyond 1.
