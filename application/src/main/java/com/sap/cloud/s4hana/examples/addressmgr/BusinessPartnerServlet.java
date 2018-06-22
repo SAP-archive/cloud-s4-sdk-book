@@ -60,7 +60,7 @@ public class BusinessPartnerServlet extends HttpServlet {
         response.getWriter().write(jsonResult);
     }
 
-    private boolean validateInput(String id) {
+    static boolean validateInput(String id) {
         return !Strings.isNullOrEmpty(id) && id.length() <= 10;
     }
 
@@ -77,10 +77,6 @@ public class BusinessPartnerServlet extends HttpServlet {
         }
 
         logger.info("Received request to mark addresses of business partner {} as checked", id);
-        // requires authentication
-        new MarkBusinessPartnerAsCheckedCommand(service,
-                id, UserAccessor.getCurrentUser().getName(), new GregorianCalendar())
-                .execute();
 
         response.setStatus(HttpServletResponse.SC_NO_CONTENT);
     }

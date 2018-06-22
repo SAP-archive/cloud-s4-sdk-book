@@ -5,13 +5,6 @@ import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.Busin
 import java.util.Calendar;
 
 public class BusinessPartnerCustomFields {
-  public static final BusinessPartnerField<String>
-      ADDRESSES_LAST_CHECKED_BY =
-      new BusinessPartnerField<>(
-          "YY1_AddrLastCheckedBy_bus");
-
-  public static final BusinessPartnerField<Calendar>
-      ADDRESSES_LAST_CHECKED_ON =
-      new BusinessPartnerField<>(
-          "YY1_AddrLastCheckedOn_bus");
+    public static final BusinessPartnerField<String> ADDRESSES_LAST_CHECKED_BY =
+            new BusinessPartnerField<>("YY1_AddrLastCheckedBy_bus");
 }

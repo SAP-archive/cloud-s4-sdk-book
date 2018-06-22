@@ -48,6 +48,10 @@ sap.ui.define([
             return this.getResourceBundle().getText("addresses", [aAdresses && aAdresses.length ? aAdresses.length : 0]);
         },
 
+        accountsListTitle: function (aAccounts) {
+            return this.getResourceBundle().getText("socialMediaAccounts", [aAccounts && aAccounts.length ? aAccounts.length : 0]);
+        },
+
         businessPartnerId: function (sBusinessPartnerId) {
             return this.getResourceBundle().getText("bupaId", [sBusinessPartnerId]);
         },

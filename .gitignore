@@ -11,3 +11,4 @@ node_modules/
 **/credentials.*
 **/node_modules
 **/package-lock.json
+application/vdm-output-tmp
