@@ -14,6 +14,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <s4sdk.version>2.1.0</s4sdk.version>
 
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -36,6 +37,10 @@
 
         <jacoco.destFile>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.destFile>
         <jacoco.outputDirectory>${project.reporting.outputDirectory}/jacoco</jacoco.outputDirectory>
+
+        <vdm.inputdir>${project.basedir}/../social-media-accounts</vdm.inputdir>
+        <vdm.tmpdir>${project.basedir}/vdm-output-tmp</vdm.tmpdir>
+        <vdm.outputdir>${project.build.outputDirectory}/vdm-output</vdm.outputdir>
     </properties>
 
     <dependencyManagement>
@@ -43,7 +48,7 @@
             <dependency>
                 <groupId>com.sap.cloud.s4hana</groupId>
                 <artifactId>sdk-bom</artifactId>
-                <version>2.0.0</version>
+                <version>${s4sdk.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -54,13 +59,16 @@
         <dependency>
             <groupId>com.sap.cloud.s4hana.cloudplatform</groupId>
             <artifactId>scp-cf</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.sap.cloud.s4hana</groupId>
             <artifactId>s4hana-all</artifactId>
-            <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.sap.cloud.s4hana</groupId>
             <artifactId>testutil</artifactId>
@@ -117,6 +125,64 @@
                     <groups>${surefire.groups}</groups>
                     <excludedGroups>${surefire.excludedGroups}</excludedGroups>
                 </configuration>
+            </plugin>
+
+            <!-- Java VDM generator -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${vdm.outputdir}</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.sap.cloud.s4hana.datamodel</groupId>
+                <artifactId>odata-generator-maven-plugin</artifactId>
+                <version>${s4sdk.version}</version>
+                <configuration>
+                    <inputDirectory>${vdm.inputdir}</inputDirectory>
+                    <outputDirectory>${vdm.tmpdir}</outputDirectory>
+                    <deleteOutputDirectory>true</deleteOutputDirectory>
+                    <packageName>com.sap.cloud.s4hana.examples.addressmgr.custom</packageName>
+                    <nameSource>LABEL</nameSource>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-maven-plugin</artifactId>
+                <version>1.16.20.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>delombok</goal>
+                        </goals>
+                        <configuration>
+                            <addOutputDirectory>false</addOutputDirectory>
+                            <sourceDirectory>${vdm.tmpdir}</sourceDirectory>
+                            <outputDirectory>${vdm.outputdir}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

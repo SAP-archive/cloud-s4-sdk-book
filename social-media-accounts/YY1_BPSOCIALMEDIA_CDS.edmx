@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://my300532.s4hana.ondemand.com:443/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my300532.s4hana.ondemand.com:443/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my300532.s4hana.ondemand.com:443/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="YY1_BPSOCIALMEDIA_CDS" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="YY1_BPSOCIALMEDIAType" sap:label="Business Partner Social Media" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SAP_UUID"/>
+                </Key>
+                <Property Name="SAP_UUID" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                <Property Name="BusinessPartner" Type="Edm.String" MaxLength="10" sap:label="Business Partner"/>
+                <NavigationProperty Name="to_SocialMediaAccount" Relationship="YY1_BPSOCIALMEDIA_CDS.assoc_FB42F80ED4A1470312B89288ABE451E4" FromRole="FromRole_assoc_FB42F80ED4A1470312B89288ABE451E4" ToRole="ToRole_assoc_FB42F80ED4A1470312B89288ABE451E4"/>
+            </EntityType>
+            <EntityType Name="YY1_SOCIALMEDIAACCOUNT_BPSO000Type" sap:label="Social Media Account" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SAP_UUID"/>
+                </Key>
+                <Property Name="SAP_UUID" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                <Property Name="SAP_PARENT_UUID" Type="Edm.Guid" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                <Property Name="Service" Type="Edm.String" MaxLength="10" sap:label="Service"/>
+                <Property Name="Account" Type="Edm.String" MaxLength="60" sap:label="Account"/>
+                <NavigationProperty Name="to_BPSOCIALMEDIA" Relationship="YY1_BPSOCIALMEDIA_CDS.assoc_FB42F80ED4A1470312B89288ABE451E4" FromRole="ToRole_assoc_FB42F80ED4A1470312B89288ABE451E4" ToRole="FromRole_assoc_FB42F80ED4A1470312B89288ABE451E4"/>
+            </EntityType>
+            <Association Name="assoc_FB42F80ED4A1470312B89288ABE451E4" sap:content-version="1">
+                <End Type="YY1_BPSOCIALMEDIA_CDS.YY1_BPSOCIALMEDIAType" Multiplicity="1" Role="FromRole_assoc_FB42F80ED4A1470312B89288ABE451E4">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <End Type="YY1_BPSOCIALMEDIA_CDS.YY1_SOCIALMEDIAACCOUNT_BPSO000Type" Multiplicity="*" Role="ToRole_assoc_FB42F80ED4A1470312B89288ABE451E4"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_assoc_FB42F80ED4A1470312B89288ABE451E4">
+                        <PropertyRef Name="SAP_UUID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_assoc_FB42F80ED4A1470312B89288ABE451E4">
+                        <PropertyRef Name="SAP_PARENT_UUID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="YY1_BPSOCIALMEDIA_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="YY1_BPSOCIALMEDIA" EntityType="YY1_BPSOCIALMEDIA_CDS.YY1_BPSOCIALMEDIAType" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="YY1_SOCIALMEDIAACCOUNT_BPSO000" EntityType="YY1_BPSOCIALMEDIA_CDS.YY1_SOCIALMEDIAACCOUNT_BPSO000Type" sap:searchable="true" sap:content-version="1"/>
+                <AssociationSet Name="assoc_FB42F80ED4A1470312B89288ABE451E4" Association="YY1_BPSOCIALMEDIA_CDS.assoc_FB42F80ED4A1470312B89288ABE451E4" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="YY1_BPSOCIALMEDIA" Role="FromRole_assoc_FB42F80ED4A1470312B89288ABE451E4"/>
+                    <End EntitySet="YY1_SOCIALMEDIAACCOUNT_BPSO000" Role="ToRole_assoc_FB42F80ED4A1470312B89288ABE451E4"/>
+                </AssociationSet>
+                <FunctionImport Name="YY1_BPSOCIALMEDIASap_upsert" ReturnType="YY1_BPSOCIALMEDIA_CDS.YY1_BPSOCIALMEDIAType" EntitySet="YY1_BPSOCIALMEDIA" m:HttpMethod="POST" sap:action-for="YY1_BPSOCIALMEDIA_CDS.YY1_BPSOCIALMEDIAType">
+                    <Parameter Name="BusinessPartner" Type="Edm.String" Mode="In" MaxLength="10"/>
+                </FunctionImport>
+            </EntityContainer>
+            <Annotations Target="YY1_BPSOCIALMEDIA_CDS.YY1_BPSOCIALMEDIAType/BusinessPartner" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="YY1_BPSOCIALMEDIA_CDS.YY1_BPSOCIALMEDIAType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>BusinessPartner</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="https://my300532.s4hana.ondemand.com:443/sap/opu/odata/sap/YY1_BPSOCIALMEDIA_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://my300532.s4hana.ondemand.com:443/sap/opu/odata/sap/YY1_BPSOCIALMEDIA_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
