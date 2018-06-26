@@ -99,7 +99,7 @@ destinations=[... other destinations, e.g., to SAP S/4HANA systems ..., ↩
 ]
 ```
 
-To run the integration tests, add your API key also in the file `MachineLearningServletsTest.java` at the specified place.
+To run the integration tests, define a new environment variable `ML_API_KEY` with your API key as value so that it is picked up when running the`MachineLearningServletsTest.java`.
 
 ### 17_2_blockchain
 To run the application including the Blockchain integration on Cloud Foundry, you need to supply the environment variable `BLACKLIST_CHAINCODE_ID`.
