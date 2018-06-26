@@ -29,6 +29,7 @@ If you want to get the state exactly as described in the book, use the last link
 | [05_06_1_security](https://github.com/SAP/cloud-s4-sdk-book/tree/05_06_1_security) | 5–6 | ... including setup of AppRouter, other security-relevant changes, and use of destination service. *Note that due to the security setup you cannot run this state in a local deployment.* | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/05_06_1_security.zip) ([⇓v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/05_06_1_security.zip)) |
 | [07_1_multitenancy](https://github.com/SAP/cloud-s4-sdk-book/tree/07_1_multitenancy) | 7 | ... including setup for multi-tenant persistence | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/07_1_multitenancy.zip) ([⇓v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/07_1_multitenancy.zip)) |
 | [08_1_REST](https://github.com/SAP/cloud-s4-sdk-book/tree/08_1_REST) | 8.2 | REST API generated with Swagger | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/08_1_REST.zip) ([⇓v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/08_1_REST.zip)) |
+| [08_2_OData](https://github.com/SAP/cloud-s4-sdk-book/tree/08_2_OData) | 8.3 | Provisioning an OData v4 service | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/08_2_OData.zip) |
 | [15_1_javaee](https://github.com/SAP/cloud-s4-sdk-book/tree/15_1_javaee) | 15.1 | JavaEE-based implementation, including security and multi-tenant persistence | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/15_1_javaee.zip) ([⇓v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/15_1_javaee.zip)) |
 | [15_2_spring_boot](https://github.com/SAP/cloud-s4-sdk-book/tree/15_2_spring_boot) | 15.2 | Spring Boot-based implementation, including security and multi-tenant persistence | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/15_2_spring_boot.zip) ([⇓v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/15_2_spring_boot.zip)) |
 | [17_1_ml](https://github.com/SAP/cloud-s4-sdk-book/tree/17_1_ml) | 17.2 | Integrating machine learning services into the Servlet-based implementation, see [notes below](#17_1_ml) | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/17_1_ml.zip) ([⇓v1](https://github.com/SAP/cloud-s4-sdk-book/archive/v1/17_1_ml.zip)) |
@@ -55,6 +56,8 @@ The following diagram illustrates how the branches build up on each other, from 
  o 04_4_input_validation*
  |\
  | o 08_1_REST
+ |\
+ | o 08_2_OData
  |\
  | o 17_1_ml
  |\
