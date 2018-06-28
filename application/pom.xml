@@ -69,6 +69,10 @@
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.servicesdk.prov</groupId>
+            <artifactId>odatav4</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" >
+    <edmx:DataServices>
+        <Schema Namespace="EPMSample" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityType Name="BusinessPartner">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.String" Nullable="false"/>
+                <Property Name="firstName" Type="Edm.String"/>
+                <Property Name="lastName" Type="Edm.String"/>
+                <Property Name="email" Type="Edm.String"/>
+            </EntityType>
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="BusinessPartners" EntityType="EPMSample.BusinessPartner"/>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
