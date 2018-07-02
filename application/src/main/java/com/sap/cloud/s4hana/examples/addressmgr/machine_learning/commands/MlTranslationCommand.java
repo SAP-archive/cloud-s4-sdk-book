@@ -92,10 +92,29 @@ public class MlTranslationCommand extends Command<List<String>> {
         return translationsInCorrectOrder;
     }
 
-    private String executeRequest(String requestJson) throws Exception {
-        
-		// TODO Build and execute request to the translation service using ScpCfService
-		response = null;
+    private String executeRequest(String requestJson) throws Exception {  
+		// Instantiate ScpCfService
+        final ScpCfService mlService = ScpCfService.of(SERVICE_TYPE, null, AUTH_URL_JSON_PATH,
+                CLIENT_ID_JSON_PATH, CLIENT_SECRET_JSON_PATH, SERVICE_LOCATION_JSON_PATH);
+
+        // Get service URL
+        URI serviceUrl = new URI(mlService.getServiceLocationInfo());
+
+        // Create request
+        HttpPost request = new HttpPost(serviceUrl);
+
+        // Add bearer
+        mlService.addBearerTokenHeader(request);
+
+        // Add more HTTP headers to the request
+        request.setHeader("Content-Type", "application/json");
+        request.setHeader("Accept", "application/json;charset=UTF-8");
+
+        HttpEntity body = new StringEntity(requestJson, ContentType.APPLICATION_JSON);
+        request.setEntity(body);
+
+        // Execute request
+        final HttpResponse response = HttpClientAccessor.getHttpClient().execute(request);
 
         // retrieve entity content (requested json with Accept header, so should be text) and close request
         final String responsePayload = HttpEntityUtil.getResponseBody(response);
