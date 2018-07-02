@@ -10,8 +10,8 @@ applications:
     TARGET_RUNTIME: tomee
     JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:96m..'
     SET_LOGGING_LEVEL: '{ROOT: INFO, com.sap.cloud.sdk: INFO}'
-#  services:
+  services:
 #  - my-application-logs
-#  - my-xsuaa
-#  - my-destination
+    - my-xsuaa
+    - my-destination
 #  - my-connectivity
