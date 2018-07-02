@@ -8,6 +8,24 @@
         <session-timeout>20</session-timeout>
     </session-config>
 
+    <login-config>
+        <auth-method>XSUAA</auth-method>
+    </login-config>
+
+    <security-role>
+        <role-name>ViewAddresses</role-name>
+    </security-role>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Read business partners</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ViewAddresses</role-name>
+        </auth-constraint>
+    </security-constraint>
+
     <!--
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

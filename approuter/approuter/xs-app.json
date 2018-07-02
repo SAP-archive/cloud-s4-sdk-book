@@ -1,0 +1,14 @@
+{
+  "welcomeFile": "index.html",
+  "routes": [
+  {
+  	"source": "^/api/(.*)",
+    "target": "/api/$1",
+    "destination": "app-destination"
+  },
+  {
+  	"source": "^/address-manager/(.*)",
+  	"target": "/address-manager/$1",
+  	"destination": "app-destination"
+  }]
+} 

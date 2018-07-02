@@ -1,0 +1,14 @@
+{
+  "xsappname": "address-manager-<subaccount_id>",
+  "tenant-mode": "shared",
+  "scopes": [{
+    "name": "$XSAPPNAME.ViewAddresses",
+    "description": "Scope to view business addresses"
+  }],
+  "role-templates": [{
+    "name": "BusinessPartnerViewer",
+    "description": "Role to view business addresses",
+    "scope-references" : [
+      "$XSAPPNAME.ViewAddresses"
+    ]}]
+}
