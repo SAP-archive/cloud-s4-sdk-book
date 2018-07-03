@@ -20,7 +20,7 @@ public class SchemaPerTenantConnectionProvider implements MultiTenantConnectionP
 
     @Override
     public Connection getAnyConnection() throws SQLException {
-        final PostgresqlServiceInfo postgreInfo = GetDatabaseConfig.retrieveDatabaseInfo("book-project-database", PostgresqlServiceInfo.class);
+        final PostgresqlServiceInfo postgreInfo = GetDatabaseConfig.retrieveDatabaseInfo("my-postgresql", PostgresqlServiceInfo.class);
         Map<String, String> properties = new HashMap<String, String>();
 
         properties.put(Environment.USER, postgreInfo.getUserName());

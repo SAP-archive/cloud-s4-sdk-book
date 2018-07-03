@@ -44,6 +44,7 @@
     </filter-mapping>
     -->
 
+    <!--
     <filter>
         <filter-name>RestCsrfPreventionFilter</filter-name>
         <filter-class>org.apache.catalina.filters.RestCsrfPreventionFilter</filter-class>
@@ -52,6 +53,7 @@
         <filter-name>RestCsrfPreventionFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    -->
 
     <filter>
         <filter-name>HttpSecurityHeadersFilter</filter-name>

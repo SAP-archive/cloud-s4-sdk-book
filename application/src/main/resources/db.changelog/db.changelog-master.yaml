@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: myuser
+      changes:
+        - createTable:
+            tableName: address
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                      primaryKey: true
+                      nullable: false
+              - column:
+                  name: businesspartner
+                  type: varchar(255)
+              - column:
+                  name: cityname
+                  type: varchar(255)
+              - column:
+                  name: country
+                  type: varchar(255)
+              - column:
+                  name: housenumber
+                  type: varchar(255)
+              - column:
+                  name: postalcode
+                  type: varchar(255)
+              - column:
+                  name: streetname
+                  type: varchar(255)
+              - column:
+                  name: status
+                  type: varchar(8)
