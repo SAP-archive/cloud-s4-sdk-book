@@ -22,6 +22,7 @@ import com.sap.cloud.s4hana.examples.addressmgr.views.AddressView;
 import com.sap.cloud.s4hana.examples.addressmgr.views.ViewModelConverter;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerAddress;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultBusinessPartnerService;
 
 @WebServlet("/api/addresses-local")
 public class LocalAddressServlet extends HttpServlet {
@@ -136,7 +137,9 @@ public class LocalAddressServlet extends HttpServlet {
         transaction.commit();
 
         BusinessPartnerAddress businessPartnerAddress = convertAddress(address);
-        new CreateAddressCommand(businessPartnerAddress).execute();
+        final DefaultBusinessPartnerService businessPartnerService = new DefaultBusinessPartnerService();
+
+        new CreateAddressCommand(businessPartnerService, businessPartnerAddress).execute();
     }
 
     private BusinessPartnerAddress convertAddress(final Address address) {

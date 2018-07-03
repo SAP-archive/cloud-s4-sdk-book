@@ -9,30 +9,14 @@
     <description>address-manager - Application</description>
 
     <artifactId>address-manager-application</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <parent>
         <groupId>com.sap.cloud.s4hana.examples</groupId>
         <artifactId>address-manager</artifactId>
-        <version>1.0</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>25.0-jre</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.checkerframework</groupId>
-                        <artifactId>checker-compat-qual</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -45,30 +29,64 @@
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Cf logging -->
+        <dependency>
+            <groupId>com.sap.hcp.cf.logging</groupId>
+            <artifactId>cf-java-logging-support-logback</artifactId>
+            <version>2.0.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sap.xs2.security</groupId>
+            <artifactId>java-container-security-api</artifactId>
+            <version>0.26.13</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- General dependencies -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Persistency -->
+        <dependency>
+            <groupId>com.sap.cloud.s4hana.frameworks</groupId>
+            <artifactId>liquibase</artifactId>
+        </dependency>
+        <!--<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.2.21.Final</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.2.21.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-cloudfoundry-connector</artifactId>
+            <version>2.0.1.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -85,11 +103,11 @@
             <plugin>
                 <groupId>org.apache.openejb.maven</groupId>
                 <artifactId>tomee-maven-plugin</artifactId>
-                <version>1.7.5</version>
+                <version>1.7.4</version>
                 <configuration>
                     <context>ROOT</context>
                     <libs>
-                        <lib>remove:slf4j-jdk14</lib>
+                        <lib>org.apache.tomcat:tomcat-catalina:7.0.82</lib>
                     </libs>
                 </configuration>
             </plugin>
