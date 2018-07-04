@@ -8,7 +8,7 @@
         <session-timeout>20</session-timeout>
     </session-config>
 
-	<!--
+
     <login-config>
         <auth-method>XSUAA</auth-method>
     </login-config>
@@ -27,7 +27,6 @@
         </auth-constraint>
     </security-constraint>
 
-	-->
 	
     <filter>
         <filter-name>HttpSecurityHeadersFilter</filter-name>
