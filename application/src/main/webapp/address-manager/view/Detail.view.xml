@@ -24,12 +24,30 @@
 						path: 'details>/BusinessPartner',
 						formatter: '.formatter.businessPartnerId'
 					}" />
+					<ObjectAttribute active="true" title="{i18n>position}" text="{details>/SearchTerm1}" press="onTranslatePosition" />
+					<ObjectAttribute active="true" title="{i18n>email}" text="{details>/MiddleName}" />
 					<ObjectAttribute text="{
 						path: 'details>/CreationDate',
 						formatter: '.formatter.creationDateValue'
 					}"/>
+					<ObjectAttribute text="{
+						path: 'details>/YY1_AddrLastCheckedBy_bus',
+						formatter: '.formatter.lastCheckedBy'
+					}"/>
+					<ObjectAttribute text="{
+						path: 'details>/YY1_AddrLastCheckedOn_bus',
+						formatter: '.formatter.lastCheckedDateValue'
+					}"/>
 				</attributes>
 			</ObjectHeader>
+			<Button
+				id="checkedAddressesButton"
+				text="{i18n>checkAddressButton}"
+				icon="sap-icon://complete"
+				width="auto"
+				press="onMarkAddressesChecked"
+				class="sapUiResponsiveMargin"
+				/>
 			<Table
 				id="addressList"
 				width="auto"

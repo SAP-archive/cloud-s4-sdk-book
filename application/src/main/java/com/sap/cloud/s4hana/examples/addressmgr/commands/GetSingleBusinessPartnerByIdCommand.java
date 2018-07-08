@@ -1,12 +1,13 @@
 package com.sap.cloud.s4hana.examples.addressmgr.commands;
 
+import org.slf4j.Logger;
+
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.frameworks.hystrix.HystrixUtil;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpCommand;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartner;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerAddress;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.BusinessPartnerService;
-import org.slf4j.Logger;
 
 public class GetSingleBusinessPartnerByIdCommand extends ErpCommand<BusinessPartner> {
     private static final Logger logger = CloudLoggerFactory.getLogger(GetSingleBusinessPartnerByIdCommand.class);
@@ -33,6 +34,8 @@ public class GetSingleBusinessPartnerByIdCommand extends ErpCommand<BusinessPart
                         BusinessPartner.IS_MALE,
                         BusinessPartner.IS_FEMALE,
                         BusinessPartner.CREATION_DATE,
+                        BusinessPartner.MIDDLE_NAME,
+                        BusinessPartner.SEARCH_TERM1,
                         BusinessPartner.TO_BUSINESS_PARTNER_ADDRESS.select(
                                 BusinessPartnerAddress.BUSINESS_PARTNER,
                                 BusinessPartnerAddress.ADDRESS_ID,
