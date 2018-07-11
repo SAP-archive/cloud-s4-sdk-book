@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sap.cloud.sdk.cloudplatform.connectivity.DestinationsRequestContextListener;
 import com.sap.cloud.sdk.cloudplatform.exception.ShouldNotHappenException;
 import com.sap.cloud.sdk.cloudplatform.security.user.UserRequestContextListener;
+import com.sap.cloud.sdk.cloudplatform.servlet.RequestContextCallable;
 import com.sap.cloud.sdk.cloudplatform.servlet.RequestContextServletFilter;
 import com.sap.cloud.sdk.cloudplatform.tenant.TenantRequestContextListener;
 import io.restassured.mapper.ObjectMapperType;
@@ -20,7 +21,7 @@ public class TestUtil
         return ShrinkWrap
             .create(WebArchive.class)
             .addClasses(classesUnderTest)
-            .addClass(RequestContextServletFilter.class)
+            .addClasses(RequestContextServletFilter.class, RequestContextCallable.class)
             .addClass(TenantRequestContextListener.class)
             .addClass(UserRequestContextListener.class)
             .addClass(DestinationsRequestContextListener.class)
