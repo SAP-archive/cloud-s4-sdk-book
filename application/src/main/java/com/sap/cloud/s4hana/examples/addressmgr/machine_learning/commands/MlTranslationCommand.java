@@ -24,7 +24,7 @@ import java.util.*;
 public class MlTranslationCommand extends Command<List<String>> {
     private static final Logger logger = CloudLoggerFactory.getLogger(MlTranslationCommand.class);
 
-    private static final String TRANSLATE_URL_PATH = "/translation/translate";
+    private static final String TRANSLATE_URL_PATH = "/translation/translation";
 
     private final MlService mlService;
 
