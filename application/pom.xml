@@ -23,11 +23,11 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>25.0-jre</version>
+                <version>25.1-jre</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.checkerframework</groupId>
-                        <artifactId>checker-compat-qual</artifactId>
+                        <artifactId>checker-qual</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -81,7 +81,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.1</version>
                 <configuration>
                     <attachClasses>true</attachClasses>
                 </configuration>
@@ -91,6 +91,7 @@
                 <artifactId>tomee-maven-plugin</artifactId>
                 <version>1.7.5</version>
                 <configuration>
+                    <tomeeClassifier>jaxrs</tomeeClassifier>
                     <context>ROOT</context>
                     <libs>
                         <lib>remove:slf4j-jdk14</lib>
