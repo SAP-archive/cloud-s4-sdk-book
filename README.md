@@ -21,12 +21,12 @@ Start with the following:
 
 ### 2. Build and test
 Then, you need to build the project, which also includes testing. For the integration tests, you need to provide the URL and credentials of your SAP S/4HANA system.
-* Open the file `integration-tests/src/test/resources/systems.yml`. Uncomment the following two lines (remove the `#` found in the original file) and supply the URL to your SAP S/4HANA system.
+* Open the file `integration-tests/src/test/resources/systems.yml`. Set the default to `ERP_SYSTEM`: `default: "ERP_SYSTEM"`, uncomment the following two lines (remove the `#` found in the original file) and supply the URL to your SAP S/4HANA system.
 ```
     - alias: "ERP_SYSTEM"
       uri: "https://myXXXXXX.s4hana.ondemand.com"
 ```
-* Create a `credentials.yml`file used during tests with the following content, insert  the credentials of your communication user in your SAP S/4HANA Cloud system.
+* Create a `credentials.yml` file (preferably in the same directory) used during tests with the following content, insert  the credentials of your communication user in your SAP S/4HANA Cloud system. Make sure that the file is ignored by any version control system, as it contains credentials.
 ```
 ---
 credentials:
@@ -34,7 +34,7 @@ credentials:
   username: "<USERNAME>"
   password: "<PASSWORD>"
 ```
-* Run the following command to build and test the application.
+* Run the following command to build and test the application. The credentials path is only required if the file is not located in the same folder as `systems.yml`.
 ```
 mvn clean install "-Dtest.credentials=//absolute/path/to/credentials.yml"
 ```
