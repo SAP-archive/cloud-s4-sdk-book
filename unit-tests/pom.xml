@@ -25,7 +25,6 @@
         <surefire.groups/>
         <surefire.excludedGroups/>
         <surefire.maxMemorySize>1024m</surefire.maxMemorySize>
-        <surefire.maxPermSize>512m</surefire.maxPermSize>
         <surefire.logLevel>info</surefire.logLevel>
 
         <jacoco.destFile>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.destFile>
@@ -110,7 +109,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.9</version>
+                <version>0.8.1</version>
                 <configuration>
                     <destFile>${jacoco.destFile}</destFile>
                     <dataFile>${jacoco.destFile}</dataFile>
@@ -138,11 +137,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20</version>
+                <version>2.19.1</version>
                 <configuration>
                     <argLine>@{argLine}
                         -Xmx${surefire.maxMemorySize}
-                        -XX:MaxPermSize=${surefire.maxPermSize}
                         -Dorg.slf4j.simpleLogger.defaultLogLevel=${surefire.logLevel}
                         -Djava.io.tmpdir=target/arquillian-working-dir/${surefire.forkNumber}/
                     </argLine>
