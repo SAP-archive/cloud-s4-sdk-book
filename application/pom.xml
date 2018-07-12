@@ -92,6 +92,16 @@
                     <libs>
                         <lib>remove:slf4j-jdk14</lib>
                     </libs>
+                    <!-- Configure auto-reload -->
+                    <synchronization>
+                        <extensions>
+                            <extension>.class</extension>
+                        </extensions>
+                    </synchronization>
+                    <reloadOnUpdate>true</reloadOnUpdate>
+                    <systemVariables>
+                        <tomee.serialization.class.blacklist>-</tomee.serialization.class.blacklist>
+                    </systemVariables>
                 </configuration>
             </plugin>
         </plugins>
