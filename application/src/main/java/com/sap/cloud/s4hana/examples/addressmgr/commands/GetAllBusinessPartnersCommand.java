@@ -44,6 +44,7 @@ public class GetAllBusinessPartnersCommand extends CachingErpCommand<List<Busine
     protected List<BusinessPartner> runCacheable() throws Exception {
         return service.getAllBusinessPartner()
                 .select(BusinessPartner.BUSINESS_PARTNER, BusinessPartner.LAST_NAME, BusinessPartner.FIRST_NAME)
+                .filter(BusinessPartner.BUSINESS_PARTNER_CATEGORY.eq(CATEGORY_PERSON))
                 .execute();
     }
 
