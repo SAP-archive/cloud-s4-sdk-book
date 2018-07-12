@@ -10,6 +10,8 @@ applications:
     TARGET_RUNTIME: tomee
     JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:96m..'
     SET_LOGGING_LEVEL: '{ROOT: INFO, com.sap.cloud.sdk: INFO}'
+    destinations: "[{name: 'ErpQueryEndpoint', url: 'https://my-s4-system.cfapps.us30.hana.ondemand.com', username: 'DUMMY', password: 'dummy'}]"
+    ALLOW_MOCKED_AUTH_HEADER: true
 #  services:
 #  - my-application-logs
 #  - my-xsuaa
