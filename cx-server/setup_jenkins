@@ -9,22 +9,18 @@ sudo mv linux-amd64/helm /usr/local/bin/helm
 
 # Assign tiller to a cluster-admin role
 kubectl create serviceaccount --namespace kube-system tiller
-sleep 5
-kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
-
-echo 'Waiting for tiller to be ready'
 sleep 10
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+sleep 10
+echo 'Waiting for tiller to be ready'
 # Install tiller
 helm init --service-account tiller --upgrade
-sleep 5
+sleep 10
 kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
-
-
-
+sleep 5
 # Pull custom values for Jenkins deployment
 wget https://raw.githubusercontent.com/SAP/cloud-s4-sdk-book/google-next/cx-server/values.yaml
 # Install Jenkins
-helm del --purge jenkins-k8s || true
 helm install --name jenkins-k8s -f values.yaml stable/jenkins
 
 # Cleanup
