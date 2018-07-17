@@ -1,0 +1,39 @@
+# Cleanup
+rm helm-v2.10.0-rc.1-linux-amd64.tar.gz || true
+rm values.yaml || true
+
+# Install Helm
+wget https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-rc.1-linux-amd64.tar.gz
+tar -zxvf helm-v2.10.0-rc.1-linux-amd64.tar.gz
+sudo mv linux-amd64/helm /usr/local/bin/helm
+
+# Assign tiller to a cluster-admin role
+kubectl create serviceaccount --namespace kube-system tiller
+sleep 5
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+
+echo 'Waiting for tiller to be ready'
+sleep 10
+# Install tiller
+helm init --service-account tiller --upgrade
+sleep 5
+kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+
+
+
+# Pull custom values for Jenkins deployment
+wget https://raw.githubusercontent.com/rkamath3/cloud-s4-sdk-book/master/cx-server/values.yaml
+# Install Jenkins
+helm del --purge k8s-poc || true
+helm install --name k8s-poc -f values.yaml stable/jenkins 
+
+echo 'Waiting for deployment status to turn OK'
+while [ [ ${kubectl get deployments --all-namespaces |grep k8s-poc-jenkins | awk '{print $6}'} -eq 1 ] ] ; do
+	sleep 5
+done
+echo 'Deployment is successfully completed'
+echo " Please use http://$(kubectl get services --all-namespaces |grep LoadBalancer | awk '{print $5}') to login to your Jenkins"
+
+# Cleanup
+rm helm-v2.10.0-rc.1-linux-amd64.tar.gz || true
+rm values.yaml || true
