@@ -24,15 +24,8 @@ kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"templat
 # Pull custom values for Jenkins deployment
 wget https://raw.githubusercontent.com/SAP/cloud-s4-sdk-book/google-next/cx-server/values.yaml
 # Install Jenkins
-helm del --purge Jenkins-k8s || true
-helm install --name Jenkins-k8s -f values.yaml stable/jenkins
-
-echo 'Waiting for deployment status to turn OK'
-while [ [ ${kubectl get deployments --all-namespaces |grep Jenkins-k8s-jenkins | awk '{print $6}'} -eq 1 ] ] ; do
-	sleep 5
-done
-echo 'Deployment is successfully completed'
-echo " Please use http://$(kubectl get services --all-namespaces |grep LoadBalancer | awk '{print $5}') to login to your Jenkins"
+helm del --purge jenkins-k8s || true
+helm install --name jenkins-k8s -f values.yaml stable/jenkins
 
 # Cleanup
 rm helm-v2.10.0-rc.1-linux-amd64.tar.gz || true
