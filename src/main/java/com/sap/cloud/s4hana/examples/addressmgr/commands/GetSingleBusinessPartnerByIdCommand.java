@@ -25,6 +25,7 @@ public class GetSingleBusinessPartnerByIdCommand extends ErpCommand<BusinessPart
 
     @Override
     protected BusinessPartner run() throws Exception {
+        return null;
         // TODO: Insert VDM-based query here
     }
 

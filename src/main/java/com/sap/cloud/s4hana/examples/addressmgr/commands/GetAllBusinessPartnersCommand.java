@@ -42,6 +42,7 @@ public class GetAllBusinessPartnersCommand extends CachingErpCommand<List<Busine
 
     @Override
     protected List<BusinessPartner> runCacheable() throws Exception {
+        return null;
         // TODO: Insert VDM-based query here
     }
 
