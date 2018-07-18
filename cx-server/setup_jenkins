@@ -1,3 +1,8 @@
+function log_info()
+{
+    echo -e "\033[1;33m[Info]\033[0m $1" >&2
+}
+
 function cleanup()
 {
     rm helm-v2.10.0-rc.1-linux-amd64.tar.gz > /dev/null 2>&1 || true
@@ -7,31 +12,40 @@ function cleanup()
 
 function install_helm()
 {
-    wget https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-rc.1-linux-amd64.tar.gz
-    tar -zxvf helm-v2.10.0-rc.1-linux-amd64.tar.gz
-    sudo mv linux-amd64/helm /usr/local/bin/helm
+    log_info 'Installing helm'
+    wget https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-rc.1-linux-amd64.tar.gz > /dev/null 2>&1
+    tar -zxvf helm-v2.10.0-rc.1-linux-amd64.tar.gz > /dev/null 2>&1
+    sudo mv linux-amd64/helm /usr/local/bin/helm > /dev/null 2>&1
+    log_info 'helm installation completed'
 }
 
-function inint_tiller()
+function init_tiller()
 {
     # Assign tiller to a cluster-admin role
-    kubectl create serviceaccount --namespace kube-system tiller
-    kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+    log_info 'Creating service account'
+    kubectl create serviceaccount --namespace kube-system tiller > /dev/null 2>&1
+    log_info 'Creating cluster role binding'
+    kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller > /dev/null 2>&1
 
     # Init tiller
-    helm init --wait --service-account tiller --upgrade
+    log_info 'Initializing the tiller'
+    helm init --wait --service-account tiller --upgrade > /dev/null 2>&1
+    log_info 'tiller initialized'
 }
 
 function install_jenkins()
 {
     # Pull custom values for Jenkins deployment
-    wget https://raw.githubusercontent.com/SAP/cloud-s4-sdk-book/google-next/cx-server/values.yaml
+    log_info 'Get values for Jenkins installation'
+    wget https://raw.githubusercontent.com/SAP/cloud-s4-sdk-book/google-next/cx-server/values.yaml > /dev/null 2>&1
 
     # Delete if there is existing deplyment (Valid only if the participant retries deployment)
     helm del --purge jenkins-k8s > /dev/null 2>&1 || true
 
     # Install Jenkins
+    log_info 'Installing Jenkins'
     helm install --name jenkins-k8s -f values.yaml stable/jenkins
+    log_info 'Jenkins Installation is successfully completed.'
 }
 
 #######################################################
@@ -39,6 +53,6 @@ function install_jenkins()
 #######################################################
 cleanup
 install_helm
-inint_tiller
+init_tiller
 install_jenkins
 cleanup
