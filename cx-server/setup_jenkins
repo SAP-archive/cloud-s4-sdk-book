@@ -4,12 +4,14 @@ function cleanup()
     rm -rf linux-amd64 > /dev/null 2>&1 || true
     rm values.yaml > /dev/null 2>&1 || true
 }
+
 function install_helm()
 {
     wget https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-rc.1-linux-amd64.tar.gz
     tar -zxvf helm-v2.10.0-rc.1-linux-amd64.tar.gz
     sudo mv linux-amd64/helm /usr/local/bin/helm
 }
+
 function inint_tiller()
 {
     # Assign tiller to a cluster-admin role
@@ -19,6 +21,7 @@ function inint_tiller()
     # Init tiller
     helm init --wait --service-account tiller --upgrade
 }
+
 function install_jenkins()
 {
     # Pull custom values for Jenkins deployment
