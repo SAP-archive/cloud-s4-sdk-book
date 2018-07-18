@@ -2,6 +2,12 @@ package com.sap.cloud.s4hana.examples.addressmgr.commands;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import org.slf4j.Logger;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import com.sap.cloud.sdk.cloudplatform.cache.CacheKey;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.frameworks.hystrix.HystrixUtil;
@@ -9,11 +15,6 @@ import com.sap.cloud.sdk.s4hana.connectivity.CachingErpCommand;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.helper.Order;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartner;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.BusinessPartnerService;
-import org.slf4j.Logger;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class GetAllBusinessPartnersCommand extends CachingErpCommand<List<BusinessPartner>> {
     private static final Logger logger = CloudLoggerFactory.getLogger(GetAllBusinessPartnersCommand.class);
@@ -42,7 +43,12 @@ public class GetAllBusinessPartnersCommand extends CachingErpCommand<List<Busine
 
     @Override
     protected List<BusinessPartner> runCacheable() throws Exception {
-        // TODO: Insert VDM-based query here
+        return service
+                .getAllBusinessPartner()
+                .select(BusinessPartner.FIRST_NAME, BusinessPartner.LAST_NAME, BusinessPartner.BUSINESS_PARTNER)
+                .filter(BusinessPartner.BUSINESS_PARTNER_CATEGORY.eq(CATEGORY_PERSON))
+                .orderBy(BusinessPartner.LAST_NAME, Order.ASC)
+                .execute();
     }
 
     @Override
