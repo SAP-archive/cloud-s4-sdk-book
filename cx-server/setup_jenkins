@@ -1,28 +1,41 @@
-# Cleanup
-rm helm-v2.10.0-rc.1-linux-amd64.tar.gz || true
-rm values.yaml || true
+function cleanup()
+{
+    rm helm-v2.10.0-rc.1-linux-amd64.tar.gz > /dev/null 2>&1 || true
+    rm -rf linux-amd64 > /dev/null 2>&1 || true
+    rm values.yaml > /dev/null 2>&1 || true
+}
+function install_helm()
+{
+    wget https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-rc.1-linux-amd64.tar.gz
+    tar -zxvf helm-v2.10.0-rc.1-linux-amd64.tar.gz
+    sudo mv linux-amd64/helm /usr/local/bin/helm
+}
+function inint_tiller()
+{
+    # Assign tiller to a cluster-admin role
+    kubectl create serviceaccount --namespace kube-system tiller
+    kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
 
-# Install Helm
-wget https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-rc.1-linux-amd64.tar.gz
-tar -zxvf helm-v2.10.0-rc.1-linux-amd64.tar.gz
-sudo mv linux-amd64/helm /usr/local/bin/helm
+    # Init tiller
+    helm init --wait --service-account tiller --upgrade
+}
+function install_jenkins()
+{
+    # Pull custom values for Jenkins deployment
+    wget https://raw.githubusercontent.com/SAP/cloud-s4-sdk-book/google-next/cx-server/values.yaml
 
-# Assign tiller to a cluster-admin role
-kubectl create serviceaccount --namespace kube-system tiller
-sleep 10
-kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
-sleep 10
-echo 'Waiting for tiller to be ready'
-# Install tiller
-helm init --service-account tiller --upgrade
-sleep 10
-kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
-sleep 5
-# Pull custom values for Jenkins deployment
-wget https://raw.githubusercontent.com/SAP/cloud-s4-sdk-book/google-next/cx-server/values.yaml
-# Install Jenkins
-helm install --name jenkins-k8s -f values.yaml stable/jenkins
+    # Delete if there is existing deplyment (Valid only if the participant retries deployment)
+    helm del --purge jenkins-k8s > /dev/null 2>&1 || true
 
-# Cleanup
-rm helm-v2.10.0-rc.1-linux-amd64.tar.gz || true
-rm values.yaml || true
+    # Install Jenkins
+    helm install --name jenkins-k8s -f values.yaml stable/jenkins
+}
+
+#######################################################
+# Helper to install Jenkins on K8S cluster using helm #
+#######################################################
+cleanup
+install_helm
+inint_tiller
+install_jenkins
+cleanup
