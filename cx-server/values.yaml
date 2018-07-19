@@ -17,7 +17,7 @@ Master:
   Component: "jenkins-master"
   UseSecurity: true
   AdminUser: admin
-  AdminPassword: SAP@next18
+#  AdminPassword:
   Cpu: "1000m"
   Memory: "4096Mi"
   # Environment variables that get added to the init container (useful for e.g. http_proxy)
