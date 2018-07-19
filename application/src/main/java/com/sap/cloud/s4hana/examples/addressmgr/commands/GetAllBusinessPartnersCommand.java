@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class GetAllBusinessPartnersCommand extends CachingErpCommand<List<BusinessPartner>> {
@@ -50,6 +51,10 @@ public class GetAllBusinessPartnersCommand extends CachingErpCommand<List<Busine
                 .filter(BusinessPartner.BUSINESS_PARTNER_CATEGORY.eq(CATEGORY_PERSON))
                 .orderBy(BusinessPartner.LAST_NAME, Order.ASC)
                 .execute();
+
+        for (BusinessPartner businessPartner : businessPartners) {
+            businessPartner.setLastName(Objects.requireNonNull(businessPartner.getLastName()).toUpperCase());
+        }
 
         return businessPartners;
     }

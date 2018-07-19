@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.helper.Order;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartner;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerFluentHelper;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerSelectable;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.BusinessPartnerService;
 import com.sap.cloud.sdk.testutil.MockUtil;
@@ -18,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.net.URI;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
