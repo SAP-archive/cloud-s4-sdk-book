@@ -48,6 +48,9 @@ function install_jenkins()
     log_info 'Jenkins Installation is successfully completed.'
 }
 
+function get_password(){
+    log_info "Login with the password $(printf $(kubectl get secret --namespace default jenkins-k8s -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo)"
+}
 #######################################################
 # Helper to install Jenkins on K8S cluster using helm #
 #######################################################
@@ -55,4 +58,5 @@ cleanup
 install_helm
 init_tiller
 install_jenkins
+get_password
 cleanup
