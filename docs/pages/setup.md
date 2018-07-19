@@ -10,7 +10,7 @@ You will need the following on your local machine to work with the source code a
 * Java Development Kit (JDK), version 8 (1.8.0), or above
 * Apache Maven, version 3.5.0, or above
 
-## Optional Requirements
+### Optional Requirements
 * Git, version 2.15.0, or above for cloning the repository from GitHub.com and pushing changes to your own fork (Download from the [project homepage](https://git-scm.com/downloads))
 
 ## Installation
