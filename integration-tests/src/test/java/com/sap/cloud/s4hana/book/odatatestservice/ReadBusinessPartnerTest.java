@@ -1,6 +1,5 @@
 package com.sap.cloud.s4hana.book.odatatestservice;
 
-import com.sap.cloud.sdk.odatav2.connectivity.ODataCreateRequestBuilder;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
 
 import com.sap.cloud.sdk.s4hana.datamodel.odata.helper.Order;
@@ -8,13 +7,11 @@ import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.Busin
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerAddress;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultBusinessPartnerService;
 
-import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryBuilder;
 import com.sap.cloud.sdk.testutil.MockUtil;
 
 import org.hamcrest.CustomTypeSafeMatcher;
 import org.hamcrest.Matcher;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -69,12 +66,12 @@ public class ReadBusinessPartnerTest {
     public void testGetAllWithSelect() throws ODataException {
         final List<BusinessPartner> businessPartners = new DefaultBusinessPartnerService()
                 .getAllBusinessPartner()
-                .select(BusinessPartner.FIRST_NAME, BusinessPartner.CREATED_BY_USER)
+                .select(BusinessPartner.BUSINESS_PARTNER_FULL_NAME, BusinessPartner.CREATED_BY_USER)
                 .execute();
 
         verifyListMatchesSize(businessPartners, greaterThan(1));
 
-        assertForAll_IdNull_FirstNameNonNull_CreatedByNonNull(businessPartners);
+        assertForAll_IdNull_FullNameNonNull_CreatedByNonNull(businessPartners);
     }
 
     @Test
@@ -89,15 +86,15 @@ public class ReadBusinessPartnerTest {
         assertForAll_IdNonNull_CategoryNonNull(businessPartners);
     }
 
-    private void assertForAll_IdNull_FirstNameNonNull_CreatedByNonNull(List<BusinessPartner> businessPartners) {
+    private void assertForAll_IdNull_FullNameNonNull_CreatedByNonNull(List<BusinessPartner> businessPartners) {
         for (final BusinessPartner businessPartner : businessPartners) {
-            assert_IdNull_FirstNameNonNull_CreatedByNonNull(businessPartner);
+            assert_IdNull_FullNameNonNull_CreatedByNonNull(businessPartner);
         }
     }
 
-    private void assert_IdNull_FirstNameNonNull_CreatedByNonNull(BusinessPartner businessPartner) {
+    private void assert_IdNull_FullNameNonNull_CreatedByNonNull(BusinessPartner businessPartner) {
         assertThat(businessPartner.getBusinessPartner(), nullValue());
-        assertThat(businessPartner.getFirstName(), not(isEmptyOrNullString()));
+        assertThat(businessPartner.getBusinessPartnerFullName(), not(isEmptyOrNullString()));
         assertThat(businessPartner.getCreatedByUser(), not(isEmptyOrNullString()));
     }
 
@@ -127,13 +124,13 @@ public class ReadBusinessPartnerTest {
     public void testGetAllWithSelectAndFilter() throws ODataException {
         final List<BusinessPartner> businessPartners = new DefaultBusinessPartnerService()
                 .getAllBusinessPartner()
-                .select(BusinessPartner.FIRST_NAME, BusinessPartner.CREATED_BY_USER)
+                .select(BusinessPartner.BUSINESS_PARTNER_FULL_NAME, BusinessPartner.FIRST_NAME, BusinessPartner.CREATED_BY_USER)
                 .filter(BusinessPartner.FIRST_NAME.eq(EXPECTED_FIRST_NAME))
                 .execute();
 
         verifyListMatchesSize(businessPartners, lessThan(sizeOfUnfilteredResult()));
 
-        assertForAll_IdNull_FirstNameNonNull_CreatedByNonNull(businessPartners);
+        assertForAll_IdNull_FullNameNonNull_CreatedByNonNull(businessPartners);
         assertForAll_FirstNameAsExpected(businessPartners, EXPECTED_FIRST_NAME);
     }
 
@@ -253,11 +250,11 @@ public class ReadBusinessPartnerTest {
     public void testGetByKeyWithSelect() throws ODataException {
         final BusinessPartner businessPartner = new DefaultBusinessPartnerService()
                 .getBusinessPartnerByKey(BUPA_ID)
-                .select(BusinessPartner.FIRST_NAME, BusinessPartner.CREATED_BY_USER)
+                .select(BusinessPartner.BUSINESS_PARTNER_FULL_NAME, BusinessPartner.CREATED_BY_USER)
                 .execute();
 
         assertThat(businessPartner, notNullValue());
-        assert_IdNull_FirstNameNonNull_CreatedByNonNull(businessPartner);
+        assert_IdNull_FullNameNonNull_CreatedByNonNull(businessPartner);
     }
 
     @Test

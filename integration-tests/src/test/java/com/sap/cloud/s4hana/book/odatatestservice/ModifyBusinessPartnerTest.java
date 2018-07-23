@@ -42,6 +42,7 @@ public class ModifyBusinessPartnerTest {
         final BusinessPartner businessPartnerToCreate = BusinessPartner.builder()
                 .firstName(firstName)
                 .lastName("Doe")
+                .businessPartnerFullName(firstName + " Doe")
                 .businessPartnerCategory("1")
                 .isFemale(true)
                 .build();
