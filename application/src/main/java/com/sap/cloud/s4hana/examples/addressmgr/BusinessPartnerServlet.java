@@ -54,6 +54,7 @@ public class BusinessPartnerServlet extends HttpServlet {
             response.setContentType("application/json");
             response.getWriter().write(jsonResult);
         } catch (Exception e) {
+            logger.error("Error occured while handling request", e);
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error occured while handling request: " + e.toString());
         }
     }
