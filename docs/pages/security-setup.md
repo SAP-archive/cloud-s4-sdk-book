@@ -32,7 +32,7 @@ In the file `<your project location>\cloud-s4-sdk-book\approuter\manifest.yml`:
 You can check the generated route in your cloud platform cockpit drilling down to your application in your space. Here is the example of my application URL, used in the demo: `address-manager-sublaryngal-subspecies.cfapps.eu10.hana.ondemand.com`, where the generated random route is `sublaryngal-subspecies`.
    
 ## Create a New XSUAA Instance using xs-security.json
-To create a new instance of XSUAA using the provided xs-security.json configuration file, execute the following commands:
+To create a new instance of XSUAA using the provided xs-security.json configuration file, execute the following commands in CLI:
 ```
 cf api https://api.cf.eu10.hana.ondemand.com
 cf login -u <your email address>
