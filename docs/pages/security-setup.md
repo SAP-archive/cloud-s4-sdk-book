@@ -41,6 +41,11 @@ cf unbind-service address-manager my-xsuaa
 cf delete-service my-xsuaa
 cf create-service xsuaa application my-xsuaa -c xs-security.json
 ```
+## Create a New Destination Instance using xs-security.json
+To create a new instance "my-destination" of the destination service, execute the following command in CLI:
+```
+cf create-service destination lite my-destination
+```
 
 ## Remove Mock of the User and Tenant in Your Deployed Application
 As we will secure our example application with the App Router and the tenant and user information will be provided via the Json Web Token, we need to remove the user variable used for mocking of those parameters.
