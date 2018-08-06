@@ -18,7 +18,7 @@ public class CreateAddressCommand {
     }
 
     public BusinessPartnerAddress execute() throws Exception {
+        // TODO: Replace with Virtual Data Model query
         return null;
-        // TODO: Insert VDM-based query here
     }
 }

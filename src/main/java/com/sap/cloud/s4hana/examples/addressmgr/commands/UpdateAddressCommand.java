@@ -18,7 +18,7 @@ public class UpdateAddressCommand {
     }
 
     public Integer execute() throws Exception {
+        // TODO: Replace with Virtual Data Model query
         return null;
-        // TODO: Insert VDM-based query here
     }
 }
