@@ -1,5 +1,6 @@
 package com.sap.cloud.s4hana.examples.addressmgr.commands;
 
+import com.sap.cloud.sdk.s4hana.datamodel.odata.helper.Order;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -20,8 +21,8 @@ public class GetAllBusinessPartnersCommand {
     }
 
     public List<BusinessPartner> execute() throws Exception {
+        // TODO: Replace with Virtual Data Model query
         return null;
-        // TODO: Insert VDM-based query here
     }
 
 }

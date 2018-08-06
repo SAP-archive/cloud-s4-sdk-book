@@ -1,5 +1,7 @@
 package com.sap.cloud.s4hana.examples.addressmgr.commands;
 
+import com.sap.cloud.sdk.odatav2.connectivity.ODataDeleteResult;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerAddress;
 import org.slf4j.Logger;
 
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
@@ -21,7 +23,7 @@ public class DeleteAddressCommand {
     }
 
     public Integer execute() throws Exception {
+        // TODO: Replace with Virtual Data Model query
         return null;
-        // TODO: Insert VDM-based query here
     }
 }
