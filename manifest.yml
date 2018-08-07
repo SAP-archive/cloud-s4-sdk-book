@@ -14,5 +14,4 @@ applications:
 #  - my-application-logs
     - my-xsuaa
     - my-destination
-    - my-ml
 #  - my-connectivity

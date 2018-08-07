@@ -1,4 +1,4 @@
-package com.sap.cloud.s4hana.examples.addressmgr.machine_learning;
+package com.sap.cloud.s4hana.examples.addressmgr.machinelearning;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collections;
 
-import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.commands.MlLanguageDetectionCommand;
-import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.commands.MlTranslationCommand;
+import com.sap.cloud.s4hana.examples.addressmgr.machinelearning.commands.MlLanguageDetectionCommand;
+import com.sap.cloud.s4hana.examples.addressmgr.machinelearning.commands.MlTranslationCommand;
 import com.sap.cloud.s4hana.examples.addressmgr.util.HttpServlet;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 

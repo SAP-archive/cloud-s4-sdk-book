@@ -1,4 +1,4 @@
-package com.sap.cloud.s4hana.examples.addressmgr.machine_learning.commands;
+package com.sap.cloud.s4hana.examples.addressmgr.machinelearning.commands;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -7,11 +7,16 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.slf4j.Logger;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,7 +24,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sap.cloud.sdk.cloudplatform.connectivity.HttpClientAccessor;
 import com.sap.cloud.sdk.cloudplatform.connectivity.HttpEntityUtil;
+import com.sap.cloud.sdk.cloudplatform.connectivity.ScpCfService;
 import com.sap.cloud.sdk.cloudplatform.exception.ShouldNotHappenException;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.frameworks.hystrix.Command;
@@ -86,9 +93,8 @@ public class MlTranslationCommand extends Command<List<String>> {
     }
 
     private String executeRequest(String requestJson) throws Exception {
-        
-		// TODO Build and execute request to the translation service using ScpCfService
-		final HttpResponse response = null;
+        // TODO Build and execute request to the translation service using ScpCfService
+        final HttpResponse response = null;
 
         // retrieve entity content (requested json with Accept header, so should be text) and close request
         final String responsePayload = HttpEntityUtil.getResponseBody(response);

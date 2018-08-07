@@ -1,4 +1,4 @@
-package com.sap.cloud.s4hana.examples.addressmgr.machine_learning;
+package com.sap.cloud.s4hana.examples.addressmgr.machinelearning;
 
 import com.sap.cloud.sdk.cloudplatform.connectivity.Destination;
 import com.sap.cloud.sdk.cloudplatform.connectivity.DestinationAccessor;
