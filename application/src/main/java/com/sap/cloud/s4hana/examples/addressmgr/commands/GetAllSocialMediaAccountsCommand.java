@@ -51,7 +51,21 @@ public class GetAllSocialMediaAccountsCommand extends CachingErpCommand<List<Soc
 
     @Override
     protected List<SocialMediaAccount> runCacheable() throws Exception {
-        return Collections.emptyList();
+        final List<BusinessPartnerSocialMedia> socialMediaList = service.getAllBusinessPartnerSocialMedia()
+                .filter(BusinessPartnerSocialMedia.BUSINESS_PARTNER.eq(businessPartnerId))
+                .select(BusinessPartnerSocialMedia.TO_SOCIAL_MEDIA_ACCOUNT
+                        .select(SocialMediaAccount.SERVICE, SocialMediaAccount.ACCOUNT))
+                .execute();
+        if (socialMediaList.isEmpty()) {
+            logger.info("Business partner {} has no entry in social media store.");
+            return Collections.emptyList();
+        }
+        if (socialMediaList.size() > 1) {
+            logger.warn("Found {} entries for the same business partner {} in social media store, " +
+                            "going to use the first one only.",
+                    socialMediaList.size(), businessPartnerId);
+        }
+        return socialMediaList.get(0).getSocialMediaAccountIfPresent().orElse(Collections.emptyList());
     }
 
     @Override

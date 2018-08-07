@@ -3,7 +3,6 @@ package com.sap.cloud.s4hana.examples.addressmgr;
 import com.google.gson.Gson;
 import com.sap.cloud.s4hana.examples.addressmgr.commands.GetAllSocialMediaAccountsCommand;
 import com.sap.cloud.s4hana.examples.addressmgr.custom.namespaces.bupasocialmedia.SocialMediaAccount;
-import com.sap.cloud.s4hana.examples.addressmgr.custom.services.BusinessPartnerSocialMediaService;
 import com.sap.cloud.s4hana.examples.addressmgr.custom.services.DefaultBusinessPartnerSocialMediaService;
 import com.sap.cloud.s4hana.examples.addressmgr.util.HttpServlet;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
@@ -36,7 +35,10 @@ public class SocialMediaServlet extends HttpServlet {
         }
 
         logger.info("Retrieving social media accounts of business partner with id {}", id);
+        final List<SocialMediaAccount> result = new GetAllSocialMediaAccountsCommand(
+                new DefaultBusinessPartnerSocialMediaService(), id)
+                .execute();
         response.setContentType("application/json");
-        response.getWriter().write(new Gson().toJson(null));
+        response.getWriter().write(new Gson().toJson(result));
     }
 }
