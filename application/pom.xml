@@ -33,7 +33,7 @@
                 <exclusions>
                     <exclusion>
                         <groupId>org.checkerframework</groupId>
-                        <artifactId>checker-compat-qual</artifactId>
+                        <artifactId>checker-qual</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
