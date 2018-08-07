@@ -1,5 +1,6 @@
 package com.sap.cloud.s4hana.examples.addressmgr.commands;
 
+import com.sap.cloud.s4hana.examples.addressmgr.models.BusinessPartnerCustomFields;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.frameworks.hystrix.HystrixUtil;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataUpdateResult;
@@ -36,6 +37,8 @@ public class MarkBusinessPartnerAsCheckedCommand extends ErpCommand<Void> {
         final BusinessPartner businessPartnerToUpdate = BusinessPartner.builder()
                 .businessPartner(businessPartnerId)
                 .build();
+        businessPartnerToUpdate.setCustomField(BusinessPartnerCustomFields.ADDRESSES_LAST_CHECKED_ON, checkedOnDate);
+        businessPartnerToUpdate.setCustomField(BusinessPartnerCustomFields.ADDRESSES_LAST_CHECKED_BY, checkedByUserName);
 
         final ODataUpdateResult updateResult = service
                 .updateBusinessPartner(businessPartnerToUpdate)

@@ -1,5 +1,6 @@
 package com.sap.cloud.s4hana.examples.addressmgr.commands;
 
+import com.sap.cloud.s4hana.examples.addressmgr.models.BusinessPartnerCustomFields;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.frameworks.hystrix.HystrixUtil;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpCommand;
@@ -33,6 +34,8 @@ public class GetSingleBusinessPartnerByIdCommand extends ErpCommand<BusinessPart
                         BusinessPartner.IS_MALE,
                         BusinessPartner.IS_FEMALE,
                         BusinessPartner.CREATION_DATE,
+                        BusinessPartnerCustomFields.ADDRESSES_LAST_CHECKED_ON,
+                        BusinessPartnerCustomFields.ADDRESSES_LAST_CHECKED_BY,
                         BusinessPartner.TO_BUSINESS_PARTNER_ADDRESS.select(
                                 BusinessPartnerAddress.BUSINESS_PARTNER,
                                 BusinessPartnerAddress.ADDRESS_ID,
