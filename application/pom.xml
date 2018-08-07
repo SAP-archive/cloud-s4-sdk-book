@@ -18,12 +18,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <properties>
-        <vdm.inputdir>${project.basedir}/src/main/vdm-input</vdm.inputdir>
-        <vdm.tmpdir>${project.basedir}/vdm-output-tmp</vdm.tmpdir>
-        <vdm.outputdir>${project.build.outputDirectory}/vdm-output</vdm.outputdir>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -98,65 +92,6 @@
                         <lib>remove:slf4j-jdk14</lib>
                     </libs>
                 </configuration>
-            </plugin>
-
-            <!-- Java VDM generator -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>${vdm.outputdir}</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.sap.cloud.s4hana.datamodel</groupId>
-                <artifactId>odata-generator-maven-plugin</artifactId>
-                <version>${s4sdk.version}</version>
-                <configuration>
-                    <inputDirectory>${vdm.inputdir}</inputDirectory>
-                    <outputDirectory>${vdm.tmpdir}</outputDirectory>
-                    <serviceNameMappingFile>${vdm.inputdir}/serviceNameMappings.properties</serviceNameMappingFile>
-                    <deleteOutputDirectory>true</deleteOutputDirectory>
-                    <packageName>com.sap.cloud.s4hana.examples.addressmgr.custom</packageName>
-                    <nameSource>LABEL</nameSource>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok-maven-plugin</artifactId>
-                <version>1.16.20.0</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>delombok</goal>
-                        </goals>
-                        <configuration>
-                            <addOutputDirectory>false</addOutputDirectory>
-                            <sourceDirectory>${vdm.tmpdir}</sourceDirectory>
-                            <outputDirectory>${vdm.outputdir}</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
