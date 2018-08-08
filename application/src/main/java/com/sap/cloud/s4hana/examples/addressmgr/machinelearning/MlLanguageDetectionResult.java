@@ -1,4 +1,4 @@
-package com.sap.cloud.s4hana.examples.addressmgr.machine_learning;
+package com.sap.cloud.s4hana.examples.addressmgr.machinelearning;
 
 import java.util.Locale;
 

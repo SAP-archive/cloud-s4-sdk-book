@@ -2,7 +2,6 @@ package com.sap.cloud.s4hana.examples.addressmgr.commands;
 
 import org.slf4j.Logger;
 
-import com.sap.cloud.s4hana.examples.addressmgr.models.BusinessPartnerCustomFields;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.frameworks.hystrix.HystrixUtil;
 import com.sap.cloud.sdk.s4hana.connectivity.ErpCommand;

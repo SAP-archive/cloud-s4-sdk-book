@@ -1,4 +1,4 @@
-package com.sap.cloud.s4hana.examples.addressmgr.machine_learning.commands;
+package com.sap.cloud.s4hana.examples.addressmgr.machinelearning.commands;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -92,10 +92,11 @@ public class MlTranslationCommand extends Command<List<String>> {
         return translationsInCorrectOrder;
     }
 
-    private String executeRequest(String requestJson) throws Exception {  
-		// Instantiate ScpCfService
+    private String executeRequest(String requestJson) throws Exception {
+
+        // Instantiate ScpCfService
         final ScpCfService mlService = ScpCfService.of(SERVICE_TYPE, null, AUTH_URL_JSON_PATH,
-                CLIENT_ID_JSON_PATH, CLIENT_SECRET_JSON_PATH, SERVICE_LOCATION_JSON_PATH);
+          CLIENT_ID_JSON_PATH, CLIENT_SECRET_JSON_PATH, SERVICE_LOCATION_JSON_PATH);
 
         // Get service URL
         URI serviceUrl = new URI(mlService.getServiceLocationInfo());

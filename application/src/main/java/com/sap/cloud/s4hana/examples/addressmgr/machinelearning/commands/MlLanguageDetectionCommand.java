@@ -1,4 +1,4 @@
-package com.sap.cloud.s4hana.examples.addressmgr.machine_learning.commands;
+package com.sap.cloud.s4hana.examples.addressmgr.machinelearning.commands;
 
 
 import com.google.gson.Gson;
@@ -13,8 +13,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Collections;
 
-import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.MlLanguageDetectionResult;
-import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.MlService;
+import com.sap.cloud.s4hana.examples.addressmgr.machinelearning.MlLanguageDetectionResult;
+import com.sap.cloud.s4hana.examples.addressmgr.machinelearning.MlService;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.frameworks.hystrix.Command;
 
