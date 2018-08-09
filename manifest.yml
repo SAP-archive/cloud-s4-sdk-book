@@ -12,7 +12,5 @@ applications:
     SET_LOGGING_LEVEL: '{ROOT: INFO, com.sap.cloud.sdk: INFO}'
     ALLOW_MOCKED_AUTH_HEADER: true
   services:
-#  - my-application-logs
     - my-xsuaa
     - my-destination
-#  - my-connectivity
