@@ -13,3 +13,4 @@ s4hana_pipeline/
 business-partner/API_BUSINESS_PARTNER.edmx
 
 vdm-output-tmp/
+business-partner/business-partner-model.js

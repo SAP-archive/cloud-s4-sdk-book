@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const router = express.Router();
 
 const odata = require('../odata-helpers.js');
-const bupaModel = require('./business-partner-model.js');
+const bupaModel = require('./business-partner-model.js').businessPartnerStore;
 
 const retrieveAllBusinessPartners = function(req, res, next) {
     console.log('Reading business partner entity set');

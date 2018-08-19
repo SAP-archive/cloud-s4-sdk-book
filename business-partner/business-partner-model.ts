@@ -1,22 +1,37 @@
-const uuid = require('uuid/v1');
-const data = require('./business-partner-data.js').data;
+import * as uuid from "uuid";
+const initialData = require('./business-partner-data.js').data;
+
+export interface BusinessPartner {
+    BusinessPartner: string;
+    PersonNumber: string;
+    to_BusinessPartnerAddress: any;
+}
+
+export interface Address {
+    BusinessPartner: string;
+    AddressID: string;
+}
 
 const today = function () {
     const time = Date.now();
     return time - (time % 24 * 60 * 60 * 1000);
 }
 
-const nextBusinessPartnerId = function(existingBusinessPartners) {
+const nextBusinessPartnerId = function(existingBusinessPartners: BusinessPartner[]) {
     return String(Math.max(...existingBusinessPartners.map( (item) => Number(item.BusinessPartner) )) + 1);
 };
 
-const nextAddressId = function(existingAddresses) {
+const nextAddressId = function(existingAddresses: Address[]) {
     return String(Math.max(...existingAddresses.map( (item) => Number(item.AddressID) )) + 1);
 };
 
-module.exports = {
-    data: data,
-    newBusinessPartner: function (id) {
+export class BusinessPartnerStore {
+    data: BusinessPartner[];
+    constructor(initialData: BusinessPartner[]) {
+        this.data = initialData;
+    }
+
+    newBusinessPartner(id: string) {
         return Object.seal({
             "__metadata": {
                 "id": `https://{host}:{port}/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner(${id})`,
@@ -32,7 +47,7 @@ module.exports = {
             "BusinessPartnerFullName": "",
             "BusinessPartnerGrouping": "BP02",
             "BusinessPartnerName": "",
-            "BusinessPartnerUUID": uuid(),
+            "BusinessPartnerUUID": uuid.v1(),
             "CorrespondenceLanguage": "",
             "CreatedByUser": "ANONYMOUS001",
             "CreationDate": `/Date(${today()})/`,
@@ -98,30 +113,30 @@ module.exports = {
             "to_Customer": null,
             "to_Supplier": null
         });
-    },
-    getBusinessPartners: function () {
+    }
+    getBusinessPartners() : BusinessPartner[] {
         return this.data;
-    },
-    findBusinessPartner: function (id) {
-        return this.getBusinessPartners().find(function (element) {
+    }
+    findBusinessPartner(id: string) {
+        return this.getBusinessPartners().find(function (element: BusinessPartner) {
             return element.BusinessPartner == id;
         });
-    },
-    createAndAddBusinessPartner: function(businessPartnerInput) {
+    }
+    createAndAddBusinessPartner(businessPartnerInput: BusinessPartner) {
         const newId = nextBusinessPartnerId(this.getBusinessPartners());
         const newBusinessPartner = this.newBusinessPartner(newId);
         Object.assign(newBusinessPartner, businessPartnerInput);
         this.getBusinessPartners().push(newBusinessPartner);
         return newBusinessPartner;
-    },
-    deleteBusinessPartner: function(id) {
+    }
+    deleteBusinessPartner(id: string) {
         if(!this.findBusinessPartner(id)) {
             throw new Error(`Cannot delete business partner: business partner with ID ${id} does not exist.`);
         }
         this.data = this.getBusinessPartners()
-            .filter( (bupa) => bupa.BusinessPartner != id );
-    },
-    modifyBusinessPartner: function(id, businessPartnerInput) {
+            .filter( (bupa: BusinessPartner) => bupa.BusinessPartner != id );
+    }
+    modifyBusinessPartner(id: string, businessPartnerInput: BusinessPartner) {
         const businessPartnerToUpdate = this.findBusinessPartner(id);
         if(!businessPartnerToUpdate) {
             throw new Error(`Cannot modify business partner: business partner with ID ${id} does not exist.`);
@@ -130,20 +145,20 @@ module.exports = {
             throw new Error(`Cannot modify business partner: identifier must not be changed`);
         }
         Object.assign(businessPartnerToUpdate, businessPartnerInput);
-    },
+    }
 
-    getAddresses: function() {
+    getAddresses() : Address[] {
         return this.getBusinessPartners()
-            .map( (bupa) => bupa.to_BusinessPartnerAddress.results)
-            .reduce( (acc,val) => acc.concat(val) , []);
-    },
-    findAddress: function(businessPartnerId, addressId) {
-        return this.getAddresses().find(function(element) {
+            .map( (bupa: BusinessPartner) => bupa.to_BusinessPartnerAddress.results)
+            .reduce( (acc: BusinessPartner[], val: BusinessPartner) => acc.concat(val) , []);
+    }
+    findAddress(businessPartnerId: string, addressId: string) {
+        return this.getAddresses().find(function(element: Address) {
             return element.BusinessPartner == businessPartnerId &&
                    element.AddressID == addressId;
         });
-    },
-    newAddress: function(businessPartnerId, addressId) {
+    }
+    newAddress(businessPartnerId: string, addressId: string) {
         const businessPartner = this.findBusinessPartner(businessPartnerId);
         if(!businessPartner) {
             throw new Error(`Cannot create address: associated business partner with ID ${businessPartnerId} does not exist.`);
@@ -159,7 +174,7 @@ module.exports = {
             "ValidityStartDate": "/Date(1518393600000+0000)/",
             "ValidityEndDate": "/Date(253402300799000+0000)/",
             "AuthorizationGroup": "",
-            "AddressUUID": uuid(),
+            "AddressUUID": uuid.v1(),
             "AdditionalStreetPrefixName": "",
             "AdditionalStreetSuffixName": "",
             "AddressTimeZone": "CET",
@@ -214,23 +229,27 @@ module.exports = {
                 "results": []
             }
         });
-    },
-    createAndAddAddress: function(addressInput) {
+    }
+    createAndAddAddress(addressInput: Address) {
         const newAddressId = nextAddressId(this.getAddresses());
         const newAddress = this.newAddress(addressInput.BusinessPartner, newAddressId);
         Object.assign(newAddress, addressInput);
-        this.findBusinessPartner(newAddress.BusinessPartner).to_BusinessPartnerAddress.results.push(newAddress);
+        const parentBusinessPartner = this.findBusinessPartner(newAddress.BusinessPartner);
+        if(!parentBusinessPartner) {
+            throw new Error(`Cannot create address: business partner with key ${newAddress.BusinessPartner} does not exist.`);
+        }
+        parentBusinessPartner.to_BusinessPartnerAddress.results.push(newAddress);
         return newAddress;
-    },
-    deleteAddress: function(businessPartnerId, addressId) {
+    }
+    deleteAddress(businessPartnerId: string, addressId: string) {
         const businessPartner = this.findBusinessPartner(businessPartnerId);
         if(!businessPartner || !this.findAddress(businessPartnerId, addressId)) {
             throw new Error(`Cannot delete address: address with key (${businessPartnerId},${addressId}) does not exist.`);
         }
         businessPartner.to_BusinessPartnerAddress.results = businessPartner.to_BusinessPartnerAddress.results
-            .filter( (address) => address.AddressID != addressId);
-    },
-    modifyAddress: function(businessPartnerId, addressId, addressInput) {
+            .filter( (address: Address) => address.AddressID != addressId);
+    }
+    modifyAddress(businessPartnerId: string, addressId: string, addressInput: Address) {
         const addressToUpdate = this.findAddress(businessPartnerId, addressId);
         if(!addressToUpdate) {
             throw new Error(`Cannot modify address: address with key (${businessPartnerId},${addressId}) does not exist.`);
@@ -242,3 +261,5 @@ module.exports = {
         Object.assign(addressToUpdate, addressInput);
     }
 };
+
+export var businessPartnerStore = new BusinessPartnerStore(initialData);
