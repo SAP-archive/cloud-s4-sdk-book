@@ -14,10 +14,4 @@ business-partner/API_BUSINESS_PARTNER.edmx
 
 vdm-output-tmp/
 
-business-partner/business-partner-model.js
-business-partner/business-partner-api.js
-social-media-accounts/social-media-accounts-model.js
-social-media-accounts/social-media-accounts-api.js
-common-types.js
-odata-helpers.js
-app.js
+dist/

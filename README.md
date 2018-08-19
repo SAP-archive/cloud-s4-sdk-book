@@ -18,7 +18,7 @@ Before you can launch the mock server, you need to manually put the metadata EDM
 * Go to the description of the [Business Partner API in the SAP API Business Hub](https://api.sap.com/shell/discover/contentpackage/SAPS4HANACloud/api/API_BUSINESS_PARTNER).
 * Click on *Log On* and log in with your credentials (you may need to register beforehand).
 * Click on *Details* and *Download Specification* and choose *EDMX*.
-* Store the downloaded file with the name `API_BUSINESS_PARTNER.edmx` in the subfolder `business-partner` of the mock server folder.
+* Store the downloaded file with the name `API_BUSINESS_PARTNER.edmx` in the subfolder `src/business-partner` of the mock server folder.
 * Open the metadata document and locate the entity type `A_BusinessPartnerType`. Within the `EntityType` item with that name, add the following two lines behind the line that contains `</Key>`:
 ```
 <Property Name="YY1_AddrLastCheckedOn_bus" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Addresses Last Checked On"/>
@@ -92,11 +92,11 @@ The OData mock service supports the following features centered around the `API_
 Also see the accompanying test suite in folder `integration-tests`, implemented as Java JUnit tests using the SAP S/4HANA Cloud SDK, specifically its Virtual Data Model (VDM).
 
 ## Background
-The mock server is implemented in JavaScript / Node.js using [Express](http://expressjs.com).
+The mock server is implemented in TypeScript / Node.js using [Express](http://expressjs.com).
 
-Entry point of the server is in `app.js`.
-The implementation of the business partner and address api and model can be found in folder `business-partner`. The demo data is defined in the file `business-partner-data.js`.
-OData features are implemented as generic Express middlewares in `odata-helper.js`.
+The entry point of the server is defined in `src/app.ts`.
+The implementation of the business partner and address api and model can be found in folder `src/business-partner`. The demo data is defined in the file `business-partner-data.js`.
+OData features are implemented as generic Express middlewares in `src/odata-helper.js`.
 
 ## License
 Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
