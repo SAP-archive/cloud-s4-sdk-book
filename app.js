@@ -2,7 +2,7 @@ const nodeAppStarted = Date.now();
 const express = require('express');
 const app = express();
 
-const bupaApi = require('./business-partner/business-partner-api.js');
+const bupaApi = require('./business-partner/business-partner-api.js').router;
 const socialMediaApi = require('./social-media-accounts/social-media-accounts-api.js');
 
 const logRequests = function(req, res, next) {

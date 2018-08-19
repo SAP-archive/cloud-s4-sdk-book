@@ -262,4 +262,4 @@ export class BusinessPartnerStore {
     }
 };
 
-export var businessPartnerStore = new BusinessPartnerStore(initialData);
+export const businessPartnerStore = new BusinessPartnerStore(initialData);

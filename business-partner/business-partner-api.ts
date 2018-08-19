@@ -1,67 +1,69 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const router = express.Router();
-
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import {businessPartnerStore, BusinessPartner, Address} from './business-partner-model.js';
 const odata = require('../odata-helpers.js');
-const bupaModel = require('./business-partner-model.js').businessPartnerStore;
 
-const retrieveAllBusinessPartners = function(req, res, next) {
+export const router = express.Router();
+
+const bupaModel = businessPartnerStore;
+
+const retrieveAllBusinessPartners = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log('Reading business partner entity set');
-    res.result = bupaModel.getBusinessPartners();
+    (<any>res).result = bupaModel.getBusinessPartners();
     next();
 };
 
-const retrieveSingleBusinessPartner = function(req, res, next) {
+const retrieveSingleBusinessPartner = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log(`Reading business partner ${req.params.id}`);
-    res.result = bupaModel.findBusinessPartner(req.params.id);
+    (<any>res).result = bupaModel.findBusinessPartner(req.params.id);
     next();
 };
 
-const retrieveAllAddresses = function(req, res, next) {
+const retrieveAllAddresses = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log('Reading address entity set');
-    res.result = bupaModel.getAddresses();
+    (<any>res).result = bupaModel.getAddresses();
     next();
 };
 
-const retrieveSingleAddress = function(req, res, next) {
+const retrieveSingleAddress = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log(`Reading address (${req.params.bupaId},${req.params.addressId})`);
-    res.result = bupaModel.findAddress(req.params.bupaId, req.params.addressId);
+    (<any>res).result = bupaModel.findAddress(req.params.bupaId, req.params.addressId);
     next();
 };
 
-const createBusinessPartner = function(req, res, next) {
+const createBusinessPartner = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log('Creating business partner');
-    res.result = bupaModel.createAndAddBusinessPartner(req.body);
-    console.log(`Created business partner ${res.result.BusinessPartner}`)
+    const newObject = (<any>res).result = bupaModel.createAndAddBusinessPartner(req.body);
+    console.log(`Created business partner ${newObject.BusinessPartner}`)
     next();
 };
 
-const createAddress = function(req, res, next) {
+const createAddress = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log('Creating address');
-    res.result = bupaModel.createAndAddAddress(req.body);
-    console.log(`Created address (${res.result.BusinessPartner},${res.result.AddressID})`)
+    const newObject = (<any>res).result = bupaModel.createAndAddAddress(req.body);
+    console.log(`Created address (${newObject.BusinessPartner},${newObject.AddressID})`)
     next();
 };
 
-const deleteBusinessPartner = function(req, res, next) {
+const deleteBusinessPartner = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log(`Deleting business partner ${req.params.id}`);
     bupaModel.deleteBusinessPartner(req.params.id);
     next();
 };
 
-const deleteAddress = function(req, res, next) {
+const deleteAddress = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log(`Deleting address (${req.params.bupaId},${req.params.addressId})`);
     bupaModel.deleteAddress(req.params.bupaId, req.params.addressId);
     next();
 };
 
-const modifyBusinessPartner = function(req, res, next) {
+const modifyBusinessPartner = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log(`Modifying business partner ${req.params.id}`);
     bupaModel.modifyBusinessPartner(req.params.id, req.body);
     next();
 };
 
-const modifyAddress = function(req, res, next) {
+const modifyAddress = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log(`Modifying address (${req.params.bupaId},${req.params.addressId})`);
     bupaModel.modifyAddress(req.params.bupaId, req.params.addressId, req.body);
     next();
@@ -115,5 +117,3 @@ router.get('/', function(req, res) {
         }
     });
 });
-
-module.exports = router;

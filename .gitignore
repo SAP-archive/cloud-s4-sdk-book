@@ -14,3 +14,4 @@ business-partner/API_BUSINESS_PARTNER.edmx
 
 vdm-output-tmp/
 business-partner/business-partner-model.js
+business-partner/business-partner-api.js
