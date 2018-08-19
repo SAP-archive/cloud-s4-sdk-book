@@ -16,8 +16,8 @@ All of the following steps shall happen in this folder where you checked out or 
 
 Before you can launch the mock server, you need to manually put the metadata EDMX document of the business partner OData service into the folder `business-partner` and prepare the document:
 * Go to the description of the [Business Partner API in the SAP API Business Hub](https://api.sap.com/shell/discover/contentpackage/SAPS4HANACloud/api/API_BUSINESS_PARTNER).
-* Click on *Login* and login with your credentials (you may need to register beforehand).
-* Click on *Download API* and choose *EDMX*.
+* Click on *Log On* and log in with your credentials (you may need to register beforehand).
+* Click on *Details* and *Download Specification* and choose *EDMX*.
 * Store the downloaded file with the name `API_BUSINESS_PARTNER.edmx` in the subfolder `business-partner` of the mock server folder.
 * Open the metadata document and locate the entity type `A_BusinessPartnerType`. Within the `EntityType` item with that name, add the following two lines behind the line that contains `</Key>`:
 ```
