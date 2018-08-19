@@ -1,5 +1,5 @@
 import * as express from 'express';
-const odata = require('../odata-helpers.js');
+import odata = require('../odata-helpers');
 import {socialMediaAccountStore} from './social-media-accounts-model';
 
 export const router = express.Router();

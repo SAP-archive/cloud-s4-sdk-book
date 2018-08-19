@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import {businessPartnerStore, BusinessPartner, Address} from './business-partner-model';
-const odata = require('../odata-helpers.js');
+import odata = require('../odata-helpers');
 
 export const router = express.Router();
 

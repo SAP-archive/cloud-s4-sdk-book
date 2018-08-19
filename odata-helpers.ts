@@ -1,7 +1,8 @@
-const bodyParser = require('body-parser');
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
 
 /** Returns true if the property name refers to a navigation property (i.e., begins with "to_") */
-const isNavigationProperty = function(propertyName) {
+const isNavigationProperty = function(propertyName: string) {
     return propertyName.startsWith('to_');
 };
 
@@ -9,7 +10,7 @@ const isNavigationProperty = function(propertyName) {
  * Removes the first segment of the navigation property path
  * @param {string} propertyName Navigation property path
  */
-const removeFirstNavigationPath = function(propertyName) {
+const removeFirstNavigationPath = function(propertyName: string) {
     return propertyName.substr(propertyName.split('/', 1)[0].length + 1);
 };
 
@@ -23,8 +24,8 @@ const removeFirstNavigationPath = function(propertyName) {
  * @param {*} entity Entity to process
  * @param {string[]} expandedProperties Navigation properties to include as expanded properties. 
  */
-const handleEntityNavPropertiesForExpand = function(entity, expandedProperties = []) {
-    return Object.entries(entity).reduce(function(result, [key, value]) {
+const handleEntityNavPropertiesForExpand = function(entity: any, expandedProperties: string[] = []) {
+    return Object.entries(entity).reduce(function(result: any, [key, value]: [string, any]) {
         if(isNavigationProperty(key)) {
             if(expandedProperties.includes(key) ||
                 expandedProperties.find( (property) => property.startsWith(key))) {
@@ -61,7 +62,7 @@ const handleEntityNavPropertiesForExpand = function(entity, expandedProperties =
  * Deals with navigation properties of the supplied entity set per the expand specification.
  * @see handleEntityNavPropertiesForExpand
  */
-const handleEntitySetNavPropertiesForExpand = function(entityArray, expandedProperties) {
+const handleEntitySetNavPropertiesForExpand = function(entityArray: any[], expandedProperties: string[]) {
     return entityArray.map( (item) => handleEntityNavPropertiesForExpand(item, expandedProperties) );
 }
 
@@ -70,11 +71,11 @@ const handleEntitySetNavPropertiesForExpand = function(entityArray, expandedProp
  * @param {Object} entity Entity to reduce
  * @param {string[]} selectedProperties Properties to keep, or all, if empty
  */
-const reduceEntityToSelect = function(entity, selectedProperties = []) {
+const reduceEntityToSelect = function(entity: any, selectedProperties: string[] = []) {
     if(0 === selectedProperties.length) {
         return entity;
     }
-    return Object.entries(entity).reduce(function(result, [key, value]) {
+    return Object.entries(entity).reduce(function(result: any, [key, value]: [string, any]) {
         const isNavProperty = isNavigationProperty(key);
         if('__metadata' === key || selectedProperties.includes(key) ||
                 (selectedProperties.includes('*')) && !isNavProperty) {
@@ -100,19 +101,19 @@ const reduceEntityToSelect = function(entity, selectedProperties = []) {
  * @param {Object[]} entityArray Array of entities to reduce
  * @param {string[]} selectedProperties Properties to keep, or all, if empty
  */
-const reduceEntitySetToSelect = function(entityArray, selectedProperties) {
+const reduceEntitySetToSelect = function(entityArray: any[], selectedProperties: string[]) {
     return entityArray.map( (item) => reduceEntityToSelect(item, selectedProperties) );
 };
 
-const insertHostIntoBody = function(body, req) {
+const insertHostIntoBody = function(body: string, req: express.Request) {
     const urlPrefix = `${req.protocol}://${req.get('host')}`;
     return body.replace(/https:\/\/{host}:{port}/g, urlPrefix);
 };
 
-module.exports = {
+export = {
     /** Send the result as an OData response */
-    sendAsODataResult: function(req, res, next) {
-        const result = res.result;
+    sendAsODataResult: function(req: express.Request, res: express.Response, next: express.NextFunction) {
+        const result = (<any>res).result;
         const arrayWrapped = Array.isArray(result) ? { results: result } : result;
         const bodyAsString = JSON.stringify({ d: arrayWrapped });
         const bodyWithHost = insertHostIntoBody(bodyAsString, req);
@@ -122,8 +123,8 @@ module.exports = {
     },
 
     /** Send 404 response if result is undefined */
-    send404IfNotFound: function (req, res, next) {
-        if(res.result) {
+    send404IfNotFound: function (req: express.Request, res: express.Response, next: express.NextFunction) {
+        if((<any>res).result) {
             next();
         } else {
             console.log("No result, responding with 404")
@@ -132,46 +133,50 @@ module.exports = {
     },
 
     /** Send 204 response for no content */
-    send204NoContent: function(req, res, next) {
+    send204NoContent: function(req: express.Request, res: express.Response, next: express.NextFunction) {
         res.sendStatus(204);
     },
 
     /** Expand each result entity (and replace not queried content with __deferred) */
-    expand: function(req, res, next) {
+    expand: function(req: express.Request, res: express.Response, next: express.NextFunction) {
         const expandQuery = req.query.$expand;
         const propertiesToExpand = expandQuery? expandQuery.split(',') : [];
 
-        res.result = Array.isArray(res.result)?
-            handleEntitySetNavPropertiesForExpand(res.result, propertiesToExpand) :
-            handleEntityNavPropertiesForExpand(res.result, propertiesToExpand);
+        const resultRef = (<any>res).result;
+        (<any>res).result = Array.isArray(resultRef)?
+            handleEntitySetNavPropertiesForExpand(resultRef, propertiesToExpand) :
+            handleEntityNavPropertiesForExpand(resultRef, propertiesToExpand);
 
         next();
     },
 
     /** Filter the result set per the $filter query option */
-    filter: function(req, res, next) {
+    filter: function(req: express.Request, res: express.Response, next: express.NextFunction) {
         const filterQuery = req.query.$filter;
 
         if(filterQuery) {
             // RegExp that matches filters such as "FirstName eq 'John'" and groups property and value
             const filterRegex = /^(\w+) eq '(.*)'$/;
-            const [, filterProperty, filterValue] = filterRegex.exec(filterQuery);
-
-            res.result = res.result.filter((item) => {
-                return item[filterProperty] == filterValue;
-            });
+            const regexMatch = filterRegex.exec(filterQuery)
+            if(regexMatch !== null) {
+                const [, filterProperty, filterValue] = regexMatch;
+    
+                (<any>res).result = (<any>res).result.filter((item: any) => {
+                    return item[filterProperty] == filterValue;
+                });
+            }
         }
 
         next();
     },
 
     /** Sort the result set per the $orderby query option (not yet implemented) */
-    sort: function(req, res, next) {
+    sort: function(req: express.Request, res: express.Response, next: express.NextFunction) {
         const orderbyQuery = req.query.$orderby;
 
         if(orderbyQuery) {
             const [sortByProperty,sortOrder] = orderbyQuery.split(' ');
-            res.result.sort(function(a, b) {
+            (<any>res).result.sort(function(a: any, b: any) {
                 const valueA = a[sortByProperty];
                 const valueB = b[sortByProperty];
                 if(undefined === valueA || undefined === valueB) {
@@ -187,21 +192,22 @@ module.exports = {
     },
 
     /** Select only the properties of each result entity specified by the $select query option */
-    select: function(req, res, next) {
+    select: function(req: express.Request, res: express.Response, next: express.NextFunction) {
         const selectQuery = req.query.$select;
 
         if(selectQuery) {
             const selectedProperties = selectQuery.split(',');
-            res.result = Array.isArray(res.result) ?
-                reduceEntitySetToSelect(res.result, selectedProperties) :
-                reduceEntityToSelect(res.result, selectedProperties);
+            const resultRef = (<any>res).result;
+            (<any>res).result = Array.isArray(resultRef) ?
+                reduceEntitySetToSelect(resultRef, selectedProperties) :
+                reduceEntityToSelect(resultRef, selectedProperties);
         }
 
         next();
     },
 
     /** Limits the result set per the $top and $skip query options (not yet implemented) */
-    limit: function(req, res, next) {
+    limit: function(req: express.Request, res: express.Response, next: express.NextFunction) {
         next();
     },
 
@@ -214,7 +220,7 @@ module.exports = {
         return [this.send404IfNotFound, this.expand, this.select, this.sendAsODataResult];
     },
     /** Create middleware chain for update based on retrieve and modify function */
-    middlewareForUpdate: function(retrieveFunction, modifyFunction) {
+    middlewareForUpdate: function(retrieveFunction: express.RequestHandler, modifyFunction: express.RequestHandler) {
         return [retrieveFunction, this.send404IfNotFound, bodyParser.json(), modifyFunction, this.send204NoContent];
     }
 };

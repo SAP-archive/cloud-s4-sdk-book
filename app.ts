@@ -1,11 +1,12 @@
 const nodeAppStarted = Date.now();
-const express = require('express');
+
+import express from 'express';
+import {router as bupaApi} from './business-partner/business-partner-api';
+import {router as socialMediaApi} from './social-media-accounts/social-media-accounts-api';
+
 const app = express();
 
-const bupaApi = require('./business-partner/business-partner-api.js').router;
-const socialMediaApi = require('./social-media-accounts/social-media-accounts-api.js').router;
-
-const logRequests = function(req, res, next) {
+const logRequests = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log(`Request: ${req.method} ${req.originalUrl}`)
     next();
 };

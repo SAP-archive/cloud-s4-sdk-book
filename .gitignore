@@ -19,3 +19,5 @@ business-partner/business-partner-api.js
 social-media-accounts/social-media-accounts-model.js
 social-media-accounts/social-media-accounts-api.js
 common-types.js
+odata-helpers.js
+app.js
