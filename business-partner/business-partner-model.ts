@@ -1,10 +1,12 @@
 import * as uuid from "uuid";
+import * as common from '../common-types';
+
 const initialData = require('./business-partner-data.js').data;
 
 export interface BusinessPartner {
     BusinessPartner: string;
     PersonNumber: string;
-    to_BusinessPartnerAddress: any;
+    to_BusinessPartnerAddress: common.ResultWrapper<Address>;
 }
 
 export interface Address {
@@ -147,10 +149,10 @@ export class BusinessPartnerStore {
         Object.assign(businessPartnerToUpdate, businessPartnerInput);
     }
 
-    getAddresses() : Address[] {
+    getAddresses() {
         return this.getBusinessPartners()
             .map( (bupa: BusinessPartner) => bupa.to_BusinessPartnerAddress.results)
-            .reduce( (acc: BusinessPartner[], val: BusinessPartner) => acc.concat(val) , []);
+            .reduce( (acc, val) => acc.concat(val) , []);
     }
     findAddress(businessPartnerId: string, addressId: string) {
         return this.getAddresses().find(function(element: Address) {

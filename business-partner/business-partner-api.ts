@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import {businessPartnerStore, BusinessPartner, Address} from './business-partner-model.js';
+import {businessPartnerStore, BusinessPartner, Address} from './business-partner-model';
 const odata = require('../odata-helpers.js');
 
 export const router = express.Router();
@@ -78,9 +78,10 @@ router.get('/([$])metadata', function(req, res) {
         }
     };
     console.log('Serving metadata for Business Partner API');
-    res.sendFile('API_BUSINESS_PARTNER.edmx', options, function(err) {
+    const EDMX_FILE_NAME = 'API_BUSINESS_PARTNER.edmx';
+    res.sendFile(EDMX_FILE_NAME, options, function(err) {
         if(err) {
-            console.error('No metadata file found at business-partner/API_BUSINESS_PARTNER.edmx. Please check the documentation on how to retrieve and where to store this file.')
+            console.error(`No metadata file found at business-partner/${EDMX_FILE_NAME}. Please check the documentation on how to retrieve and where to store this file.`)
             res.sendStatus(404);
         }
     });

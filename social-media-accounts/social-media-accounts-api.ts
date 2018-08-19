@@ -1,31 +1,32 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const router = express.Router();
-
+import * as express from 'express';
 const odata = require('../odata-helpers.js');
-const socMediaModel = require('./social-media-accounts-model.js');
+import {socialMediaAccountStore} from './social-media-accounts-model';
 
-const retrieveAllBusinessPartnerSocialMedia = function(req, res, next) {
+export const router = express.Router();
+
+const socMediaModel = socialMediaAccountStore;
+
+const retrieveAllBusinessPartnerSocialMedia = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log('Reading business partner social media entity set');
-    res.result = socMediaModel.getBusinessPartnerSocialMedia();
+    (<any>res).result = socMediaModel.getBusinessPartnerSocialMedia();
     next();
 };
 
-const retrieveSingleBusinessPartnerSocialMedia = function(req, res, next) {
+const retrieveSingleBusinessPartnerSocialMedia = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log(`Reading business partner social media ${req.params.uuid}`);
-    res.result = socMediaModel.findBusinessPartnerSocialMedia(req.params.uuid);
+    (<any>res).result = socMediaModel.findBusinessPartnerSocialMedia(req.params.uuid);
     next();
 };
 
-const retrieveAllSocialMediaAccounts = function(req, res, next) {
+const retrieveAllSocialMediaAccounts = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log('Reading social media accounts entity set');
-    res.result = socMediaModel.getSocialMediaAccounts();
+    (<any>res).result = socMediaModel.getSocialMediaAccounts();
     next();
 };
 
-const retrieveSingleSocialMediaAccount = function(req, res, next) {
+const retrieveSingleSocialMediaAccount = function(req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log(`Reading social media account ${req.params.uuid}`);
-    res.result = socMediaModel.findSocialMediaAccount(req.params.uuid);
+    (<any>res).result = socMediaModel.findSocialMediaAccount(req.params.uuid);
     next();
 };
 
@@ -69,5 +70,3 @@ router.get('/', function(req, res) {
         }
     });
 });
-
-module.exports = router;
