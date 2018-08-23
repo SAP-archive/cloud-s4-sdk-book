@@ -2,16 +2,18 @@ package com.sap.cloud.s4hana.examples.addressmgr;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sap.cloud.sdk.cloudplatform.connectivity.DestinationsRequestContextListener;
-import com.sap.cloud.sdk.cloudplatform.exception.ShouldNotHappenException;
-import com.sap.cloud.sdk.cloudplatform.security.user.UserRequestContextListener;
-import com.sap.cloud.sdk.cloudplatform.servlet.RequestContextServletFilter;
-import com.sap.cloud.sdk.cloudplatform.tenant.TenantRequestContextListener;
 import io.restassured.mapper.ObjectMapperType;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.ByteArrayAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+
+import com.sap.cloud.sdk.cloudplatform.connectivity.DestinationsRequestContextListener;
+import com.sap.cloud.sdk.cloudplatform.exception.ShouldNotHappenException;
+import com.sap.cloud.sdk.cloudplatform.security.user.UserRequestContextListener;
+import com.sap.cloud.sdk.cloudplatform.servlet.RequestContextCallable;
+import com.sap.cloud.sdk.cloudplatform.servlet.RequestContextServletFilter;
+import com.sap.cloud.sdk.cloudplatform.tenant.TenantRequestContextListener;
 
 public class TestUtil
 {
@@ -20,7 +22,7 @@ public class TestUtil
         return ShrinkWrap
             .create(WebArchive.class)
             .addClasses(classesUnderTest)
-            .addClass(RequestContextServletFilter.class)
+            .addClasses(RequestContextServletFilter.class, RequestContextCallable.class)
             .addClass(TenantRequestContextListener.class)
             .addClass(UserRequestContextListener.class)
             .addClass(DestinationsRequestContextListener.class)
