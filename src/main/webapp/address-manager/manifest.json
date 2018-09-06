@@ -13,7 +13,7 @@
 		},
 		"dataSources": {
 			"businessPartners": {
-				"uri": "/api/busiess-partners",
+				"uri": "/address-manager-application/api/busiess-partners",
 				"type": "JSON"
 			}
 		}

@@ -4,7 +4,7 @@ sap.ui.define([
 ], function () {
     var api = {
         getBusinessPartnerUrl: function (businessPartnerId) {
-            var businessPartnerUrl = "/api/business-partners";
+            var businessPartnerUrl = "/address-manager-application/api/business-partners";
             if (businessPartnerId) {
                 return businessPartnerUrl + "?id=" + businessPartnerId;
             }
@@ -16,7 +16,7 @@ sap.ui.define([
         },
 
         getAddressUrl: function (businessPartnerId, addressId) {
-            var addressUrl = "/api/addresses";
+            var addressUrl = "/address-manager-application/api/addresses";
             if (businessPartnerId && addressId) {
                 return addressUrl + "?businessPartnerId=" + businessPartnerId + "&addressId=" + addressId;
             }
@@ -52,7 +52,7 @@ sap.ui.define([
 
         fetchCSRFToken: function () {
             return jQuery.get({
-                url: "/api/addresses",
+                url: "/address-manager-application/api/addresses",
                 headers: { "X-CSRF-Token": "Fetch" }
             }).always(function (response) {
                 var csrfToken = response.getResponseHeader("x-csrf-token");
