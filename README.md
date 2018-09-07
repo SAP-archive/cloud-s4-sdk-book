@@ -31,4 +31,5 @@ mvn scp:clean -pl application
 ## Deployment in SAP Cloud Platform, Neo
 To deploy the application in SAP Cloud Platform, Neo, you can use the SDK for SAP Cloud Platform, Neo or SAP Cloud Platform Cockpit. 
 To deploy using the cockpit, go to your account, choose Applications -> Java Applications -> Deploy Application. The screenshot below demonstrates the artifacts and additional parameters that you need to set for the deployment.
+
 ![SAP Cloud Platform, Neo Deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/powerweek_helloworld/Deployment.png).
