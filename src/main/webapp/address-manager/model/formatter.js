@@ -48,8 +48,32 @@ sap.ui.define([
             return this.getResourceBundle().getText("addresses", [aAdresses && aAdresses.length ? aAdresses.length : 0]);
         },
 
+        accountsListTitle: function (aAccounts) {
+            return this.getResourceBundle().getText("socialMediaAccounts", [aAccounts && aAccounts.length ? aAccounts.length : 0]);
+        },
+
         businessPartnerId: function (sBusinessPartnerId) {
             return this.getResourceBundle().getText("bupaId", [sBusinessPartnerId]);
+        },
+
+        lastCheckedBy: function(sLastCheckedByName) {
+            if(!sLastCheckedByName) {
+                return "";
+            }
+            return this.getResourceBundle().getText("lastCheckedBy", [sLastCheckedByName]);
+        },
+
+        lastCheckedDateValue: function (sTimestamp) {
+            if(!sTimestamp) {
+                return "";
+            }
+            var i18n = this.getResourceBundle();
+            return i18n.getText("lastCheckedOn", new Date(sTimestamp.year, sTimestamp.month, sTimestamp.dayOfMonth).toLocaleString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }));
         }
     };
 });

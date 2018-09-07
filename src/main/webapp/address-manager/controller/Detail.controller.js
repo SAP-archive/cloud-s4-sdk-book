@@ -8,8 +8,9 @@ sap.ui.define([
     "sap/ui/demo/addressmgr/model/formatter",
     "sap/ui/demo/addressmgr/model/address",
     "sap/ui/demo/addressmgr/model/MessageType",
-    "sap/ui/demo/addressmgr/service/businessPartner"
-], function (BaseController, JSONModel, Device, formatter, address, MessageType, businessPartnerService) {
+    "sap/ui/demo/addressmgr/service/businessPartner",
+    "sap/ui/demo/addressmgr/service/socialMediaAccounts"
+], function (BaseController, JSONModel, Device, formatter, address, MessageType, businessPartnerService, socialMediaAccountsService) {
     return BaseController.extend("sap.ui.demo.addressmgr.controller.Detail", {
         viewModelName: "detailView",
         mainModelName: "details",
@@ -21,7 +22,14 @@ sap.ui.define([
             }));
 
             this.setMainModel(new JSONModel());
+            this.setModel(new JSONModel(), "socialMedia")
             this.getRouter().getRoute("businessPartner").attachPatternMatched(this._onBusinessPartnerMatched, this);
+
+            var that = this;
+            var oModel = this.getMainModel();
+            oModel.attachRequestCompleted(function () {
+                that._loadSocialMediaModel(that._getCurrentBusinessPartnerId()); 
+            });
         },
 
         onAddAddress: function () {
@@ -85,6 +93,19 @@ sap.ui.define([
             this.editAddressDialog.close();
         },
 
+        onMarkAddressesChecked: function () {
+            var that = this;
+            var oViewModel = this.getViewModel();
+
+            oViewModel.setProperty("/busy", true);
+
+            businessPartnerService.markBusinessPartnerAddressesChecked(this._getCurrentBusinessPartnerId())
+                .always(function() {
+                    oViewModel.setProperty("/busy", false);
+                    that._reloadDetailsModel();
+                });
+        },
+
         /* =========================================================== */
         /* begin: internal methods                                     */
         /* =========================================================== */
@@ -110,6 +131,13 @@ sap.ui.define([
             });
 
             oModel.loadData(businessPartnerService.getBusinessPartnerUrl(sBusinessPartnerId));
+        },
+
+        _loadSocialMediaModel: function(sBusinessPartnerId) {
+            var that = this;
+            var oSocialMediaModel = this.getModel("socialMedia");
+
+            oSocialMediaModel.loadData(socialMediaAccountsService.getSocialMediaAccountsUrl(sBusinessPartnerId));
         },
 
         _reloadDetailsModel: function () {

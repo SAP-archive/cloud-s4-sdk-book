@@ -28,8 +28,24 @@
 						path: 'details>/CreationDate',
 						formatter: '.formatter.creationDateValue'
 					}"/>
+					<ObjectAttribute text="{
+						path: 'details>/YY1_AddrLastCheckedBy_bus',
+						formatter: '.formatter.lastCheckedBy'
+					}"/>
+					<ObjectAttribute text="{
+						path: 'details>/YY1_AddrLastCheckedOn_bus',
+						formatter: '.formatter.lastCheckedDateValue'
+					}"/>
 				</attributes>
 			</ObjectHeader>
+			<Button
+				id="checkedAddressesButton"
+				text="{i18n>checkAddressButton}"
+				icon="sap-icon://complete"
+				width="auto"
+				press="onMarkAddressesChecked"
+				class="sapUiResponsiveMargin"
+				/>
 			<Table
 				id="addressList"
 				width="auto"
@@ -72,6 +88,40 @@
 								<Button type="Transparent" icon="sap-icon://edit" press="onEditAddress" />
 								<Button type="Transparent" icon="sap-icon://delete" press="onDeleteAddress" />
 							</HBox>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+			<Table
+				id="socialMediaAccountList"
+				width="auto"
+				items="{socialMedia>/}"
+				noDataText="{i18n>noAccountsText}"
+				class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar id="accountsToolbar">
+						<Title
+							id="accountsHeader"
+							text="{
+								path: 'socialMedia>/',
+								formatter: '.formatter.accountsListTitle'
+							}"/>
+						<ToolbarSpacer/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>service}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>account}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{socialMedia>Service}" />
+							<Text text="{socialMedia>Account}" />
 						</cells>
 					</ColumnListItem>
 				</items>
