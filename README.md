@@ -53,3 +53,6 @@ To deploy the application in SAP Cloud Platform, Neo, you can use the SDK for SA
 To deploy using the cockpit, go to your account, choose Applications -> Java Applications -> Deploy Application. The screenshot below demonstrates the artifacts and additional parameters that you need to set for the deployment.
 
 ![SAP Cloud Platform, Neo Deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/powerweek_helloworld/Deployment.png).
+
+Congratulation! You have deployed your first Hello World application in SAP Cloud Platform, Neo!
+Can you find out the URL you can use to locate your application? Ask your instructor in case you experience difficulties.
