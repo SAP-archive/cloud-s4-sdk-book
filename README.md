@@ -39,6 +39,10 @@ mvn scp:clean scp:push -pl application
 After that, you can use the following URL to access the deployed application:
 http://localhost:8080/address-manager-application
 
+Note that it can take few minutes before the application will get accessible. 
+After the application will be accessible, you will get the login page. You can use the following credentials for the login:
+User: test, password: test.
+
 To stop the local server, run the following command:
 ```
 mvn scp:clean -pl application
