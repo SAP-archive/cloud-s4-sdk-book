@@ -1,6 +1,22 @@
 # Instructions to Follow to Build and Deploy a Hello World Application in SAP Cloud Platform, Neo
 In the following, we introduce the steps that you need to execute to build your Hello World application using the [SAP S/4HANA Cloud SDK](https://www.sap.com/developer/topics/s4hana-cloud-sdk.html) archetype for SAP Cloud Platform, Neo and to deploy this application locally and in SAP Cloud Platform account.
 
+## Prerequisites
+Before we can continue with the generation step, we need to make sure that the required software is installed. The blog post [Set up](https://blogs.sap.com/2017/05/15/step-1-with-sap-s4hana-cloud-sdk-set-up/) describes how to install JDK and Maven on your local machine. Run the following commands to check the results:
+1. Check Java version:
+```
+java -version
+```
+This command should reeturn java 8 version (1.8.*)
+
+2. Check Maven version:
+```
+mvn -version
+```
+This command should display maven version. In case of issues, double check the following description of the [maven installation process](https://maven.apache.org/install.html).
+
+In addition, make sure that you have Eclipse with the corresponding Maven Pluging or IntelliJ installed. This is required to do programming exercises more efficiently.
+
 ## Generating the Application from a Maven Archetype
 To generate the project from the SDK archetype in the batch mode, run the following command in your command line:
 ```
