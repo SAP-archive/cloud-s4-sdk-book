@@ -22,12 +22,26 @@ With that, the required integration functionality is implemented. Proceed to the
 
 ## Connecting to SAP S/4HANA
 It does not matter whether you run your code against SAP S/4HANA On-Premise or Cloud, source code will not change, just the configuration of the system destination.
-For this exercise, for simplicity, we provide an SAP S/4HANA mock server that mocks business partner OData services whitelisted in [SAP API business hub](https://api.sap.com/api/API_BUSINESS_PARTNER/resource).
+S/4HANA Cloud is accessable via the following URL: https://my301481.s4hana.ondemand.com
+
+Alternatively, we provide an SAP S/4HANA mock server that mocks business partner OData services whitelisted in [SAP API business hub](https://api.sap.com/api/API_BUSINESS_PARTNER/resource).
 You have two options:
 * Simple option: just use the URL of the already running mock server: https://bupa-mock-odata-tonsorial-occultness.cfapps.eu10.hana.ondemand.com
 * Alternatively, you can deploy and run your own version of the mock server, as described [here](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html). Please note that Mock server is a SAP Cloud Platform, Cloud Foundry application and you would need SAP Cloud Platform, Cloud Foundry account to be able to run it.
 
-## Build and Deploy Application Locally
+## Deploy Application in SAP Cloud Platform, Neo in Trial Account
+Before we deploy and run the application in SAP Cloud Platform, we will configure the target SAP S/4HANA system, to which the application will be talking to.
+For that, you need to configure Destination in the SAP Cloud Platform Cockpit. In the source code, we did not specify any special name of the destination. 
+So, the default name will be used by the application, which is "ErpQueryEndpoint". To configure the destination, go to you trial account of SAP Cloud Platform, Neo and select
+Connectivity -> Destinations in the left menu bar. Configure the destination exactly as shown in the screenshot below.
+
+![Configure Destination](https://github.com/SAP/cloud-s4-sdk-book/blob/powerweek_copyover/ErpQueryEndpoint.PNG)
+
+After the destination is configured you can deploy the application using the Cloud Cockpit, by navigating to your account, selecting Java Application -> Deploy Application, as shown in the screenshot below.
+
+![Deploy application](https://github.com/SAP/cloud-s4-sdk-book/blob/powerweek_copyover/Deployment.png)
+
+## Optional: Build and Deploy Application Locally
 Build application by executing the following Maven command:
 ```
 mvn clean install
@@ -49,18 +63,6 @@ To stop the local server, run the following command:
 ```
 mvn scp:clean -pl application
 ```
-
-## Deploy Application in SAP Cloud Platform, Neo in Trial Account
-Before we deploy and run the application in SAP Cloud Platform, we will configure the target SAP S/4HANA system, to which the application will be talking to.
-For that, you need to configure Destination in the SAP Cloud Platform Cockpit. In the source code, we did not specify any special name of the destination. 
-So, the default name will be used by the application, which is "ErpQueryEndpoint". To configure the destination, go to you trial account of SAP Cloud Platform, Neo and select
-Connectivity -> Destinations in the left menu bar. Configure the destination exactly as shown in the screenshot below.
-
-![Configure Destination](https://github.com/SAP/cloud-s4-sdk-book/blob/powerweek_copyover/ErpQueryEndpoint.PNG)
-
-After the destination is configured you can deploy the application using the Cloud Cockpit, by navigating to your account, selecting Java Application -> Deploy Application, as shown in the screenshot below.
-
-![Deploy application](https://github.com/SAP/cloud-s4-sdk-book/blob/powerweek_copyover/Deployment.png)
 
 
 
