@@ -18,6 +18,11 @@ Find the TODO in the class and implement the following query using the [Virtual 
 * Order the business partner by the last name ascending
 * Execute the query and return the result of the execution
 
+return service.getAllBusinessPartner().select(BusinessPartner.BUSINESS_PARTNER, BusinessPartner.FIRST_NAME,
+        		BusinessPartner.LAST_NAME).orderBy(BusinessPartner.LAST_NAME, Order.ASC)
+        		.filter(BusinessPartner.BUSINESS_PARTNER_CATEGORY.eq(CATEGORY_PERSON))
+        		.execute();
+
 With that, the required integration functionality is implemented. Proceed to the next steps, to build and deploy the application.
 
 ## Connecting to SAP S/4HANA
