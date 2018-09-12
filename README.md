@@ -56,7 +56,7 @@ For that, you need to configure Destination in the SAP Cloud Platform Cockpit. I
 So, the default name will be used by the application, which is "ErpQueryEndpoint". To configure the destination, go to you trial account of SAP Cloud Platform, Neo and select
 Connectivity -> Destinations in the left menu bar. Configure the destination exactly as shown in the screenshot below.
 
-![Configure Destination](https://github.com/SAP/cloud-s4-sdk-book/blob/powerweek_copyover/DestinationConfig.png)
+![Configure Destination](https://github.com/SAP/cloud-s4-sdk-book/blob/powerweek_copyover/ErpQueryEndpoint.PNG)
 
 After the destination is configured you can deploy the application using the Cloud Cockpit, by navigating to your account, selecting Java Application -> Deploy Application, as shown in the screenshot below.
 
