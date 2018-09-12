@@ -7,7 +7,7 @@ For this, please proceed as described in the [following instructions](https://gi
 
 ## Prepare Project Structure
 Download zip file from the [following URL](https://github.com/SAP/cloud-s4-sdk-book/archive/powerweek_copyover.zip) and unzip it into the folder of your choice.
-Copy the unziped files into the "../address-manager/application" folder generated in the previous step.
+Copy the src folder into the "../address-manager/application" folder generated in the previous step.
 
 ## Implement SAP S/4HANA Query in Class GetAllBusinessPartnersCommand
 The current version of the application does not return any business partners. To fix this gap, we need to implement the getAllBusinessPartner query in the corresponding class.
