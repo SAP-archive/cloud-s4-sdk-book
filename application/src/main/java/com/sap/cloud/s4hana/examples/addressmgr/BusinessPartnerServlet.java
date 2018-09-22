@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @WebServlet("/api/business-partners")
@@ -79,7 +79,7 @@ public class BusinessPartnerServlet extends HttpServlet {
         logger.info("Received request to mark addresses of business partner {} as checked", id);
         // requires authentication
         new MarkBusinessPartnerAsCheckedCommand(service,
-                id, UserAccessor.getCurrentUser().getName(), new GregorianCalendar())
+                id, UserAccessor.getCurrentUser().getName(), LocalDateTime.now())
                 .execute();
 
         response.setStatus(HttpServletResponse.SC_NO_CONTENT);

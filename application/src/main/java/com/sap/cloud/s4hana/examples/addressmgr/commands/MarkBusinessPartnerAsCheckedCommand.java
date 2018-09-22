@@ -9,7 +9,7 @@ import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.Busin
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.BusinessPartnerService;
 import org.slf4j.Logger;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 public class MarkBusinessPartnerAsCheckedCommand extends ErpCommand<Void> {
     private static final Logger logger = CloudLoggerFactory.getLogger(MarkBusinessPartnerAsCheckedCommand.class);
@@ -17,11 +17,11 @@ public class MarkBusinessPartnerAsCheckedCommand extends ErpCommand<Void> {
     private final BusinessPartnerService service;
     private final String businessPartnerId;
     private final String checkedByUserName;
-    private final Calendar checkedOnDate;
+    private final LocalDateTime checkedOnDate;
 
     public MarkBusinessPartnerAsCheckedCommand(final BusinessPartnerService service,
                                                final String businessPartnerId, final String checkedByUserName,
-                                               final Calendar checkedOnDate) {
+                                               final LocalDateTime checkedOnDate) {
         super(HystrixUtil.getDefaultErpCommandSetter(
                 MarkBusinessPartnerAsCheckedCommand.class,
                 HystrixUtil.getDefaultErpCommandProperties().withExecutionTimeoutInMilliseconds(10000)));

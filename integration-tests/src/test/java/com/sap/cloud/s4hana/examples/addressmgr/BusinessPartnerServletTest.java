@@ -18,8 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.net.URL;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
@@ -82,13 +81,8 @@ public class BusinessPartnerServletTest
     @Test
     public void testUpdateLastChecked() {
         final String userName = String.format("%s@%s.com", RandomStringUtils.randomAlphabetic(10), RandomStringUtils.randomAlphabetic(10));
-        final Calendar before = new GregorianCalendar();
-        before.set(Calendar.HOUR_OF_DAY, 0);
-        before.set(Calendar.MINUTE, 0);
-        before.set(Calendar.SECOND, 0);
-        before.set(Calendar.MILLISECOND, 0);
-        mockUtil.mockUser(userName);
-        mockUtil.setCurrentUser(userName);
+        final LocalDateTime before = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
+        mockUtil.mockCurrentUser(userName);
 
         given()
             .body("{\"AddressesChecked\": true}")
@@ -102,7 +96,7 @@ public class BusinessPartnerServletTest
         assertThat(businessPartner.getCustomField(BusinessPartnerCustomFields.ADDRESSES_LAST_CHECKED_BY))
             .isEqualTo(userName);
         assertThat(businessPartner.getCustomField(BusinessPartnerCustomFields.ADDRESSES_LAST_CHECKED_ON))
-            .isGreaterThanOrEqualTo(before);
+            .isAfterOrEqualTo(before);
     }
 
     @Test
