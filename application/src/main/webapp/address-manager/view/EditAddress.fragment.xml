@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:f="sap.ui.layout.form">
-    <Dialog title="{= ${editAddress>/isNew} ? ${i18n>createAddress} : ${i18n>editAdress} }">
+    <Dialog title="{= ${editAddress>/isNew} ? ${i18n>createAddress} : ${i18n>editAddress} }">
         <f:SimpleForm editable="true"
 			layout="ResponsiveGridLayout"
 			labelSpanXL="4"
