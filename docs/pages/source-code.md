@@ -85,6 +85,24 @@ Please consider the following explanations:
 Below you find specific setup instructions for certain branches.
 
 ### 17_1_ml
+The machine learning services used in the book are in the meantime available as proper services on Cloud Foundry, although still in alpha / beta status.
+Hence, we have adapted the code to use those services in a more production-ready manner, instead of accessing the sandbox services from the SAP API Business Hub.
+The first subsection describes the configuration necessary to run the production-ready variant.
+The old configuration, applicable for the state of version  *v1* with the sandbox API, can be found in the second subsection
+
+#### Configuration for production-ready code
+You need the following to run the app with machine learning capabilities on Cloud Foundy:
+* Create an instance of the machine learning foundation trial beta service (`ml-foundation-trial-beta`) in your Cloud Platform account.
+* Bind the service to your application.
+
+If you want to run the application locally with machine learning capabilities, you need to:
+* Copy the value of the environment variable `VCAP_SERVICES` from your application on Cloud Foundry (caution. this holds sensitive information).
+* Create an environment variable `VCAP_SERVICES` on your local machine that has the copied value.
+
+#### Old configuration
+> The following is only applicable for *v1*, not the current state.
+> It accesses the machine learning services from the SAP API Business Hub.
+
 You need to add an additional destination to access the machine learning API.
 To this end, add a destination called `mlApi` to the `destinations` environment variable and/or the destination service on Cloud Foundry.
 The URL of that destination shall be `https://sandbox.api.sap.com/ml`.
