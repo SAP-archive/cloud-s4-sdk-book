@@ -154,7 +154,7 @@ module.exports = {
 
         if(filterQuery) {
             // RegExp that matches filters such as "FirstName eq 'John'" and groups property and value
-            const filterRegex = /^(\w+) eq '(.*)'$/;
+            const filterRegex = /^\(?(\w+) eq '(.*)'\)?$/;
             const [, filterProperty, filterValue] = filterRegex.exec(filterQuery);
 
             res.result = res.result.filter((item) => {
