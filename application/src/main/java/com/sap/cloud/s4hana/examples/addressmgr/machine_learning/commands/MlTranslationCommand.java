@@ -4,6 +4,7 @@ import com.google.gson.*;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.MlService;
+import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.MlServiceType;
 import com.sap.cloud.sdk.cloudplatform.connectivity.HttpClientAccessor;
 import com.sap.cloud.sdk.cloudplatform.connectivity.HttpEntityUtil;
 import com.sap.cloud.sdk.cloudplatform.exception.ShouldNotHappenException;
@@ -24,19 +25,16 @@ import java.util.*;
 public class MlTranslationCommand extends Command<List<String>> {
     private static final Logger logger = CloudLoggerFactory.getLogger(MlTranslationCommand.class);
 
-    private static final String TRANSLATE_URL_PATH = "/translation/translation";
-
     private final MlService mlService;
 
     private final String sourceLang;
     private final String targetLang;
     private final List<String> texts;
 
-    public MlTranslationCommand(final MlService mlService, final String sourceLang,
-                                final String targetLang, final List<String> texts) {
+    public MlTranslationCommand(final String sourceLang, final String targetLang, final List<String> texts) {
         super(HystrixCommandGroupKey.Factory.asKey("LeonardoMlFoundation-translate"), 10000);
 
-        this.mlService = mlService;
+        this.mlService = MlService.createFromCfServicesConfig(MlServiceType.TRANSLATION);
         this.sourceLang = sourceLang;
         this.targetLang = targetLang;
         this.texts = texts;
@@ -81,13 +79,10 @@ public class MlTranslationCommand extends Command<List<String>> {
     }
 
     private String executeRequest(String requestJson) throws Exception {
-        HttpPost request = new HttpPost(new URI(TRANSLATE_URL_PATH));
+        HttpPost request = mlService.createPostRequest();
 
         request.setHeader("Content-Type", "application/json");
         request.setHeader("Accept", "application/json;charset=UTF-8");
-
-        // API Key for API Sandbox
-        request.setHeader("APIKey", mlService.getMlApiKeyOrThrow());
 
         logger.trace("Request: {}", requestJson);
 
@@ -96,7 +91,7 @@ public class MlTranslationCommand extends Command<List<String>> {
 
         try {
             // Getting cached http client for base URL, reuse of connection and other resources - and send request
-            final HttpResponse response = HttpClientAccessor.getHttpClient(mlService.getMlDestination()).execute(request);
+            final HttpResponse response = HttpClientAccessor.getHttpClient().execute(request);
 
             // retrieve entity content (requested json with Accept header, so should be text) and close request
             final String responsePayload = HttpEntityUtil.getResponseBody(response);

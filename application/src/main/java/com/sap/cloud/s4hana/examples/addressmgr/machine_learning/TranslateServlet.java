@@ -30,7 +30,7 @@ public class TranslateServlet extends HttpServlet {
         final PrintWriter responseWriter = response.getWriter();
 
         try {
-            String output = translate(new MlService(), input, "en");
+            String output = translate(input, "en");
             responseWriter.write("Translation: " + output);
         } catch (Exception e) {
             logger.error("Problem in translation service access", e);
@@ -38,8 +38,8 @@ public class TranslateServlet extends HttpServlet {
         }
     }
 
-    private String translate(MlService mlService, final String input, final String targetLang) throws Exception {
-        Observable<String> result = new MlLanguageDetectionCommand(mlService, input).observe().flatMap(
+    private String translate(final String input, final String targetLang) throws Exception {
+        Observable<String> result = new MlLanguageDetectionCommand(input).observe().flatMap(
                 mlLanguageDetectionResult -> {
                     final String sourceLang = mlLanguageDetectionResult.getLangCode();
                     if (StringUtils.isBlank(sourceLang)) {
@@ -47,7 +47,7 @@ public class TranslateServlet extends HttpServlet {
                         return Observable.just("");
                     }
 
-                    return new MlTranslationCommand(mlService, sourceLang, targetLang, Collections.singletonList(input))
+                    return new MlTranslationCommand(sourceLang, targetLang, Collections.singletonList(input))
                             .observe()
                             .map(strings -> {
                                 if (strings.isEmpty()) {
