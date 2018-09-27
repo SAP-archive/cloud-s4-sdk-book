@@ -86,7 +86,7 @@ Consider the following detailed limitations:
 The OData mock service supports the following features centered around the `API_BUSINESS_PARTNER`, and thus allows to test certain scenarios using this mock server instead of an SAP S/4HANA system:
 * Entity types _Business Partner_ and _Business Partner Address_ with all properties (including two custom fields on business partners).
 * OData queries (`GET`) on entity sets and by key with query options `expand`, `select`, `filter`, and `orderby`. For filtering, only string equality comparisons are supported, no complex filter expressions nor other operators than `eq`.
-* Creating (`DELETE`), updating (`PATCH`, `PUT`), and deleting (`DELETE`) entities. Modifications are only stored in-memory.
+* Creating (`POST`), updating (`PATCH`, `PUT`), and deleting (`DELETE`) entities. Modifications are only stored in-memory.
 * Retrieving metadata document (`/$metadata`). The full metadata of the API is returned, not only the supported part.
 
 Also see the accompanying test suite in folder `integration-tests`, implemented as Java JUnit tests using the SAP S/4HANA Cloud SDK, specifically its Virtual Data Model (VDM).
