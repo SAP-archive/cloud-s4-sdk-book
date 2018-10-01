@@ -60,7 +60,7 @@ public class BusinessPartnerServlet extends HttpServlet {
         response.getWriter().write(jsonResult);
     }
 
-    private boolean validateInput(String id) {
+    static boolean validateInput(String id) {
         return !Strings.isNullOrEmpty(id) && id.length() <= 10;
     }
 

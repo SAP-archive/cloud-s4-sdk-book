@@ -92,6 +92,40 @@
 					</ColumnListItem>
 				</items>
 			</Table>
+			<Table
+				id="socialMediaAccountList"
+				width="auto"
+				items="{socialMedia>/}"
+				noDataText="{i18n>noAccountsText}"
+				class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar id="accountsToolbar">
+						<Title
+							id="accountsHeader"
+							text="{
+								path: 'socialMedia>/',
+								formatter: '.formatter.accountsListTitle'
+							}"/>
+						<ToolbarSpacer/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>service}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>account}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{socialMedia>Service}" />
+							<Text text="{socialMedia>Account}" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
 		</semantic:content>
 	</semantic:DetailPage>
 </mvc:View>
