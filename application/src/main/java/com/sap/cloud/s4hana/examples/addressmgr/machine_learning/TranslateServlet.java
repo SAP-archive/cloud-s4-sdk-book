@@ -39,7 +39,8 @@ public class TranslateServlet extends HttpServlet {
     }
 
     private String translate(final String input, final String targetLang) throws Exception {
-        Observable<String> result = new MlLanguageDetectionCommand(input).observe().flatMap(
+        Observable<String> result = new MlLanguageDetectionCommand(
+                MlService.createFromCfServicesConfig(MlServiceType.LANGUAGE_DETECTION), input).observe().flatMap(
                 mlLanguageDetectionResult -> {
                     final String sourceLang = mlLanguageDetectionResult.getLangCode();
                     if (StringUtils.isBlank(sourceLang)) {
@@ -47,7 +48,9 @@ public class TranslateServlet extends HttpServlet {
                         return Observable.just("");
                     }
 
-                    return new MlTranslationCommand(sourceLang, targetLang, Collections.singletonList(input))
+                    return new MlTranslationCommand(
+                            MlService.createFromCfServicesConfig(MlServiceType.TRANSLATION),
+                                sourceLang, targetLang, Collections.singletonList(input))
                             .observe()
                             .map(strings -> {
                                 if (strings.isEmpty()) {

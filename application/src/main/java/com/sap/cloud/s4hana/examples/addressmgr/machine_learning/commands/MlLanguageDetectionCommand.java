@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.MlLanguageDetectionResult;
 import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.MlService;
-import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.MlServiceType;
 import com.sap.cloud.sdk.cloudplatform.connectivity.HttpClientAccessor;
 import com.sap.cloud.sdk.cloudplatform.connectivity.HttpEntityUtil;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
@@ -15,12 +14,6 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.slf4j.Logger;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,9 +24,9 @@ public class MlLanguageDetectionCommand extends Command<MlLanguageDetectionResul
     private final MlService mlService;
     private final String input;
 
-    public MlLanguageDetectionCommand(final String input) {
+    public MlLanguageDetectionCommand(final MlService mlService, final String input) {
         super(HystrixCommandGroupKey.Factory.asKey("LeonardoMlFoundation-langdetect"), 10000);
-        this.mlService = MlService.createFromCfServicesConfig(MlServiceType.LANGUAGE_DETECTION);
+        this.mlService = mlService;
         this.input = input;
     }
 

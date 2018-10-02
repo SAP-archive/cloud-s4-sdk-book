@@ -31,7 +31,8 @@ public class LanguageDetectServlet extends HttpServlet {
         }
 
         try {
-            MlLanguageDetectionResult output = new MlLanguageDetectionCommand(input).execute();
+            MlLanguageDetectionResult output = new MlLanguageDetectionCommand(
+                    MlService.createFromCfServicesConfig(MlServiceType.LANGUAGE_DETECTION), input).execute();
             response.setContentType("application/json");
             responseWriter.write(new Gson().toJson(output));
 

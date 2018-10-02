@@ -4,7 +4,6 @@ import com.google.gson.*;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.MlService;
-import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.MlServiceType;
 import com.sap.cloud.sdk.cloudplatform.connectivity.HttpClientAccessor;
 import com.sap.cloud.sdk.cloudplatform.connectivity.HttpEntityUtil;
 import com.sap.cloud.sdk.cloudplatform.exception.ShouldNotHappenException;
@@ -19,7 +18,6 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.slf4j.Logger;
 
-import java.net.URI;
 import java.util.*;
 
 public class MlTranslationCommand extends Command<List<String>> {
@@ -31,10 +29,11 @@ public class MlTranslationCommand extends Command<List<String>> {
     private final String targetLang;
     private final List<String> texts;
 
-    public MlTranslationCommand(final String sourceLang, final String targetLang, final List<String> texts) {
+    public MlTranslationCommand(final MlService mlService,
+                                final String sourceLang, final String targetLang, final List<String> texts) {
         super(HystrixCommandGroupKey.Factory.asKey("LeonardoMlFoundation-translate"), 10000);
 
-        this.mlService = MlService.createFromCfServicesConfig(MlServiceType.TRANSLATION);
+        this.mlService = mlService;
         this.sourceLang = sourceLang;
         this.targetLang = targetLang;
         this.texts = texts;
