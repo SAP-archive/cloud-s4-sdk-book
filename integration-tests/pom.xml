@@ -160,12 +160,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>2.22.0</version>
                 <configuration>
                     <argLine>@{argLine}
                         -Xmx${surefire.maxMemorySize}
                         -Dorg.slf4j.simpleLogger.defaultLogLevel=${surefire.logLevel}
-                        -Djava.io.tmpdir=target/arquillian-working-dir/${surefire.forkNumber}/
+                        -Djava.io.tmpdir=target/arquillian-working-dir/${surefire.forkCount}/
                     </argLine>
                     <skipTests>${surefire.skipTests}</skipTests>
                     <includes>
