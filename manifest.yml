@@ -2,7 +2,7 @@
 applications:
 
 - name: address-manager
-  memory: 768M
+  memory: 1024M
   timeout: 300
   random-route: true
   path: application/target/address-manager-application.war
