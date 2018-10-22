@@ -44,8 +44,8 @@ After you have successfully built the project, you can deploy it locally as foll
 * Configure your local environment by setting the following environment variables. Replace the URL and credentials with the appropriate values for your SAP S/4HANA Cloud system.
   * Adapt the below commands for setting environment variables as appropriate for your operating system. The following commands are for the Windows command line.
 ```
-set destinations="[{name: 'ErpQueryEndpoint', url: '<URL>', username: '<USERNAME>', password: '<PASSWORD>'"
-set ALLOW_MOCKED_AUTH_HEADER="true"
+set destinations=[{name: 'ErpQueryEndpoint', url: '<URL>', username: '<USERNAME>', password: '<PASSWORD>'}]
+set ALLOW_MOCKED_AUTH_HEADER=true
 ```
 * Run the following commands to deploy the application on a local server.
 ```
