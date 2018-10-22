@@ -16,6 +16,7 @@ Both changes and errata are mentioned in the following, organized by part and ch
 * No major changes known yet
 
 ## Part II
+* **Chapter 6.4.3**: there is a typo on page 204; the value for the property `userIdSource` has to be `email` on Cloud Foundry (not `mail`, which is the correct value for Neo). The screenshot in Figure 6.10 shows a wrong property `nameIdSource` with value `user_name`.
 * **Chapter 7.4**: the `TenantNotFoundException` mentioned in Listing 7.7 has been renamed to `TenantNotAvailableException`.
 
 ## Part III
