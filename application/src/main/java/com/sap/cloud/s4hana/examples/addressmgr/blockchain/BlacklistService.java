@@ -6,27 +6,21 @@ import com.google.gson.JsonParser;
 import com.sap.cloud.s4hana.examples.addressmgr.util.CloudPlatformService;
 import com.sap.cloud.sdk.cloudplatform.exception.ShouldNotHappenException;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
-import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.AddressEmailAddress;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartner;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerAddress;
+import com.sap.cloud.sdk.services.scp.blockchain.hyperledgerfabric.FabricInvocationType;
+import com.sap.cloud.sdk.services.scp.blockchain.hyperledgerfabric.FabricService;
 import org.slf4j.Logger;
 
-import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public class BlacklistService {
     private static final Logger logger = CloudLoggerFactory.getLogger(BlacklistService.class);
     private static final String BLACKLIST_CHAINCODE_ID = "BLACKLIST_CHAINCODE_ID";
 
-    private BlockchainService blockchainService;
+    private FabricService blockchainService;
 
     private final String blacklistChaincodeId;
 
-    public BlacklistService(CloudPlatformService cloudPlatformService, BlockchainService blockchainService) {
+    public BlacklistService(CloudPlatformService cloudPlatformService, FabricService blockchainService) {
         this.blockchainService = blockchainService;
 
         blacklistChaincodeId = getBlacklistChaincodeIdOrThrow(cloudPlatformService);
@@ -47,7 +41,7 @@ public class BlacklistService {
     }
 
     public int getEmailBlacklistCount(String emailAddress) throws Exception {
-        final String response = blockchainService.invokeOrQuery(BlockchainInvocationType.QUERY, blacklistChaincodeId,
+        final String response = blockchainService.invokeOrQuery(FabricInvocationType.QUERY, blacklistChaincodeId,
                 "count", "email", emailAddress);
 
         JsonObject resultObject = checkErrorfreeAndJsonContent(response);
@@ -81,7 +75,7 @@ public class BlacklistService {
     }
 
     public void addEmailToBlacklist(String emailAddress) throws Exception {
-        blockchainService.invokeOrQuery(BlockchainInvocationType.INVOKE, blacklistChaincodeId, "add", "email",
+        blockchainService.invokeOrQuery(FabricInvocationType.INVOKE, blacklistChaincodeId, "add", "email",
                 emailAddress);
     }
 }

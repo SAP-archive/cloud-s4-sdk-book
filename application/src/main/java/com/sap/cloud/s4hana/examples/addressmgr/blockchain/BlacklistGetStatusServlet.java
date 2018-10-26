@@ -5,6 +5,7 @@ import com.sap.cloud.s4hana.examples.addressmgr.blockchain.commands.GetEmailBlac
 import com.sap.cloud.s4hana.examples.addressmgr.util.CloudPlatformService;
 import com.sap.cloud.s4hana.examples.addressmgr.util.HttpServlet;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
+import com.sap.cloud.sdk.services.scp.blockchain.hyperledgerfabric.FabricService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
@@ -29,7 +30,7 @@ public class BlacklistGetStatusServlet extends HttpServlet {
         } else {
             try {
                 final BlacklistService blacklistService = new BlacklistService(new CloudPlatformService(),
-                        BlockchainService.createByGettingTokenViaCfServicesConfig());
+                        FabricService.create());
                 final Map<String, Integer> result = new GetEmailBlacklistStatusCommand(blacklistService, email.trim())
                         .execute();
 
