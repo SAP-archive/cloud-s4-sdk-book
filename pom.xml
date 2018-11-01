@@ -58,7 +58,7 @@
                 <version>3.0.0-M1</version>
                 <executions>
                     <execution>
-                        <id>S/4HANA Cloud SDK Project Structure Checks</id>
+                        <id>SAP S/4HANA Cloud SDK Project Structure Checks</id>
                         <goals>
                             <goal>enforce</goal>
                         </goals>
