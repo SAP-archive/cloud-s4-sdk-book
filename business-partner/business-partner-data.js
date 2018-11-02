@@ -300,7 +300,7 @@ module.exports = {
             "OrganizationBPName4": "",
             "OrganizationFoundationDate": null,
             "OrganizationLiquidationDate": null,
-            "SearchTerm1": "Abogado",
+            "SearchTerm1": "Ontwikkelaar",
             "AdditionalLastName": "",
             "BirthDate": null,
             "BusinessPartnerIsBlocked": false,
