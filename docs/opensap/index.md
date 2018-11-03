@@ -61,14 +61,12 @@ To inspect the source code of a particular state, either checkout the correspond
 
 ## Errata
 
-### Week 2
+### Week 3
 
-#### Unit 5
+#### Unit 2
 
 * In the demo for creating a Jenkins job, we used the repository `https://github.com/fwilhe/address-manager` as an example.
     We recommend to use your own `address-manager` repository (for example `https://github.com/{your-GitHub-username}/address-manager`) as the branch source in Jenkins.
-
-### Week 3
 
 ### Unit 3
 
