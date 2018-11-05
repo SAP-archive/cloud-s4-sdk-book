@@ -30,6 +30,7 @@ Check that the environment variable `JAVA_HOME` points to the path of your JDK i
 To get the example code on your local machine, clone it from GitHub via `git clone https://github.com/SAP/cloud-s4-sdk-book`.
 Alternatively, you can download the individual branches as ZIP files in the table below.
 
+Please note that this repository contains different branches, some of which are related to the openSAP course as explained below, while others are relevant for the [book](https://sap.github.io/cloud-s4-sdk-book/) only.
 We recommend to use this repository as a reference throughout the course, and work on an `address-manager` repository in your own user account on GitHub.
 Creating your own repository is described in unit 5 of week 1 of the course.
 
