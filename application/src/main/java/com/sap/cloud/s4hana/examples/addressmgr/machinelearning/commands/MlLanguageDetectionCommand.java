@@ -95,7 +95,7 @@ public class MlLanguageDetectionCommand extends Command<MlLanguageDetectionResul
         logger.warn("Fallback called because of exception", getExecutionException());
         final MlLanguageDetectionResult enResult = new MlLanguageDetectionResult();
         enResult.setConfidence(0.);
-        enResult.setLangStr("en");
+        enResult.setLangStr("de");
         return enResult;
     }
 }

@@ -1,7 +1,7 @@
 ---
 applications:
 
-- name: address-manager
+- name: address-manager-ml
   memory: 768M
   random-route: true
   path: application/target/address-manager-application.war
@@ -10,9 +10,8 @@ applications:
     TARGET_RUNTIME: tomee
     JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:96m..'
     SET_LOGGING_LEVEL: '{ROOT: INFO, com.sap.cloud.sdk: INFO}'
+    ALLOW_MOCKED_AUTH_HEADER: true
   services:
-#  - my-application-logs
     - my-xsuaa
     - my-destination
     - my-ml
-#  - my-connectivity
