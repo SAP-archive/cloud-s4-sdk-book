@@ -6,4 +6,4 @@ erp:
 #      uri: "https://myXXXXXX.s4hana.ondemand.com"
 #      proxy: "http://proxy:8080"
     - alias: "MOCK_SYSTEM"
-      uri: "http://localhost:3000"
+      uri: "https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com"
