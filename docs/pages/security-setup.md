@@ -55,7 +55,7 @@ To do so, choose `User-Provided Variables` for your application in the cockpit a
 To deploy the Business Partner Address Manager application with the introduced security, run the following commands:
 ```
 cd <your project location>\cloud-s4-sdk-book
-mvn clean install '-Dmaven.test.skip'
+mvn clean install
 cf push
 ```
 
