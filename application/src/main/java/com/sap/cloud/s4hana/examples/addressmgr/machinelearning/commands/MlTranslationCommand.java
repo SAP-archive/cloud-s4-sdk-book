@@ -16,6 +16,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.slf4j.Logger;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +31,10 @@ import com.sap.cloud.sdk.cloudplatform.connectivity.ScpCfService;
 import com.sap.cloud.sdk.cloudplatform.exception.ShouldNotHappenException;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.frameworks.hystrix.Command;
+import com.sap.cloud.sdk.services.scp.machinelearning.CloudFoundryLeonardoMlServiceType;
+import com.sap.cloud.sdk.services.scp.machinelearning.LeonardoMlFoundation;
+import com.sap.cloud.sdk.services.scp.machinelearning.LeonardoMlService;
+import com.sap.cloud.sdk.services.scp.machinelearning.LeonardoMlServiceType;
 
 public class MlTranslationCommand extends Command<List<String>> {
     private static final Logger logger = CloudLoggerFactory.getLogger(MlTranslationCommand.class);
@@ -94,47 +99,38 @@ public class MlTranslationCommand extends Command<List<String>> {
 
     private String executeRequest(String requestJson) throws Exception {
 
-        // Instantiate ScpCfService
-        final ScpCfService mlService = ScpCfService.of(SERVICE_TYPE, null, AUTH_URL_JSON_PATH,
-          CLIENT_ID_JSON_PATH, CLIENT_SECRET_JSON_PATH, SERVICE_LOCATION_JSON_PATH);
+        LeonardoMlService mlService = LeonardoMlFoundation.create(CloudFoundryLeonardoMlServiceType.TRIAL_BETA,
+                LeonardoMlServiceType.TRANSLATION);
 
-        // Get service URL
-        URI serviceUrl = new URI(mlService.getServiceLocationInfo());
-
-        // Create request
-        HttpPost request = new HttpPost(serviceUrl);
-
-        // Add bearer
-        mlService.addBearerTokenHeader(request);
-
-        // Add more HTTP headers to the request
-        request.setHeader("Content-Type", "application/json");
-        request.setHeader("Accept", "application/json;charset=UTF-8");
-
+        HttpPost request = new HttpPost();
         HttpEntity body = new StringEntity(requestJson, ContentType.APPLICATION_JSON);
         request.setEntity(body);
 
-        // Execute request
-        final HttpResponse response = HttpClientAccessor.getHttpClient().execute(request);
+        return mlService.invoke(request, response -> {
+            final String responsePayload;
+            try {
+                responsePayload = HttpEntityUtil.getResponseBody(response);
 
-        // retrieve entity content (requested json with Accept header, so should be text) and close request
-        final String responsePayload = HttpEntityUtil.getResponseBody(response);
+            final StatusLine statusLine = response.getStatusLine();
+            logger.trace("Response status: {}, content: {}", statusLine, responsePayload);
 
-        final StatusLine statusLine = response.getStatusLine();
-        logger.trace("Response status: {}, content: {}", statusLine, responsePayload);
-
-        switch (statusLine.getStatusCode()) {
-            case HttpStatus.SC_OK:
-                break;
-            case HttpStatus.SC_REQUEST_TOO_LONG:
-            case HttpStatus.SC_BAD_REQUEST:
-                logger.debug("Received request input problem response: {}. Content: {}", statusLine, responsePayload);
-                throw new HystrixBadRequestException("Malformed request: " + statusLine.getStatusCode());
-            default:
-                logger.error("Service seems unavailable: {}. Content: {}", statusLine, responsePayload);
-                throw new ShouldNotHappenException("Service seems unavailable: Received response: " + statusLine);
-        }
-        return responsePayload;
+            switch (statusLine.getStatusCode()) {
+                case HttpStatus.SC_OK:
+                    break;
+                case HttpStatus.SC_REQUEST_TOO_LONG:
+                case HttpStatus.SC_BAD_REQUEST:
+                    logger.debug("Received request input problem response: {}. Content: {}", statusLine, responsePayload);
+                    throw new HystrixBadRequestException("Malformed request: " + statusLine.getStatusCode());
+                default:
+                    logger.error("Service seems unavailable: {}. Content: {}", statusLine, responsePayload);
+                    throw new ShouldNotHappenException("Service seems unavailable: Received response: " + statusLine);
+            }
+            return responsePayload;
+            } catch (IOException e) {
+                logger.error("Error while retrieving response body", e);
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     static Map<String, String> parseResponse(String response) {
