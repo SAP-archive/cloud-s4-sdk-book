@@ -99,9 +99,12 @@ public class MlTranslationCommand extends Command<List<String>> {
 
     private String executeRequest(String requestJson) throws Exception {
 
-        // TODO: Task 2 - Integrate the translation service using the S/4HANA CLoud SDK LeonardoMlService class and prepare the request
-        LeonardoMlService mlService = null;
-        HttpPost request = null;
+        LeonardoMlService mlService = LeonardoMlFoundation.create(CloudFoundryLeonardoMlServiceType.TRIAL_BETA,
+                LeonardoMlServiceType.TRANSLATION);
+
+        HttpPost request = new HttpPost();
+        HttpEntity body = new StringEntity(requestJson, ContentType.APPLICATION_JSON);
+        request.setEntity(body);
 
         return mlService.invoke(request, response -> {
             return retrieveResponsePayload(response);

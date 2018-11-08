@@ -28,7 +28,15 @@ public class DeleteAddressCommand extends ErpCommand<Integer> {
 
     @Override
     protected Integer run() throws Exception {
-        //TODO: Task 3 - Implement business partner delete query
-        throw new RuntimeException("TODO: Implement");
+        final BusinessPartnerAddress addressToDelete = BusinessPartnerAddress.builder()
+                .businessPartner(businessPartnerId)
+                .addressID(addressId)
+                .build();
+
+        final ODataDeleteResult oDataDeleteResult = service
+                .deleteBusinessPartnerAddress(addressToDelete)
+                .execute();
+
+        return oDataDeleteResult.getHttpStatusCode();
     }
 }

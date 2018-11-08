@@ -26,8 +26,26 @@ public class GetSingleBusinessPartnerByIdCommand extends ErpCommand<BusinessPart
 
     @Override
     protected BusinessPartner run() throws Exception {
-        // TODO: Task 1 - Retrieve a business partner by ID
-        throw new RuntimeException("TODO: Implement");
+        final BusinessPartner businessPartner = service
+                .getBusinessPartnerByKey(id)
+                .select(BusinessPartner.BUSINESS_PARTNER,
+                        BusinessPartner.LAST_NAME,
+                        BusinessPartner.FIRST_NAME,
+                        BusinessPartner.IS_MALE,
+                        BusinessPartner.IS_FEMALE,
+                        BusinessPartner.CREATION_DATE,
+                        BusinessPartner.MIDDLE_NAME,
+                        BusinessPartner.SEARCH_TERM1,
+                        BusinessPartner.TO_BUSINESS_PARTNER_ADDRESS.select(
+                                BusinessPartnerAddress.BUSINESS_PARTNER,
+                                BusinessPartnerAddress.ADDRESS_ID,
+                                BusinessPartnerAddress.COUNTRY,
+                                BusinessPartnerAddress.POSTAL_CODE,
+                                BusinessPartnerAddress.CITY_NAME,
+                                BusinessPartnerAddress.STREET_NAME,
+                                BusinessPartnerAddress.HOUSE_NUMBER))
+                .execute();
+        return businessPartner;
     }
 
     @Override

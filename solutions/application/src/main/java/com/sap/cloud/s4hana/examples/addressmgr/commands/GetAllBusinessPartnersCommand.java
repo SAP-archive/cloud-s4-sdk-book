@@ -42,8 +42,16 @@ public class GetAllBusinessPartnersCommand extends CachingErpCommand<List<Busine
 
     @Override
     protected List<BusinessPartner> runCacheable() throws Exception {
-        // TODO: Task 1 - Retrieve a list of bisiness partners
-        throw new RuntimeException("TODO: Implement");
+        final List<BusinessPartner> businessPartners = service
+                .getAllBusinessPartner()
+                .select(BusinessPartner.BUSINESS_PARTNER,
+                        BusinessPartner.LAST_NAME,
+                        BusinessPartner.FIRST_NAME)
+                .filter(BusinessPartner.BUSINESS_PARTNER_CATEGORY.eq(CATEGORY_PERSON))
+                .orderBy(BusinessPartner.LAST_NAME, Order.ASC)
+                .execute();
+
+        return businessPartners;
     }
 
     @Override
