@@ -12,6 +12,10 @@ So, let us get started!
 ## <a name="prerequisites">Technical prerequisites</a>
 
 ## <a name="task0">Task 0: Preparation steps</a>
+download zip
+load into ide
+
+explain the local deployment
 
 ## <a name="task1">Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model</a>
 
