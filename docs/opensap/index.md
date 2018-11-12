@@ -16,7 +16,8 @@ The example source code for this course is hosted in a [GitHub repository](https
 
 You will need the following on your local machine to work with the source code and run the application:
 
-* Java Development Kit (JDK), version 8 (1.8.0), or above
+* Java Development Kit (JDK), **version 8 (1.8.0)**
+    * Please note that **only JDK version 8** works with the example source code as of now. Don't use any earlier or later version.
 * Apache Maven, version 3.5.0, or above
 * Git, version 2.15.0, or above for cloning the repository (Download from the [project homepage](https://git-scm.com/downloads))
 
