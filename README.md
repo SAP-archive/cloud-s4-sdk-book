@@ -1,5 +1,5 @@
 # SAP Leonardo Machine Learning und the SAP S/4HANA Cloud SDK
-Here, we provide the required instructions to proceed with the code jam "SAP Leonardo Machine Learning and the SAP S/4HANA Cloud SDK". Below, you find the following information:
+Here, we provide the instructions to proceed with the code jam "SAP Leonardo Machine Learning and the SAP S/4HANA Cloud SDK". Below, you find the following information:
 * [Technical prerequisites](#prerequisites): software required to execute the steps described in this documentation. This information was provided before the workshop, so, we assume that those prerequisites are already fulfilled. Nevertheless, you can use this description to double check.
 * [Task 0: Preparation steps](#task0)
 * [Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model](#task1)
@@ -10,6 +10,9 @@ Here, we provide the required instructions to proceed with the code jam "SAP Leo
 So, let us get started!
 
 ## <a name="prerequisites">Technical prerequisites</a>
+Please, find the local setup and how to install the required software in the blog post [Step 1 with SAP S/4HANA Cloud SDK: Set up](https://blogs.sap.com/2017/05/15/step-1-with-sap-s4hana-cloud-sdk-set-up/).
+
+We will deploy the application in SAP Cloud Platform, Cloud Foundry. For that purpose, you would require your own trial account. [Here](https://cloudplatform.sap.com/try.html), you can find information on how to get your trial account in SAP Cloud Platform, Cloud Foundry. 
 
 ## <a name="task0">Task 0: Preparation steps</a>
 download zip
