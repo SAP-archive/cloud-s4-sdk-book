@@ -14,6 +14,8 @@ The example source code for this course is hosted in a [GitHub repository](https
 
 ### Requirements
 
+During the course, we use IntelliJ IDEA for editing the code of our Java projects. You can get your free copy of it [on this website](https://www.jetbrains.com/idea/download/).
+
 You will need the following on your local machine to work with the source code and run the application:
 
 * Java Development Kit (JDK), **version 8 (1.8.0)**
