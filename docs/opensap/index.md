@@ -20,6 +20,7 @@ You will need the following on your local machine to work with the source code a
     * Please note that **only JDK version 8** works with the example source code as of now. Don't use any earlier or later version.
 * Apache Maven, version 3.5.0, or above
 * Git, version 2.15.0, or above for cloning the repository (Download from the [project homepage](https://git-scm.com/downloads))
+* During the course, we use IntelliJ IDEA as IDE. You can get your free copy [on this website](https://www.jetbrains.com/idea/download/).
 
 Please follow the instructions outlined in [this blog post](https://blogs.sap.com/2017/05/15/step-1-with-sap-s4hana-cloud-sdk-set-up/) to install the JDK and Maven using a package manager on Windows or macOS.
 
