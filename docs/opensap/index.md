@@ -14,14 +14,15 @@ The example source code for this course is hosted in a [GitHub repository](https
 
 ### Requirements
 
-During the course, we use IntelliJ IDEA for editing the code of our Java projects. You can get your free copy of it [on this website](https://www.jetbrains.com/idea/download/).
+During the course, we use IntelliJ IDEA for editing the code of our Java projects. You can get your free copy of the community edition [on this website](https://www.jetbrains.com/idea/download/).
 
-You will need the following on your local machine to work with the source code and run the application:
+You will need the following on your local machine to build and deploy the application:
 
 * Java Development Kit (JDK), **version 8 (1.8.0)**
     * Please note that **only JDK version 8** works with the example source code as of now. Don't use any earlier or later version.
 * Apache Maven, version 3.5.0, or above
 * Git, version 2.15.0, or above for cloning the repository (Download from the [project homepage](https://git-scm.com/downloads))
+* Cloud Foundry Command Line Interface (cf CLI) (refer to the [install instructions](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html))
 
 Please follow the instructions outlined in [this blog post](https://blogs.sap.com/2017/05/15/step-1-with-sap-s4hana-cloud-sdk-set-up/) to install the JDK and Maven using a package manager on Windows or macOS.
 
