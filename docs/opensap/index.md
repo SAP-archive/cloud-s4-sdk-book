@@ -47,7 +47,6 @@ To inspect the source code of a particular state, either checkout the correspond
 
 | Branch | Week/ Unit | Description | Download as Archive  |
 |---|---|---|---|
-| [course/1_5_hello_world](https://github.com/SAP/cloud-s4-sdk-book/tree/course/1_5_hello_world) | 1/5 | Plain project generated from archetype | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/course/1_5_hello_world.zip) |
 | [course/2_1_copyover](https://github.com/SAP/cloud-s4-sdk-book/tree/course/2_1_copyover) | 2/1 | Delta containing front-end and command stubs to apply to your project | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_1_copyover.zip) |
 | [course/2_1_start](https://github.com/SAP/cloud-s4-sdk-book/tree/course/2_1_start) | 2/1 | As an alternative to the copyover, use this branch for a fresh start | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_1_start.zip) |
 | [course/2_2_start](https://github.com/SAP/cloud-s4-sdk-book/tree/course/2_2_start) | 2/2 | Starting point for the unit | [ZIP](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_2_start.zip) |
