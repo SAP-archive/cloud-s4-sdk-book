@@ -1,7 +1,7 @@
 package com.sap.cloud.s4hana.examples.addressmgr.models;
 
 import com.sap.cloud.sdk.s4hana.datamodel.odata.adapter.LocalDateTimeCalendarConverter;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerField;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.field.BusinessPartnerField;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;
