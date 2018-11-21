@@ -46,11 +46,20 @@ npm start
 ```
 
 Wait until you see the output `Mock server started`. Access the mock OData service at http://localhost:3000/sap/opu/odata/sap/API_BUSINESS_PARTNER (no credentials required).
+This should have the following output.
+```
+{"d":{"EntitySets":["A_BusinessPartner","A_BusinessPartnerAddress"]}}
+```
+To see an example response of business partners, visit http://localhost:3000/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner.
 
-Use `http://localhost:3000` as the URL for your destination `ErpQueryEndpoint` with any dummy user and password, for example:
-```
-destinations=[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]
-```
+#### Connect your application to the mock server
+Before running your application using the SAP S/4HANA Cloud SDK locally, you need to set the environment variable `destinations` as follows to connect the application to the mock server.
+Username and password can have any value.
+* Windows command prompt: `set destinations=[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]`
+* Windows PowerShell: `$Env:destinations="[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]"`
+* Linux / MacOS: `export destinations="[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]"`
+
+Afterwards, start the application in the same session with `mvn clean package tomee:run` (within the `application` folder).
 
 ### On SAP Cloud Platform, Cloud Foundry
 #### Prerequisites
