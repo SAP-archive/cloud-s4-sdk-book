@@ -65,6 +65,8 @@ mvn tomee:run -pl application
 ```
 * Open the URL http://localhost:8080/address-manager in your browser to see the frontend of the launched application.
 
+At this phase, we do not have any data returned from the application and we see the runtime exception in the console, saying that we need to implement the functionality. Let us start with the first step: integrating SAP S/4HANA into this application using the SAP S/4HANA Cloud SDK.
+
 ## <a name="task1">Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model</a>
 
 ## <a name="task2">Task 2: Integrate SAP Leonardo Machine Learning service to provide translations</a>
