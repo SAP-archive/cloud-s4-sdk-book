@@ -15,6 +15,9 @@ Make sure to install all the mentioned tool, including the IDE. All the exercise
 
 We will deploy the application in SAP Cloud Platform, Cloud Foundry. For that purpose, you would require your own trial account. [Here](https://cloudplatform.sap.com/try.html), you can find information on how to get your trial account in SAP Cloud Platform, Cloud Foundry. 
 
+For this workshop, we provide a running SAP S/4HANA Mock server that mocks business partner APIs, so you do not need to set up it by yourself. The server is accessable via URL https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com and does not require authentication.
+In case you want to try out this hands on later and the service is not available, follow [this description](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html) to set up your own instance of the mock server.
+
 ## <a name="task0">Task 0: Preparation steps</a>
 Before, we get started with the actual implementation, we need to perform some preparation steps and familiarize ourselves with the project structure. 
 * Download the [archive with the initial project version](https://github.com/SAP/cloud-s4-sdk-book/archive/ml-codejam.zip) from the GitHub
@@ -26,7 +29,41 @@ Before, we get started with the actual implementation, we need to perform some p
   * **pom.xml** is a [maven configuration file](https://maven.apache.org/pom.html)
   * **manifest.yml** is a deployment descriptor to be able to deploy the application in SAP Cloud Platform, Cloud Foundry.
 
-explain the local deployment
+Before we get started with the development, let us build and deploy the current state of the application locally.
+
+### Build and test
+While building the application, we will execute integration tests. For the integration tests, you need to provide the URL and credentials of your SAP S/4HANA system.
+* Open the file `integration-tests/src/test/resources/systems.yml`. Set the default to `MOCK_SYSTEM`: `default: "MOCK_SYSTEM"`, uncomment the following two lines (remove the `#` found in the original file) and supply the URL to your SAP S/4HANA system or Mock server. In the code jam we will use the provided mock server URL.
+```
+    - alias: "MOCK_SYSTEM"
+      uri: "https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com"
+```
+* Create a `credentials.yml` file (preferably in the same directory) used during tests with the following content:
+```
+---
+credentials:
+- alias: "MOCK_SYSTEM"
+  username: "(username)"
+  password: "(password)"
+```
+* In the root folder of the project, run the following command to build and test the application. The credentials path is only required if the file is not located in the same folder as `systems.yml`.
+```
+mvn clean install "-Dtest.credentials=//absolute/path/to/credentials.yml"
+```
+
+### Deploy locally
+After you have successfully built the project, you can deploy it locally as follows. This will start a local server that hosts your application.
+* Configure your local environment by setting the following environment variables. Replace the URL and credentials with the appropriate values for your SAP S/4HANA Cloud system in case you are not using the provided mock server.
+  * Adapt the below commands for setting environment variables as appropriate for your operating system. The following commands are for the Windows command line.
+```
+set destinations=[{name: 'ErpQueryEndpoint', url: 'https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com', username: '<USERNAME>', password: '<PASSWORD>'}]
+set ALLOW_MOCKED_AUTH_HEADER=true
+```
+* Run the following commands to deploy the application on a local server.
+```
+mvn tomee:run -pl application
+```
+* Open the URL http://localhost:8080/address-manager in your browser to see the frontend of the launched application.
 
 ## <a name="task1">Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model</a>
 
