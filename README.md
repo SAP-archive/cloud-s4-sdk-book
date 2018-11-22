@@ -38,7 +38,7 @@ While building the application, we will execute integration tests. For the integ
     - alias: "MOCK_SYSTEM"
       uri: "https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com"
 ```
-* Create a `credentials.yml` file (preferably in the same directory) used during tests with the following content:
+* In the same directory, create a `credentials.yml` file used during tests with the following content:
 ```
 ---
 credentials:
@@ -48,7 +48,7 @@ credentials:
 ```
 * In the root folder of the project, run the following command to build and test the application. The credentials path is only required if the file is not located in the same folder as `systems.yml`.
 ```
-mvn clean install "-Dtest.credentials=//absolute/path/to/credentials.yml"
+mvn clean install
 ```
 
 ### Deploy locally
@@ -68,6 +68,32 @@ mvn tomee:run -pl application
 At this phase, we do not have any data returned from the application and we see the runtime exception in the console, saying that we need to implement the functionality. Let us start with the first step: integrating SAP S/4HANA into this application using the SAP S/4HANA Cloud SDK.
 
 ## <a name="task1">Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model</a>
+In this step, we will implement two queries to SAP S/4HANA to retrieve business partner data. Firstly, we will retrieve the list of business partners for the list view in  the application. Secondly, we will retrieve detailed data a single business partner by ID.
+
+Start the development of queries by looking into the class BusinessPartnerServlet, which is a servlet exposing the API. 
+We could use any API framework here, such as JAX-RS or Spring. However, we use a servlet here for simplicity. Looking into the servlet, we can see that the main functionality is moved out into the commands GetAllBusinessPartnersCommand and GetSingleBusinessPartnerByIdCommand. Open and implement both commands as explained below.
+
+The GetAllBusinessPartnersCommand should return a list of available business partners in the ERP system. The class was already created. We just have to implement the execute method:
+* The instance of the class BusinessPartnerService already provides a method to retrieve all business partners. Type service to see a list of all available methods. Use the method getAllBusinessPartner to fetch multiple business partner entities.
+* We only want to return the properties first name, last name and id. Thus, select only these properties by using the select method on the result from step 1. Luckily, we do not have to know the exact names of these properties in the public API of S/4HANA. They are codified as static member of the class BusinessPartner. We can select the business partner id by using BusinessPartner.BUSINESS_PARTNER. Please, do the same for the first name and last name.
+* There are multiple categories of business partners. In this session, we only want to retrieve persons. The category is identified by a number, which is stored in the static class variable called CATEGORY_PERSON. The method to filter is called filter and can be executed on the result from the previous step.
+The property BusinessPartner.BUSINESS_PARTNER_CATEGORY should equal CATEGORY_PERSON. To express that use the methods provided by the object BusinessPartner.BUSINESS_PARTNER_CATEGORY.
+* We want to order the result by the last name, sorting ascending. The method is called orderBy and expects the property and the order.
+* All the previous steps did not execute any requests, but just defined the request. With the method execute you finally execute the query and retrieve the result.
+Hint: Try to solve it on your own. However, the solution can also be found in the solution folder in the session material.
+
+The command GetSingleBusinessPartnerByIdCommand should return a specific business partner including address details. The implementation is very similar to the first command.
+* In addition to getting all business partners there is a method to get only one business partner identified by the key: getBusinessPartnerByKey. Use this method with the available id property.
+* Furthermore, select the properties business partner id, last name, first name, is male, is female and creation date. Also select the corresponding address. It can be accessed using the property TO_BUSINESS_PARTNER_ADDRESS. For the address, select the properties business partner id, address id, country, postal code, city name, street name and house number.
+* There is no need to apply additional operations.
+
+To check whether the queries are implemented correctly, go to the integration-tests folder and remove the @Ignore annotation for the following tests: BusinessPartnerServletTest.testGetAll() and BusinessPartnerServletTest.testGetSingle().
+Now, build and test the application and make sure that the tests ran successfully. 
+```
+mvn clean install
+```
+
+If the uncommented test do not show errors, congratulations! You have successfully integrated SAP S/4HANA with your application. In the next step, we will see how to integrate one of the SAP Leonardo Machine Learning services in few lines of code.
 
 ## <a name="task2">Task 2: Integrate SAP Leonardo Machine Learning service to provide translations</a>
 
