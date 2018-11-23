@@ -119,8 +119,17 @@ In this method, we already provide the logic for the execution of the translatio
 
 If you experience difficulties, you can compare you solution with the one provided in the [folder solutions](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/solutions/application/src/main/java/com/sap/cloud/s4hana/examples/addressmgr/machinelearning/commands/MlTranslationCommand.java).
 
-Now, we can deploy the application in SAP Cloud Platform, Cloud Foundry and see the result of the integration of the translation service in action.
+Now, we can deploy the application in SAP Cloud Platform, Cloud Foundry and see the result of the integration of the translation service in action. To deploy your application using cloud platform cockpit.
 
+### Create service instances for S/4HANA connectivity and Leonardo ML integration
+Firstly, create an instance of the destination service to connect to SAP S/4HANA (mock) system. For that, in the cloud platform cockpit on the level of your development space choose Services -> Service Marketplace and choose the destination service from the catalog.
+Instantiate the service with all the default parameters.
+[Destination service in the Service Marketplace]()
+
+
+### Create destination endpoints
+
+### Deploy the application using the SAP Cloud Platform cockpit
 
 ## <a name="task3">Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
 
