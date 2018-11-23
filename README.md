@@ -169,6 +169,8 @@ In your development space, choose Application -> Deploy Application. Choose the 
 
 When the application is deployed, you can drill down into the application, choose the link for the application and append it with "/address-manager". You should be able to see the business partner coming back from the mock server and you should be able to translate their professions by clicking on them.
 
+![Result of the deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deploymentResult.PNG)
+
 ## <a name="task3">Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
 
 ## <a name="task4">Bonus, Task 4: Integrate advanced ML capabilities</a>
