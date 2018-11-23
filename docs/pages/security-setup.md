@@ -13,6 +13,8 @@ npm --version
 If npm is not intalled, you can download and install it from here: https://www.npmjs.com/
 
 ## Install the App Router
+Make sure that you use the project version from the security branch. You can also download it as a zip archive [here](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_3_security.zip). This version already includes pre-defined set of files for the approuter and it also add the security constraints for your web.xml in the application to protect business partners endpoints.
+
 See the file `<your project location>\cloud-s4-sdk-book\approuter\approuter\package.json`
 This is the descriptor required to install the correct version of the approuter using npm tool (NodeJS Packet Manager).
 To start the installation run the following commands:
@@ -64,3 +66,8 @@ To deploy the App Router, run the following commands:
 cd <your project location>\cloud-s4-sdk-book\approuter
 cf push
 ```
+
+We have protected access the business partner APIs. Now, you won't see the data coming back from this service via the application, as your user is not authenticated. Application router does not allow to read the data, as well, as our user is not authorized and still required a role assignement in the SAP Cloud Platform Cockpit.
+
+## Configure Roles, Roles Collections, and User Assignments
+Now, follow the instructions in the video to set up your role, role collection, and to assign this role collection to your user. After this is done and you have logged out and logged in to your application router (use <approuter url>/logout for that), you will be able to see the data via the application router.
