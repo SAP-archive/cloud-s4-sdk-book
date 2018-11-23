@@ -137,14 +137,27 @@ Next, we will create destination endpoint to connect to the S/4HANA mock server 
 You can find the configuration of the destination endpoints on the level of your subaccount by choosing Connectivity -> Destinations.
 Then, you can create a new destination endpoint by choosing "New Destination".
 
-For the S/4HANA connectivity, create the destination with the following parameters:
-Name: ErpQueryEndpoint
-Type: HTTP
-URL: https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com
-Proxy type: Internet
-Authentication: NoAuthentication
+For the S/4HANA connectivity, create the destination with the following parameters: <br>
+Name: ErpQueryEndpoint <br>
+Type: HTTP <br>
+URL: https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com <br>
+Proxy type: Internet <br>
+Authentication: NoAuthentication <br>
 
-To connect to the language detection APIs in SAP API Business Hub, we will create another destination:
+To connect to the language detection APIs in SAP API Business Hub, we will create another destination with the following parameters: <br>
+Name: mlApi <br>
+Type: HTTP <br>
+URL: http://sandbox.api.sap.com/ml <br>
+Proxy Type: Internet
+Authentication: BasicAuthentication <br>
+User: <your email address from SAP API Hub> <br>
+Password: <your password from SAP API Hub> <br>
+ 
+Additionally, add the following additional properties: <br>
+mlApiKey: <your key from the SAP API Hub>
+ 
+In case you do not how to get the key from the API Hub, please, approach the instructor.
+
 
 ### Deploy the application using the SAP Cloud Platform cockpit
 
