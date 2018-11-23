@@ -105,6 +105,22 @@ mvn tomee:run -pl application
 In the next step, we will see how to integrate one of the SAP Leonardo Machine Learning services in few lines of code.
 
 ## <a name="task2">Task 2: Integrate SAP Leonardo Machine Learning service to provide translations</a>
+In this step, we will integrate SAP Leonardo Machine Learning services into an application using an example of the translation service, which is a part of the set of functional services.
+
+To implement the integration, find the package machinelearning in your project, where you will find the TranslateServlet class. This class contains the method translate(), which delegates the translation logic to the commands MlLanguageDetectionCommand for the language detection and MlTranslationCommand for the translation.
+
+Navigate to the class MlTranslationCommand and investigate its methods. Here, in the method executeRequest, you will find the next task. 
+In this method, we already provide the logic for the execution of the translation request using the instance of LeonardoMlService class and retrive the resulting payload. The rest is left for you. To make the translation work in integration with your application, add the following steps into the executeRequest method:
+
+* Instantiate the LeonardoMlService class. Consider that you use trial beta as Cloud Foundry Leonardo ML service type and Translation as a Leonardo ML service type.
+* Create an object request of type HttpPost
+* Create an object body of type HttpEntity. Use requestJson and ContentType.APPLICATION_JSON to instantiate the object.
+* Add the created body to the request using the method setEntity.
+
+If you experience difficulties, you can compare you solution with the one provided in the [folder solutions](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/solutions/application/src/main/java/com/sap/cloud/s4hana/examples/addressmgr/machinelearning/commands/MlTranslationCommand.java).
+
+Now, we can deploy the application in SAP Cloud Platform, Cloud Foundry and see the result of the integration of the translation service in action.
+
 
 ## <a name="task3">Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
 
