@@ -150,16 +150,24 @@ Type: HTTP <br>
 URL: http://sandbox.api.sap.com/ml <br>
 Proxy Type: Internet
 Authentication: BasicAuthentication <br>
-User: <your email address from SAP API Hub> <br>
-Password: <your password from SAP API Hub> <br>
+User: your email address from SAP API Hub <br>
+Password: your password from SAP API Hub <br>
  
 Additionally, add the following additional properties: <br>
 mlApiKey: <your key from the SAP API Hub>
  
-In case you do not how to get the key from the API Hub, please, approach the instructor.
+In case you do not how to get the key from the API Hub, please, approach the instructor. You can also take a look at the explanation in the [S/4HANA Cloud SDK Deep Dive](https://blogs.sap.com/2018/05/31/quickly-build-a-prototype-with-sap-leonardo-machine-learning-foundation-sap-api-business-hub-and-sap-s4hana-cloud-sdk/).
 
 
 ### Deploy the application using the SAP Cloud Platform cockpit
+
+Finally, we will deploy the application in your development space in SAP Cloud Platform, Cloud Foundry. You can do it using the CLI of Cloud Foundry or using the SAP Cloud Platform Cockpit. Here, we show how to do it using the cockpit.
+
+In your development space, choose Application -> Deploy Application. Choose the location of your archive and the corresponding manifest.zml file, as shown in the Figure.
+
+![Application Deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deployment.PNG)
+
+When the application is deployed, you can drill down into the application, choose the link for the application and append it with "/address-manager". You should be able to see the business partner coming back from the mock server and you should be able to translate their professions by clicking on them.
 
 ## <a name="task3">Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
 
