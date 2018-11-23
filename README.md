@@ -123,13 +123,51 @@ Now, we can deploy the application in SAP Cloud Platform, Cloud Foundry and see 
 
 ### Create service instances for S/4HANA connectivity and Leonardo ML integration
 Firstly, create an instance of the destination service to connect to SAP S/4HANA (mock) system. For that, in the cloud platform cockpit on the level of your development space choose Services -> Service Marketplace and choose the destination service from the catalog.
-Instantiate the service with all the default parameters.
-[Destination service in the Service Marketplace]()
+Instantiate the service with all the default parameters. Give the name my-destination to your instance.
+![Destination service in the Service Marketplace](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/destination.PNG)
 
+Secondly, create an instance of the Authorization and Trust Management service. In the Service Marketplace, choose the Authorization and Trust Management service and instantiate it with the default parameters. Give the name my-xsuaa to your service instance.
+![Authorization and Trust Management](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/uaa.PNG)
+
+Thirdly, create an instance of SAP Leonardo ML service. The service can be found in the Service Marketplace under the name ml-foundation-trial-beta. Instantiate the service with the defailt parameters and give it the name my-ml.
+![SAP Leonardo Machine Learning](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/ml.PNG)
 
 ### Create destination endpoints
+Next, we will create destination endpoint to connect to the S/4HANA mock server and to the language detection APIs on SAP API Business Hub.
+You can find the configuration of the destination endpoints on the level of your subaccount by choosing Connectivity -> Destinations.
+Then, you can create a new destination endpoint by choosing "New Destination".
+
+For the S/4HANA connectivity, create the destination with the following parameters: <br>
+Name: ErpQueryEndpoint <br>
+Type: HTTP <br>
+URL: https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com <br>
+Proxy type: Internet <br>
+Authentication: NoAuthentication <br>
+
+To connect to the language detection APIs in SAP API Business Hub, we will create another destination with the following parameters: <br>
+Name: mlApi <br>
+Type: HTTP <br>
+URL: http://sandbox.api.sap.com/ml <br>
+Proxy Type: Internet
+Authentication: BasicAuthentication <br>
+User: your email address from SAP API Hub <br>
+Password: your password from SAP API Hub <br>
+ 
+Additionally, add the following additional properties: <br>
+mlApiKey: <your key from the SAP API Hub>
+ 
+In case you do not how to get the key from the API Hub, please, approach the instructor. You can also take a look at the explanation in the [S/4HANA Cloud SDK Deep Dive](https://blogs.sap.com/2018/05/31/quickly-build-a-prototype-with-sap-leonardo-machine-learning-foundation-sap-api-business-hub-and-sap-s4hana-cloud-sdk/).
+
 
 ### Deploy the application using the SAP Cloud Platform cockpit
+
+Finally, we will deploy the application in your development space in SAP Cloud Platform, Cloud Foundry. You can do it using the CLI of Cloud Foundry or using the SAP Cloud Platform Cockpit. Here, we show how to do it using the cockpit.
+
+In your development space, choose Application -> Deploy Application. Choose the location of your archive and the corresponding manifest.zml file, as shown in the Figure.
+
+![Application Deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deployment.PNG)
+
+When the application is deployed, you can drill down into the application, choose the link for the application and append it with "/address-manager". You should be able to see the business partner coming back from the mock server and you should be able to translate their professions by clicking on them.
 
 ## <a name="task3">Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
 
