@@ -93,7 +93,16 @@ Now, build and test the application and make sure that the tests ran successfull
 mvn clean install
 ```
 
-If the uncommented test do not show errors, congratulations! You have successfully integrated SAP S/4HANA with your application. In the next step, we will see how to integrate one of the SAP Leonardo Machine Learning services in few lines of code.
+If the uncommented test do not show errors, congratulations! You have successfully integrated SAP S/4HANA with your application. 
+
+You can also deploy the application locally and see the business partner data from the S/4HANA Mock server:
+```
+mvn tomee:run -pl application
+```
+
+![Business partner address manager](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/AddressManager.PNG)
+
+In the next step, we will see how to integrate one of the SAP Leonardo Machine Learning services in few lines of code.
 
 ## <a name="task2">Task 2: Integrate SAP Leonardo Machine Learning service to provide translations</a>
 
