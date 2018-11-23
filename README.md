@@ -171,6 +171,8 @@ When the application is deployed, you can drill down into the application, choos
 
 ![Result of the deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deploymentResult.PNG)
 
+![Business Partner Address Manager with the integrated translation service](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/Translation.PNG)
+
 ## <a name="task3">Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
 
 ## <a name="task4">Bonus, Task 4: Integrate advanced ML capabilities</a>
