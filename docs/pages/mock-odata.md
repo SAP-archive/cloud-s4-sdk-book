@@ -11,19 +11,19 @@ The mock server can be used as a stand-in for simple tests and experiments with 
 It is especially tailored towards the examples found in the book.
 This page explains how to run the mock server and how to integrate it into the tests of the sample application.
 
-> **Note**: the server is not secured in any way. Run the server on your own risk and only for experiments. Do not use the server to store any personal data - only use fake data.
+> **Note**: the server is not secured in any way. Run the server at your own risk and only for experiments. Do not use the server to store any personal data - only use fake data.
 
 ## How to run the server
 When you have cloned this repository, checkout the branch `mock-server`.
 Alternatively, download [this archive](https://github.com/SAP/cloud-s4-sdk-book/archive/mock-server.zip) and unzip it to your local machine.
-All of the following steps shall happen in this folder where you checked out or extraced the code of the mock server.
+All of the following steps shall happen in this folder where you checked out or extracted the code of the mock server.
 
 Before you can launch the mock server, you need to manually put the metadata EDMX document of the business partner OData service into the folder `business-partner` and prepare the document:
 * Go to the description of the [Business Partner API in the SAP API Business Hub](https://api.sap.com/shell/discover/contentpackage/SAPS4HANACloud/api/API_BUSINESS_PARTNER).
 * Click on *Login* and login with your credentials (you may need to register beforehand).
 * Click on the *Details* tab, then click *Download Specification* and choose *EDMX*.
 * Store the downloaded file with the name `API_BUSINESS_PARTNER.edmx` in the subfolder `business-partner` of the mock server folder.
-* Open the metadata document and locate the entity type `A_BusinessPartnerType`. Within the `EntityType` item with that name, add the following two lines behind the line that contains `</Key>`:
+* Open the metadata document and locate the entity type `A_BusinessPartnerType`. Within the `EntityType` item with that name, add the following two lines after the line that contains `</Key>`:
 
 ```
 <Property Name="YY1_AddrLastCheckedOn_bus" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Addresses Last Checked On"/>
