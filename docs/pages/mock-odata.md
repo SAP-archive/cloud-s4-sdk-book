@@ -5,7 +5,7 @@ title: OData Mock Service
 # OData Mock Service
 This repository also contains a simple Node.js-based server that represents an OData mock server in the branch `mock-server`.
 The server makes it possible to test the SAP S/4HANA integration capabilities of the SAP S/4HANA Cloud SDK described in the book without access to an SAP S/4HANA system.
-The server hosts an OData v2 mock service that mimicks the business partner API of SAP S/4HANA Cloud to a limited extent.
+The server hosts an OData v2 mock service that mimics the business partner API of SAP S/4HANA Cloud to a limited extent.
 
 The mock server can be used as a stand-in for simple tests and experiments with the SAP S/4HANA Cloud SDK if no SAP S/4HANA system is available.
 It is especially tailored towards the examples found in the book.
@@ -23,14 +23,14 @@ Before you can launch the mock server, you need to manually put the metadata EDM
 * Click on *Login* and login with your credentials (you may need to register beforehand).
 * Click on the *Details* tab, then click *Download Specification* and choose *EDMX*.
 * Store the downloaded file with the name `API_BUSINESS_PARTNER.edmx` in the subfolder `business-partner` of the mock server folder.
-* Open the metadata document and locate the entity type `A_BusinessPartnerType`. Within the `EntityType` item with that name, add the following two lines after the line that contains `</Key>`:
+* Open the file `API_BUSINESS_PARTNER.edmx` in a text editor and find the line containing `EntityType Name="A_BusinessPartnerType"`. Within this `EntityType`, add the following two lines after the line that contains `</Key>`:
 
 ```
 <Property Name="YY1_AddrLastCheckedOn_bus" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Addresses Last Checked On"/>
 <Property Name="YY1_AddrLastCheckedBy_bus" Type="Edm.String" MaxLength="50" sap:label="Addresses Last Checked By"/>
 ```
 
-After you have thus prepared the mock server,  you can run the mock server on your local machine (at http://localhost:3000) or on SAP Cloud Platform, Cloud Foundry, as described in either of the following two sections.
+After you have thus prepared the mock server, you can run the mock server on your local machine (at http://localhost:3000) or on SAP Cloud Platform, Cloud Foundry, as described in either of the following two sections.
 
 ### Locally
 #### Prerequisites
