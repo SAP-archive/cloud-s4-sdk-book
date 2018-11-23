@@ -123,9 +123,14 @@ Now, we can deploy the application in SAP Cloud Platform, Cloud Foundry and see 
 
 ### Create service instances for S/4HANA connectivity and Leonardo ML integration
 Firstly, create an instance of the destination service to connect to SAP S/4HANA (mock) system. For that, in the cloud platform cockpit on the level of your development space choose Services -> Service Marketplace and choose the destination service from the catalog.
-Instantiate the service with all the default parameters.
-[Destination service in the Service Marketplace]()
+Instantiate the service with all the default parameters. Give the name my-destination to your instance.
+[Destination service in the Service Marketplace](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/destination.PNG)
 
+Secondly, create an instance of the Authorization and Trust Management service. In the Service Marketplace, choose the Authorization and Trust Management service and instantiate it with the default parameters. Give the name my-xsuaa to your service instance.
+[Authorization and Trust Management](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/uaa.PNG)
+
+Thirdly, create an instance of SAP Leonardo ML service. The service can be found in the Service Marketplace under the name ml-foundation-trial-beta. Instantiate the service with the defailt parameters and give it the name my-ml.
+[SAP Leonardo Machine Learning](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/ml.PNG)
 
 ### Create destination endpoints
 
