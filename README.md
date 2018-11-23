@@ -133,6 +133,18 @@ Thirdly, create an instance of SAP Leonardo ML service. The service can be found
 ![SAP Leonardo Machine Learning](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/ml.PNG)
 
 ### Create destination endpoints
+Next, we will create destination endpoint to connect to the S/4HANA mock server and to the language detection APIs on SAP API Business Hub.
+You can find the configuration of the destination endpoints on the level of your subaccount by choosing Connectivity -> Destinations.
+Then, you can create a new destination endpoint by choosing "New Destination".
+
+For the S/4HANA connectivity, create the destination with the following parameters:
+Name: ErpQueryEndpoint
+Type: HTTP
+URL: https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com
+Proxy type: Internet
+Authentication: NoAuthentication
+
+To connect to the language detection APIs in SAP API Business Hub, we will create another destination:
 
 ### Deploy the application using the SAP Cloud Platform cockpit
 
