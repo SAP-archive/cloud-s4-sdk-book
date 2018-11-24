@@ -144,7 +144,7 @@ Thirdly, create an instance of SAP Leonardo ML service. The service can be found
 
 Take a look at the manifest.yml file in your application. This file is the deployment descriptor that contains metainformation required for the deployyment, including the service bindings. We have just created the service instances in SAP Cloud Platform cockpit. Exactly this service instances will be bound to the application after it is deployed, as this is specified in the manifest.yml.
 
-[Service bindings in the deployment descriptor manifest.yml](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/manifest.PNG)
+![Service bindings in the deployment descriptor manifest.yml](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/manifest.PNG)
 
 ### Create destination endpoints
 Next, we will create destination endpoint to connect to the S/4HANA mock server and to the language detection APIs on SAP API Business Hub.
