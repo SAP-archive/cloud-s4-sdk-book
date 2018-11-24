@@ -107,12 +107,22 @@ In the next step, we will see how to integrate one of the SAP Leonardo Machine L
 ## <a name="task2">Task 2: Integrate SAP Leonardo Machine Learning service to provide translations</a>
 In this step, we will integrate SAP Leonardo Machine Learning services into an application using an example of the translation service, which is a part of the set of functional services.
 
+There are several steps involved to make the integration with SAP Leonardo ML services work, those steps are described in details below:
+* Implement the integration with ML services in Java Backend
+* Create service instances for S/4HANA connectivity and Leonardo ML integration
+* Create destination endpoints
+* Deploy the application using the SAP Cloud Platform cockpit
+
+### Implement the integration with ML services in Java Backend 
+To implement the integration with ML services, we will leverage the SAP S/4HANA Cloud SDK component that simplifies the integration and handles the boilerplate code for you, such as OAuth 2.0 authentication against ML services.
+
 To implement the integration, find the package machinelearning in your project, where you will find the TranslateServlet class. This class contains the method translate(), which delegates the translation logic to the commands MlLanguageDetectionCommand for the language detection and MlTranslationCommand for the translation.
 
 Navigate to the class MlTranslationCommand and investigate its methods. Here, in the method executeRequest, you will find the next task. 
 In this method, we already provide the logic for the execution of the translation request using the instance of LeonardoMlService class and retrive the resulting payload. The rest is left for you. To make the translation work in integration with your application, add the following steps into the executeRequest method:
 
-* Instantiate the LeonardoMlService class. Consider that you use trial beta as Cloud Foundry Leonardo ML service type and Translation as a Leonardo ML service type.
+* In you IDE, navigate to the LeonardoMlService, which is a part of the machinelearning package of the SAP S/4HANA Cloud SDK and investigate its methods. Also, looks through the other classes and methods provided in this library. You may also use the [Javadoc for those classes](https://help.sap.com/http.svc/rc/76ceac609c19443099fca151cf9c9e21/1.0/en-US/com/sap/cloud/sdk/services/scp/machinelearning/package-summary.html) to get more information.
+* Instantiate the LeonardoMlService class, wich is a part of the SAP S/4HANA Cloud SDK component for ML services integration. Consider that you use trial beta as Cloud Foundry Leonardo ML service type and Translation as a Leonardo ML service type.
 * Create an object request of type HttpPost
 * Create an object body of type HttpEntity. Use requestJson and ContentType.APPLICATION_JSON to instantiate the object.
 * Add the created body to the request using the method setEntity.
@@ -133,6 +143,8 @@ Thirdly, create an instance of SAP Leonardo ML service. The service can be found
 ![SAP Leonardo Machine Learning](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/ml.PNG)
 
 Take a look at the manifest.yml file in your application. This file is the deployment descriptor that contains metainformation required for the deployyment, including the service bindings. We have just created the service instances in SAP Cloud Platform cockpit. Exactly this service instances will be bound to the application after it is deployed, as this is specified in the manifest.yml.
+
+[Service bindings in the deployment descriptor manifest.yml](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/manifest.PNG)
 
 ### Create destination endpoints
 Next, we will create destination endpoint to connect to the S/4HANA mock server and to the language detection APIs on SAP API Business Hub.
@@ -158,8 +170,7 @@ Password: your password from SAP API Hub <br>
 Additionally, add the following additional properties: <br>
 mlApiKey: <your key from the SAP API Hub>
  
-In case you do not how to get the key from the API Hub, please, approach the instructor. You can also take a look at the explanation in the [S/4HANA Cloud SDK Deep Dive](https://blogs.sap.com/2018/05/31/quickly-build-a-prototype-with-sap-leonardo-machine-learning-foundation-sap-api-business-hub-and-sap-s4hana-cloud-sdk/).
-
+In case you do not know how to get the key from the API Hub, please, approach the instructor. You can also take a look at the explanation in the [S/4HANA Cloud SDK Deep Dive](https://blogs.sap.com/2018/05/31/quickly-build-a-prototype-with-sap-leonardo-machine-learning-foundation-sap-api-business-hub-and-sap-s4hana-cloud-sdk/).
 
 ### Deploy the application using the SAP Cloud Platform cockpit
 
