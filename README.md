@@ -194,7 +194,32 @@ When the application is deployed, you can drill down into the application, choos
 
 ![Business Partner Address Manager with the integrated translation service](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/Translation.PNG)
 
+Congratulations! You have just finished the main steps in this code jam:
+* Firstly, we have integrated SAP S/4HANA Business Partner APIs to read the list of business partners and to read the detailed information
+* Secondly, we have integrated SAP Leonardo Machine Learning functional service, using the Translation as an example.
+
+Continue to the next steps in case you have time. Alternatively, you can execute those steps offline.
 
 ## <a name="task3">Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
+Here, we will further investigate the capabilities of the SAP S/4HANA Cloud SDK virtual data model to integrate SAP S/4HANA now also for create, update, and delete operations.
+
+*	The class BusinessPartnerService already offers methods to create, update or delete address. The input values, such as the addresses or IDs to delete are member variables of the commands. They are passed into the command from the servlet.
+*	Implement the run methods in the commands CreateAddressCommand, UpdateAddressCommand, DeleteAddressCommand. 
+*	For the delete method we first have to create a business partner address instance, which has the IDs for the business partner and the address specified. The class BusinessPartnerAddress offers the method builder to create a builder and can be used as follows:
+
+```
+BusinessPartnerAddress addressToDelete = BusinessPartnerAddress.builder()
+        .businessPartner(businessPartnerId)
+        .addressID(addressId)
+        .build();
+```
+
+*	Two commands expect an integer to be returned as result. These integers should correspond to the status code returned from SAP S/4HANA as result of the modification. You can simple call getHttpStatusCode to get the status code back.
+
+Try to implement the queries by yourself. Feel free to check out the solution folder that we have prepared for you in case you are experiencing difficulties.
+
+To test your logic, we have already prepared the tests. 
+
+You can now deploy the application locally or in SAP Cloud Platform, as show before to test the new capabilities of your application from the user interface.
 
 ## <a name="task4">Bonus, Task 4: Integrate advanced ML capabilities</a>
