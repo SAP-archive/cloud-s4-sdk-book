@@ -132,6 +132,8 @@ Secondly, create an instance of the Authorization and Trust Management service. 
 Thirdly, create an instance of SAP Leonardo ML service. The service can be found in the Service Marketplace under the name ml-foundation-trial-beta. Instantiate the service with the defailt parameters and give it the name my-ml.
 ![SAP Leonardo Machine Learning](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/ml.PNG)
 
+Take a look at the manifest.yml file in your application. This file is the deployment descriptor that contains metainformation required for the deployyment, including the service bindings. We have just created the service instances in SAP Cloud Platform cockpit. Exactly this service instances will be bound to the application after it is deployed, as this is specified in the manifest.yml.
+
 ### Create destination endpoints
 Next, we will create destination endpoint to connect to the S/4HANA mock server and to the language detection APIs on SAP API Business Hub.
 You can find the configuration of the destination endpoints on the level of your subaccount by choosing Connectivity -> Destinations.
@@ -172,6 +174,8 @@ When the application is deployed, you can drill down into the application, choos
 ![Result of the deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deploymentResult.PNG)
 
 ![Business Partner Address Manager with the integrated translation service](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/Translation.PNG)
+
+
 
 ## <a name="task3">Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
 
