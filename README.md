@@ -180,12 +180,19 @@ In your development space, choose Application -> Deploy Application. Choose the 
 
 ![Application Deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deployment.PNG)
 
+As the deployment descriptor of the application (manifest.yml) was containing the instructions to bind the application instance to the Machine Learning instance, we can also now see this binding in the cockpit. To investigate this, drill down to your deployed application and choose "Service Bindings", where you will find the binding the the instance my-ml.
+
+![SAP Leonardo ML service binding](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/mlServiceBinding.PNG)
+
+If you drill click the link "my-ml", you can see all the URLs of ML services, available in the scope of the chosed ml-foundation-trial-beta service. Those URLs are used behind the scenes by the SDK class LeonardoMlService to execute corresponding queries. Among others, you can also find the URL for the translation service that we connect in this code jam.
+
+![SAp Leonardo ML services information](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/mlURLs.PNG)
+
 When the application is deployed, you can drill down into the application, choose the link for the application and append it with "/address-manager". You should be able to see the business partner coming back from the mock server and you should be able to translate their professions by clicking on them.
 
 ![Result of the deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deploymentResult.PNG)
 
 ![Business Partner Address Manager with the integrated translation service](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/Translation.PNG)
-
 
 
 ## <a name="task3">Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
