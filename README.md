@@ -13,6 +13,20 @@ So, let us get started!
 Please, find the local setup and how to install the required software in the blog post [Step 1 with SAP S/4HANA Cloud SDK: Set up](https://blogs.sap.com/2017/05/15/step-1-with-sap-s4hana-cloud-sdk-set-up/).
 Make sure to install all the mentioned tool, including the IDE. All the exercises in the code jam are based on the local development environment.
 
+Verify your installation by running `javac -version` and `mvn -version` on a command line shell. The output should look similar to the following:
+```
+> javac -version
+javac 1.8.0_72
+
+> mvn -version
+Apache Maven 3.5.0 (ff8f5e7444045639af65f6095c62210b5713f426; 2017-04-03T21:39:06+02:00)
+Maven home: C:\Program Files\path\to\maven\bin\..
+Java version: 1.8.0_72, vendor: Oracle Corporation
+Java home: C:\Program Files\path\to\java\jdk1.8.0_72\jre
+...
+```
+Check that the environment variable `JAVA_HOME` points to the path of your JDK installation, e.g., `C:\Program Files\path\to\java\jdk1.8.0_72`.
+
 We will deploy the application in SAP Cloud Platform, Cloud Foundry. For that purpose, you would require your own trial account. [Here](https://cloudplatform.sap.com/try.html), you can find information on how to get your trial account in SAP Cloud Platform, Cloud Foundry. 
 
 For this workshop, we provide a running SAP S/4HANA Mock server that mocks business partner APIs, so you do not need to set up it by yourself. The server is accessable via URL https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com and does not require authentication.
