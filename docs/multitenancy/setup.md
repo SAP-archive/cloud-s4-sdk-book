@@ -12,9 +12,9 @@ cf create-service postgresql v9.6-dev my-postgresql
 * To evaluate the APIs introduced in this module, you can use Postman. The tool is available for the Download [here](https://www.getpostman.com/)
 
 ## How to test tenant-aware local persistence using Postman
-For you convenience, we provide you with the [Postman collection](https://github.com/SAP/cloud-s4-sdk-book/blob/course/2_4_multitenancy/docs/multitenancy/BP%20multitenancy.postman_collection.json) that you can simply upload to your Postman and use for the evaluation. Before the upload, make sure that you substitute the place holders in the template as follows:
+For you convenience, we provide you with the [Postman collection](https://github.com/SAP/cloud-s4-sdk-book/blob/course/2_4_multitenancy/docs/multitenancy/BP%20multitenancy.postman_collection.json) that you can simply upload to your Postman and use for the evaluation. Before the upload, make sure that you substitute the placeholders in the template as follows:
 * Substitute <your_account> with your account ID. It should looks like <your_Puser>trial and can be found in SAP Cloud Platform Cockpit
-![Subaccount ID](https://github.com/SAP/cloud-s4-sdk-book/blob/course/2_4_multitenancy/docs/multitenancy/figures/subaccount.PNG)
+![Account ID](https://github.com/SAP/cloud-s4-sdk-book/blob/course/2_4_multitenancy/docs/multitenancy/figures/subaccount.PNG)
 * Substitute <your_tenant_number> with the ID of your subaccount, where the application is deployed. You can find the tenant ID in the SAP Cloud Cockpit, as shown in the figure:
 ![Tenant ID](https://github.com/SAP/cloud-s4-sdk-book/blob/course/2_4_multitenancy/docs/multitenancy/figures/tenantID.PNG)
 * Create global variables in Postman <br>
