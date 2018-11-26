@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "5cde847a-cc1b-7b44-a822-80e3fa980ddb",
+		"name": "BP multitenancy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET csrf token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4304eb1c-a2f2-41bb-8d25-82f326426647",
+						"type": "text/javascript",
+						"exec": [
+							"postman.setGlobalVariable(\"csrfToken\", postman.getResponseHeader(\"X-Csrf-Token\"));"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "fetch"
+					},
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://approuter-<your_subaccount>.cfapps.eu10.hana.ondemand.com",
+					"protocol": "https",
+					"host": [
+						"approuter-<your_subaccount>",
+						"cfapps",
+						"eu10",
+						"hana",
+						"ondemand",
+						"com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT tenant",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "{{csrfToken}}"
+					},
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://approuter-<your_subaccount>.cfapps.eu10.hana.ondemand.com/api/callback/tenant/<your_tenant_number>",
+					"protocol": "https",
+					"host": [
+						"approuter-<your_subaccount>",
+						"cfapps",
+						"eu10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"api",
+						"callback",
+						"tenant",
+						"<your_tenant_number>"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET data",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://approuter-<your_subaccount>.cfapps.eu10.hana.ondemand.com/api/addresses-local",
+					"protocol": "https",
+					"host": [
+						"approuter-<your_subaccount>",
+						"cfapps",
+						"eu10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"api",
+						"addresses-local"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST data",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "{{csrfToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n   \"businessPartner\":\"bp5\",\r\n   \"cityName\":\"Munich\",\r\n   \"country\":\"Germany\",\r\n   \"houseNumber\":\"2\",\r\n   \"postalCode\":\"115408\",\r\n   \"streetName\":\"Max-Bill\"\r\n}"
+				},
+				"url": {
+					"raw": "https://approuter-<your_subaccount>.cfapps.eu10.hana.ondemand.com/api/addresses-local",
+					"protocol": "https",
+					"host": [
+						"approuter-<your_subaccount>",
+						"cfapps",
+						"eu10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"api",
+						"addresses-local"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE tenant",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "{{csrfToken}}"
+					},
+					{
+						"key": "Cookie",
+						"value": "{{cookie}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://approuter-<your_subaccount>.cfapps.eu10.hana.ondemand.com/api/callback/tenant/<your_tenant_number>",
+					"protocol": "https",
+					"host": [
+						"approuter-<your_subaccount>",
+						"cfapps",
+						"eu10",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"api",
+						"callback",
+						"tenant",
+						"<your_tenant_number>"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
