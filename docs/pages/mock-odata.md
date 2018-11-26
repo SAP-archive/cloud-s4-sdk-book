@@ -35,7 +35,7 @@ After you have thus prepared the mock server, you can run the mock server on you
 ### Locally
 #### Prerequisites
 The following tools need to be installed on your local machine.
-* [node.js](http://npmjs.com) 8.x or higher
+* [node.js](https://nodejs.org) 8.x or higher
 * [npm](http://npmjs.com)
 
 #### Launch the mock server
