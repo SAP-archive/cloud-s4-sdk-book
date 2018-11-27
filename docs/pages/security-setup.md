@@ -45,7 +45,7 @@ cf delete-service my-xsuaa
 
 ## Create a New XSUAA Instance using xs-security.json
 To create a new instance of XSUAA using the provided xs-security.json configuration file, execute the following commands in CLI.
-You can skip the login, if you already have logged in before.
+You can skip the login if you already have logged in before.
 
 ```
 cf api https://api.cf.eu10.hana.ondemand.com
