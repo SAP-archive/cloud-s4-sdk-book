@@ -32,18 +32,29 @@ In the file `<your project location>\cloud-s4-sdk-book\approuter\manifest.yml`:
 * Substitute the placeholder `<subaccount_id>` with your subaccount ID. For example, your trial subaccount ID can look as follows: p2000389027trial
 * Substitute the placeholder `<generated_random_route>` with your own generated route for your Business Partner Address Manager application that was deployed in previous modules. 
 You can check the generated route in your cloud platform cockpit drilling down to your application in your space. Here is the example of my application URL, used in the demo: `address-manager-sublaryngal-subspecies.cfapps.eu10.hana.ondemand.com`, where the generated random route is `sublaryngal-subspecies`.
-   
-## Create a New XSUAA Instance using xs-security.json
-To create a new instance of XSUAA using the provided xs-security.json configuration file, execute the following commands in CLI:
+
+## Delete existing instances of the XSUAA service
+In case you already created an instance of the XSUAA service and called it  my-xsuaa, you should first delete this instance in order to create a new one in the next step. To do that execute the following commands:
 ```
 cf api https://api.cf.eu10.hana.ondemand.com
 cf login -u <your email address>
 
 cf unbind-service address-manager my-xsuaa
 cf delete-service my-xsuaa
+```
+
+## Create a New XSUAA Instance using xs-security.json
+To create a new instance of XSUAA using the provided xs-security.json configuration file, execute the following commands in CLI.
+You can skip the login if you already have logged in before.
+
+```
+cf api https://api.cf.eu10.hana.ondemand.com
+cf login -u <your email address>
+
 cf create-service xsuaa application my-xsuaa -c xs-security.json
 ```
-## Create a New Destination Instance using xs-security.json
+
+## Create a New Destination Instance
 To create a new instance "my-destination" of the destination service, execute the following command in CLI:
 ```
 cf create-service destination lite my-destination
