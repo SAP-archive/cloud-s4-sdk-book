@@ -54,7 +54,7 @@ cf login -u <your email address>
 cf create-service xsuaa application my-xsuaa -c xs-security.json
 ```
 
-## Create a New Destination Instance using xs-security.json
+## Create a New Destination Instance
 To create a new instance "my-destination" of the destination service, execute the following command in CLI:
 ```
 cf create-service destination lite my-destination
