@@ -52,13 +52,6 @@
             <version>1.1.11</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.sap.xs2.security</groupId>
-            <artifactId>java-container-security-api</artifactId>
-            <version>0.26.13</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- General dependencies -->
         <dependency>
             <groupId>org.projectlombok</groupId>
