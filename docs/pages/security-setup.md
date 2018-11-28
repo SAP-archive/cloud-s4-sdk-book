@@ -3,7 +3,7 @@ This page explains how to setup security for authorization flow with the App rou
 
 Please note that in this unit (2.3) of the corresponding Open SAP course, you can check out the branch [course/2_3_security](https://github.com/SAP/cloud-s4-sdk-book/tree/course/2_3_security) and use this branch as an initial state for the setup in contrast to the previous units, where you modified already exising app. This is done to reduce the setup effort, as this branch already contains required configuration files for your application router and required adaptations to web.xml and manifest.yml to secure your backend micro-service.
 
-In case you have time and want to investigate the topic deeper, we encourage you the also try to secure the address manage application by yourself from scratch using 
+In case you have time and want to investigate the topic deeper, we encourage you the also try to secure the address manage application by yourself from scratch. 
 
 ## Prerequisites
 To execute steps in this document, ensure that npm is installed on your machine.
@@ -57,10 +57,18 @@ cf create-service xsuaa application my-xsuaa -c xs-security.json
 ```
 
 ## Create a New Destination Instance
+In this unit, the file manifest.yml of the application does not include the destination environment variable, pointing to the S/4HANA (mock) server. To retrieve the data from the mock server in this setup, we need to create a destination service instance and a new destination in SAP Cloud Platform pointing to the mock server:
 To create a new instance "my-destination" of the destination service, execute the following command in CLI:
 ```
 cf create-service destination lite my-destination
 ```
+
+To create a new destination endpoint, go to the SAP Cloud Platform Cockpit and on the subaccount level select Connectivity -> Destinations -> New Destination. Enter the following parameters and save your destination: <br>
+Name: ErpQueryEndpoint <br>
+Type: HTTP <br>
+URL: <URL of your mock server> <br>
+Proxy Type: Internet <br>
+Authentication: NoAuthentication <br>
 
 ## Remove Mock of the User and Tenant in Your Deployed Application
 As we will secure our example application with the App Router and the tenant and user information will be provided via the Json Web Token, we need to remove the user variable used for mocking of those parameters.
