@@ -57,13 +57,13 @@ cf create-service xsuaa application my-xsuaa -c xs-security.json
 ```
 
 ## Create a New Destination Instance
-In this unit, the file manifest.yml of the application does not include the destination environment variable, pointing to the S/4HANA (mock) server. To retrieve the data from the mock server in this setup, we need to create a destination service instance and a new destination in SAP Cloud Platform pointing to the mock server:
+In this unit, file manifest.yml of the address manager application does not include the destination environment variable, pointing to the S/4HANA (mock) server. To retrieve the data from the server in this setup, we need to create a destination service instance and a new destination in SAP Cloud Platform pointing to the mock server.
 To create a new instance "my-destination" of the destination service, execute the following command in CLI:
 ```
 cf create-service destination lite my-destination
 ```
 
-To create a new destination endpoint, go to the SAP Cloud Platform Cockpit and on the subaccount level select Connectivity -> Destinations -> New Destination. Enter the following parameters and save your destination: <br>
+To create a new destination endpoint, go to the SAP Cloud Platform Cockpit and on the subaccount level select Connectivity -> Destinations -> New Destination Enter the following parameters and save your destination: <br>
 Name: ErpQueryEndpoint <br>
 Type: HTTP <br>
 URL: <URL of your mock server> <br>
