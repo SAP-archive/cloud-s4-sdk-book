@@ -1,7 +1,9 @@
 # Security Setup Instructions
-This page explains how to setup security for authorization flow with 
-the App router and Authorization and Trust Management service (xsUAA) 
-in SAP Cloud Platform, Cloud Foundry using the provided artifacts.
+This page explains how to setup security for authorization flow with the App router and Authorization and Trust Management service (xsUAA) in SAP Cloud Platform, Cloud Foundry using the provided artifacts in the branch [course/2_3_security](https://github.com/SAP/cloud-s4-sdk-book/tree/course/2_3_security).
+
+Please note that in this unit (2.3) of the corresponding Open SAP course, you can check out the branch [course/2_3_security](https://github.com/SAP/cloud-s4-sdk-book/tree/course/2_3_security) and use this branch as an initial state for the setup in contrast to the previous units, where you modified already exising app. This is done to reduce the setup effort, as this branch already contains required configuration files for your application router and required adaptations to web.xml and manifest.yml to secure your backend micro-service.
+
+In case you have time and want to investigate the topic deeper, we encourage you the also try to secure the address manage application by yourself from scratch using 
 
 ## Prerequisites
 To execute steps in this document, ensure that npm is installed on your machine.
