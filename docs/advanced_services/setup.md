@@ -23,9 +23,9 @@ In case you do not know how to find your API key, here is a quick instruction:
 * Go to https://api.sap.com/
 * Logon with your user and password that you have used in the destination configuration above
 * Choose any API, for instance you can search for "language detection". After you select this service, you will have an option to "Show API Key"
-![Show API Key]()
+![Show API Key](https://github.com/SAP/cloud-s4-sdk-book/blob/course/4_3_advanced_services_initial/docs/advanced_services/figures/APIKey.PNG)
 * Copy the shown value as a value of the property mlApiKey in the endpoint configuration above.
-![API Key Value]()
+![API Key Value](https://github.com/SAP/cloud-s4-sdk-book/blob/course/4_3_advanced_services_initial/docs/advanced_services/figures/APIKeyValue.PNG)
 
 ## Create Machine Learning Service Instance
 The translation service will be integrated using the service binding in SAP Cloud Platform and using the SDK class ScpCfService.
