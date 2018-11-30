@@ -34,6 +34,10 @@
         </dependencies>
     </dependencyManagement>
 
+    <properties>
+        <emjapi.version>1.9.0</emjapi.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.sap.cloud.s4hana.cloudplatform</groupId>
@@ -68,6 +72,23 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Messaging -->
+        <dependency>
+            <groupId>com.sap.cloud.servicesdk.xbem</groupId>
+            <artifactId>emjapi-api</artifactId>
+            <version>${emjapi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.servicesdk.xbem</groupId>
+            <artifactId>emjapi-connector-sap-cp</artifactId>
+            <version>${emjapi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.servicesdk.xbem</groupId>
+            <artifactId>emjapi-adapter-amqp10</artifactId>
+            <version>${emjapi.version}</version>
         </dependency>
     </dependencies>
 

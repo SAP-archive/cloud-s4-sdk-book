@@ -19,6 +19,12 @@ Start with the following:
 * Clone or download this repository.
 * Navigate to the folder where you cloned or downloaded the repository. All of the steps mentioned below happen relative to this root folder. Execute all commands mentioned in the following in the root folder (which contains, besides others, this README file).
 
+To use the eventing capabilities of an S/4HANA system you also need to prepare the following:
+* Set up an enterprise messaging service called `my-enterprise-messaging` in your space.
+* Configure a queue called `BusinessPartnerQueue` in your SAP Enterprise Messaging Dashboard.
+
+For another example containing and describing the messaging setup have a look into [this guide](https://help.sap.com/viewer/7dde0e0e3a294f01a6f7870731c5e4ad/SHIP/en-US).
+
 ### 2. Build and test
 Then, you need to build the project, which also includes testing. For the integration tests, you need to provide the URL and credentials of your SAP S/4HANA system.
 * Open the file `integration-tests/src/test/resources/systems.yml`. Set the default to `ERP_SYSTEM`: `default: "ERP_SYSTEM"`, uncomment the following two lines (remove the `#` found in the original file) and supply the URL to your SAP S/4HANA system.

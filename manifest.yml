@@ -10,8 +10,18 @@ applications:
     TARGET_RUNTIME: tomee
     JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:96m..'
     SET_LOGGING_LEVEL: '{ROOT: INFO, com.sap.cloud.sdk: INFO}'
-#  services:
+    ALLOW_MOCKED_AUTH_HEADER: true
+    SAP_XBEM_BINDINGS: >
+      {"inputs":
+       {"AddressChangeQueue":
+        {"service": "my-enterprise-messaging",
+         "address": "queue:BusinessPartnerQueue",
+         "reliable": true,
+         "maxMsgInFlight": 2000}
+       }}
+  services:
 #  - my-application-logs
 #  - my-xsuaa
 #  - my-destination
 #  - my-connectivity
+    - my-enterprise-messaging
