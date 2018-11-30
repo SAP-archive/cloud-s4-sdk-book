@@ -15,7 +15,7 @@ public class MessageConsumer implements Consumer<Stream<Message<byte[]>>>
     @Override
     public void accept( final Stream<Message<byte[]>> messageStream )
     {
-        messageStream.map(Message::getContent).map(String::new).forEach(logger::info);
         // add your custom message/event handling logic here
+        messageStream.map(Message::getContent).map(String::new).forEach(logger::info);
     }
 }

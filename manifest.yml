@@ -14,7 +14,7 @@ applications:
     SAP_XBEM_BINDINGS: >
       {"inputs":
        {"AddressChangeQueue":
-        {"service": "Eventing",
+        {"service": "my-enterprise-messaging",
          "address": "queue:BusinessPartnerQueue",
          "reliable": true,
          "maxMsgInFlight": 2000}
@@ -24,4 +24,4 @@ applications:
 #  - my-xsuaa
 #  - my-destination
 #  - my-connectivity
-    - Eventing
+    - my-enterprise-messaging
