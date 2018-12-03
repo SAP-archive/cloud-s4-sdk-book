@@ -140,16 +140,16 @@ There are several steps involved to make the integration with SAP Leonardo ML se
 ### Implement the integration with ML services in Java Backend 
 To implement the integration with ML services, we will leverage the SAP S/4HANA Cloud SDK component that simplifies the integration and handles the boilerplate code for you, such as OAuth 2.0 authentication against ML services.
 
-To implement the integration, find the package machinelearning in your project, where you will find the TranslateServlet class. This class contains the method translate(), which delegates the translation logic to the commands MlLanguageDetectionCommand for the language detection and MlTranslationCommand for the translation.
+To implement the integration, find the package *machinelearning* in your project, where you will find the *TranslateServlet* class. This class contains the method *translate()*, which delegates the translation logic to the commands *MlLanguageDetectionCommand* for the language detection and *MlTranslationCommand* for the translation.
 
-Navigate to the class MlTranslationCommand and investigate its methods. Here, in the method executeRequest, you will find the next task. 
-In this method, we already provide the logic for the execution of the translation request using the instance of LeonardoMlService class and retrive the resulting payload. The rest is left for you. To make the translation work in integration with your application, add the following steps into the executeRequest method:
+Navigate to the class *MlTranslationCommand* and investigate its methods. Here, in the method *executeRequest*, you will find the next task. 
+In this method, we already provide the logic for the execution of the translation request using the instance of *LeonardoMlService* class and retrive the resulting payload. The rest is left for you. To make the translation work in integration with your application, add the following steps into the *executeRequest* method:
 
-* In you IDE, navigate to the LeonardoMlService, which is a part of the machinelearning package of the SAP S/4HANA Cloud SDK and investigate its methods. Also, looks through the other classes and methods provided in this library. You may also use the [Javadoc for those classes](https://help.sap.com/http.svc/rc/76ceac609c19443099fca151cf9c9e21/1.0/en-US/com/sap/cloud/sdk/services/scp/machinelearning/package-summary.html) to get more information.
-* Instantiate the LeonardoMlService class, wich is a part of the SAP S/4HANA Cloud SDK component for ML services integration. Consider that you use trial beta as Cloud Foundry Leonardo ML service type and Translation as a Leonardo ML service type.
-* Create an object request of type HttpPost
-* Create an object body of type HttpEntity. Use requestJson and ContentType.APPLICATION_JSON to instantiate the object.
-* Add the created body to the request using the method setEntity.
+* In you IDE, navigate to the LeonardoMlService, which is a part of the *machinelearning* package of the SAP S/4HANA Cloud SDK and investigate its methods. Also, looks through the other classes and methods provided in this library. You may also use the [Javadoc for those classes](https://help.sap.com/http.svc/rc/76ceac609c19443099fca151cf9c9e21/1.0/en-US/com/sap/cloud/sdk/services/scp/machinelearning/package-summary.html) to get more information.
+* Instantiate the *LeonardoMlService* class, wich is a part of the SAP S/4HANA Cloud SDK component for ML services integration. Consider that you use trial beta as Cloud Foundry Leonardo ML service type and Translation as a Leonardo ML service type.
+* Create an object request of type *HttpPost*
+* Create an object body of type *HttpEntity*. Use *requestJson* and *ContentType.APPLICATION_JSON* to instantiate the object.
+* Add the created body to the request using the method *setEntity*.
 
 If you experience difficulties, you can compare you solution with the one provided in the [folder solutions](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/solutions/application/src/main/java/com/sap/cloud/s4hana/examples/addressmgr/machinelearning/commands/MlTranslationCommand.java).
 
