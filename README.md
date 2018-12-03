@@ -94,7 +94,7 @@ At this phase, we do not have any data returned from the application and we see 
 ## <a name="task1">Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model</a>
 In this step, we will implement two queries to SAP S/4HANA to retrieve business partner data. Firstly, we will retrieve the list of business partners for the list view in  the application. Secondly, we will retrieve detailed data a single business partner by ID.
 
-Start the development of queries by looking into the class BusinessPartnerServlet, which is a servlet exposing the API. 
+Start the development of queries by looking into the class BusinessPartnerServlet, which is the servlet exposing the business partner APIs. 
 We could use any API framework here, such as JAX-RS or Spring. However, we use a servlet here for simplicity. Looking into the servlet, we can see that the main functionality is moved out into the commands GetAllBusinessPartnersCommand and GetSingleBusinessPartnerByIdCommand. Open and implement both commands as explained below.
 
 The GetAllBusinessPartnersCommand should return a list of available business partners in the ERP system. The class was already created. We just have to implement the execute method:
