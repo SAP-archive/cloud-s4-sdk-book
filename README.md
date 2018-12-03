@@ -148,12 +148,10 @@ In this method, we already provide the logic for the execution of the translatio
 * In you IDE, navigate to the LeonardoMlService, which is a part of the *machinelearning* package of the SAP S/4HANA Cloud SDK and investigate its methods. Also, looks through the other classes and methods provided in this library. You may also use the [Javadoc for those classes](https://help.sap.com/http.svc/rc/76ceac609c19443099fca151cf9c9e21/1.0/en-US/com/sap/cloud/sdk/services/scp/machinelearning/package-summary.html) to get more information.
 * Instantiate the *LeonardoMlService* class, wich is a part of the SAP S/4HANA Cloud SDK component for ML services integration. Consider that you use trial beta as Cloud Foundry Leonardo ML service type and Translation as a Leonardo ML service type.
 * Create an object request of type *HttpPost*
-* Create an object body of type *HttpEntity*. Use *requestJson* and *ContentType.APPLICATION_JSON* to instantiate the object.
+* Create an object body of type *HttpEntity* (*StringEntity*). Use *requestJson* and *ContentType.APPLICATION_JSON* to instantiate the object.
 * Add the created body to the request using the method *setEntity*.
 
 If you experience difficulties, you can compare you solution with the one provided in the [folder solutions](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/solutions/application/src/main/java/com/sap/cloud/s4hana/examples/addressmgr/machinelearning/commands/MlTranslationCommand.java).
-
-Now, we can deploy the application in SAP Cloud Platform, Cloud Foundry and see the result of the integration of the translation service in action. To deploy your application using cloud platform cockpit.
 
 ### Create service instances for S/4HANA connectivity and Leonardo ML integration
 Firstly, create an instance of the destination service to connect to SAP S/4HANA (mock) system. For that, in the cloud platform cockpit on the level of your development space choose Services -> Service Marketplace and choose the destination service from the catalog.
