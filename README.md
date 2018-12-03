@@ -1,4 +1,4 @@
-# SAP Leonardo Machine Learning und the SAP S/4HANA Cloud SDK
+# SAP Leonardo Machine Learning Foundation and the SAP S/4HANA Cloud SDK
 Here, we provide the instructions to proceed with the code jam "SAP Leonardo Machine Learning and the SAP S/4HANA Cloud SDK". Below, you find the following information:
 * [Technical prerequisites](#prerequisites): software required to execute the steps described in this documentation. This information was provided before the workshop, so, we assume that those prerequisites are already fulfilled. Nevertheless, you can use this description to double check.
 * [Task 0: Preparation steps](#task0)
