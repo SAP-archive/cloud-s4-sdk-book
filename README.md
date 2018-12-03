@@ -5,13 +5,26 @@ Here, we provide the instructions to proceed with the code jam "SAP Leonardo Mac
 * [Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model](#task1)
 * [Task 2: Integrate SAP Leonardo Machine Learning service to provide translations](#task2)
 * [Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model](#task3)
-* [Bonus, Task 4: Integrate advanced ML capabilities](#task4)
 
 So, let us get started!
 
 ## <a name="prerequisites">Technical prerequisites</a>
 Please, find the local setup and how to install the required software in the blog post [Step 1 with SAP S/4HANA Cloud SDK: Set up](https://blogs.sap.com/2017/05/15/step-1-with-sap-s4hana-cloud-sdk-set-up/).
 Make sure to install all the mentioned tool, including the IDE. All the exercises in the code jam are based on the local development environment.
+
+Verify your installation by running `javac -version` and `mvn -version` on a command line shell. The output should look similar to the following:
+```
+> javac -version
+javac 1.8.0_72
+
+> mvn -version
+Apache Maven 3.5.0 (ff8f5e7444045639af65f6095c62210b5713f426; 2017-04-03T21:39:06+02:00)
+Maven home: C:\Program Files\path\to\maven\bin\..
+Java version: 1.8.0_72, vendor: Oracle Corporation
+Java home: C:\Program Files\path\to\java\jdk1.8.0_72\jre
+...
+```
+Check that the environment variable `JAVA_HOME` points to the path of your JDK installation, e.g., `C:\Program Files\path\to\java\jdk1.8.0_72`.
 
 We will deploy the application in SAP Cloud Platform, Cloud Foundry. For that purpose, you would require your own trial account. [Here](https://cloudplatform.sap.com/try.html), you can find information on how to get your trial account in SAP Cloud Platform, Cloud Foundry. 
 
@@ -144,7 +157,7 @@ Thirdly, create an instance of SAP Leonardo ML service. The service can be found
 
 Take a look at the manifest.yml file in your application. This file is the deployment descriptor that contains metainformation required for the deployyment, including the service bindings. We have just created the service instances in SAP Cloud Platform cockpit. Exactly this service instances will be bound to the application after it is deployed, as this is specified in the manifest.yml.
 
-[Service bindings in the deployment descriptor manifest.yml](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/manifest.PNG)
+![Service bindings in the deployment descriptor manifest.yml](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/manifest.PNG)
 
 ### Create destination endpoints
 Next, we will create destination endpoint to connect to the S/4HANA mock server and to the language detection APIs on SAP API Business Hub.
@@ -180,14 +193,44 @@ In your development space, choose Application -> Deploy Application. Choose the 
 
 ![Application Deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deployment.PNG)
 
+As the deployment descriptor of the application (manifest.yml) was containing the instructions to bind the application instance to the Machine Learning instance, we can also now see this binding in the cockpit. To investigate this, drill down to your deployed application and choose "Service Bindings", where you will find the binding the the instance my-ml.
+
+![SAP Leonardo ML service binding](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/mlServiceBinding.PNG)
+
+If you drill click the link "my-ml", you can see all the URLs of ML services, available in the scope of the chosed ml-foundation-trial-beta service. Those URLs are used behind the scenes by the SDK class LeonardoMlService to execute corresponding queries. Among others, you can also find the URL for the translation service that we connect in this code jam.
+
+![SAp Leonardo ML services information](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/mlURLs.PNG)
+
 When the application is deployed, you can drill down into the application, choose the link for the application and append it with "/address-manager". You should be able to see the business partner coming back from the mock server and you should be able to translate their professions by clicking on them.
 
 ![Result of the deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deploymentResult.PNG)
 
 ![Business Partner Address Manager with the integrated translation service](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/Translation.PNG)
 
+Congratulations! You have just finished the main steps in this code jam:
+* Firstly, we have integrated SAP S/4HANA Business Partner APIs to read the list of business partners and to read the detailed information
+* Secondly, we have integrated SAP Leonardo Machine Learning functional service, using the Translation as an example.
 
+Continue to the next steps in case you have time. Alternatively, you can execute those steps offline.
 
 ## <a name="task3">Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
+Here, we will further investigate the capabilities of the SAP S/4HANA Cloud SDK virtual data model to integrate SAP S/4HANA now also for create, update, and delete operations.
 
-## <a name="task4">Bonus, Task 4: Integrate advanced ML capabilities</a>
+*	The class BusinessPartnerService already offers methods to create, update or delete address. The input values, such as the addresses or IDs to delete are member variables of the commands. They are passed into the command from the servlet.
+*	Implement the run methods in the commands CreateAddressCommand, UpdateAddressCommand, DeleteAddressCommand. 
+*	For the delete method we first have to create a business partner address instance, which has the IDs for the business partner and the address specified. The class BusinessPartnerAddress offers the method builder to create a builder and can be used as follows:
+
+```
+BusinessPartnerAddress addressToDelete = BusinessPartnerAddress.builder()
+        .businessPartner(businessPartnerId)
+        .addressID(addressId)
+        .build();
+```
+
+*	Two commands expect an integer to be returned as result. These integers should correspond to the status code returned from SAP S/4HANA as result of the modification. You can simple call getHttpStatusCode to get the status code back.
+
+Try to implement the queries by yourself. Feel free to check out the solution folder that we have prepared for you in case you are experiencing difficulties.
+
+To test your logic, we have already prepared the tests. Go the the class AddressServletTest, which resides in the integration-tests module and remove all @Ignore annotations. Run the tests in this class and make sure that all tests are green. If not, get back to your commands and fix the issues.
+
+If the tests are successful, you can now deploy the application locally or in SAP Cloud Platform, as show before to test the new capabilities of your application from the user interface.
