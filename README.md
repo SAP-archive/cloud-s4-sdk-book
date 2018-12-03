@@ -5,7 +5,6 @@ Here, we provide the instructions to proceed with the code jam "SAP Leonardo Mac
 * [Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model](#task1)
 * [Task 2: Integrate SAP Leonardo Machine Learning service to provide translations](#task2)
 * [Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model](#task3)
-* [Bonus, Task 4: Integrate advanced ML capabilities](#task4)
 
 So, let us get started!
 
@@ -235,5 +234,3 @@ Try to implement the queries by yourself. Feel free to check out the solution fo
 To test your logic, we have already prepared the tests. Go the the class AddressServletTest, which resides in the integration-tests module and remove all @Ignore annotations. Run the tests in this class and make sure that all tests are green. If not, get back to your commands and fix the issues.
 
 If the tests are successful, you can now deploy the application locally or in SAP Cloud Platform, as show before to test the new capabilities of your application from the user interface.
-
-## <a name="task4">Bonus, Task 4: Integrate advanced ML capabilities</a>
