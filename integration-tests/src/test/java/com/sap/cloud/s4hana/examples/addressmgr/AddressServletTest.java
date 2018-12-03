@@ -12,6 +12,7 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -68,6 +69,7 @@ public class AddressServletTest
         RestAssured.baseURI = baseUrl.toExternalForm();
     }
 
+    @Ignore
     @Test
     public void testCreate() throws ODataException {
         final String houseNumber = String.valueOf(new Random().nextInt(100));
@@ -102,6 +104,7 @@ public class AddressServletTest
                 .path("AddressID");
     }
 
+    @Ignore
     @Test
     public void testDelete() {
         // Create address to delete afterwards
@@ -119,6 +122,7 @@ public class AddressServletTest
         assertThat(getAddress(BUPA_ID, addressId)).isNull();
     }
 
+    @Ignore
     @Test
     public void testUpdate() throws ODataException {
         // Create address to update

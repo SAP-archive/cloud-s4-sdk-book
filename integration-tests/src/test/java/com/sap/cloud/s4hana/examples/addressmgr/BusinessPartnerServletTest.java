@@ -9,6 +9,7 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import java.net.URL;
@@ -46,6 +47,7 @@ public class BusinessPartnerServletTest
         RestAssured.baseURI = baseUrl.toExternalForm();
     }
 
+    @Ignore
     @Test
     public void testGetAll()
     {
@@ -58,6 +60,7 @@ public class BusinessPartnerServletTest
                 .body("[0].BusinessPartner", not(isEmptyOrNullString()));
     }
 
+    @Ignore
     @Test
     public void testGetSingle() {
         when()

@@ -2,6 +2,7 @@ package com.sap.cloud.s4hana.examples.addressmgr.commands;
 
 import com.google.common.collect.Lists;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -46,6 +47,7 @@ public class GetAllBusinessPartnersCommandTest {
         new GetAllBusinessPartnersCommand(null).getCache().invalidateAll();
     }
 
+    @Ignore
     @Test
     public void testGetAll() throws ODataException {
         mockService()
@@ -66,6 +68,7 @@ public class GetAllBusinessPartnersCommandTest {
                 .execute());
     }
 
+    @Ignore
     @Test
     public void testWithError() throws ODataException {
         mockService().thenThrow(ODataException.class);
