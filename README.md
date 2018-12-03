@@ -97,7 +97,7 @@ Hint: Try to solve it on your own. However, the solution can also be found in th
 
 The command GetSingleBusinessPartnerByIdCommand should return a specific business partner including address details. The implementation is very similar to the first command.
 * In addition to getting all business partners there is a method to get only one business partner identified by the key: getBusinessPartnerByKey. Use this method with the available id property.
-* Furthermore, select the properties business partner id, last name, first name, is male, is female and creation date. Also select the corresponding address. It can be accessed using the property TO_BUSINESS_PARTNER_ADDRESS. For the address, select the properties business partner id, address id, country, postal code, city name, street name and house number.
+* Furthermore, select the properties business partner id, last name, first name, is male, is female, SearchTerm1, Middle_Name, and creation date. Also select the corresponding address. It can be accessed using the property TO_BUSINESS_PARTNER_ADDRESS. For the address, select the properties business partner id, address id, country, postal code, city name, street name and house number.
 * There is no need to apply additional operations.
 
 To check whether the queries are implemented correctly, go to the integration-tests folder and remove the @Ignore annotation for the following tests: BusinessPartnerServletTest.testGetAll() and BusinessPartnerServletTest.testGetSingle().
