@@ -69,6 +69,7 @@ credentials:
   username: "(username)"
   password: "(password)"
 ```
+As the mock server does not require authentication, you do not need to update the username and password in this file.
 * In the root folder of the project, run the following command to build and test the application. The credentials path is only required if the file is not located in the same folder as `systems.yml`.
 ```
 mvn clean install
