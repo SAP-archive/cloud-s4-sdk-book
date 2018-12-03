@@ -190,9 +190,13 @@ User: your email address from SAP API Hub <br>
 Password: your password from SAP API Hub <br>
  
 Additionally, add the following additional properties: <br>
-mlApiKey: <your key from the SAP API Hub>
+mlApiKey: your key from the SAP API Hub
+
+You can copy your API key from the SAP API Business Hub after you have logged in, using the button "Show API Key", as shown in the figure.
+
+![Get API Key]()
  
-In case you do not know how to get the key from the API Hub, please, approach the instructor. You can also take a look at the explanation in the [S/4HANA Cloud SDK Deep Dive](https://blogs.sap.com/2018/05/31/quickly-build-a-prototype-with-sap-leonardo-machine-learning-foundation-sap-api-business-hub-and-sap-s4hana-cloud-sdk/).
+In case you experience difficulties, please, approach the instructor.
 
 ### Deploy the application using the SAP Cloud Platform cockpit
 
