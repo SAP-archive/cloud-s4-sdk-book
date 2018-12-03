@@ -60,7 +60,7 @@ erp:
       uri: "https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com"
 
 ```
-In case you are working on this code jam offline, make sure to substitute the mock server URL with your own one.
+In case you are working on this code jam after the seminar, make sure to substitute the mock server URL with your own one.
 * In the same directory, create a `credentials.yml` file used during tests with the following content:
 ```
 ---
