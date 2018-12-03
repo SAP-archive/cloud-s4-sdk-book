@@ -46,11 +46,21 @@ Before we get started with the development, let us build and deploy the current 
 
 ### Build and test
 While building the application, we will execute integration tests. For the integration tests, you need to provide the URL and credentials of your SAP S/4HANA system.
-* Open the file `integration-tests/src/test/resources/systems.yml`. Set the default to `MOCK_SYSTEM`: `default: "MOCK_SYSTEM"`, uncomment the following two lines (remove the `#` found in the original file) and supply the URL to your SAP S/4HANA system or Mock server. In the code jam we will use the provided mock server URL.
+* Open the file `integration-tests/src/test/resources/systems.yml`.
+As we will be using the pre-deployed mock server in this code jam, please make sure that the file contains the following content:
 ```
+---
+erp:
+  default: "MOCK_SYSTEM"
+  systems:
+#    - alias: "ERP_SYSTEM"
+#      uri: "https://myXXXXXX.s4hana.ondemand.com"
+#      proxy: "http://proxy:8080"
     - alias: "MOCK_SYSTEM"
       uri: "https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com"
+
 ```
+In case you are working on this code jam offline, make sure to substitute the mock server URL with your own one.
 * In the same directory, create a `credentials.yml` file used during tests with the following content:
 ```
 ---
