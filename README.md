@@ -1,4 +1,4 @@
-# SAP Leonardo Machine Learning und the SAP S/4HANA Cloud SDK
+# SAP Leonardo Machine Learning Foundation and the SAP S/4HANA Cloud SDK
 Here, we provide the instructions to proceed with the code jam "SAP Leonardo Machine Learning and the SAP S/4HANA Cloud SDK". Below, you find the following information:
 * [Technical prerequisites](#prerequisites): software required to execute the steps described in this documentation. This information was provided before the workshop, so, we assume that those prerequisites are already fulfilled. Nevertheless, you can use this description to double check.
 * [Task 0: Preparation steps](#task0)
@@ -37,7 +37,7 @@ Before, we get started with the actual implementation, we need to perform some p
 * Load into your IDE as a Maven project
 * Investigate your project structure:
   * **application** folder contains the business logic that we will extend in this code jam. It also contains the JS based frontend components in the **webapp** subfolder. We will only focus on backend components, though.
-  * **integration-tests** and **unit-tests** folders include integration and unit tests. We have already prepared the integration tests for your application, they do not pass yet, though.
+  * **integration-tests** and **unit-tests** folders include integration and unit tests. We have already prepared the integration tests for your application, they do not pass yet, though, and therefore are ignored for now.
   * Artifacts **cx-server**, **Jenkinsfile**, **pipeline_config.yml** help to set up and customize CI/CD server and the pipeline for your SDK based solutions. We will not cover this topic in this code jam, but we highly encourage you to check out [the related resources after the workshop](https://blogs.sap.com/2017/09/20/continuous-integration-and-delivery/)
   * **pom.xml** is a [maven configuration file](https://maven.apache.org/pom.html)
   * **manifest.yml** is a deployment descriptor to be able to deploy the application in SAP Cloud Platform, Cloud Foundry.
@@ -46,11 +46,21 @@ Before we get started with the development, let us build and deploy the current 
 
 ### Build and test
 While building the application, we will execute integration tests. For the integration tests, you need to provide the URL and credentials of your SAP S/4HANA system.
-* Open the file `integration-tests/src/test/resources/systems.yml`. Set the default to `MOCK_SYSTEM`: `default: "MOCK_SYSTEM"`, uncomment the following two lines (remove the `#` found in the original file) and supply the URL to your SAP S/4HANA system or Mock server. In the code jam we will use the provided mock server URL.
+* Open the file `integration-tests/src/test/resources/systems.yml`.
+As we will be using the pre-deployed mock server in this code jam, please make sure that the file contains the following content:
 ```
+---
+erp:
+  default: "MOCK_SYSTEM"
+  systems:
+#    - alias: "ERP_SYSTEM"
+#      uri: "https://myXXXXXX.s4hana.ondemand.com"
+#      proxy: "http://proxy:8080"
     - alias: "MOCK_SYSTEM"
       uri: "https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com"
+
 ```
+In case you are working on this code jam after the seminar, make sure to substitute the mock server URL with your own one.
 * In the same directory, create a `credentials.yml` file used during tests with the following content:
 ```
 ---
@@ -59,6 +69,7 @@ credentials:
   username: "(username)"
   password: "(password)"
 ```
+As the mock server does not require authentication, you do not need to update the username and password in this file.
 * In the root folder of the project, run the following command to build and test the application. The credentials path is only required if the file is not located in the same folder as `systems.yml`.
 ```
 mvn clean install
@@ -83,24 +94,24 @@ At this phase, we do not have any data returned from the application and we see 
 ## <a name="task1">Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model</a>
 In this step, we will implement two queries to SAP S/4HANA to retrieve business partner data. Firstly, we will retrieve the list of business partners for the list view in  the application. Secondly, we will retrieve detailed data a single business partner by ID.
 
-Start the development of queries by looking into the class BusinessPartnerServlet, which is a servlet exposing the API. 
+Start the development of queries by looking into the class BusinessPartnerServlet, which is the servlet exposing the business partner APIs. 
 We could use any API framework here, such as JAX-RS or Spring. However, we use a servlet here for simplicity. Looking into the servlet, we can see that the main functionality is moved out into the commands GetAllBusinessPartnersCommand and GetSingleBusinessPartnerByIdCommand. Open and implement both commands as explained below.
 
-The GetAllBusinessPartnersCommand should return a list of available business partners in the ERP system. The class was already created. We just have to implement the execute method:
-* The instance of the class BusinessPartnerService already provides a method to retrieve all business partners. Type service to see a list of all available methods. Use the method getAllBusinessPartner to fetch multiple business partner entities.
-* We only want to return the properties first name, last name and id. Thus, select only these properties by using the select method on the result from step 1. Luckily, we do not have to know the exact names of these properties in the public API of S/4HANA. They are codified as static member of the class BusinessPartner. We can select the business partner id by using BusinessPartner.BUSINESS_PARTNER. Please, do the same for the first name and last name.
-* There are multiple categories of business partners. In this session, we only want to retrieve persons. The category is identified by a number, which is stored in the static class variable called CATEGORY_PERSON. The method to filter is called filter and can be executed on the result from the previous step.
-The property BusinessPartner.BUSINESS_PARTNER_CATEGORY should equal CATEGORY_PERSON. To express that use the methods provided by the object BusinessPartner.BUSINESS_PARTNER_CATEGORY.
-* We want to order the result by the last name, sorting ascending. The method is called orderBy and expects the property and the order.
-* All the previous steps did not execute any requests, but just defined the request. With the method execute you finally execute the query and retrieve the result.
+The *GetAllBusinessPartnersCommand* should return a list of available business partners in the ERP system. The class was already created. We just have to implement the execute method:
+* The instance of the class *BusinessPartnerService* already provides a method to retrieve all business partners. Type *service* to see a list of all available methods. Use the method *getAllBusinessPartner* to fetch multiple business partner entities.
+* We only want to return the properties first name, last name and id. Thus, select only these properties by using the *select* method on the result from step 1. Luckily, we do not have to know the exact names of these properties in the public API of S/4HANA. They are codified as static member of the class *BusinessPartner*. We can select the business partner id by using *BusinessPartner.BUSINESS_PARTNER*. Please, do the same for the first name and last name.
+* There are multiple categories of business partners. In this session, we only want to retrieve persons. The category is identified by a number, which is stored in the static class variable called *CATEGORY_PERSON*. The method to filter is called *filter* and can be executed on the result from the previous step.
+The property *BusinessPartner.BUSINESS_PARTNER_CATEGORY* should equal *CATEGORY_PERSON*. To express that use the methods provided by the object *BusinessPartner.BUSINESS_PARTNER_CATEGORY*.
+* We want to order the result by the last name, sorting ascending. The method is called *orderBy* and expects the property and the order.
+* All the previous steps did not execute any requests, but just defined the request. With the method *execute* you finally execute the query and retrieve the result.
 Hint: Try to solve it on your own. However, the solution can also be found in the solution folder in the session material.
 
-The command GetSingleBusinessPartnerByIdCommand should return a specific business partner including address details. The implementation is very similar to the first command.
-* In addition to getting all business partners there is a method to get only one business partner identified by the key: getBusinessPartnerByKey. Use this method with the available id property.
-* Furthermore, select the properties business partner id, last name, first name, is male, is female and creation date. Also select the corresponding address. It can be accessed using the property TO_BUSINESS_PARTNER_ADDRESS. For the address, select the properties business partner id, address id, country, postal code, city name, street name and house number.
+The command *GetSingleBusinessPartnerByIdCommand* should return a specific business partner including address details. The implementation is very similar to the first command.
+* In addition to getting all business partners there is a method to get only one business partner identified by the key: *getBusinessPartnerByKey*. Use this method with the available id property.
+* Furthermore, select the properties business partner id, last name, first name, is male, is female, SearchTerm1, Middle_Name, and creation date. Also select the corresponding address. It can be accessed using the property *TO_BUSINESS_PARTNER_ADDRESS*. For the address, select the properties business partner id, address id, country, postal code, city name, street name and house number.
 * There is no need to apply additional operations.
 
-To check whether the queries are implemented correctly, go to the integration-tests folder and remove the @Ignore annotation for the following tests: BusinessPartnerServletTest.testGetAll() and BusinessPartnerServletTest.testGetSingle().
+To check whether the queries are implemented correctly, go to the integration-tests folder and remove the *@Ignore* annotation for the following tests: *BusinessPartnerServletTest.testGetAll()* and *BusinessPartnerServletTest.testGetSingle()*.
 Now, build and test the application and make sure that the tests ran successfully. 
 ```
 mvn clean install
@@ -129,20 +140,18 @@ There are several steps involved to make the integration with SAP Leonardo ML se
 ### Implement the integration with ML services in Java Backend 
 To implement the integration with ML services, we will leverage the SAP S/4HANA Cloud SDK component that simplifies the integration and handles the boilerplate code for you, such as OAuth 2.0 authentication against ML services.
 
-To implement the integration, find the package machinelearning in your project, where you will find the TranslateServlet class. This class contains the method translate(), which delegates the translation logic to the commands MlLanguageDetectionCommand for the language detection and MlTranslationCommand for the translation.
+To implement the integration, find the package *machinelearning* in your project, where you will find the *TranslateServlet* class. This class contains the method *translate()*, which delegates the translation logic to the commands *MlLanguageDetectionCommand* for the language detection and *MlTranslationCommand* for the translation.
 
-Navigate to the class MlTranslationCommand and investigate its methods. Here, in the method executeRequest, you will find the next task. 
-In this method, we already provide the logic for the execution of the translation request using the instance of LeonardoMlService class and retrive the resulting payload. The rest is left for you. To make the translation work in integration with your application, add the following steps into the executeRequest method:
+Navigate to the class *MlTranslationCommand* and investigate its methods. Here, in the method *executeRequest*, you will find the next task. 
+In this method, we already provide the logic for the execution of the translation request using the instance of *LeonardoMlService* class and retrive the resulting payload. The rest is left for you. To make the translation work in integration with your application, add the following steps into the *executeRequest* method:
 
-* In you IDE, navigate to the LeonardoMlService, which is a part of the machinelearning package of the SAP S/4HANA Cloud SDK and investigate its methods. Also, looks through the other classes and methods provided in this library. You may also use the [Javadoc for those classes](https://help.sap.com/http.svc/rc/76ceac609c19443099fca151cf9c9e21/1.0/en-US/com/sap/cloud/sdk/services/scp/machinelearning/package-summary.html) to get more information.
-* Instantiate the LeonardoMlService class, wich is a part of the SAP S/4HANA Cloud SDK component for ML services integration. Consider that you use trial beta as Cloud Foundry Leonardo ML service type and Translation as a Leonardo ML service type.
-* Create an object request of type HttpPost
-* Create an object body of type HttpEntity. Use requestJson and ContentType.APPLICATION_JSON to instantiate the object.
-* Add the created body to the request using the method setEntity.
+* In you IDE, navigate to the LeonardoMlService, which is a part of the *machinelearning* package of the SAP S/4HANA Cloud SDK and investigate its methods. Also, looks through the other classes and methods provided in this library. You may also use the [Javadoc for those classes](https://help.sap.com/http.svc/rc/76ceac609c19443099fca151cf9c9e21/1.0/en-US/com/sap/cloud/sdk/services/scp/machinelearning/package-summary.html) to get more information.
+* Instantiate the *LeonardoMlService* class, wich is a part of the SAP S/4HANA Cloud SDK component for ML services integration. Consider that you use trial beta as Cloud Foundry Leonardo ML service type and Translation as a Leonardo ML service type.
+* Create an object request of type *HttpPost*
+* Create an object body of type *HttpEntity* (*StringEntity*). Use *requestJson* and *ContentType.APPLICATION_JSON* to instantiate the object.
+* Add the created body to the request using the method *setEntity*.
 
 If you experience difficulties, you can compare you solution with the one provided in the [folder solutions](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/solutions/application/src/main/java/com/sap/cloud/s4hana/examples/addressmgr/machinelearning/commands/MlTranslationCommand.java).
-
-Now, we can deploy the application in SAP Cloud Platform, Cloud Foundry and see the result of the integration of the translation service in action. To deploy your application using cloud platform cockpit.
 
 ### Create service instances for S/4HANA connectivity and Leonardo ML integration
 Firstly, create an instance of the destination service to connect to SAP S/4HANA (mock) system. For that, in the cloud platform cockpit on the level of your development space choose Services -> Service Marketplace and choose the destination service from the catalog.
@@ -155,7 +164,7 @@ Secondly, create an instance of the Authorization and Trust Management service. 
 Thirdly, create an instance of SAP Leonardo ML service. The service can be found in the Service Marketplace under the name ml-foundation-trial-beta. Instantiate the service with the defailt parameters and give it the name my-ml.
 ![SAP Leonardo Machine Learning](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/ml.PNG)
 
-Take a look at the manifest.yml file in your application. This file is the deployment descriptor that contains metainformation required for the deployyment, including the service bindings. We have just created the service instances in SAP Cloud Platform cockpit. Exactly this service instances will be bound to the application after it is deployed, as this is specified in the manifest.yml.
+Take a look at the manifest.yml file in your application. This file is the deployment descriptor that contains metainformation required for the deployment, including the service bindings. We have just created the service instances in SAP Cloud Platform cockpit. Exactly this service instances will be bound to the application after it is deployed, as this is specified in the manifest.yml.
 
 ![Service bindings in the deployment descriptor manifest.yml](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/manifest.PNG)
 
@@ -181,9 +190,13 @@ User: your email address from SAP API Hub <br>
 Password: your password from SAP API Hub <br>
  
 Additionally, add the following additional properties: <br>
-mlApiKey: <your key from the SAP API Hub>
+mlApiKey: your key from the SAP API Hub
+
+You can copy your API key from the SAP API Business Hub after you have logged in, using the button "Show API Key", as shown in the figure.
+
+![Get API Key]()
  
-In case you do not know how to get the key from the API Hub, please, approach the instructor. You can also take a look at the explanation in the [S/4HANA Cloud SDK Deep Dive](https://blogs.sap.com/2018/05/31/quickly-build-a-prototype-with-sap-leonardo-machine-learning-foundation-sap-api-business-hub-and-sap-s4hana-cloud-sdk/).
+In case you experience difficulties, please, approach the instructor.
 
 ### Deploy the application using the SAP Cloud Platform cockpit
 
