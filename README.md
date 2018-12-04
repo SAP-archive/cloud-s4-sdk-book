@@ -169,7 +169,7 @@ Take a look at the manifest.yml file in your application. This file is the deplo
 ![Service bindings in the deployment descriptor manifest.yml](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/manifest.PNG)
 
 ### Create destination endpoints
-Next, we will create destination endpoint to connect to the S/4HANA mock server and to the language detection APIs on SAP API Business Hub.
+Next, we will create a destination endpoint to connect to the S/4HANA mock server.
 You can find the configuration of the destination endpoints on the level of your subaccount by choosing Connectivity -> Destinations.
 Then, you can create a new destination endpoint by choosing "New Destination".
 
@@ -180,29 +180,33 @@ URL: https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com <br
 Proxy type: Internet <br>
 Authentication: NoAuthentication <br>
 
-To connect to the language detection APIs in SAP API Business Hub, we will create another destination with the following parameters: <br>
-Name: mlApi <br>
-Type: HTTP <br>
-URL: http://sandbox.api.sap.com/ml <br>
-Proxy Type: Internet
-Authentication: BasicAuthentication <br>
-User: your email address from SAP API Hub <br>
-Password: your password from SAP API Hub <br>
- 
-Additionally, add the following additional properties: <br>
-mlApiKey: your key from the SAP API Hub
-
-You can copy your API key from the SAP API Business Hub after you have logged in, using the button "Show API Key", as shown in the figure.
-
-![Get API Key](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/APIKey.PNG)
- 
-In case you experience difficulties, please, approach the instructor.
-
 ### Deploy the application using the SAP Cloud Platform cockpit
 
 Finally, we will deploy the application in your development space in SAP Cloud Platform, Cloud Foundry. You can do it using the CLI of Cloud Foundry or using the SAP Cloud Platform Cockpit. Here, we show how to do it using the cockpit.
 
-In your development space, choose Application -> Deploy Application. Choose the location of your archive and the corresponding manifest.zml file, as shown in the Figure.
+Firstly, go to your project *manifest.yml* file and adapt the application name, adding your P-user to avoid domain collisions with the other participants. For example:
+
+```
+---
+applications:
+
+- name: address-manager-ml-Pxxxxxxxxxx
+  memory: 768M
+  random-route: true
+  path: application/target/address-manager-application.war
+  buildpack: sap_java_buildpack
+  env:
+    TARGET_RUNTIME: tomee
+    JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:96m..'
+    SET_LOGGING_LEVEL: '{ROOT: INFO, com.sap.cloud.sdk: INFO}'
+    ALLOW_MOCKED_AUTH_HEADER: true
+  services:
+    - my-xsuaa
+    - my-destination
+    - my-ml
+```
+
+Secondly, in your development space, choose Application -> Deploy Application. Choose the location of your archive and the corresponding manifest.zml file, as shown in the Figure.
 
 ![Application Deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deployment.PNG)
 
@@ -212,7 +216,7 @@ As the deployment descriptor of the application (manifest.yml) was containing th
 
 If you drill click the link "my-ml", you can see all the URLs of ML services, available in the scope of the chosed ml-foundation-trial-beta service. Those URLs are used behind the scenes by the SDK class LeonardoMlService to execute corresponding queries. Among others, you can also find the URL for the translation service that we connect in this code jam.
 
-![SAp Leonardo ML services information](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/mlURLs.PNG)
+![SAP Leonardo ML services information](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/mlURLs.PNG)
 
 When the application is deployed, you can drill down into the application, choose the link for the application and append it with "/address-manager". You should be able to see the business partner coming back from the mock server and you should be able to translate their professions by clicking on them.
 
