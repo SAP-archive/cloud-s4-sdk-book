@@ -1,5 +1,6 @@
 package com.sap.cloud.s4hana.examples.addressmgr.machinelearning.commands;
 
+import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -7,6 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
+import lombok.Data;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -117,33 +119,35 @@ public class MlTranslationCommand extends Command<List<String>> {
     }
 
     static Map<String, String> parseResponse(String response) {
-        // this method provides an example of how parsing can be fine-tuned when using the JsonParser directly:
+        Gson gson = new Gson();
+        TranslationResult translationResult = gson.fromJson(response, TranslationResult.class);
+
         Map<String, String> inputToTranslations = new HashMap<>();
-        final JsonElement parsedTree = new JsonParser().parse(response);
-        if (parsedTree.isJsonObject() && parsedTree.getAsJsonObject().has("units")) {
-            final JsonElement units = parsedTree.getAsJsonObject().get("units");
-            if (units.isJsonArray() && units.getAsJsonArray().size() > 0) {
-                for (JsonElement unit : units.getAsJsonArray()) {
-                    if (unit.isJsonObject() && unit.getAsJsonObject().has("value")
-                            && unit.getAsJsonObject().has("translations")) {
-                        String currentInput = unit.getAsJsonObject().get("value").getAsString();
-                        final JsonElement translations = unit.getAsJsonObject().get("translations");
-                        if (translations.isJsonArray() && translations.getAsJsonArray().size() > 0) {
-                            final JsonElement firstTranslation = translations.getAsJsonArray().get(0);
-                            if (firstTranslation.isJsonObject() && firstTranslation.getAsJsonObject().has("value")) {
-                                final JsonElement translationElement = firstTranslation.getAsJsonObject().get("value");
-                                String translation = "";
-                                if (!translationElement.isJsonNull()) {
-                                    translation = translationElement.getAsString();
-                                }
-                                inputToTranslations.put(currentInput, translation);
-                            }
-                        }
-                    }
-                }
+
+        for (TranslationUnit translationUnit : translationResult.getUnits()) {
+            String translation = "";
+            if (!translationUnit.getTranslations().isEmpty()) {
+                // Taking the first translation as a particular use case for the address manager
+                translation = translationUnit.getTranslations().get(0).getValue();
             }
+            inputToTranslations.put(translationUnit.getValue(), translation);
         }
         return inputToTranslations;
+    }
+
+    @Data
+    private class TranslationResult {
+        List<TranslationUnit> units = Lists.newArrayList();
+    }
+    @Data
+    private class TranslationUnit {
+        String value;
+        List<Translation> translations = Lists.newArrayList();
+    }
+    @Data
+    private class Translation {
+        String language;
+        String value;
     }
 
     static String createRequestJson(String sourceLang, String targetLang, List<String> texts) {
