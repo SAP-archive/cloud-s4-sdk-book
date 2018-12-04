@@ -194,7 +194,7 @@ mlApiKey: your key from the SAP API Hub
 
 You can copy your API key from the SAP API Business Hub after you have logged in, using the button "Show API Key", as shown in the figure.
 
-![Get API Key]()
+![Get API Key](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/APIKey.PNG)
  
 In case you experience difficulties, please, approach the instructor.
 
