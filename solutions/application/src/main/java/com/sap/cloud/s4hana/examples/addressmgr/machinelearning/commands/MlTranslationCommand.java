@@ -1,5 +1,6 @@
 package com.sap.cloud.s4hana.examples.addressmgr.machinelearning.commands;
 
+import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -7,6 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
+import lombok.Data;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -152,6 +154,21 @@ public class MlTranslationCommand extends Command<List<String>> {
             inputToTranslations.put(translationUnit.getValue(), translation);
         }
         return inputToTranslations;
+    }
+
+    @Data
+    private class TranslationResult {
+        List<TranslationUnit> units = Lists.newArrayList();
+    }
+    @Data
+    private class TranslationUnit {
+        String value;
+        List<Translation> translations = Lists.newArrayList();
+    }
+    @Data
+    private class Translation {
+        String language;
+        String value;
     }
 
     static String createRequestJson(String sourceLang, String targetLang, List<String> texts) {
