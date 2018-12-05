@@ -24,7 +24,10 @@ public class CreateAddressCommand extends ErpCommand<BusinessPartnerAddress> {
 
     @Override
     protected BusinessPartnerAddress run() throws Exception {
-        //TODO: Task 3 - Implement business partner create query
-        throw new RuntimeException("TODO: Implement");
+        final BusinessPartnerAddress addressCreated = service
+                .createBusinessPartnerAddress(addressToCreate)
+                .execute();
+
+        return addressCreated;
     }
 }
