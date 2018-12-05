@@ -95,7 +95,7 @@ At this phase, we do not have any data returned from the application and we see 
 In this step, we will implement two queries to SAP S/4HANA to retrieve business partner data. Firstly, we will retrieve the list of business partners for the list view in  the application. Secondly, we will retrieve detailed data a single business partner by ID.
 
 Start the development of queries by looking into the class BusinessPartnerServlet, which is the servlet exposing the business partner APIs. 
-We could use any API framework here, such as JAX-RS or Spring. However, we use a servlet here for simplicity. Looking into the servlet, we can see that the main functionality is moved out into the commands GetAllBusinessPartnersCommand and GetSingleBusinessPartnerByIdCommand. Open and implement both commands as explained below.
+We could use any API framework here, such as JAX-RS or Spring. However, we use a servlet here for simplicity. Looking into the servlet, we can see that the main functionality is moved out into the commands GetAllBusinessPartnersCommand and GetSingleBusinessPartnerByIdCommand. Open and implement the command *GetAllBusinessPartnersCommand* as explained below.
 
 The *GetAllBusinessPartnersCommand* should return a list of available business partners in the ERP system. The class was already created. We just have to implement the execute method:
 * The instance of the class *BusinessPartnerService* already provides a method to retrieve all business partners. Type *service* to see a list of all available methods. Use the method *getAllBusinessPartner* to fetch multiple business partner entities.
@@ -106,10 +106,7 @@ The property *BusinessPartner.BUSINESS_PARTNER_CATEGORY* should equal *CATEGORY_
 * All the previous steps did not execute any requests, but just defined the request. With the method *execute* you finally execute the query and retrieve the result.
 Hint: Try to solve it on your own. However, the solution can also be found in the solution folder in the session material.
 
-The command *GetSingleBusinessPartnerByIdCommand* should return a specific business partner including address details. The implementation is very similar to the first command.
-* In addition to getting all business partners there is a method to get only one business partner identified by the key: *getBusinessPartnerByKey*. Use this method with the available id property.
-* Furthermore, select the properties business partner id, last name, first name, is male, is female, SearchTerm1, Middle_Name, and creation date. Also select the corresponding address. It can be accessed using the property *TO_BUSINESS_PARTNER_ADDRESS*. For the address, select the properties business partner id, address id, country, postal code, city name, street name and house number.
-* There is no need to apply additional operations.
+Now, also take a look at he command *GetSingleBusinessPartnerByIdCommand*. It was already implemented for you. Based on this source code, can you find out how the OData "expand" method can be implemented using the Virtual Data Model of the SAP S/4HANA Cloud SDK? Hint: addresses of business partners are retrieved using *expand*.
 
 To check whether the queries are implemented correctly, go to the integration-tests folder and remove the *@Ignore* annotation for the following tests: *BusinessPartnerServletTest.testGetAll()* and *BusinessPartnerServletTest.testGetSingle()*.
 Now, build and test the application and make sure that the tests ran successfully. 
