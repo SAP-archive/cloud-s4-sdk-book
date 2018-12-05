@@ -150,6 +150,11 @@ In this method, we already provide the logic for the execution of the translatio
 
 If you experience difficulties, you can compare you solution with the one provided in the [folder solutions](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/solutions/application/src/main/java/com/sap/cloud/s4hana/examples/addressmgr/machinelearning/commands/MlTranslationCommand.java).
 
+Build the latest version using the command:
+```
+mvn clean install
+```
+
 ### Create service instances for S/4HANA connectivity and Leonardo ML integration
 Firstly, create an instance of the destination service to connect to SAP S/4HANA (mock) system. For that, in the cloud platform cockpit on the level of your development space choose Services -> Service Marketplace and choose the destination service from the catalog.
 Instantiate the service with all the default parameters. Give the name my-destination to your instance.
