@@ -102,7 +102,6 @@ The *GetAllBusinessPartnersCommand* should return a list of available business p
 * We only want to return the properties first name, last name and id. Thus, select only these properties by using the *select* method on the result from step 1. Luckily, we do not have to know the exact names of these properties in the public API of S/4HANA. They are codified as static member of the class *BusinessPartner*. We can select the business partner id by using *BusinessPartner.BUSINESS_PARTNER*. Please, do the same for the first name and last name.
 * There are multiple categories of business partners. In this session, we only want to retrieve persons. The category is identified by a number, which is stored in the static class variable called *CATEGORY_PERSON*. The method to filter is called *filter* and can be executed on the result from the previous step.
 The property *BusinessPartner.BUSINESS_PARTNER_CATEGORY* should equal *CATEGORY_PERSON*. To express that use the methods provided by the object *BusinessPartner.BUSINESS_PARTNER_CATEGORY*.
-* We want to order the result by the last name, sorting ascending. The method is called *orderBy* and expects the property and the order.
 * All the previous steps did not execute any requests, but just defined the request. With the method *execute* you finally execute the query and retrieve the result.
 Hint: Try to solve it on your own. However, the solution can also be found in the solution folder in the session material.
 
@@ -233,10 +232,10 @@ Congratulations! You have just finished the main steps in this code jam:
 Continue to the next steps in case you have time. Alternatively, you can execute those steps offline.
 
 ## <a name="task3">Bonus, Task 3: Write data back to SAP S/4HANA using the SAP S/4HANA Cloud SDK virtual data model</a>
-Here, we will further investigate the capabilities of the SAP S/4HANA Cloud SDK virtual data model to integrate SAP S/4HANA now also for create, update, and delete operations.
+Here, we will further investigate the capabilities of the SAP S/4HANA Cloud SDK virtual data model to integrate SAP S/4HANA now also for update, and delete operations.
 
 *	The class BusinessPartnerService already offers methods to create, update or delete address. The input values, such as the addresses or IDs to delete are member variables of the commands. They are passed into the command from the servlet.
-*	Implement the run methods in the commands CreateAddressCommand, UpdateAddressCommand, DeleteAddressCommand. 
+*	Implement the run methods in the commands UpdateAddressCommand and DeleteAddressCommand. 
 *	For the delete method we first have to create a business partner address instance, which has the IDs for the business partner and the address specified. The class BusinessPartnerAddress offers the method builder to create a builder and can be used as follows:
 
 ```
