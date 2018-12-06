@@ -63,12 +63,14 @@ To create a new instance "my-destination" of the destination service, execute th
 cf create-service destination lite my-destination
 ```
 
-To create a new destination endpoint, go to the SAP Cloud Platform Cockpit and on the subaccount level select Connectivity -> Destinations -> New Destination Enter the following parameters and save your destination: <br>
-Name: ErpQueryEndpoint <br>
-Type: HTTP <br>
-URL: <URL of your mock server> <br>
-Proxy Type: Internet <br>
-Authentication: NoAuthentication <br>
+To create a new destination endpoint, go to the SAP Cloud Platform Cockpit and on the subaccount level select Connectivity -> Destinations -> New Destination Enter the following parameters and save your destination:<br>
+Name: ErpQueryEndpoint<br>
+Type: HTTP<br>
+URL: insert URL of your mock server<br>
+Proxy Type: Internet<br>
+Authentication: NoAuthentication<br>
+
+If you want to connect to a real S/4HANA system instead of the mock server, make sure to choose the appropriate authentication and credentials, for example, BasicAuthentication.
 
 ## Remove Mock of the User and Tenant in Your Deployed Application
 As we will secure our example application with the App Router and the tenant and user information will be provided via the Json Web Token, we need to remove the user variable used for mocking of those parameters.
