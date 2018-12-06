@@ -8,7 +8,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
-import lombok.Data;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -156,19 +155,58 @@ public class MlTranslationCommand extends Command<List<String>> {
         return inputToTranslations;
     }
 
-    @Data
     private class TranslationResult {
         List<TranslationUnit> units = Lists.newArrayList();
+
+        private List<TranslationUnit> getUnits() {
+            return units;
+        }
+
+        private void setUnits(final List<TranslationUnit> units) {
+            this.units = units;
+        }
     }
-    @Data
+
     private class TranslationUnit {
         String value;
         List<Translation> translations = Lists.newArrayList();
+
+        private String getValue() {
+            return value;
+        }
+
+        private void setValue(final String value) {
+            this.value = value;
+        }
+
+        private List<Translation> getTranslations() {
+            return translations;
+        }
+
+        private void setTranslations(final List<Translation> translations) {
+            this.translations = translations;
+        }
     }
-    @Data
+
     private class Translation {
         String language;
         String value;
+
+        private String getLanguage() {
+            return language;
+        }
+
+        private void setLanguage(final String language) {
+            this.language = language;
+        }
+
+        private String getValue() {
+            return value;
+        }
+
+        private void setValue(final String value) {
+            this.value = value;
+        }
     }
 
     static String createRequestJson(String sourceLang, String targetLang, List<String> texts) {
