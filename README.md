@@ -207,7 +207,7 @@ applications:
     - my-ml
 ```
 
-Secondly, in your development space, choose Application -> Deploy Application. Choose the location of your archive and the corresponding manifest.zml file, as shown in the Figure.
+Secondly, in your development space, choose Application -> Deploy Application. Choose the location of your archive (see the folder application/target/address-manager-application.war) and the corresponding manifest.yml file, as shown in the Figure.
 
 ![Application Deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deployment.PNG)
 
