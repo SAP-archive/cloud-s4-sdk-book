@@ -219,7 +219,7 @@ If you drill click the link "my-ml", you can see all the URLs of ML services, av
 
 ![SAP Leonardo ML services information](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/mlURLs.PNG)
 
-When the application is deployed, you can drill down into the application, choose the link for the application and append it with "/address-manager". You should be able to see the business partner coming back from the mock server and you should be able to translate their professions by clicking on them.
+When the application is deployed, you can drill down into the application, choose the link for the application and append "/address-manager" to it. You should be able to see the business partner coming back from the mock server and you should be able to translate their professions by clicking on them.
 
 ![Result of the deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deploymentResult.PNG)
 
