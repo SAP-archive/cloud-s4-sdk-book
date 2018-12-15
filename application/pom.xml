@@ -21,7 +21,6 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>25.1-jre</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.checkerframework</groupId>
@@ -115,17 +114,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.2.2</version>
                 <configuration>
                     <attachClasses>true</attachClasses>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.openejb.maven</groupId>
+                <groupId>org.apache.tomee.maven</groupId>
                 <artifactId>tomee-maven-plugin</artifactId>
-                <version>1.7.5</version>
+                <version>7.0.5</version>
                 <configuration>
-                    <tomeeClassifier>jaxrs</tomeeClassifier>
+                    <tomeeClassifier>webprofile</tomeeClassifier>
                     <context>ROOT</context>
                     <libs>
                         <lib>remove:slf4j-jdk14</lib>
@@ -186,14 +185,14 @@
             <plugin>
                 <groupId>com.sap.cloud.s4hana.plugins</groupId>
                 <artifactId>s4sdk-maven-plugin</artifactId>
-                <version>2.8.0</version>
+                <version>2.9.0</version>
                 <executions>
                     <execution>
                         <goals>
                             <goal>usage-analytics</goal>
                         </goals>
                         <configuration>
-                            <skip>true</skip>
+                            <skipUsageAnalytics>true</skipUsageAnalytics>
                             <generateSalt>true</generateSalt>
                             <!--
                             Note: A random salt is auto-generated once the project is built for the first time.
