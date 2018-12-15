@@ -3,11 +3,10 @@ package com.sap.cloud.s4hana.examples.addressmgr.machine_learning.commands;
 import com.google.gson.Gson;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.MlLanguageDetectionResult;
-import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.MlService;
-import com.sap.cloud.sdk.cloudplatform.connectivity.HttpClientAccessor;
 import com.sap.cloud.sdk.cloudplatform.connectivity.HttpEntityUtil;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.frameworks.hystrix.Command;
+import com.sap.cloud.sdk.services.scp.machinelearning.LeonardoMlService;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -19,12 +18,11 @@ import java.util.List;
 
 public class MlLanguageDetectionCommand extends Command<MlLanguageDetectionResult> {
     private static final Logger logger = CloudLoggerFactory.getLogger(MlLanguageDetectionCommand.class);
-    private static final String LANG_DETECT_PATH = "/";
 
-    private final MlService mlService;
+    private final LeonardoMlService mlService;
     private final String input;
 
-    public MlLanguageDetectionCommand(final MlService mlService, final String input) {
+    public MlLanguageDetectionCommand(final LeonardoMlService mlService, final String input) {
         super(HystrixCommandGroupKey.Factory.asKey("LeonardoMlFoundation-langdetect"), 10000);
         this.mlService = mlService;
         this.input = input;
@@ -37,7 +35,7 @@ public class MlLanguageDetectionCommand extends Command<MlLanguageDetectionResul
     }
 
     private String executeRequest(final String requestJson) throws Exception {
-        final HttpPost request = mlService.createPostRequest(LANG_DETECT_PATH);
+        final HttpPost request = new HttpPost("/");
 
         request.setHeader("Content-Type", "application/json");
         request.setHeader("Accept", "application/json;charset=UTF-8");
@@ -45,7 +43,7 @@ public class MlLanguageDetectionCommand extends Command<MlLanguageDetectionResul
         request.setEntity(new StringEntity(requestJson, ContentType.APPLICATION_JSON));
 
         try {
-            final HttpResponse response = HttpClientAccessor.getHttpClient().execute(request);
+            final HttpResponse response = mlService.invoke(request, input -> input);
 
             return HttpEntityUtil.getResponseBody(response);
         } finally {

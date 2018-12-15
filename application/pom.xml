@@ -40,6 +40,10 @@
             <groupId>com.sap.cloud.s4hana</groupId>
             <artifactId>s4hana-all</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.s4hana.services</groupId>
+            <artifactId>scp-machine-learning</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>

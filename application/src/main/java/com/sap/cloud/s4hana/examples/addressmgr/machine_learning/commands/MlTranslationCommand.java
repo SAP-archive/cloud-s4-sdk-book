@@ -3,12 +3,11 @@ package com.sap.cloud.s4hana.examples.addressmgr.machine_learning.commands;
 import com.google.gson.*;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
-import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.MlService;
-import com.sap.cloud.sdk.cloudplatform.connectivity.HttpClientAccessor;
 import com.sap.cloud.sdk.cloudplatform.connectivity.HttpEntityUtil;
 import com.sap.cloud.sdk.cloudplatform.exception.ShouldNotHappenException;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
 import com.sap.cloud.sdk.frameworks.hystrix.Command;
+import com.sap.cloud.sdk.services.scp.machinelearning.LeonardoMlService;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -23,13 +22,13 @@ import java.util.*;
 public class MlTranslationCommand extends Command<List<String>> {
     private static final Logger logger = CloudLoggerFactory.getLogger(MlTranslationCommand.class);
 
-    private final MlService mlService;
+    private final LeonardoMlService mlService;
 
     private final String sourceLang;
     private final String targetLang;
     private final List<String> texts;
 
-    public MlTranslationCommand(final MlService mlService,
+    public MlTranslationCommand(final LeonardoMlService mlService,
                                 final String sourceLang, final String targetLang, final List<String> texts) {
         super(HystrixCommandGroupKey.Factory.asKey("LeonardoMlFoundation-translate"), 10000);
 
@@ -78,7 +77,7 @@ public class MlTranslationCommand extends Command<List<String>> {
     }
 
     private String executeRequest(String requestJson) throws Exception {
-        HttpPost request = mlService.createPostRequest();
+        HttpPost request = new HttpPost();
 
         request.setHeader("Content-Type", "application/json");
         request.setHeader("Accept", "application/json;charset=UTF-8");
@@ -90,7 +89,7 @@ public class MlTranslationCommand extends Command<List<String>> {
 
         try {
             // Getting cached http client for base URL, reuse of connection and other resources - and send request
-            final HttpResponse response = HttpClientAccessor.getHttpClient().execute(request);
+            final HttpResponse response = mlService.invoke(request, input -> input);
 
             // retrieve entity content (requested json with Accept header, so should be text) and close request
             final String responsePayload = HttpEntityUtil.getResponseBody(response);

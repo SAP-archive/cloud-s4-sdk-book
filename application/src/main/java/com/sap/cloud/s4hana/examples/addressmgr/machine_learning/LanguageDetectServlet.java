@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.sap.cloud.s4hana.examples.addressmgr.machine_learning.commands.MlLanguageDetectionCommand;
 import com.sap.cloud.s4hana.examples.addressmgr.util.HttpServlet;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
+import com.sap.cloud.sdk.services.scp.machinelearning.LeonardoMlServiceType;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 
@@ -32,7 +33,7 @@ public class LanguageDetectServlet extends HttpServlet {
 
         try {
             MlLanguageDetectionResult output = new MlLanguageDetectionCommand(
-                    MlService.createFromCfServicesConfig(MlServiceType.LANGUAGE_DETECTION), input).execute();
+                    MlService.createFromCfServicesConfig(LeonardoMlServiceType.LANG_DETECTION), input).execute();
             response.setContentType("application/json");
             responseWriter.write(new Gson().toJson(output));
 
