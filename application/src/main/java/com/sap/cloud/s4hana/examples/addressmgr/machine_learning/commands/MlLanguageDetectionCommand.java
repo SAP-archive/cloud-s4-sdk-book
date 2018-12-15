@@ -19,7 +19,7 @@ import java.util.List;
 
 public class MlLanguageDetectionCommand extends Command<MlLanguageDetectionResult> {
     private static final Logger logger = CloudLoggerFactory.getLogger(MlLanguageDetectionCommand.class);
-    private static final String LANG_DETECT_PATH = "/api/v2alpha1/text/lang-detect";
+    private static final String LANG_DETECT_PATH = "/";
 
     private final MlService mlService;
     private final String input;
