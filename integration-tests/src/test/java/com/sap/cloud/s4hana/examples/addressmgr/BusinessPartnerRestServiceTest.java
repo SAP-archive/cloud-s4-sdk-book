@@ -72,7 +72,7 @@ public class BusinessPartnerRestServiceTest {
 
     @Test
     public void testNotFound() {
-        when().get(basePath + "/business-partners/noBP").then().statusCode(404).contentType(ContentType.JSON);
+        when().get(basePath + "/business-partners/noBP").then().statusCode(404);
     }
 
     @Test
