@@ -10,7 +10,6 @@ applications:
     - sap_java_buildpack
   env:
     TARGET_RUNTIME: main
-    JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:128m..'
     SPRING_PROFILES_ACTIVE: cloud
   services:
   - my-xsuaa
