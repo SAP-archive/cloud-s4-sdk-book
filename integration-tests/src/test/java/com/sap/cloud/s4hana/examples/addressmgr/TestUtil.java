@@ -3,6 +3,8 @@ package com.sap.cloud.s4hana.examples.addressmgr;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+
+import com.sap.cloud.s4hana.examples.addressmgr.util.JacksonJSONProvider;
 import com.sap.cloud.sdk.cloudplatform.connectivity.DestinationsRequestContextListener;
 import com.sap.cloud.sdk.cloudplatform.exception.ShouldNotHappenException;
 import com.sap.cloud.sdk.cloudplatform.security.user.UserRequestContextListener;
@@ -27,7 +29,7 @@ public class TestUtil
             .addClass(UserRequestContextListener.class)
             .addClass(DestinationsRequestContextListener.class)
             .addAsManifestResource("arquillian.xml")
-            .addClasses(ApplicationConfig.class, JacksonJsonProvider.class)
+            .addClasses(ApplicationConfig.class, JacksonJSONProvider.class)
             .addAsWebInfResource(new ByteArrayAsset("<beans/>".getBytes()), ArchivePaths.create("beans.xml"));
     }
 

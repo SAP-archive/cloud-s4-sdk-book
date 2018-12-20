@@ -82,9 +82,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.openejb</groupId>
+            <groupId>org.apache.tomee</groupId>
             <artifactId>openejb-cxf-rs</artifactId>
-            <version>4.7.5</version>
+            <version>7.0.5</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
