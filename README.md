@@ -28,7 +28,7 @@ Check that the environment variable `JAVA_HOME` points to the path of your JDK i
 
 We will deploy the application in SAP Cloud Platform, Cloud Foundry. For that purpose, you would require your own trial account. [Here](https://cloudplatform.sap.com/try.html), you can find information on how to get your trial account in SAP Cloud Platform, Cloud Foundry. 
 
-For this workshop, we provide a running SAP S/4HANA Mock server that mocks business partner APIs, so you do not need to set up it by yourself. The server is accessable via URL https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com and does not require authentication.
+For this workshop, we provide a running SAP S/4HANA Mock server that mocks business partner APIs, so you do not need to set up it by yourself. Ask your instructor for the URL that you can use to access the mock server. The mock server does not require authentication.
 In case you want to try out this hands on later and the service is not available, follow [this description](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html) to set up your own instance of the mock server.
 
 ## <a name="task0">Task 0: Preparation steps</a>
@@ -57,7 +57,7 @@ erp:
 #      uri: "https://myXXXXXX.s4hana.ondemand.com"
 #      proxy: "http://proxy:8080"
     - alias: "MOCK_SYSTEM"
-      uri: "https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com"
+      uri: "<Your mockserver URL>"
 
 ```
 In case you are working on this code jam after the seminar, make sure to substitute the mock server URL with your own one.
