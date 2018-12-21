@@ -57,7 +57,7 @@ erp:
 #      uri: "https://myXXXXXX.s4hana.ondemand.com"
 #      proxy: "http://proxy:8080"
     - alias: "MOCK_SYSTEM"
-      uri: "<Your mockserver URL>"
+      uri: "Your mockserver URL"
 
 ```
 In case you are working on this code jam after the seminar, make sure to substitute the mock server URL with your own one.
@@ -80,7 +80,7 @@ After you have successfully built the project, you can deploy it locally as foll
 * Configure your local environment by setting the following environment variables. Replace the URL and credentials with the appropriate values for your SAP S/4HANA Cloud system in case you are not using the provided mock server.
   * Adapt the below commands for setting environment variables as appropriate for your operating system. The following commands are for the Windows command line.
 ```
-set destinations=[{name: 'ErpQueryEndpoint', url: '<your mock server URL>', username: 'USERNAME', password: 'PASSWORD'}]
+set destinations=[{name: 'ErpQueryEndpoint', url: 'your mock server URL', username: 'USERNAME', password: 'PASSWORD'}]
 set ALLOW_MOCKED_AUTH_HEADER=true
 ```
 * Run the following commands to deploy the application on a local server.
@@ -177,7 +177,7 @@ Then, you can create a new destination endpoint by choosing "New Destination".
 For the S/4HANA connectivity, create the destination with the following parameters: <br>
 Name: ErpQueryEndpoint <br>
 Type: HTTP <br>
-URL: https://bupa-mock-odata-sagittal-inserter.cfapps.eu10.hana.ondemand.com <br>
+URL: your mock server URL <br>
 Proxy type: Internet <br>
 Authentication: NoAuthentication <br>
 
