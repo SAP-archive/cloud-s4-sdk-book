@@ -4,12 +4,15 @@
 ## Builder to hide credentials from image
 FROM alpine:latest AS builder
 
-RUN apk add curl
+RUN apk add curl libxml2-utils
 
 ARG API_KEY
 RUN curl -H "apikey: $API_KEY"\
     "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/\$metadata"\
-    -o "API_BUSINESS_PARTNER.edmx"
+    | xmllint --format - > API_BUSINESS_PARTNER.edmx
+
+COPY business-partner/API_BUSINESS_PARTNER.patch .
+RUN patch API_BUSINESS_PARTNER.edmx API_BUSINESS_PARTNER.patch
 
 ## Node.js app
 FROM node:8
