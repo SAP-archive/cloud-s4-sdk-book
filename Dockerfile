@@ -1,3 +1,6 @@
+## Build docker image of mock server by passing in "--build-arg API_KEY=<API key from SAP API Business Hub>"
+## ----
+
 ## Builder to hide credentials from image
 FROM alpine:latest AS builder
 
