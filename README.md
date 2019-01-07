@@ -49,7 +49,7 @@ set ALLOW_MOCKED_AUTH_HEADER=true
 ```
 * Run the following commands to deploy the application on a local server.
 ```
-mvn tomee:run -pl application
+mvn spring-boot:run -pl application
 ```
 * Open the URL http://localhost:8080/address-manager in your browser to see the frontend of the launched application.
 
