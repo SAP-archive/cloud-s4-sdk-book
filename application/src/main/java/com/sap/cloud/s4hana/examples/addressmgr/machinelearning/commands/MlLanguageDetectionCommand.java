@@ -24,7 +24,6 @@ import com.sap.cloud.sdk.frameworks.hystrix.Command;
 
 public class MlLanguageDetectionCommand extends Command<Detection> {
     private static final Logger logger = CloudLoggerFactory.getLogger(MlLanguageDetectionCommand.class);
-    public static final String LANGUAGE_DETECTION_SUFFIX = "/api/v2alpha1/text/lang-detect";
 
     private final MlService mlService;
     private final String input;
@@ -48,7 +47,7 @@ public class MlLanguageDetectionCommand extends Command<Detection> {
                 CLIENT_ID_JSON_PATH, CLIENT_SECRET_JSON_PATH, SERVICE_LOCATION_JSON_PATH);
 
         // Get service URL
-        String languageDetectionUrl = mlService.getServiceLocationInfo() + LANGUAGE_DETECTION_SUFFIX;
+        String languageDetectionUrl = mlService.getServiceLocationInfo();
 
         URI serviceUrl = new URI(languageDetectionUrl);
 
