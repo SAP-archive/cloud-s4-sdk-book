@@ -95,7 +95,7 @@ At this phase, we do not have any data returned from the application and we see 
 ## <a name="task1">Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model</a>
 In this step, we will investigate two queries to SAP S/4HANA to retrieve business partner data. Firstly, we will retrieve the list of business partners for the list view in  the application. Secondly, we will retrieve detailed data a single business partner by ID.
 
-### Implementation of the SAP S/4HANA Integration
+### Implement the SAP S/4HANA Integration
 Start the development of queries by looking into the class BusinessPartnerServlet, which is the servlet exposing the business partner APIs. 
 We could use any API framework here, such as JAX-RS or Spring. However, we use a servlet here for simplicity. Looking into the servlet, we can see that the main functionality is moved out into the commands GetAllBusinessPartnersCommand and GetSingleBusinessPartnerByIdCommand. Open and implement the command *GetAllBusinessPartnersCommand* as explained below.
 
@@ -117,7 +117,7 @@ mvn clean install
 
 If the uncommented test do not show errors, congratulations! You have successfully integrated SAP S/4HANA with your application. 
 
-### Local Deployment
+### Deploy Local
 You can also deploy the application locally and see the business partner data from the S/4HANA Mock server:
 ```
 mvn tomee:run -pl application
@@ -125,7 +125,7 @@ mvn tomee:run -pl application
 
 ![Business partner address manager](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/AddressManager.PNG)
 
-### Deployment in SAP Cloud Platform, Cloud Foundry
+### Deploy in SAP Cloud Platform, Cloud Foundry
 Generally, you can use several ways to deploy your applications in SAP Cloud Platform. The recommended way to do it in productive applications is to use the [Continuous Delivery Toolkit](https://github.com/SAP/cloud-s4-sdk-pipeline), which also ensures that your source code is properly tested and checked before being deployed. 
 ALternatively, you can do it manually using the [CLI of Cloud Foundry](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html).
 Here, we describe how to deploy your application manually using the SAP Cloud Platform, Cloud Foundry Cockpit. Necessary preliminary steps are also described here.
