@@ -126,8 +126,8 @@ mvn tomee:run -pl application
 ![Business partner address manager](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/AddressManager.PNG)
 
 ### Deploy in SAP Cloud Platform, Cloud Foundry
-Generally, you can use several ways to deploy your applications in SAP Cloud Platform. The recommended way to do it in productive applications is to use the [Continuous Delivery Toolkit](https://github.com/SAP/cloud-s4-sdk-pipeline), which also ensures that your source code is properly tested and checked before being deployed. 
-ALternatively, you can do it manually using the [CLI of Cloud Foundry](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html).
+Generally, you can use several ways to deploy your applications in SAP Cloud Platform. The recommended way to do it for productive applications is to use the [Continuous Delivery Toolkit](https://github.com/SAP/cloud-s4-sdk-pipeline), which also ensures that your source code is properly tested and checked before being deployed. 
+Alternatively, you can do it manually using the [CLI of Cloud Foundry](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html).
 Here, we describe how to deploy your application manually using the SAP Cloud Platform, Cloud Foundry Cockpit. Necessary preliminary steps are also described here.
 * Create service instances for S/4HANA connectivity
 * Create destination endpoints
