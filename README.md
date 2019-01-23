@@ -214,12 +214,12 @@ mvn clean install
 In the cloud platform cockpit on the level of your development space choose Services -> Service Marketplace and choose ml-foundation-trial-beta. Instantiate the service with the defailt parameters and give it the name my-ml.
 ![SAP Leonardo Machine Learning](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/ml.PNG)
 
-![Service bindings in the deployment descriptor manifest.yml](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/manifest.PNG)
-
 ### Deploy the application using the SAP Cloud Platform cockpit
 Finally, we will deploy the application in your development space in SAP Cloud Platform, Cloud Foundry, as it was done in the previous task.
 
 Firstly, go to your project *manifest.yml* file and add the service my-ml into the section "services" to make sure that the newly create machine learning service will be bound to our application. Please, see in the example below:
+
+![Service bindings in the deployment descriptor manifest.yml](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/manifest.PNG)
 
 ```
 ---
