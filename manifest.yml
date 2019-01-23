@@ -14,4 +14,3 @@ applications:
   services:
     - my-xsuaa
     - my-destination
-    - my-ml
