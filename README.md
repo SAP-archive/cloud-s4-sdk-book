@@ -143,7 +143,7 @@ Navigate to the class *MlTranslationCommand* and investigate its methods. Here, 
 In this method, we already provide the logic for the execution of the translation request using the instance of *LeonardoMlService* class and retrive the resulting payload. The rest is left for you. To make the translation work in integration with your application, add the following steps into the *executeRequest* method:
 
 * In you IDE, navigate to the LeonardoMlService, which is a part of the *machinelearning* package of the SAP S/4HANA Cloud SDK and investigate its methods. Also, looks through the other classes and methods provided in this library. You may also use the [Javadoc for those classes](https://help.sap.com/http.svc/rc/76ceac609c19443099fca151cf9c9e21/1.0/en-US/com/sap/cloud/sdk/services/scp/machinelearning/package-summary.html) to get more information.
-* Instantiate the *LeonardoMlService* class, wich is a part of the SAP S/4HANA Cloud SDK component for ML services integration. Consider that you use trial beta as Cloud Foundry Leonardo ML service type and Translation as a Leonardo ML service type.
+* Instantiate the *LeonardoMlService* class, which is a part of the SAP S/4HANA Cloud SDK component for ML services integration. Consider that you use trial beta as Cloud Foundry Leonardo ML service type and Translation as a Leonardo ML service type.
 * Create an object request of type *HttpPost*
 * Create an object body of type *HttpEntity* (*StringEntity*). Use *requestJson* and *ContentType.APPLICATION_JSON* to instantiate the object.
 * Add the created body to the request using the method *setEntity*.
