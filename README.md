@@ -117,7 +117,7 @@ mvn clean install
 
 If the uncommented test do not show errors, congratulations! You have successfully integrated SAP S/4HANA with your application. 
 
-### Deploy Local
+### Deploy Locally
 You can also deploy the application locally and see the business partner data from the S/4HANA Mock server:
 ```
 mvn tomee:run -pl application
