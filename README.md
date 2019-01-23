@@ -93,8 +93,9 @@ mvn tomee:run -pl application
 At this phase, we do not have any data returned from the application and we see the runtime exception in the console, saying that we need to implement the functionality. Let us start with the first step: integrating SAP S/4HANA into this application using the SAP S/4HANA Cloud SDK.
 
 ## <a name="task1">Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model</a>
-In this step, we will implement two queries to SAP S/4HANA to retrieve business partner data. Firstly, we will retrieve the list of business partners for the list view in  the application. Secondly, we will retrieve detailed data a single business partner by ID.
+In this step, we will investigate two queries to SAP S/4HANA to retrieve business partner data. Firstly, we will retrieve the list of business partners for the list view in  the application. Secondly, we will retrieve detailed data a single business partner by ID.
 
+### Implementation of the SAP S/4HANA Integration
 Start the development of queries by looking into the class BusinessPartnerServlet, which is the servlet exposing the business partner APIs. 
 We could use any API framework here, such as JAX-RS or Spring. However, we use a servlet here for simplicity. Looking into the servlet, we can see that the main functionality is moved out into the commands GetAllBusinessPartnersCommand and GetSingleBusinessPartnerByIdCommand. Open and implement the command *GetAllBusinessPartnersCommand* as explained below.
 
@@ -116,12 +117,67 @@ mvn clean install
 
 If the uncommented test do not show errors, congratulations! You have successfully integrated SAP S/4HANA with your application. 
 
+### Local Deployment
 You can also deploy the application locally and see the business partner data from the S/4HANA Mock server:
 ```
 mvn tomee:run -pl application
 ```
 
 ![Business partner address manager](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/AddressManager.PNG)
+
+### Deployment in SAP Cloud Platform, Cloud Foundry
+Generally, you can use several ways to deploy your applications in SAP Cloud Platform. The recommended way to do it in productive applications is to use the [Continuous Delivery Toolkit](https://github.com/SAP/cloud-s4-sdk-pipeline), which also ensures that your source code is properly tested and checked before being deployed. 
+ALternatively, you can do it manually using the [CLI of Cloud Foundry](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html).
+Here, we describe how to deploy your application manually using the SAP Cloud Platform, Cloud Foundry Cockpit. Necessary preliminary steps are also described here.
+* Create service instances for S/4HANA connectivity
+* Create destination endpoints
+* Deploy the application using the SAP Cloud Platform cockpit
+
+Firstly, create an instance of the destination service to connect to SAP S/4HANA (mock) system. For that, in the cloud platform cockpit on the level of your development space choose Services -> Service Marketplace and choose the destination service from the catalog.
+Instantiate the service with all the default parameters. Give the name my-destination to your instance.
+![Destination service in the Service Marketplace](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/destination.PNG)
+
+Secondly, create an instance of the Authorization and Trust Management service. In the Service Marketplace, choose the Authorization and Trust Management service and instantiate it with the default parameters. Give the name my-xsuaa to your service instance.
+![Authorization and Trust Management](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/uaa.PNG)
+
+Next, we will create a destination endpoint to connect to the S/4HANA mock server.
+You can find the configuration of the destination endpoints on the level of your subaccount by choosing Connectivity -> Destinations.
+Then, you can create a new destination endpoint by choosing "New Destination".
+
+For the S/4HANA connectivity, create the destination with the following parameters: <br>
+Name: ErpQueryEndpoint <br>
+Type: HTTP <br>
+URL: https://odata-mock-server-shy-sitatunga.cfapps.eu10.hana.ondemand.com/ <br>
+Proxy type: Internet <br>
+Authentication: NoAuthentication <br>
+
+Now, we are ready to deploy our application in SAP Cloud Platform, Cloud Foundry.
+Firstly, go to your project *manifest.yml* file and adapt the application name, adding your P-user to avoid domain collisions with the other participants. For example:
+
+```
+---
+applications:
+
+- name: address-manager-ml-Pxxxxxxxxxx
+  memory: 768M
+  random-route: true
+  path: application/target/address-manager-application.war
+  buildpack: sap_java_buildpack
+  env:
+    TARGET_RUNTIME: tomee
+    JBP_CONFIG_SAPJVM_MEMORY_SIZES: 'metaspace:96m..'
+    SET_LOGGING_LEVEL: '{ROOT: INFO, com.sap.cloud.sdk: INFO}'
+    ALLOW_MOCKED_AUTH_HEADER: true
+  services:
+    - my-xsuaa
+    - my-destination
+```
+
+Secondly, in your development space, choose Application -> Deploy Application. Choose the location of your archive (see the folder application/target/address-manager-application.war) and the corresponding manifest.yml file, as shown in the Figure.
+
+![Application Deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deployment.PNG)
+
+When the application is deployed, you can drill down into the application, choose the link for the application and append "/address-manager" to it. You should be able to see the business partner coming back from the mock server.
 
 In the next step, we will see how to integrate one of the SAP Leonardo Machine Learning services in few lines of code.
 
@@ -130,8 +186,7 @@ In this step, we will integrate SAP Leonardo Machine Learning services into an a
 
 There are several steps involved to make the integration with SAP Leonardo ML services work, those steps are described in details below:
 * Implement the integration with ML services in Java Backend
-* Create service instances for S/4HANA connectivity and Leonardo ML integration
-* Create destination endpoints
+* Create service instance for Leonardo ML integration
 * Deploy the application using the SAP Cloud Platform cockpit
 
 ### Implement the integration with ML services in Java Backend 
@@ -155,38 +210,16 @@ Build the latest version using the command:
 mvn clean install
 ```
 
-### Create service instances for S/4HANA connectivity and Leonardo ML integration
-Firstly, create an instance of the destination service to connect to SAP S/4HANA (mock) system. For that, in the cloud platform cockpit on the level of your development space choose Services -> Service Marketplace and choose the destination service from the catalog.
-Instantiate the service with all the default parameters. Give the name my-destination to your instance.
-![Destination service in the Service Marketplace](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/destination.PNG)
-
-Secondly, create an instance of the Authorization and Trust Management service. In the Service Marketplace, choose the Authorization and Trust Management service and instantiate it with the default parameters. Give the name my-xsuaa to your service instance.
-![Authorization and Trust Management](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/uaa.PNG)
-
-Thirdly, create an instance of SAP Leonardo ML service. The service can be found in the Service Marketplace under the name ml-foundation-trial-beta. Instantiate the service with the defailt parameters and give it the name my-ml.
+### Create service instances for Leonardo ML integration
+In the cloud platform cockpit on the level of your development space choose Services -> Service Marketplace and choose ml-foundation-trial-beta. Instantiate the service with the defailt parameters and give it the name my-ml.
 ![SAP Leonardo Machine Learning](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/ml.PNG)
-
-Take a look at the manifest.yml file in your application. This file is the deployment descriptor that contains metainformation required for the deployment, including the service bindings. We have just created the service instances in SAP Cloud Platform cockpit. Exactly this service instances will be bound to the application after it is deployed, as this is specified in the manifest.yml.
 
 ![Service bindings in the deployment descriptor manifest.yml](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/manifest.PNG)
 
-### Create destination endpoints
-Next, we will create a destination endpoint to connect to the S/4HANA mock server.
-You can find the configuration of the destination endpoints on the level of your subaccount by choosing Connectivity -> Destinations.
-Then, you can create a new destination endpoint by choosing "New Destination".
-
-For the S/4HANA connectivity, create the destination with the following parameters: <br>
-Name: ErpQueryEndpoint <br>
-Type: HTTP <br>
-URL: https://odata-mock-server-shy-sitatunga.cfapps.eu10.hana.ondemand.com/ <br>
-Proxy type: Internet <br>
-Authentication: NoAuthentication <br>
-
 ### Deploy the application using the SAP Cloud Platform cockpit
+Finally, we will deploy the application in your development space in SAP Cloud Platform, Cloud Foundry, as it was done in the previous task.
 
-Finally, we will deploy the application in your development space in SAP Cloud Platform, Cloud Foundry. You can do it using the CLI of Cloud Foundry or using the SAP Cloud Platform Cockpit. Here, we show how to do it using the cockpit.
-
-Firstly, go to your project *manifest.yml* file and adapt the application name, adding your P-user to avoid domain collisions with the other participants. For example:
+Firstly, go to your project *manifest.yml* file and add the service my-ml into the section "services" to make sure that the newly create machine learning service will be bound to our application. Please, see in the example below:
 
 ```
 ---
