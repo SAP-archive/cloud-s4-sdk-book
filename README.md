@@ -179,6 +179,7 @@ Secondly, in your development space, choose Application -> Deploy Application. C
 
 When the application is deployed, you can drill down into the application, choose the link for the application and append "/address-manager" to it. You should be able to see the business partner coming back from the mock server.
 
+If you still have time, continue with the next task.
 In the next step, we will see how to integrate one of the SAP Leonardo Machine Learning services in few lines of code.
 
 ## <a name="task2">Task 2: Integrate SAP Leonardo Machine Learning service to provide translations</a>
@@ -241,7 +242,7 @@ applications:
     - my-ml
 ```
 
-Secondly, in your development space, remove the previous instance of the application that you have deployed in Task 1. Note that in productive scenarios this won't be required and you would achieve no downtime with the blue-green deployments with tools such as the [Continuous Delivery Toolkit](https://blogs.sap.com/2017/09/20/continuous-integration-and-delivery/).
+In case you deploy using the Cloud Platform Cockpit and if you have already deployed the application in SAP Cloud Platform in Task 1, you would need to remove the previous instance (this is not required if you use Command Line Interface for the deployment). Also note that in productive scenarios the delition won't be required and you will achieve no downtime with the blue-green deployments with tools such as the [Continuous Delivery Toolkit](https://blogs.sap.com/2017/09/20/continuous-integration-and-delivery/).
 
 Then choose Application -> Deploy Application. Choose the location of your archive (see the folder application/target/address-manager-application.war) and the corresponding manifest.yml file, as shown in the Figure.
 
