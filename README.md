@@ -241,7 +241,9 @@ applications:
     - my-ml
 ```
 
-Secondly, in your development space, choose Application -> Deploy Application. Choose the location of your archive (see the folder application/target/address-manager-application.war) and the corresponding manifest.yml file, as shown in the Figure.
+Secondly, in your development space, remove the previous instance of the application that you have deployed in Task 1. Note that in productive scenarios this won't be required and you would achieve no downtime with the blue-green deployments with tools such as the [Continuous Delivery Toolkit](https://blogs.sap.com/2017/09/20/continuous-integration-and-delivery/).
+
+Then choose Application -> Deploy Application. Choose the location of your archive (see the folder application/target/address-manager-application.war) and the corresponding manifest.yml file, as shown in the Figure.
 
 ![Application Deployment](https://github.com/SAP/cloud-s4-sdk-book/blob/ml-codejam/docs/pictures/deployment.PNG)
 
