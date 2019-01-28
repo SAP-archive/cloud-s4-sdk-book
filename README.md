@@ -98,7 +98,7 @@ mvn tomee:run -pl application
 At this phase, we do not have any data returned from the application and we see the runtime exception in the console, saying that we need to implement the functionality. Let us start with the first step: integrating SAP S/4HANA into this application using the SAP S/4HANA Cloud SDK.
 
 ## <a name="task1">Task 1: Retrieve SAP S/4HANA data using the SAP S/4HANA Cloud SDK virtual data model</a>
-In this step, we will investigate two queries to SAP S/4HANA to retrieve business partner data. Firstly, we will retrieve the list of business partners for the list view in  the application. Secondly, we will retrieve detailed data a single business partner by ID.
+In this step, we will investigate two queries to SAP S/4HANA to retrieve business partner data. Firstly, we will retrieve the list of business partners for the list view in  the application. Secondly, we will take a look at the query retrieving detailed data of a single business partner by ID.
 
 ### Implement the SAP S/4HANA Integration
 Start the development of queries by looking into the class BusinessPartnerServlet, which is the servlet exposing the business partner APIs. 
