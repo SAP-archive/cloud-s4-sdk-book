@@ -1,40 +1,14 @@
-#Project Setup
 general:
-  productiveBranch: 'master'
-
-#Steps Specific Configuration
+  productiveBranch: 'infrastructure-integration-test'
 steps:
-  mavenExecute:
-#    dockerImage: 'maven:3.6.0-jdk-8'
-    projectSettingsFile : ''
-
   cloudFoundryDeploy:
-#    dockerImage: 's4sdk/docker-cf-cli'
-    smokeTestStatusCode: '200'
-
-
-#Stage Specific Configurations
+    dockerImage: localhost:5000/ppiper/cf-cli
 stages:
-  staticCodeChecks:
-    findbugsExcludesFile: '' #Path to findbugs exclude file
-    pmdExcludes: '' # List or ANT style patterns
-
-#  integrationTests:
-#    credentials:
-#      - alias: ''
-#        credentialId: ''
-
-#  s4SdkQualityChecks:
-#    jacocoExcludes:
-#      - ''
-#    nonErpDestinations:
-#      - ''
-
-#  productionDeployment:
-#    cfTargets:
-#      - org: 'org'
-#        space: 'Productive'
-#        apiEndpoint: 'https://'
-#        appName: 'appName'
-#        manifest: 'manifest.yml'
-#        credentialsId: 'credentialsId'
+  productionDeployment:
+    cfTargets:
+      - org: 'P2001099548trial_trial'
+        space: 'dev'
+        apiEndpoint: 'https://api.cf.eu10.hana.ondemand.com'
+        appName: 'devops-docker-images-IT'
+        manifest: 'manifest.yml'
+        credentialsId: 'devops-docker-images-IT-cf'
