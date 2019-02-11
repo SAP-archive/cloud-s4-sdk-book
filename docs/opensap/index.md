@@ -104,7 +104,7 @@ mvn archetype:generate ^
 The .gitignore file referenced in unit can be found [here](http://tiny.cc/s4sdk-gitignore).
 
 ##### Troubleshooting:
-* When starting the application locally, make sure the run the command `mvn tomee:run` in the application folder of your project. Otherwise, the command might fail with an error message like: 
+* When starting the application locally, make sure to run the command `mvn tomee:run` in the application folder of your project. Otherwise, the command might fail with an error message like: 
 `No plugin found for prefix 'tomee'`.
 
 * If your subacount on SCP could not be created, please do the following:
@@ -116,7 +116,7 @@ Create a space and assign quota to the subaccount by going to the global account
 Add 'Application Runtime' to your subaccount.
 
 * By default, the command `mvn tomee:run` will start a server on port 8080 and will also listen to some additional helper ports.
-If these ports are already block by another application, the start of the address manager will fail. 
+If these ports are already blocked by another application, the start of the address manager will fail. 
 However, in this case you can change the port, e.g. by providing another port: `mvn -Dtomee-plugin.http=8180 clean package tomee:run`. 
 All available parameters can be found in the [documentation](http://tomee.apache.org/maven/run-mojo.html) of the tomee maven plugin.
 
@@ -136,13 +136,13 @@ As in the last unit, you can continue working with your local example applicatio
 
 In case you want to download a fresh copy of the project as a starting point, checkout the git branch `course/2_2_start` or download the example project as [zip file](http://tiny.cc/s4sdk-2-2-start-zip).
 
-In this unit, you will learn te basics about how to build an extension application for S/4HANA Cloud and On-Premise. 
+In this unit, you will learn the basics about how to build an extension application for S/4HANA Cloud and On-Premise. 
 You can use your own S/4HANA for the experiments. 
-To make a more convenient, you can also use a mock server.
+To make following the course more convenient, also if you have no S/4HANA system at hand, you can also use a mock server.
 Please follow the [guide](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html) as supplementary material on how to setup the mock server locally or on SAP Cloud Platform.
 The guide also explains how to [connect your application](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html#connect-your-application-to-the-mock-server) to the mock server.
 
-The final result of this unit can be found int the branch `course/2_2_end`. You can also download the [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_2_end.zip).
+The final result of this unit can be found in the branch `course/2_2_end`. You can also download the [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_2_end.zip).
 
 #### Unit 3: Securing the Extension App
 
