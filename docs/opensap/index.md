@@ -63,7 +63,7 @@ To inspect the source code of a particular state, either checkout the correspond
 
 ## Example Code and Additional Material
 
-This section describes where to find the example code for the specific units. If exists, it also links additional material and important commands for each unit.   
+This section describes where to find the example code for the specific units. It also links additional material and important commands for each unit, where applicable.
 
 ### Week 1 Introducing Intelligent ERP
 
@@ -73,7 +73,7 @@ Just enjoy watching the videos for units 1 to 4. There is no preparation require
 
 #### Unit 5 Building a Hello World Extension App
 
-Before starting with his unit make sure you fulfilled you requirements listed above.
+Before starting with his unit make sure you fulfilled the requirements listed above.
 
 In the openSAP course, you are asked to create a new project from our archetypes.
 The command to generate a new project is the following.
