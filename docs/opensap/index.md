@@ -103,75 +103,140 @@ mvn archetype:generate ^
 
 The .gitignore file referenced in unit can be found [here](http://tiny.cc/s4sdk-gitignore).
 
-## Week 2 Building Side-by-Side Extensions
+##### Troubleshooting:
+When starting the application locally, make sure the run the command `mvn tomee:run` in the application folder of your project. Otherwise, the command might fail with an error message like: 
+`No plugin found for prefix 'tomee'`.
 
-### Unit 1: Building a Basic Extension App
+If your subacount on SCP could not be created, please do the following:
+Please try to create a new subaccount. 
+You can delete the old one. 
+Choose another name and value for the subdomain. 
+Afterwards, enable Cloud Foundry in your subaccount to create an organization. 
+Create a space and assign quota to the subaccount by going to the global account and select 'Entitelments' on the left. 
+Add 'Application Runtime' to your subaccount.
+
+### Week 2 Building Side-by-Side Extensions
+
+#### Unit 1: Building a Basic Extension App
 
 In this unit, please continue with the state of your example project as it was at the end of the last unit.
- However, please also copy over some [additional resources](http://tiny.cc/s4sdk-2-1-copyover-zip), e.g. front-end, into your project as explained in the video. 
- Extract the zip file and copy the src folder into the application folder of your project.
- 
- In case you want to download a fresh copy of the project as a starting point, checkout the git branch `course/2_1_start` or download the example project as [zip file](http://tiny.cc/s4sdk-2-1-start-zip).
+However, please also copy over some [additional resources](http://tiny.cc/s4sdk-2-1-copyover-zip), e.g. front-end, into your project as explained in the video. 
+Extract the zip file and copy the src folder into the application folder of your project.
 
-### Unit 2: Enhancing the Extension App
+In case you want to download a fresh copy of the project as a starting point, checkout the git branch `course/2_1_start` or download the example project as [zip file](http://tiny.cc/s4sdk-2-1-start-zip).
+
+#### Unit 2: Enhancing the Extension App
 
 As in the last unit, you can continue working with your local example application as it was at the end of the unit.
 
- In case you want to download a fresh copy of the project as a starting point, checkout the git branch `course/2_2_start` or download the example project as [zip file](http://tiny.cc/s4sdk-2-2-start-zip).
- 
+In case you want to download a fresh copy of the project as a starting point, checkout the git branch `course/2_2_start` or download the example project as [zip file](http://tiny.cc/s4sdk-2-2-start-zip).
+
 In this unit, you will learn te basics about how to build an extension application for S/4HANA Cloud and On-Premise. 
 You can use your own S/4HANA for the experiments. 
 To make a more convenient, you can also use a mock server.
 Please follow the [guide](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html) as supplementary material on how to setup the mock server locally or on SAP Cloud Platform.
- The guide also explains how to [connect your application](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html#connect-your-application-to-the-mock-server) to the mock server.
- 
- The final result of this unit can be found int the branch `course/2_2_end`. You can also download the [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_2_end.zip).
- 
- ### Unit 3: Securing the Extension App
+The guide also explains how to [connect your application](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html#connect-your-application-to-the-mock-server) to the mock server.
+
+The final result of this unit can be found int the branch `course/2_2_end`. You can also download the [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_2_end.zip).
+
+#### Unit 3: Securing the Extension App
 
 In this unit, there already is a prepared demo application you should work with.
 It is located in the branch `course/2_3_security` of the example repository.
 You can also download the corresponding [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_3_security.zip)
 
 Please follow the instructions in the [security setup guide](http://tiny.cc/s4sdk-security-setup) to prepare your account to setup security for the application.
- Please follow this guide before watching the demo starting after slide 7 of this unit.
+Please follow this guide before watching the demo starting after slide 7 of this unit.
 
- ### Unit 4: Introducing Multitenancy
- 
- As in the last unit, there is already a prepared demo application you should work with.
- It is located in the branch `course/2_4_multitenancy` of example repository.
- You can also download the corresponding [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_4_multitenancy.zip)
- 
- The relevant commands and steps to follow and try out the demo in the openSAP video can be found [here](https://github.com/SAP/cloud-s4-sdk-book/blob/course/2_4_multitenancy/docs/multitenancy/setup.md).
- 
-  ### Unit 5: Adding Automated Tests
-  
-  To follow the demo shown in the video, please start with the version in the git branch `course/2_5_testing`. 
- You can also download the corresponding [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_5_testing.zip).
- 
- *Note for IntelliJ users Please disable the `argLine` option in File>Settings as shown below.*
- 
- ![Disable argline](../assets/argline.png)
- 
-  The final result of this unit can be found int the branch `course/2_5_testing_practice`. 
-  You can download the final result as [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_5_testing_practice.zip).
-  This version is also the starting point if you also want to implement additional tests as suggested in the unit.
- 
-## Week 3 Delivering High Quality Extensions
+#### Unit 4: Introducing Multitenancy
 
-## Week 4 Advanced Extensibility
+As in the last unit, there is already a prepared demo application you should work with.
+It is located in the branch `course/2_4_multitenancy` of example repository.
+You can also download the corresponding [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_4_multitenancy.zip)
 
-## Errata
+The relevant commands and steps to follow and try out the demo in the openSAP video can be found [here](https://github.com/SAP/cloud-s4-sdk-book/blob/course/2_4_multitenancy/docs/multitenancy/setup.md).
 
-### Week 3
+#### Unit 5: Adding Automated Tests
 
-#### Unit 2
+To follow the demo shown in the video, please start with the version in the git branch `course/2_5_testing`. 
+You can also download the corresponding [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_5_testing.zip).
 
-* In the demo for creating a Jenkins job, we used the repository `https://github.com/fwilhe/address-manager` as an example.
-    We recommend to use your own `address-manager` repository (for example `https://github.com/{your-GitHub-username}/address-manager`) as the branch source in Jenkins.
+*Note for IntelliJ users Please disable the `argLine` option in File>Settings as shown below.*
 
-### Unit 3
+![Disable argline](../assets/argline.png)
 
-* In the description of automatic versioning, the term "released" is used where "deployed" should have been used.
-    Using feature toggles, it is possible to decouple _deployment_ and _release_ of features.
-    This process allows us to activate features which are not production ready yet for individual users and _release_ them to all users later.
+The final result of this unit can be found in the branch `course/2_5_testing_practice`. 
+You can download the final result as [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_5_testing_practice.zip).
+This version is also the starting point if you also want to implement additional tests as suggested in the unit.
+
+### Week 3 Delivering High Quality Extensions
+
+#### Unit 1: Introducing DevOps and Continuous Delivery
+
+Just enjoy watching the video. There is no preparation required.
+
+#### Unit 2: Rapid Setup of Continuous Delivery
+
+To follow this unit, we suggest to continue with teh final result of Week 2 Unit 5. 
+The final result of this unit can be found in the branch `course/2_5_testing_practice`. 
+You can download the final result as [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_5_testing_practice.zip).
+
+Make sure that you commit and push your version of the example application to a version control system, such as Github.com, which is accessible from your server you use to run the Continuous Delivery server.
+We learned how to do that in Week 1 Unit 5 of this course.
+In the demo for creating a Jenkins job, we used the repository `https://github.com/fwilhe/address-manager` as an example.
+We recommend to use your own `address-manager` repository (for example `https://github.com/{your-GitHub-username}/address-manager`) as the branch source in Jenkins.
+
+#### Unit 3: Deep Dive into the Continuous Delivery Pipeline
+
+Just enjoy watching the video. There is no preparation required.
+
+While watch the video, please remember the following remark: In the description of automatic versioning, the term "released" is used where "deployed" should have been used.
+Using feature toggles, it is possible to decouple _deployment_ and _release_ of features.
+This process allows us to activate features which are not production ready yet for individual users and _release_ them to all users later.
+
+#### Unit 4: Adapting the Continuous Delivery Pipeline to Your Needs
+
+To follow the demo in this unit, please continue with your state and repository of your example application which you used in Unit 2 of this week.
+Besides that, no preparation is required.
+
+#### Unit 5: Operating Cloud Applications
+
+To follow this unit we recommend to continue with the version of the example application you used in Week 2 Unit 3 'Securing the Extension App'. 
+
+Please note that the Dynatrace demo is not meant to reproduced by you locally.
+However, if you want to get some experience with Dynatrace, you can use a trial version to reproduce the demo.
+
+### Week 4 Advanced Extensibility
+
+#### Unit 1: Creating and Exposing In-App Extensions
+
+If you have an S/4HANA system at hand, you can use it to follow the demo. 
+Otherwise just enjoy watching the demo.
+You will still be able to follow the demos in the next unit, as the mock server is prepared to serve the in-app extensions.
+
+#### Unit 2: Combining In-App and Side-by-Side Extensions
+
+To follow the demo for retrieving and storing information on the last address check please use the branch `course/4_2_in_app_step1_start`.
+You can also download the version as as [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/4_2_in_app_step1_start.zip). 
+
+The result of the first demo can be found in the branch `course/4_2_in_app_step1_solution`. 
+You can also download the result as [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/4_2_in_app_step1_solution.zip).
+
+To follow the second demo for retrieving social media accounts please use the branch `course/4_2_in_app_step2_start`.
+You can also download the version as as [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/4_2_in_app_step2_start.zip). 
+
+The result of the second demo can be found in the branch `course/4_2_in_app_step2_solution`. 
+You can also download the result as [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/4_2_in_app_step2_solution.zip).
+
+#### Unit 3: Consumption of Advanced Services
+
+To follow the demo in this unit please use the branch `course/4_3_advanced_services_initial`.
+You can also download the version as as [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/4_3_advanced_services_initial.zip). 
+
+The result of the demo can be found in the branch `course/4_3_advanced_services_solution`. 
+You can also download the result as [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/4_3_advanced_services_solution.zip).
+
+#### Unit 4: Reacting to SAP S/4HANA Events
+
+If you are interesting in seeing how eventing can be used in an application checkout the branch `course/4_4_eventing`. 
+You can also download the example as [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/4_4_eventing.zip).
