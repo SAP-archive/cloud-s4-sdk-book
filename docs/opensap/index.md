@@ -7,7 +7,7 @@ title: 'openSAP Course: Create and Deliver Cloud-Native SAP S/4HANA Extensions'
 
 Welcome to our [course](https://open.sap.com/courses/s4h13) on creating and delivering game changing cloud-native SAP S/4HANA extensions.
 This page explains how to use our example code repository and provides setup instructions.
-For each unit we provide the links to the complementary material and other information that help you to succeed in the do it yourself task of this course. 
+For each unit, we provide links to the complementary material and other information that help you to succeed in the do-it-yourself tasks of this course. 
 
 ## Requirements
 
@@ -69,11 +69,13 @@ This section describes where to find the example code for the specific units. If
 
 #### Unit 1 to 4
 
-Just enjoy watching the videos for unit 1 to 4. There is no preparation required.
+Just enjoy watching the videos for units 1 to 4. There is no preparation required.
 
 #### Unit 5 Building a Hello World Extension App
 
 Before starting with his unit make sure you fulfilled you requirements listed above.
+
+In the openSAP course, you are asked to create a new project from our archetypes.
 The command to generate a new project is the following.
 
 For bash:
@@ -118,19 +120,21 @@ As in the last unit, you can continue working with your local example applicatio
  In case you want to download a fresh copy of the project as a starting point, checkout the git branch `course/2_2_start` or download the example project as [zip file](http://tiny.cc/s4sdk-2-2-start-zip).
  
 In this unit, you will learn te basics about how to build an extension application for S/4HANA Cloud and On-Premise. 
-You can use your own S/4HANA for the experiments or use a mock server.
+You can use your own S/4HANA for the experiments. 
+To make a more convenient, you can also use a mock server.
 Please follow the [guide](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html) as supplementary material on how to setup the mock server locally or on SAP Cloud Platform.
  The guide also explains how to [connect your application](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html#connect-your-application-to-the-mock-server) to the mock server.
  
- The final result of this unit can be found int the branch `course/2_2_end`. You can download the [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_2_end.zip).
+ The final result of this unit can be found int the branch `course/2_2_end`. You can also download the [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_2_end.zip).
  
  ### Unit 3: Securing the Extension App
 
-In this unit, there is already a prepared demo application you should work with.
-It is located in the branch `course/2_3_security` of example repository.
+In this unit, there already is a prepared demo application you should work with.
+It is located in the branch `course/2_3_security` of the example repository.
 You can also download the corresponding [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_3_security.zip)
 
-Please follow the instructions in [security setup guide](http://tiny.cc/s4sdk-security-setup) to prepare your account to setup security for the application before watching the demo starting after slide 7 of this unit.
+Please follow the instructions in the [security setup guide](http://tiny.cc/s4sdk-security-setup) to prepare your account to setup security for the application.
+ Please follow this guide before watching the demo starting after slide 7 of this unit.
 
  ### Unit 4: Introducing Multitenancy
  
@@ -150,8 +154,8 @@ Please follow the instructions in [security setup guide](http://tiny.cc/s4sdk-se
  ![Disable argline](../assets/argline.png)
  
   The final result of this unit can be found int the branch `course/2_5_testing_practice`. 
-  You can download the [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_5_testing_practice.zip).
-  This is also the starting point if you also want to implement additional tests as suggested in the unit.
+  You can download the final result as [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_5_testing_practice.zip).
+  This version is also the starting point if you also want to implement additional tests as suggested in the unit.
  
 ## Week 3 Delivering High Quality Extensions
 
