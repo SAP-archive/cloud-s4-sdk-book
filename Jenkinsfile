@@ -1,4 +1,3 @@
-#!/usr/bin/env groovy 
 
 node {
     deleteDir()
