@@ -104,16 +104,21 @@ mvn archetype:generate ^
 The .gitignore file referenced in unit can be found [here](http://tiny.cc/s4sdk-gitignore).
 
 ##### Troubleshooting:
-When starting the application locally, make sure the run the command `mvn tomee:run` in the application folder of your project. Otherwise, the command might fail with an error message like: 
+* When starting the application locally, make sure the run the command `mvn tomee:run` in the application folder of your project. Otherwise, the command might fail with an error message like: 
 `No plugin found for prefix 'tomee'`.
 
-If your subacount on SCP could not be created, please do the following:
+* If your subacount on SCP could not be created, please do the following:
 Please try to create a new subaccount. 
 You can delete the old one. 
 Choose another name and value for the subdomain. 
 Afterwards, enable Cloud Foundry in your subaccount to create an organization. 
-Create a space and assign quota to the subaccount by going to the global account and select 'Entitelments' on the left. 
+Create a space and assign quota to the subaccount by going to the global account and select 'Entitlements' on the left. 
 Add 'Application Runtime' to your subaccount.
+
+* By default, the command `mvn tomee:run` will start a server on port 8080 and will also listen to some additional helper ports.
+If these ports are already block by another application, the start of the address manager will fail. 
+However, in this case you can change the port, e.g. by providing another port: `mvn -Dtomee-plugin.http=8180 clean package tomee:run`. 
+All available parameters can be found in the [documentation](http://tomee.apache.org/maven/run-mojo.html) of the tomee maven plugin.
 
 ### Week 2 Building Side-by-Side Extensions
 
