@@ -20,7 +20,7 @@ You will need the following on your local machine to build and deploy the applic
 * Apache Maven, version 3.5.0, or above
 * Git, version 2.15.0, or above for cloning the repository (Download from the [project homepage](https://git-scm.com/downloads))
 * Cloud Foundry Command Line Interface (cf CLI) (refer to the [install instructions](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html))
-
+* Docker (Required for Week 3) (refer to the [install instructions](https://docs.docker.com/install/))
 Please follow the instructions outlined in [this blog post](https://blogs.sap.com/2017/05/15/step-1-with-sap-s4hana-cloud-sdk-set-up/) to install the JDK and Maven using a package manager on Windows or macOS.
 
 Verify the tools are installed correctly by running the commands `java -version`, `mvn -version`, `cf --version` and `git --version` in a terminal or command prompt.
@@ -182,6 +182,10 @@ Just enjoy watching the video. There is no preparation required.
 
 #### Unit 2: Rapid Setup of Continuous Delivery
 
+Before starting with this unit, please make sure you installed Docker. 
+To do so, follow the [install instructions](https://docs.docker.com/install/) for your operation system.
+If your operation does not support Docker, please use a virtual machine and install Docker there.
+
 To follow this unit, we suggest to continue with teh final result of Week 2 Unit 5. 
 The final result of this unit can be found in the branch `course/2_5_testing_practice`. 
 You can download the final result as [zip file](https://github.com/SAP/cloud-s4-sdk-book/archive/course/2_5_testing_practice.zip).
@@ -190,6 +194,8 @@ Make sure that you commit and push your version of the example application to a 
 We learned how to do that in Week 1 Unit 5 of this course.
 In the demo for creating a Jenkins job, we used the repository `https://github.com/fwilhe/address-manager` as an example.
 We recommend to use your own `address-manager` repository (for example `https://github.com/{your-GitHub-username}/address-manager`) as the branch source in Jenkins.
+
+Additional information on how to use the cx-server can be found in the [operations guide](https://github.wdf.sap.corp/MA/cloud-s4-sdk-pipeline/blob/master/doc/operations/operations-guide.md).
 
 #### Unit 3: Deep Dive into the Continuous Delivery Pipeline
 
