@@ -7,11 +7,14 @@ title: 'openSAP Course: Create and Deliver Cloud-Native SAP S/4HANA Extensions'
 
 Welcome to our [course](https://open.sap.com/courses/s4h13) on creating and delivering game changing cloud-native SAP S/4HANA extensions.
 This page explains how to use our example code repository and provides setup instructions.
-For each unit, we provide links to the complementary material and other information that help you to succeed in the do-it-yourself tasks of this course. 
+In the section [Example Code and Additional Material](#example-code-and-additional-material), there are links to the complementary material and other information that help you to succeed in the do-it-yourself tasks of this course.
+Please follow this section unit by unit while watching the videos of the openSAP course. 
 
 ## Requirements
 
 During the course, we use IntelliJ IDEA for editing the code of our Java projects. You can get your free copy of the community edition [on this website](https://www.jetbrains.com/idea/download/).
+
+Please follow the instructions outlined in [this blog post](https://blogs.sap.com/2017/05/15/step-1-with-sap-s4hana-cloud-sdk-set-up/) to install the JDK and Maven using a package manager on Windows or macOS.
 
 You will need the following on your local machine to build and deploy the application:
 
@@ -21,7 +24,6 @@ You will need the following on your local machine to build and deploy the applic
 * Git, version 2.15.0, or above for cloning the repository (Download from the [project homepage](https://git-scm.com/downloads))
 * Cloud Foundry Command Line Interface (cf CLI) (refer to the [install instructions](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html))
 * Docker (Required for Week 3) (refer to the [install instructions](https://docs.docker.com/install/))
-Please follow the instructions outlined in [this blog post](https://blogs.sap.com/2017/05/15/step-1-with-sap-s4hana-cloud-sdk-set-up/) to install the JDK and Maven using a package manager on Windows or macOS.
 
 Verify the tools are installed correctly by running the commands `java -version`, `mvn -version`, `cf --version` and `git --version` in a terminal or command prompt.
 Check that the environment variable `JAVA_HOME` points to the path of your JDK installation, e.g., `C:\Program Files\path\to\java\jdk1.8.0_72`.
@@ -73,10 +75,21 @@ Just enjoy watching the videos for units 1 to 4. There is no preparation require
 
 #### Unit 5 Building a Hello World Extension App
 
-Before starting with his unit make sure you fulfilled the requirements listed above.
+Before starting with this unit make sure your environment has all the tools installed and configured as listed in the section [Requirements](#requirements).
 
 In the openSAP course, you are asked to create a new project from our archetypes.
 The command to generate a new project is the following.
+
+For cmd (Windows):
+``` cmd
+mvn archetype:generate ^
+"-DarchetypeGroupId=com.sap.cloud.s4hana.archetypes" ^
+"-DarchetypeArtifactId=scp-cf-tomee" ^
+"-DarchetypeVersion=2.1.2" ^
+"-DgroupId=com.sap.cloud.s4hana.examples" ^
+"-DartifactId=address-manager" ^
+"-Dversion=1.0-SNAPSHOT"
+```
 
 For bash:
 
@@ -90,34 +103,23 @@ mvn archetype:generate \
 "-Dversion=1.0-SNAPSHOT"
 ```
 
-For cmd (Windows):
-``` cmd
-mvn archetype:generate ^
-"-DarchetypeGroupId=com.sap.cloud.s4hana.archetypes" ^
-"-DarchetypeArtifactId=scp-cf-tomee" ^
-"-DarchetypeVersion=2.1.2" ^
-"-DgroupId=com.sap.cloud.s4hana.examples" ^
-"-DartifactId=address-manager" ^
-"-Dversion=1.0-SNAPSHOT"
-```
-
 The .gitignore file referenced in unit can be found [here](http://tiny.cc/s4sdk-gitignore).
 
 ##### Troubleshooting:
-* When starting the application locally, make sure to run the command `mvn tomee:run` in the application folder of your project. Otherwise, the command might fail with an error message like: 
+* When starting the application locally, make sure the to the command `mvn tomee:run` in the `application` folder of your project. Otherwise, the command might fail with an error message like: 
 `No plugin found for prefix 'tomee'`.
 
 * If your subacount on SCP could not be created, please do the following:
-Please try to create a new subaccount. 
-You can delete the old one. 
+Delete your subaccount and create a new one on the overview page of your global account.
 Choose another name and value for the subdomain. 
 Afterwards, enable Cloud Foundry in your subaccount to create an organization. 
 Create a space and assign quota to the subaccount by going to the global account and select 'Entitlements' on the left. 
 Add 'Application Runtime' to your subaccount.
 
 * By default, the command `mvn tomee:run` will start a server on port 8080 and will also listen to some additional helper ports.
+One of it is the shutdown port on 8005 which is often occupied on windows.
 If these ports are already blocked by another application, the start of the address manager will fail. 
-However, in this case you can change the port, e.g. by providing another port: `mvn -Dtomee-plugin.http=8180 clean package tomee:run`. 
+However, in this case you can change the port, e.g. by providing another port: `mvn -Dtomee-plugin.http=8180 -Dtomee-plugin.shutdown=8006 clean package tomee:run`. 
 All available parameters can be found in the [documentation](http://tomee.apache.org/maven/run-mojo.html) of the tomee maven plugin.
 
 ### Week 2 Building Side-by-Side Extensions
@@ -185,6 +187,7 @@ Just enjoy watching the video. There is no preparation required.
 Before starting with this unit, please make sure you installed Docker. 
 To do so, follow the [install instructions](https://docs.docker.com/install/) for your operation system.
 If your operation does not support Docker, please use a virtual machine and install Docker there.
+For windows, you need to have Windows 10 Professional and at least 8GB of RAM. 
 
 To follow this unit, we suggest to continue with teh final result of Week 2 Unit 5. 
 The final result of this unit can be found in the branch `course/2_5_testing_practice`. 
@@ -214,8 +217,8 @@ Besides that, no preparation is required.
 
 To follow this unit we recommend to continue with the version of the example application you used in Week 2 Unit 3 'Securing the Extension App'. 
 
-Please note that the Dynatrace demo is not meant to reproduced by you locally.
-However, if you want to get some experience with Dynatrace, you can use a trial version to reproduce the demo.
+Please note that the Dynatrace demo is not meant to reproduced by you. 
+Thus, do not wonder that there is no description on how to prepare this demo and get access to Dynatrace.
 
 ### Week 4 Advanced Extensibility
 
