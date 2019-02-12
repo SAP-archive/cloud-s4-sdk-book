@@ -1,8 +1,5 @@
 general:
-  productiveBranch: 'infrastructure-integration-test'
-steps:
-  cloudFoundryDeploy:
-    dockerImage: localhost:5000/ppiper/cf-cli
+  productiveBranch: 'consumer-test'
 stages:
   productionDeployment:
     cfTargets:
