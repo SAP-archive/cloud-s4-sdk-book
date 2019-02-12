@@ -103,7 +103,7 @@ mvn archetype:generate \
 "-Dversion=1.0-SNAPSHOT"
 ```
 
-The .gitignore file referenced in unit can be found [here](http://tiny.cc/s4sdk-gitignore).
+The .gitignore file referenced in this unit can be found [here](http://tiny.cc/s4sdk-gitignore).
 
 ##### Troubleshooting:
 * When starting the application locally, make sure the to the command `mvn tomee:run` in the `application` folder of your project. Otherwise, the command might fail with an error message like: 
