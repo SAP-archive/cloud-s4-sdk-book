@@ -24,7 +24,7 @@ Master:
   #InitContainerEnv:
   #  - name: jaas_owner
   #    value: "admin"
-  InitContainerEnv:
+  ContainerEnv:
      - name: ON_K8S
        value: "true"
      - name: jaas_owner
@@ -139,6 +139,11 @@ Agent:
   # - type: Secret
   #   secretName: mysecret
   #   mountPath: /var/myapp/mysecret
+  envVars:
+     - name: ON_K8S
+       value: "true"
+     - name: jaas_owner
+       value: "admin"  
   NodeSelector: {}
   # Key Value selectors. Ex:
   # jenkins-agent: v1
