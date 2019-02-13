@@ -51,9 +51,9 @@ Master:
   #   - name: http_proxy
   #     value: "http://192.168.64.1:3128"
   ContainerEnv:
-     - name: ON_K8S
+     - name: "ON_K8S"
        value: "true"
-     - name: jaas_owner
+     - name: "jaas_owner"
        value: "admin"  
   # Set min/max heap here if needed with:
   # JavaOpts: "-Xms512m -Xmx512m"
@@ -277,9 +277,9 @@ Agent:
   # https://github.com/jenkinsci/kubernetes-plugin/tree/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes
   # Pod-wide ennvironment, these vars are visible to any container in the slave pod
   envVars:
-     - name: ON_K8S
+     - name: "ON_K8S"
        value: "true"
-     - name: jaas_owner
+     - name: "jaas_owner"
        value: "admin"
   volumes:
   # - type: Secret
