@@ -25,10 +25,10 @@ Master:
   #  - name: jaas_owner
   #    value: "admin"
   ContainerEnv:
-     - name: ON_K8S
-       value: "true"
      - name: jaas_owner
-       value: "admin"       
+       value: "admin"
+     - name: ON_K8S
+       value: "true"       
   # Set min/max heap here if needed with:
   # JavaOpts: "-Xms512m -Xmx512m"
   # JenkinsOpts: ""
