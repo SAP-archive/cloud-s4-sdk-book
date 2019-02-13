@@ -50,7 +50,7 @@ Master:
   # InitContainerEnv:
   #   - name: http_proxy
   #     value: "http://192.168.64.1:3128"
-  # ContainerEnv:
+  ContainerEnv:
      - name: ON_K8S
        value: "true"
      - name: jaas_owner
