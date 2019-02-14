@@ -195,6 +195,8 @@ You can download the final result as [zip file](https://github.com/SAP/cloud-s4-
 
 Make sure that you commit and push your version of the example application to a version control system, such as Github.com, which is accessible from your server you use to run the Continuous Delivery server.
 We learned how to do that in Week 1 Unit 5 of this course.
+Make sure you configured the systems for the integration tests in the file `systems.yml` as explained in week 2 unit 5.
+
 In the demo for creating a Jenkins job, we used the repository `https://github.com/fwilhe/address-manager` as an example.
 We recommend to use your own `address-manager` repository (for example `https://github.com/{your-GitHub-username}/address-manager`) as the branch source in Jenkins.
 
