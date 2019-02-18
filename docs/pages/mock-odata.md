@@ -52,15 +52,6 @@ This should have the following output.
 ```
 To see an example response of business partners, visit http://localhost:3000/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner.
 
-#### Connect your application to the mock server
-Before running your application using the SAP S/4HANA Cloud SDK locally, you need to set the environment variable `destinations` as follows to connect the application to the mock server.
-Username and password can have any value.
-* Windows command prompt: `set destinations=[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]`
-* Windows PowerShell: `$Env:destinations="[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]"`
-* Linux / MacOS: `export destinations="[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]"`
-
-Afterwards, start the application in the same session with `mvn clean package tomee:run` (within the `application` folder).
-
 ### On SAP Cloud Platform, Cloud Foundry
 #### Prerequisites
 The following tools need to be installed on your local machine.
@@ -81,6 +72,33 @@ urls: bupa-mock-odata-<random-route>.cfapps.eu10.hana.ondemand.com
 Access the mock OData service at that URL, by appending the path `/sap/opu/odata/sap/API_BUSINESS_PARTNER`.
 
 Use your specific URL like `https://bupa-mock-odata-<random-route>.cfapps.eu10.hana.ondemand.com` as the URL for your destination `ErpQueryEndpoint` with any dummy user and password (or choose _No Authentication_ when defining the destination with the destination service on SAP Cloud Platform).
+
+## Connect your application to the mock server
+
+### Run the application locally
+Before running your application using the SAP S/4HANA Cloud SDK locally, you need to set the environment variable `destinations` as follows to connect the application to the mock server.
+Username and password can have any value. 
+The URL should point to the location of your mock server instance, e.g. the local URL (`http://localhost:3000`) or the URL of hte deployment of the mock server to SAP Cloud Platform.
+
+* Windows command prompt: `set destinations=[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]`
+* Windows PowerShell: `$Env:destinations="[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]"`
+* Linux / MacOS: `export destinations="[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]"`
+
+Afterwards, start the application in the same session with `mvn clean package tomee:run` (within the `application` folder).
+
+### Deploy the application to SAP Cloud Platform
+
+To deploy the application to SAP Cloud Platform and connect to an mock server instance configure the destination service on SAP Cloud Platform or define an environment variable in the manifest.yml:
+
+``` yaml
+applications:
+- name: address-manager
+....
+env:
+  ...
+  destinations: [{name: 'ErpQueryEndpoint', url: 'http://url.hana.ondemand.com', username: 'DUMMY', password: 'dummy'}]
+
+```
 
 ## Limitations
 As a mock server, the functionality of the mock OData service is limited to the most essential features. It is by no means a complete OData service compliant with the OData v2 specification. Also, it is beyond the plain API not comparable with the business partner API of SAP S/4HANA Cloud.
