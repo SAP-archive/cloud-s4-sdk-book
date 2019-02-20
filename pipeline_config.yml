@@ -1,5 +1,6 @@
 general:
   productiveBranch: 'consumer-test'
+  collectTelemetryData: false
 stages:
   productionDeployment:
     cfTargets:
