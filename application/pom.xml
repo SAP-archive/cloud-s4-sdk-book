@@ -104,6 +104,16 @@
         <dependency>
             <groupId>com.sap.xs2.security</groupId>
             <artifactId>java-container-security</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.unboundid.components</groupId>
+                    <artifactId>json</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>
