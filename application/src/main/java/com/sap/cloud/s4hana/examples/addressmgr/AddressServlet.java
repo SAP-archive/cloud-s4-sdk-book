@@ -68,7 +68,7 @@ public class AddressServlet extends HttpServlet {
         return new Gson().fromJson(body, BusinessPartnerAddress.class);
     }
 
-    private boolean validateInputForCreate(BusinessPartnerAddress addressToCreate) {
+    private boolean validateInputForCreate(final BusinessPartnerAddress addressToCreate) {
         return !Strings.isNullOrEmpty(addressToCreate.getBusinessPartner());
     }
 
