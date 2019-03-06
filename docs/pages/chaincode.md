@@ -10,7 +10,7 @@ Proceed as follows:
 ```
 jar cvf blacklist_chaincode.zip -C blacklist_chaincode .
 ```
-* Upload the created zip file as chaincode to the channel as described in Chapter 17.3 of the book.
+* Upload the created zip file as chaincode to the channel as described in Chapter 17.3 of the book, with the following additional step: You need to supply a name for the chaincode as first argument. In the dialog to deploy the chaincode, click on *+ Add Argument* and enter `blacklist-chaincode` or similar.
 
 > _Note_: There is no need to compile the Go source code. The SAP Leonardo Blockchain service will compile the go code.
 
