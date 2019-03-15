@@ -44,6 +44,7 @@ function install_jenkins()
 
     # Install Jenkins
     log_info 'Installing Jenkins'
+    helm repo update
     helm install --name jenkins-k8s -f values.yaml stable/jenkins
     log_info 'Jenkins Installation is successfully completed.'
 }
