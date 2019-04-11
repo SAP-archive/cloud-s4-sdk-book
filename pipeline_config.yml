@@ -2,6 +2,9 @@ general:
   productiveBranch: 'consumer-test'
   collectTelemetryData: false
 stages:
+  npmAudit:
+    auditedAdvisories:
+      - 803
   productionDeployment:
     cfTargets:
       - org: 'P2001099548trial_trial'
