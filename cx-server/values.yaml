@@ -10,7 +10,7 @@
 
 Master:
   Name: jenkins-master
-  Image: "ppiper/jenkins-master"
+  Image: "s4sdk/jenkins-master"
   ImageTag: "latest"
   ImagePullPolicy: "Always"
 # ImagePullSecret: jenkins
