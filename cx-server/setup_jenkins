@@ -37,7 +37,7 @@ function install_jenkins()
 {
     # Pull custom values for Jenkins deployment
     log_info 'Get values for Jenkins installation'
-    wget https://raw.githubusercontent.com/SAP/cloud-s4-sdk-book/google-next/cx-server/values.yaml > /dev/null 2>&1
+    wget https://raw.githubusercontent.com/SAP/cloud-s4-sdk-book/K8S/cx-server/values.yaml > /dev/null 2>&1
 
     # Delete if there is existing deplyment (Valid only if the participant retries deployment)
     helm del --purge jenkins-k8s > /dev/null 2>&1 || true
