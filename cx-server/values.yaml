@@ -150,7 +150,7 @@ master:
   #   port: 9000
 
   # List of plugins to be install during Jenkins master start
-  #installPlugins:
+  installPlugins:
 
   # Enable to always override the installed plugins with the values of 'master.installPlugins' on upgrade or redeployment.
   # overwritePlugins: true
