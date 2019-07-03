@@ -11,7 +11,7 @@
 master:
   # Used for label app.kubernetes.io/component
   componentName: "jenkins-master"
-  image: "ppiper/jenkins-master"
+  image: "s4sdk/jenkins-master"
   imageTag: "latest"
   imagePullPolicy: "Always"
   imagePullSecretName:
