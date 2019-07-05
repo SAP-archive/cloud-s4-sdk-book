@@ -39,9 +39,8 @@ public class BusinessPartnerServlet extends HttpServlet {
             if (!validateInput(id)) {
                 logger.warn("Invalid request to retrieve a business partner, id: {}.", id);
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-                        String.format("Invalid business partner ID '%s'. " +
-                                        "Business partner ID must not be empty or longer than 10 characters.",
-                                id));
+                        String.format("Invalid business partner ID. " +
+                                        "Business partner ID must not be empty or longer than 10 characters."));
                 return;
             }
             logger.info("Retrieving business partner with id {}", id);

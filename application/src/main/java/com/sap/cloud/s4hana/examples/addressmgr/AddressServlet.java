@@ -113,8 +113,8 @@ public class AddressServlet extends HttpServlet {
         } catch (Exception e) {
             logger.error("Error while updating address {} in SAP S/4HANA.", addressToUpdate, e);
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-                    String.format("Could not update address %s of business partner %s" +
-                            " due to error while calling SAP S/4HANA.", addressId, businessPartnerId));
+                    String.format("Could not update address of business partner" +
+                            " due to error while calling SAP S/4HANA."));
         }
     }
 
@@ -168,8 +168,8 @@ public class AddressServlet extends HttpServlet {
             logger.error("Error while deleting address {} of business partner {} in SAP S/4HANA.",
                     addressId, businessPartnerId, e);
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-                    String.format("Could not delete address %s of business partner %s" +
-                            " due to error while calling SAP S/4HANA.", addressId, businessPartnerId));
+                    String.format("Could not delete address of business partner" +
+                            " due to error while calling SAP S/4HANA."));
         }
     }
 
