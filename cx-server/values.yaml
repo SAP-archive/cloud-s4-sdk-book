@@ -11,7 +11,7 @@
 master:
   # Used for label app.kubernetes.io/component
   componentName: "jenkins-master"
-  image: "s4sdk/jenkins-master"
+  image: "ppiper/jenkins-master"
   imageTag: "latest"
   imagePullPolicy: "Always"
   imagePullSecretName:
@@ -324,7 +324,7 @@ master:
 
 agent:
   enabled: true
-  image: "s4sdk/jenkins-agent-k8s"
+  image: "ppiper/jenkins-agent-k8s"
   imageTag: "latest"
   customJenkinsLabels: []
   # name of the secret to be used for image pulling
@@ -348,7 +348,7 @@ agent:
   # Configure the attributes as they appear in the corresponding Java class for that type
   # https://github.com/jenkinsci/kubernetes-plugin/tree/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes
   # Pod-wide ennvironment, these vars are visible to any container in the slave pod
-  #envVars:
+  envVars:
   # - name: ON_K8S
   #   value: "true"
   volumes:
