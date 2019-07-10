@@ -5,11 +5,11 @@ general:
 #Steps Specific Configuration
 steps:
   mavenExecute:
-#    dockerImage: 'maven:3.5.0-jdk-8'
+    dockerImage: 'ppiper/mta-archive-builder'
     projectSettingsFile : ''
 
   deployToCfWithCli:
-#    dockerImage: 's4sdk/docker-cf-cli'
+    dockerImage: 's4sdk/docker-cf-cli'
     smokeTestStatusCode: '200'
 
 
