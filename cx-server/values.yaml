@@ -12,7 +12,7 @@ master:
   # Used for label app.kubernetes.io/component
   componentName: "jenkins-master"
   image: "s4sdk/jenkins-master"
-  imageTag: "latest"
+  imageTag: "v21"
   imagePullPolicy: "Always"
   imagePullSecretName:
   # Optionally configure lifetime for master-container
@@ -58,9 +58,9 @@ master:
       cpu: "2000m"
       memory: "4096Mi"
   # Environment variables that get added to the init container (useful for e.g. http_proxy)
-  # initContainerEnv:
-  #   - name: http_proxy
-  #     value: "http://192.168.64.1:3128"
+  initContainerEnv:
+    - name: ON_K8S
+      value: "true"
   # containerEnv:
   #   - name: http_proxy
   #     value: "http://192.168.64.1:3128"
@@ -325,7 +325,7 @@ master:
 agent:
   enabled: true
   image: "s4sdk/jenkins-agent-k8s"
-  imageTag: "latest"
+  imageTag: "v21"
   customJenkinsLabels: []
   # name of the secret to be used for image pulling
   imagePullSecretName:
@@ -349,8 +349,8 @@ agent:
   # https://github.com/jenkinsci/kubernetes-plugin/tree/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes
   # Pod-wide ennvironment, these vars are visible to any container in the slave pod
   envVars:
-  # - name: PATH
-  #   value: /usr/local/bin
+   - name: ON_K8S
+     value: "true"
   volumes:
   # - type: Secret
   #   secretName: mysecret
