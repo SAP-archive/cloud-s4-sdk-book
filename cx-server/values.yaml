@@ -77,8 +77,8 @@ master:
   # jenkinsUriPrefix: "/jenkins"
   # Enable pod security context (must be `true` if runAsUser or fsGroup are set)
   usePodSecurityContext: true
-    runAsUser: 1000
-    fsGroup: 1000
+  runAsUser: 1000
+  fsGroup: 1000
   servicePort: 80
   targetPort: 8080
   # For minikube, set this to NodePort, elsewhere use LoadBalancer
@@ -154,11 +154,6 @@ master:
 
   # List of plugins to be install during Jenkins master start
   installPlugins:
-    - kubernetes:1.16.0
-    - workflow-job:2.32
-    - workflow-aggregator:2.6
-    - credentials-binding:1.19
-    - git:3.10.0
 
   # Enable to always override the installed plugins with the values of 'master.installPlugins' on upgrade or redeployment.
   # overwritePlugins: true
