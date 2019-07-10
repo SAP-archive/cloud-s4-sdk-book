@@ -7,11 +7,6 @@
 # See templates/_helpers.tpl
 # nameOverride:
 # fullnameOverride:
-# namespaceOverride:
-
-# For FQDN resolving of the master service. Change this value to match your existing configuration.
-# ref: https://github.com/kubernetes/dns/blob/master/docs/specification.md
-clusterZone: "cluster.local"
 
 master:
   # Used for label app.kubernetes.io/component
@@ -77,9 +72,11 @@ master:
   # jenkinsUriPrefix: "/jenkins"
   # Enable pod security context (must be `true` if runAsUser or fsGroup are set)
   usePodSecurityContext: true
-  runAsUser: 1000
-  fsGroup: 1000
-  servicePort: 80
+  # Set runAsUser to 1000 to let Jenkins run as non-root user 'jenkins' which exists in 'jenkins/jenkins' docker image.
+  # When setting runAsUser to a different value than 0 also set fsGroup to the same value:
+  # runAsUser: <defaults to 0>
+  # fsGroup: <will be omitted in deployment if runAsUser is 0>
+  servicePort: 8080
   targetPort: 8080
   # For minikube, set this to NodePort, elsewhere use LoadBalancer
   # Use ClusterIP if your setup includes ingress controller
@@ -188,10 +185,8 @@ master:
   # etc.  Best reference is https://<jenkins_url>/configuration-as-code/reference.  The example below creates a welcome message:
   JCasC:
     enabled: false
-    pluginVersion: "1.21"
-    # it's only used when plugin version is <=1.18 for later version the
-    # configuration as code support plugin is no longer needed
-    supportPluginVersion: "1.18"
+    pluginVersion: 1.5
+    supportPluginVersion: 1.5
     configScripts:
       welcome-message: |
         jenkins:
@@ -465,26 +460,18 @@ backup:
   # Additional arguments for kube-tasks
   # Ref: https://github.com/nuvo/kube-tasks#simple-backup
   extraArgs: []
-  # Add existingSecret for AWS credentials
-  existingSecret: {}
-  ## Example for using an existing secret
-   # jenkinsaws:
-  ## Use this key for AWS access key ID
-     # awsaccesskey: jenkins_aws_access_key
-  ## Use this key for AWS secret access key
-     # awssecretkey: jenkins_aws_secret_key
   # Add additional environment variables
   env:
   # Example environment variable required for AWS credentials chain
-  - name: "AWS_REGION"
-    value: "us-east-1"
+  - name: "ON_K8S"
+    value: "true"
   resources:
     requests:
-      memory: 1Gi
-      cpu: 1
+      memory: 2Gi
+      cpu: 2
     limits:
-      memory: 1Gi
-      cpu: 1
+      memory: 2Gi
+      cpu: 2
   # Destination to store the backup artifacts
   # Supported cloud storage services: AWS S3, Minio S3, Azure Blob Storage
   # Additional support can added. Visit this repository for details
