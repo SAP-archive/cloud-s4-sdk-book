@@ -1,7 +1,8 @@
 #Project Setup
 general:
   productiveBranch: 'master'
-
+  jenkinsKubernetes:
+    jnlpAgent: 's4sdk/jenkins-agent-k8s:v21'
 #Steps Specific Configuration
 steps:
   mavenExecute:
