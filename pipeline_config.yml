@@ -5,7 +5,7 @@ general:
 #Steps Specific Configuration
 steps:
   mavenExecute:
-    dockerImage: 'ppiper/mta-archive-builder'
+    dockerImage: 'maven:3.6.1-jdk-7'
     projectSettingsFile : ''
 
   deployToCfWithCli:
