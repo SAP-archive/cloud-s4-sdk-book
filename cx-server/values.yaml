@@ -77,8 +77,8 @@ master:
   # jenkinsUriPrefix: "/jenkins"
   # Enable pod security context (must be `true` if runAsUser or fsGroup are set)
   usePodSecurityContext: true
-    runAsUser: 1000
-    fsGroup: 1000
+    #runAsUser: 1000
+    #fsGroup: 1000
   servicePort: 80
   targetPort: 8080
   # For minikube, set this to NodePort, elsewhere use LoadBalancer
