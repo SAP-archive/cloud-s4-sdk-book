@@ -325,7 +325,7 @@ master:
 agent:
   enabled: true
   image: "s4sdk/jenkins-agent-k8s"
-  imageTag: "v21"
+  imageTag: "v17"
   customJenkinsLabels: []
   # name of the secret to be used for image pulling
   imagePullSecretName:
