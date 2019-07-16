@@ -5,6 +5,8 @@ stages:
   npmAudit:
     auditedAdvisories:
       - 803
+      - 1068
+      - 1070
   productionDeployment:
     cfTargets:
       - org: 'P2001099548trial_trial'
