@@ -9,8 +9,8 @@ stages:
       - 1070
   productionDeployment:
     cfTargets:
-      - org: 'P2001099548trial_trial'
-        space: 'dev'
+      - org: 'piper'
+        space: 'infra-testing'
         apiEndpoint: 'https://api.cf.eu10.hana.ondemand.com'
         appName: 'devops-docker-images-IT'
         manifest: 'manifest.yml'
