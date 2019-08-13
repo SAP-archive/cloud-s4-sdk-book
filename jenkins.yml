@@ -17,13 +17,3 @@ unclassified:
           scm:
             git:
               remote: "https://github.com/SAP/jenkins-library.git"
-credentials:
-  system:
-    domainCredentials:
-      - credentials:
-          - usernamePassword:
-              scope: GLOBAL
-              id: "devops-docker-images-IT-cf"
-              username: ${CX_INFRA_IT_CF_USERNAME}
-              password: ${CX_INFRA_IT_CF_PASSWORD}
-              description: "SAP CP Trial account."
