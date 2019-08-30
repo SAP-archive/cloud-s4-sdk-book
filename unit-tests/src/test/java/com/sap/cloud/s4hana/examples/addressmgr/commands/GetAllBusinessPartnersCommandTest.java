@@ -9,13 +9,14 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.OngoingStubbing;
 
+import javax.cache.Caching;
 import java.net.URI;
 import java.util.List;
 
+import com.sap.cloud.sdk.datamodel.odata.helper.Order;
 import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
 import com.sap.cloud.sdk.testutil.MockUtil;
 
-import com.sap.cloud.sdk.s4hana.datamodel.odata.helper.Order;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartner;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerFluentHelper;
 import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.selectable.BusinessPartnerSelectable;
@@ -41,9 +42,9 @@ public class GetAllBusinessPartnersCommandTest {
     public void before() {
         mockUtil = new MockUtil();
         mockUtil.mockDefaults();
-        mockUtil.mockDestination("ErpQueryEndpoint", URI.create(""));
+        mockUtil.mockDestination("ERP_SYSTEM", URI.create(""));
         // Invalidate cache ahead of each test
-        new GetAllBusinessPartnersCommand(null).getCache().invalidateAll();
+        Caching.getCachingProvider().getCacheManager().destroyCache(GetAllBusinessPartnersCommand.class.getName());
     }
 
     @Test
@@ -63,7 +64,7 @@ public class GetAllBusinessPartnersCommandTest {
                 .select(any(BusinessPartnerSelectable.class))
                 .filter(BusinessPartner.BUSINESS_PARTNER_CATEGORY.eq("1"))
                 .orderBy(BusinessPartner.LAST_NAME, Order.ASC)
-                .execute());
+                .execute(any()));
     }
 
     @Test

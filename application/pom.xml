@@ -33,11 +33,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.sap.cloud.s4hana.cloudplatform</groupId>
+            <groupId>com.sap.cloud.sdk.cloudplatform</groupId>
             <artifactId>scp-cf</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sap.cloud.s4hana</groupId>
+            <groupId>com.sap.cloud.sdk.s4hana</groupId>
             <artifactId>s4hana-all</artifactId>
         </dependency>
 
@@ -65,6 +65,11 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>jcache</artifactId>
+            <version>2.7.0</version>
         </dependency>
     </dependencies>
 
@@ -94,9 +99,9 @@
             </plugin>
 
             <plugin>
-                <groupId>com.sap.cloud.s4hana.plugins</groupId>
-                <artifactId>s4sdk-maven-plugin</artifactId>
-                <version>2.19.0</version>
+                <groupId>com.sap.cloud.sdk.plugins</groupId>
+                <artifactId>usage-analytics-maven-plugin</artifactId>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <goals>

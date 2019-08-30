@@ -1,9 +1,10 @@
 ---
 erp:
-  default: "MOCK_SYSTEM"
+  default: "ERP_SYSTEM"
   systems:
-#    - alias: "ERP_SYSTEM"
-#      uri: "https://myXXXXXX.s4hana.ondemand.com"
-#      proxy: "http://proxy:8080"
-    - alias: "MOCK_SYSTEM"
-      uri: "http://localhost:3000"
+    - alias: "ERP_SYSTEM"
+      uri: "https://my300470.s4hana.ondemand.com/"
+      systemId: "MySystemId"           # optional, defaults to ""
+      sapClient: "001"                 # optional, defaults to default SAP client
+      locale: "en"                     # optional, defaults to English (US)
+      erpEdition: "cloud"              # optional, defaults to "cloud"

@@ -5,14 +5,6 @@ import com.google.common.base.Strings;
 import com.google.common.io.CharStreams;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
-import com.sap.cloud.s4hana.examples.addressmgr.commands.CreateAddressCommand;
-import com.sap.cloud.s4hana.examples.addressmgr.commands.DeleteAddressCommand;
-import com.sap.cloud.s4hana.examples.addressmgr.commands.UpdateAddressCommand;
-import com.sap.cloud.s4hana.examples.addressmgr.util.HttpServlet;
-import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerAddress;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.services.BusinessPartnerService;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultBusinessPartnerService;
 import org.slf4j.Logger;
 
 import javax.servlet.ServletException;
@@ -21,6 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.Duration;
+
+import com.sap.cloud.s4hana.examples.addressmgr.util.HttpServlet;
+import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
+import com.sap.cloud.sdk.cloudplatform.resilience.ResilienceConfiguration;
+import com.sap.cloud.sdk.cloudplatform.resilience.ResilienceConfiguration.TimeLimiterConfiguration;
+import com.sap.cloud.sdk.cloudplatform.resilience.ResilienceDecorator;
+
+import com.sap.cloud.sdk.s4hana.connectivity.ErpHttpDestination;
+import com.sap.cloud.sdk.s4hana.connectivity.ErpHttpDestinationUtils;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerAddress;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.BusinessPartnerService;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultBusinessPartnerService;
 
 @WebServlet("/api/addresses")
 public class AddressServlet extends HttpServlet {
@@ -28,6 +33,15 @@ public class AddressServlet extends HttpServlet {
     private static final Logger logger = CloudLoggerFactory.getLogger(AddressServlet.class);
 
     private final BusinessPartnerService service = new DefaultBusinessPartnerService();
+    private final ErpHttpDestination destination = ErpHttpDestinationUtils
+            .getErpHttpDestination("ERP_SYSTEM");
+
+    private final TimeLimiterConfiguration timeLimit = TimeLimiterConfiguration.of()
+            .timeoutDuration(Duration.ofSeconds(10));
+
+    private final ResilienceConfiguration resilienceConfiguration =
+            ResilienceConfiguration.of(AddressServlet.class)
+            .timeLimiterConfiguration(timeLimit);
 
     @Override
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
@@ -42,7 +56,7 @@ public class AddressServlet extends HttpServlet {
             return;
         }
 
-        if(!validateInputForCreate(address)) {
+        if (!validateInputForCreate(address)) {
             logger.warn("Invalid request to create an address: {}.", address);
             response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                     "Bad request: business partner of address needs to be specified.");
@@ -51,7 +65,12 @@ public class AddressServlet extends HttpServlet {
 
         logger.info("Received post request to create address {}", address);
         try {
-            final BusinessPartnerAddress addressCreated = new CreateAddressCommand(service, address).execute();
+            final BusinessPartnerAddress createAddress = ResilienceDecorator.executeCallable(
+                    () -> service.createBusinessPartnerAddress(address).execute(destination),
+                    resilienceConfiguration);
+            // createAddress.call();
+            final BusinessPartnerAddress addressCreated = service.createBusinessPartnerAddress(address)
+                    .execute(destination);
             response.setStatus(HttpServletResponse.SC_CREATED);
             response.setContentType("application/json");
             response.getWriter().write(new Gson().toJson(addressCreated));
@@ -77,7 +96,7 @@ public class AddressServlet extends HttpServlet {
             throws ServletException, IOException {
         final String businessPartnerId = request.getParameter("businessPartnerId");
         final String addressId = request.getParameter("addressId");
-        if(!validateIds(businessPartnerId, addressId)) {
+        if (!validateIds(businessPartnerId, addressId)) {
             logger.warn("Invalid request to update: at least one mandatory parameter was invalid, query was: {}",
                     request.getQueryString());
             response.sendError(HttpServletResponse.SC_BAD_REQUEST,
@@ -95,9 +114,9 @@ public class AddressServlet extends HttpServlet {
             return;
         }
 
-        if(!validateInputForUpdate(addressFromBody, businessPartnerId, addressId)) {
+        if (!validateInputForUpdate(addressFromBody, businessPartnerId, addressId)) {
             logger.warn("Invalid request to update: at least one mismatch between body and query, query was: {}" +
-                            "; and parsed body was: {}.", request.getQueryString(), addressFromBody);
+                    "; and parsed body was: {}.", request.getQueryString(), addressFromBody);
             response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                     "Address in body must have none or matching identifiers.");
             return;
@@ -107,7 +126,8 @@ public class AddressServlet extends HttpServlet {
 
         logger.info("Received patch request to update address {}", addressToUpdate);
         try {
-            new UpdateAddressCommand(service, addressToUpdate).execute();
+            service.updateBusinessPartnerAddress(addressToUpdate)
+                    .execute(destination);
 
             response.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } catch (Exception e) {
@@ -125,15 +145,15 @@ public class AddressServlet extends HttpServlet {
                 .addressID(addressId)
                 .build();
         // Only change properties for which non-null values have been provided
-        if(addressFromBody.getStreetName() != null)
+        if (addressFromBody.getStreetName() != null)
             addressToUpdate.setStreetName(addressFromBody.getStreetName());
-        if(addressFromBody.getHouseNumber() != null)
+        if (addressFromBody.getHouseNumber() != null)
             addressToUpdate.setHouseNumber(addressFromBody.getHouseNumber());
-        if(addressFromBody.getCityName() != null)
+        if (addressFromBody.getCityName() != null)
             addressToUpdate.setCityName(addressFromBody.getCityName());
-        if(addressFromBody.getPostalCode() != null)
+        if (addressFromBody.getPostalCode() != null)
             addressToUpdate.setPostalCode(addressFromBody.getPostalCode());
-        if(addressFromBody.getCountry() != null)
+        if (addressFromBody.getCountry() != null)
             addressToUpdate.setCountry(addressFromBody.getCountry());
         return addressToUpdate;
     }
@@ -141,7 +161,7 @@ public class AddressServlet extends HttpServlet {
     private boolean validateInputForUpdate(BusinessPartnerAddress addressFromBody, String businessPartnerId,
                                            String addressId) {
         return (addressFromBody.getBusinessPartner() == null
-                    || addressFromBody.getBusinessPartner().equals(businessPartnerId)) &&
+                || addressFromBody.getBusinessPartner().equals(businessPartnerId)) &&
                 (addressFromBody.getAddressID() == null || addressFromBody.getAddressID().equals(addressId));
     }
 
@@ -151,7 +171,7 @@ public class AddressServlet extends HttpServlet {
         final String businessPartnerId = request.getParameter("businessPartnerId");
         final String addressId = request.getParameter("addressId");
 
-        if(!validateIds(businessPartnerId, addressId)) {
+        if (!validateIds(businessPartnerId, addressId)) {
             logger.warn("Invalid request to delete: at least one mandatory parameter was invalid, query was: {}",
                     request.getQueryString());
             response.sendError(HttpServletResponse.SC_BAD_REQUEST,
@@ -160,8 +180,12 @@ public class AddressServlet extends HttpServlet {
         }
 
         logger.info("Received delete request to delete address {},{}", businessPartnerId, addressId);
+        final BusinessPartnerAddress addressToDelete = BusinessPartnerAddress.builder()
+                .businessPartner(businessPartnerId)
+                .addressID(addressId)
+                .build();
         try {
-            new DeleteAddressCommand(service, businessPartnerId, addressId).execute();
+            service.deleteBusinessPartnerAddress(addressToDelete).execute(destination);
 
             response.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } catch (Exception e) {

@@ -2,10 +2,6 @@ package com.sap.cloud.s4hana.examples.addressmgr;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import com.sap.cloud.sdk.cloudplatform.connectivity.ProxyConfiguration;
-import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
-import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerAddress;
-import com.sap.cloud.sdk.testutil.MockUtil;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -18,11 +14,24 @@ import org.junit.runner.RunWith;
 import java.net.URL;
 import java.util.Random;
 
+import com.sap.cloud.sdk.cloudplatform.resilience.ResilienceConfiguration;
+import com.sap.cloud.sdk.cloudplatform.resilience.ResilienceDecorator;
+import com.sap.cloud.sdk.odatav2.connectivity.ODataException;
+import com.sap.cloud.sdk.testutil.MockUtil;
+
+import com.sap.cloud.sdk.s4hana.connectivity.ErpHttpDestination;
+import com.sap.cloud.sdk.s4hana.connectivity.ErpHttpDestinationUtils;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.BusinessPartnerAddress;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.BusinessPartnerService;
+import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultBusinessPartnerService;
+
+import static com.sap.cloud.s4hana.examples.addressmgr.BusinessPartnerServletTest.BUPA_ID;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
-import static com.sap.cloud.s4hana.examples.addressmgr.BusinessPartnerServletTest.BUPA_ID;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.hamcrest.Matchers.not;
 
 @RunWith( Arquillian.class )
 public class AddressServletTest
@@ -59,7 +68,7 @@ public class AddressServletTest
     public static void beforeClass()
     {
         mockUtil.mockDefaults();
-        mockUtil.mockErpDestination();
+        mockUtil.mockErpDestination("ERP_SYSTEM", "ERP_SYSTEM");
     }
 
     @Before
@@ -139,6 +148,12 @@ public class AddressServletTest
     }
 
     private BusinessPartnerAddress getAddress(final String bupaId, final String addressId) {
-        return new GetAddressCommand(bupaId, addressId).execute();
+        final BusinessPartnerService service = new DefaultBusinessPartnerService();
+        final ErpHttpDestination destination = ErpHttpDestinationUtils.getErpHttpDestination("ERP_SYSTEM");
+        return ResilienceDecorator.executeCallable(
+                () -> service.getBusinessPartnerAddressByKey(bupaId,addressId).execute(destination),
+                ResilienceConfiguration.of(AddressServletTest.class),
+                e ->  null
+        );
     }
 }

@@ -55,22 +55,22 @@
         </dependency>
 
         <dependency>
-            <groupId>com.sap.cloud.s4hana.cloudplatform</groupId>
+            <groupId>com.sap.cloud.sdk.cloudplatform</groupId>
             <artifactId>scp-cf</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sap.cloud.s4hana</groupId>
+            <groupId>com.sap.cloud.sdk.s4hana</groupId>
             <artifactId>s4hana-all</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sap.cloud.s4hana</groupId>
-            <artifactId>testutil</artifactId>
+            <groupId>com.sap.cloud.sdk.testutil</groupId>
+            <artifactId>testutil-core</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sap.cloud.s4hana.quality</groupId>
+            <groupId>com.sap.cloud.sdk.quality</groupId>
             <artifactId>listeners-all</artifactId>
             <scope>test</scope>
         </dependency>
