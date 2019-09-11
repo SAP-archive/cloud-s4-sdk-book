@@ -6,4 +6,4 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Run Cloud SDK Pipeline
-      uses: SAP/devops-docker-cx-server/jenkinsfile-runner-github-action
+      uses: SAP/devops-docker-cx-server/jenkinsfile-runner-github-action@master
