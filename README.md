@@ -57,7 +57,7 @@ mvn tomee:run -pl application
 None.
 
 ## How to Obtain Support
-Please reach out to us and the community with your questions on [Stack Overflow](https://stackoverflow.com/tags/s4sdk) (tag: `s4sdk`).
+Please reach out to us and the community with your questions on [Stack Overflow](https://stackoverflow.com/tags/sap-cloud-sdk) (tag: `sap-cloud-sdk`).
 If you have found a bug in the _sample source code_ hosted in this repository, please open an Issue in this GitHub repository.
 
 ## License
