@@ -27,7 +27,7 @@ The numbers behind each item in the table of contents refer to the book chapters
 ## More Information and Contact
 You can find more information in the [tutorial series](https://blogs.sap.com/2017/05/10/first-steps-with-sap-s4hana-cloud-sdk/) of the SAP S/4HANA Cloud SDK.
 
-In case of questions, please reach out to us and the community on [Stack Overflow](https://stackoverflow.com/tags/s4sdk) (tag: `s4sdk`).
+In case of questions, please reach out to us and the community on [Stack Overflow](https://stackoverflow.com/tags/sap-cloud-sdk) (tag: `sap-cloud-sdk`).
 
 ## License
 Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
