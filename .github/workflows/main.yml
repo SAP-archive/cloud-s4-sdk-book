@@ -5,7 +5,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Build
-      uses: SAP/devops-docker-cx-server/mvn-github-action/build@ghact
-    - name: Unit Tests
-      uses: SAP/devops-docker-cx-server/mvn-github-action/unit-test@ghact
+    - name: Build and test
+      uses: SAP/devops-docker-cx-server/mvn-github-action/monolith@ghact
