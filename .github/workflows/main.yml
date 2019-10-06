@@ -5,5 +5,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Run Cloud SDK Pipeline
+    - name: Run Pipeline
       uses: SAP/devops-docker-cx-server/jenkinsfile-runner-github-action@master
