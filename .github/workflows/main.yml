@@ -1,8 +1,8 @@
 on: push
-name: Build project
+name: Test
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@master
     - name: Run Pipeline
