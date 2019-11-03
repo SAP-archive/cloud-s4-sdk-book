@@ -4,3 +4,4 @@ package com.sap.cloud.s4hana.examples.addressmgr;
 public class Dummy {
 
 }
+
