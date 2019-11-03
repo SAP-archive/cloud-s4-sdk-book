@@ -19,7 +19,7 @@ jobs:
       run: mvn -B install --file pom.xml -Dmaven.test.skip=true
 
     - name: Run unit tests
-      run: mvn -B test surefire-report:report --file unit-tests/pom.xml
+      run: mvn -B test surefire-report:report org.jacoco:jacoco-maven-plugin:0.8.6-SNAPSHOT:report --file unit-tests/pom.xml
 
     - uses: actions/upload-artifact@master
       with:
