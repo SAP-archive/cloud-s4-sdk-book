@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 public class UnitTest {
     @Test
     public void test() {
-        assertTrue(true);
+        int x = new Unit().a(1,1);
+        assertEquals(2, x);
     }
 }
