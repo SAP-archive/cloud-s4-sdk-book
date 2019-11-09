@@ -1,7 +1,8 @@
 on:
   push:
+    branches: github-action
   schedule:
-    - cron: "0 3 * * *"
+    - cron: "0 10 * * *"
 name: Test
 jobs:
   build:
