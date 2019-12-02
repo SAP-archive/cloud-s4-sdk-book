@@ -4,17 +4,32 @@
   "description": "OData mock service for Business Partner API of SAP S/4HANA Cloud",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "debug": "node --inspect-brk server.js",
+    "test": "npx jest",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "generate-test-resources": "npx generate-odata-client -i social-media-accounts -o integration-tests/social-media-accounts/odata-client -s ./integration-tests/social-media-accounts/service-mapping.json --forceOverwrite"
   },
   "author": "SAP",
   "license": "Apache-2.0",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.15.5",
-    "uuid": "^3.2.1"
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "uuid": "^3.3.3"
   },
   "engines": {
     "node": "^8.9.4"
+  },
+  "devDependencies": {
+    "@sap/cloud-sdk-generator": "^1.13.1",
+    "@sap/cloud-sdk-vdm-business-partner-service": "^1.13.1",
+    "@types/express": "^4.17.2",
+    "@types/jest": "^24.0.23",
+    "@types/supertest": "^2.0.8",
+    "jest": "^24.9.0",
+    "jest-extended": "^0.11.2",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.2"
   }
 }

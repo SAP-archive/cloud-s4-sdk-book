@@ -15,7 +15,7 @@ const nextAddressId = function(existingAddresses) {
 };
 
 module.exports = {
-    data: data,
+    data,
     newBusinessPartner: function (id) {
         return Object.seal({
             "__metadata": {

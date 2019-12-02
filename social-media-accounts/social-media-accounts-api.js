@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const router = express.Router();
 
 const odata = require('../odata-helpers.js');
@@ -48,16 +47,16 @@ router.get('/([$])metadata', function(req, res) {
 });
 
 router.route('/YY1_BPSOCIALMEDIA')
-.get(retrieveAllBusinessPartnerSocialMedia, odata.middlewareForSet());
+    .get(retrieveAllBusinessPartnerSocialMedia, odata.middlewareForSet());
 
-router.route('/YY1_BPSOCIALMEDIA\\((SAP_UUID=)?(guid\':uuid\'|%27:uuid%27)\\)')
-.get(retrieveSingleBusinessPartnerSocialMedia, odata.middlewareForEntity());
+router.route('/YY1_BPSOCIALMEDIA\\((SAP_UUID=)?(guid%27:uuid%27|%27:uuid%27|guid\':uuid\'|\':uuid\')\\)')
+    .get(retrieveSingleBusinessPartnerSocialMedia, odata.middlewareForEntity());
 
 router.route('/YY1_SOCIALMEDIAACCOUNT_BPSO000')
-.get(retrieveAllSocialMediaAccounts, odata.middlewareForSet());
+    .get(retrieveAllSocialMediaAccounts, odata.middlewareForSet());
 
-router.route('/YY1_SOCIALMEDIAACCOUNT_BPSO000\\((SAP_UUID=)?(guid\':uuid\'|%27:uuid%27)\\)')
-.get(retrieveSingleSocialMediaAccount, odata.middlewareForEntity());
+router.route('/YY1_SOCIALMEDIAACCOUNT_BPSO000\\((SAP_UUID=)?(guid%27:uuid%27|%27:uuid%27|guid\':uuid\'|\':uuid\')\\)')
+    .get(retrieveSingleSocialMediaAccount, odata.middlewareForEntity());
 
 router.get('/', function(req, res) {
     res.json({
