@@ -1,0 +1,37 @@
+{
+  "name": "yy-1-bpsocialmedia-cds-service",
+  "version": "1.13.1",
+  "description": "SAP Cloud SDK for JavaScript: Virtual Data Model (VDM) for service yy-1-bpsocialmedia-cds-service",
+  "homepage": "https://www.sap.com/cloud-sdk",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "**/*.js",
+    "**/*.js.map",
+    "**/*.d.ts",
+    "**/d.ts.map",
+    "**/*-csn.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "compile": "npx tsc",
+    "doc": "npx typedoc"
+  },
+  "dependencies": {
+    "@sap/cloud-sdk-core": "^1.13.1"
+  },
+  "peerDependencies": {
+    "@sap/cloud-sdk-core": "^1.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^11.13.5",
+    "typedoc": "^0.15.0",
+    "typescript": "3.5.3"
+  }
+}

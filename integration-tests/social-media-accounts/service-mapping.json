@@ -1,0 +1,7 @@
+{
+  "YY1_BPSOCIALMEDIA_CDS": {
+    "directoryName": "yy-1-bpsocialmedia-cds-service",
+    "servicePath": "/sap/opu/odata/sap/YY1_BPSOCIALMEDIA_CDS",
+    "npmPackageName": "yy-1-bpsocialmedia-cds-service"
+  }
+}
