@@ -3,7 +3,6 @@ const app = express();
 
 const bupaApi = require('./business-partner/business-partner-api.js');
 const socialMediaApi = require('./social-media-accounts/social-media-accounts-api.js');
-const timeSheetEntryApi = require('./timeSheetEntryCollection/timeSheetEntryCollection-api.js')
 
 const logRequests = function(req, res, next) {
     console.log(`Request: ${req.method} ${req.originalUrl}`)
