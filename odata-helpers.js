@@ -153,13 +153,13 @@ const reduceEntityToSelect = function(entity, selectedProperties = []) {
  * @param {Object[]} entityArray Array of entities to reduce
  * @param {string[]} selectedProperties Properties to keep, or all, if empty
  */
-const reduceEntitySetToSelect = function(entityArray, selectedProperties) {
+function reduceEntitySetToSelect(entityArray, selectedProperties) {
     return entityArray.map(item => reduceEntityToSelect(item, selectedProperties));
 };
 
-const insertHostIntoBody = function(body, req) {
+function replaceHost(text, req) {
     const urlPrefix = `${req.protocol}://${req.get('host')}`;
-    return body.replace(/https:\/\/{host}:{port}/g, urlPrefix);
+    return text.replace(/https:\/\/{host}:{port}/g, urlPrefix);
 };
 
 /**
@@ -287,7 +287,7 @@ module.exports = {
         const result = res.result;
         const arrayWrapped = Array.isArray(result) ? { results: result } : result;
         const bodyAsString = JSON.stringify({ d: arrayWrapped });
-        const bodyWithHost = insertHostIntoBody(bodyAsString, req);
+        const bodyWithHost = replaceHost(bodyAsString, req);
 
         res.set('Content-Type', 'application/json');
         res.send(bodyWithHost);
@@ -311,7 +311,8 @@ module.exports = {
     /** Set 201 response for created */
     set201Created: function(req, res, next) {
         res.status(201);
-        res.location(res.result && res.result.__metadata ? res.result.__metadata.uri : '');
+        const location = res.result && res.result.__metadata ? res.result.__metadata.uri : '';
+        res.location(replaceHost(location, req));
         next();
     },
 
