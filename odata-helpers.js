@@ -311,6 +311,7 @@ module.exports = {
     /** Set 201 response for created */
     set201Created: function(req, res, next) {
         res.status(201);
+        res.location(res.result && res.result.__metadata ? res.result.__metadata.uri : '');
         next();
     },
 
