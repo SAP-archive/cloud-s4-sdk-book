@@ -23,10 +23,7 @@ jobs:
         java-version: 1.8
 
     - name: Download Project Piper executable
-      run: |
-        wget https://github.com/SAP/jenkins-library/releases/download/v1.4.0/piper
-        chmod +x piper
-        ./piper
+      uses: SAP/devops-docker-cx-server/install-project-piper-action@install-piper-action
 
     - name: Build with Maven
       run: mvn -B install --file pom.xml -Dmaven.test.skip=true
