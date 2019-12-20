@@ -16,4 +16,5 @@ jobs:
 
     - name: do something with piper
       run: |
-        piper --help
+        find /opt
+        /opt/piper
