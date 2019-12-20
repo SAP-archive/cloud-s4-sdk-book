@@ -16,5 +16,6 @@ jobs:
 
     - name: do something with piper
       run: |
-        find /opt
+        ls -la /opt/piper
+        chmod +x /opt/piper
         /opt/piper
