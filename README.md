@@ -62,7 +62,7 @@ cf push
 
 Watch the output of the command for the URL of the Cloud Foundry app. Look for a line towards the end similar to the following:
 ```
-urls: bupa-mock-odata-<random-route>.cfapps.eu10.hana.ondemand.com
+routes: bupa-mock-odata-<random-route>.cfapps.eu10.hana.ondemand.com
 ```
 Access the mock OData service at that URL, by appending the path `/sap/opu/odata/sap/API_BUSINESS_PARTNER`.
 
