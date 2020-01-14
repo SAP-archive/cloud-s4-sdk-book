@@ -40,7 +40,7 @@ npm install
 npm start
 ```
 
-Wait until you see the output `Mock server started`. Access the mock OData service at http://localhost:3000/sap/opu/odata/sap/API_BUSINESS_PARTNER (no credentials required).
+Wait until you see the output `Mock server started`. Access the mock OData service at [http://localhost:3000/sap/opu/odata/sap/API_BUSINESS_PARTNER](http://localhost:3000/sap/opu/odata/sap/API_BUSINESS_PARTNER) (no credentials required).
 
 Use `http://localhost:3000` as the URL for your destination `ErpQueryEndpoint` with any dummy user and password, for example:
 ```
