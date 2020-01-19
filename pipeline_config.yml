@@ -21,7 +21,7 @@
 
 ### General project setup
 general:
-
+  nullsafe: maybe
 
 ### Step-specific configuration
 steps:
