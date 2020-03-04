@@ -1,5 +1,3 @@
-#!/usr/bin/env groovy 
-
 String pipelineVersion = "master"
 
 node {
