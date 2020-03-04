@@ -16,3 +16,9 @@ stages:
         appName: 'devops-docker-images-IT'
         manifest: 'manifest.yml'
         credentialsId: 'devops-docker-images-IT-cf'
+  artifactDeployment:
+    nexus:
+      version: nexus3
+      url: localhost:8081
+      repository: maven-releases
+#      credentialsId: <Put Credentials Id here or leave this commented out for anonymous upload>
