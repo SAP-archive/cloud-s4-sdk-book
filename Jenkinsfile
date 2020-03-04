@@ -1,5 +1,3 @@
-#!/usr/bin/env groovy
-
 final def pipelineSdkVersion = 'master'
 
 pipeline {
