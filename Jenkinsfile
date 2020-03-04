@@ -1,3 +1,5 @@
+import com.sap.piper.PiperGoUtils
+
 final def pipelineSdkVersion = 'master'
 
 pipeline {
