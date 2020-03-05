@@ -1,0 +1,11 @@
+on: push
+name: Test
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - uses: SAP/project-piper-action@master
+      with:
+        command: mavenExecute
+        flags: "--goals compile"
