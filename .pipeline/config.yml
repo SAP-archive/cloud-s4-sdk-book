@@ -1,5 +1,6 @@
 steps:
   artifactPrepareVersion:
     buildTool: maven
+    versioningType: cloud_noTag
   mavenExecute:
     goals: compile
