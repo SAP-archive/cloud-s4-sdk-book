@@ -8,8 +8,8 @@ jobs:
     - uses: SAP/project-piper-action@master
       with:
         command: artifactPrepareVersion
-        version: master
+        piper-version: master
     - uses: SAP/project-piper-action@master
       with:
         command: mavenBuild
-        version: master
+        piper-version: master
