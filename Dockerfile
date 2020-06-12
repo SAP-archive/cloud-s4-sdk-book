@@ -4,7 +4,7 @@
 ## Builder to hide credentials from image
 FROM alpine:latest AS builder
 
-RUN apk add curl libxml2-utils
+RUN apk add patch curl libxml2-utils
 
 ARG API_KEY
 RUN curl -H "apikey: $API_KEY"\
