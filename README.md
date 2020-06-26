@@ -10,8 +10,11 @@ This page explains how to run the mock server and how to integrate it into the t
 > **Note**: the server is not secured in any way. Run the server on your own risk and only for experiments. Do not use the server to store any personal data - only use fake data.
 
 ## How to run the server
-When you have cloned this repository, checkout the branch `mock-server`.
-Alternatively, download [this archive](https://github.com/SAP/cloud-s4-sdk-book/archive/mock-server.zip) and unzip it to your local machine.
+Clone the branch `mock-server` of this [repository](https://github.com/SAP/cloud-s4-sdk-book/tree/mock-server):
+```shell
+git clone --single-branch --branch mock-server https://github.com/SAP/cloud-s4-sdk-book.git
+```
+
 All of the following steps shall happen in this folder where you checked out or extraced the code of the mock server.
 
 Before you can launch the mock server, you need to manually put the metadata EDMX document of the business partner OData service into the folder `business-partner` and prepare the document:
