@@ -8,10 +8,6 @@ steps:
 #    dockerImage: 'maven:3.5.0-jdk-8'
     projectSettingsFile : ''
 
-  deployToCfWithCli:
-#    dockerImage: 's4sdk/docker-cf-cli'
-    smokeTestStatusCode: '200'
-
 
 #Stage Specific Configurations
 stages:
