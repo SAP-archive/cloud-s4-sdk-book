@@ -17,7 +17,7 @@ import com.sap.cloud.s4hana.examples.addressmgr.commands.CreateAddressCommand;
 import com.sap.cloud.s4hana.examples.addressmgr.datasource.MultitenantEntityManagerFacade;
 import com.sap.cloud.s4hana.examples.addressmgr.models.Address;
 import com.sap.cloud.s4hana.examples.addressmgr.models.Status;
-import com.sap.cloud.s4hana.examples.addressmgr.util.HttpServlet;
+import com.sap.cloud.s4hana.examples.addressmgr.util.HttpServlet2;
 import com.sap.cloud.s4hana.examples.addressmgr.views.AddressView;
 import com.sap.cloud.s4hana.examples.addressmgr.views.ViewModelConverter;
 import com.sap.cloud.sdk.cloudplatform.logging.CloudLoggerFactory;
@@ -25,7 +25,7 @@ import com.sap.cloud.sdk.s4hana.datamodel.odata.namespaces.businesspartner.Busin
 import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultBusinessPartnerService;
 
 @WebServlet("/api/addresses-local")
-public class LocalAddressServlet extends HttpServlet {
+public class LocalAddressServlet extends HttpServlet2 {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = CloudLoggerFactory.getLogger(LocalAddressServlet.class);
 

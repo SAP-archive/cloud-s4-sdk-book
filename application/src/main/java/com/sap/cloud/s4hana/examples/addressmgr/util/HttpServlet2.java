@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public abstract class HttpServlet extends javax.servlet.http.HttpServlet {
+public abstract class HttpServlet2 extends javax.servlet.http.HttpServlet {
     @Override
     protected void service(final HttpServletRequest req, final HttpServletResponse resp)
             throws ServletException, IOException {
