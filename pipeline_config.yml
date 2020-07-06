@@ -4,33 +4,6 @@ general:
 
 #Steps Specific Configuration
 steps:
-  mavenExecute:
-#    dockerImage: 'maven:3.5.0-jdk-8'
-    projectSettingsFile : ''
-
 
 #Stage Specific Configurations
 stages:
-  staticCodeChecks:
-    findbugsExcludesFile: '' #Path to findbugs exclude file
-    pmdExcludes: '' # List or ANT style patterns
-
-#  integrationTests:
-#    credentials:
-#      - alias: ''
-#        credentialId: ''
-
-#  s4SdkQualityChecks:
-#    jacocoExcludes:
-#      - ''
-#    nonErpDestinations:
-#      - ''
-
-#  productionDeployment:
-#    cfTargets:
-#      - org: 'org'
-#        space: 'Productive'
-#        apiEndpoint: 'https://'
-#        appName: 'appName'
-#        manifest: 'manifest.yml'
-#        credentialsId: 'credentialsId'
