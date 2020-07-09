@@ -19,7 +19,7 @@
     "uuid": "^3.3.3"
   },
   "engines": {
-    "node": "^8.9.4"
+    "node": "^12.16.1"
   },
   "devDependencies": {
     "@sap/cloud-sdk-generator": "^1.13.1",
