@@ -10,5 +10,9 @@ RUN ls -la application/target/address-manager-application.war
 
 FROM debian:buster-slim
 
+RUN apt-get -y update && apt-get -y install ca-certificates \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
 COPY --from=builder /app /app
 COPY --from=builder /usr/local/bin/cf /usr/local/bin
