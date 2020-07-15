@@ -1,0 +1,16 @@
+name: Build and push
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Run CI
+      run: |
+        echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
+        docker build -t fwilhe/cf-it:latest .
+        docker push fwilhe/cf-it:latest
