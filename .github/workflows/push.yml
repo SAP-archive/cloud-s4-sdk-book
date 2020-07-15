@@ -1,10 +1,6 @@
 name: Build and push
 
-on:
-  push:
-    branches:
-      - '**'
-  workflow_dispatch:
+on: push
 
 jobs:
   push:
