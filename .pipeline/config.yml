@@ -8,21 +8,6 @@ stages:
       - 1068
       - 1070
       - 1184
-  endToEndTests:
-    appUrls:
-      - url: 'https://devops-docker-images-it.cfapps.eu10.hana.ondemand.com/'
-        credentialId: devops-docker-images-IT-cf
-        parameters: ['--NIGHTWATCH_ENV=chrome']
-      - url: 'https://devops-docker-images-it.cfapps.eu10.hana.ondemand.com/'
-        credentialId: devops-docker-images-IT-cf
-        parameters: ['--NIGHTWATCH_ENV=firefox']
-    cfTargets:
-      - org: 'piper'
-        space: 'infra-testing'
-        apiEndpoint: 'https://api.cf.eu10.hana.ondemand.com'
-        appName: 'devops-docker-images-IT'
-        manifest: 'manifest-test.yml'
-        credentialsId: 'devops-docker-images-IT-cf'
   productionDeployment:
     cfCreateServices:
       - serviceManifest: 'services-manifest.yml'
@@ -45,5 +30,3 @@ steps:
     space: infra-testing
     appName: 'devops-docker-images-IT'
     manifest: manifest.yml
-  executeNpm:
-    dockerImage: 'ppiper/node-browsers:v4'
