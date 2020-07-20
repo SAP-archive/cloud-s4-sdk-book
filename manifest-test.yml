@@ -1,0 +1,20 @@
+---
+applications:
+
+- name: address-manager
+  memory: 1024M
+  timeout: 300
+  routes:
+      - route: devops-docker-images-it.cfapps.eu10.hana.ondemand.com
+  path: application/target/address-manager-application.war
+  buildpacks:
+    - sap_java_buildpack
+  env:
+    TARGET_RUNTIME: tomee7
+    ALLOW_MOCKED_AUTH_HEADER: true
+    SET_LOGGING_LEVEL: '{ROOT: INFO, com.sap.cloud.sdk: INFO}'
+  services:
+#  - my-application-logs
+    # - ((xsuaa-instance-name))
+    # - ((destination-service-name))
+#  - my-connectivity
