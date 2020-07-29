@@ -2,12 +2,12 @@ package com.sap.cloud.s4hana.examples.addressmgr;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sap.cloud.sdk.cloudplatform.connectivity.HttpClientsThreadContextListener;
+import com.sap.cloud.sdk.cloudplatform.connectivity.DestinationsRequestContextListener;
 import com.sap.cloud.sdk.cloudplatform.exception.ShouldNotHappenException;
-import com.sap.cloud.sdk.cloudplatform.security.principal.PrincipalThreadContextListener;
-import com.sap.cloud.sdk.cloudplatform.servlet.RequestAccessorFilter;
-import com.sap.cloud.sdk.cloudplatform.tenant.TenantThreadContextListener;
-
+import com.sap.cloud.sdk.cloudplatform.security.user.UserRequestContextListener;
+import com.sap.cloud.sdk.cloudplatform.servlet.RequestContextCallable;
+import com.sap.cloud.sdk.cloudplatform.servlet.RequestContextServletFilter;
+import com.sap.cloud.sdk.cloudplatform.tenant.TenantRequestContextListener;
 import io.restassured.mapper.ObjectMapperType;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -19,14 +19,14 @@ public class TestUtil
     public static WebArchive createDeployment( final Class<?>... classesUnderTest )
     {
         return ShrinkWrap
-                .create(WebArchive.class)
-                .addClasses(classesUnderTest)
-                .addClasses(RequestAccessorFilter.class)
-                .addClass(TenantThreadContextListener.class)
-                .addClass(PrincipalThreadContextListener.class)
-                .addClass(HttpClientsThreadContextListener.class)
-                .addAsManifestResource("arquillian.xml")
-                .addAsWebInfResource(new ByteArrayAsset("<beans/>".getBytes()), ArchivePaths.create("beans.xml"));
+            .create(WebArchive.class)
+            .addClasses(classesUnderTest)
+            .addClasses(RequestContextServletFilter.class, RequestContextCallable.class)
+            .addClass(TenantRequestContextListener.class)
+            .addClass(UserRequestContextListener.class)
+            .addClass(DestinationsRequestContextListener.class)
+            .addAsManifestResource("arquillian.xml")
+            .addAsWebInfResource(new ByteArrayAsset("<beans/>".getBytes()), ArchivePaths.create("beans.xml"));
     }
 
     public static ObjectMapperType objectMapperType()

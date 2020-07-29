@@ -10,7 +10,7 @@
     <version>1.0</version>
 
     <parent>
-        <groupId>com.sap.cloud.sdk.examples</groupId>
+        <groupId>com.sap.cloud.s4hana.examples</groupId>
         <artifactId>address-manager</artifactId>
         <version>1.0</version>
     </parent>
@@ -42,7 +42,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.sap.cloud.sdk.examples</groupId>
+            <groupId>com.sap.cloud.s4hana.examples</groupId>
             <artifactId>address-manager-application</artifactId>
             <classifier>classes</classifier>
             <version>1.0</version>
@@ -55,22 +55,22 @@
         </dependency>
 
         <dependency>
-            <groupId>com.sap.cloud.sdk.cloudplatform</groupId>
+            <groupId>com.sap.cloud.s4hana.cloudplatform</groupId>
             <artifactId>scp-cf</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sap.cloud.sdk.s4hana</groupId>
+            <groupId>com.sap.cloud.s4hana</groupId>
             <artifactId>s4hana-all</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sap.cloud.sdk.testutil</groupId>
-            <artifactId>testutil-core</artifactId>
+            <groupId>com.sap.cloud.s4hana</groupId>
+            <artifactId>testutil</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sap.cloud.sdk.quality</groupId>
+            <groupId>com.sap.cloud.s4hana.quality</groupId>
             <artifactId>listeners-all</artifactId>
             <scope>test</scope>
         </dependency>

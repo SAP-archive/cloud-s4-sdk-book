@@ -11,7 +11,7 @@
     <packaging>war</packaging>
 
     <parent>
-        <groupId>com.sap.cloud.sdk.examples</groupId>
+        <groupId>com.sap.cloud.s4hana.examples</groupId>
         <artifactId>address-manager</artifactId>
         <version>1.0</version>
     </parent>
@@ -33,11 +33,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.sap.cloud.sdk.cloudplatform</groupId>
+            <groupId>com.sap.cloud.s4hana.cloudplatform</groupId>
             <artifactId>scp-cf</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sap.cloud.sdk.s4hana</groupId>
+            <groupId>com.sap.cloud.s4hana</groupId>
             <artifactId>s4hana-all</artifactId>
         </dependency>
 
@@ -84,7 +84,7 @@
             <plugin>
                 <groupId>org.apache.tomee.maven</groupId>
                 <artifactId>tomee-maven-plugin</artifactId>
-                <version>8.0.3</version>
+                <version>7.0.5</version>
                 <configuration>
                     <tomeeClassifier>webprofile</tomeeClassifier>
                     <context>ROOT</context>
@@ -92,6 +92,30 @@
                         <lib>remove:slf4j-jdk14</lib>
                     </libs>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.sap.cloud.s4hana.plugins</groupId>
+                <artifactId>s4sdk-maven-plugin</artifactId>
+                <version>2.9.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>usage-analytics</goal>
+                        </goals>
+                        <configuration>
+                            <skipUsageAnalytics>true</skipUsageAnalytics>
+                            <generateSalt>true</generateSalt>
+                            <!--
+                            Note: A random salt is auto-generated once the project is built for the first time.
+                            Please keep the generated salt in the POM file, for example, when pushing to git.
+
+                            To learn more, visit: https://blogs.sap.com/2018/10/23/usage-analytics-s4sdk/
+                            -->
+                            <salt />
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
