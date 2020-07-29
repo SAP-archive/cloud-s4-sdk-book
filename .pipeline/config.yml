@@ -1,6 +1,8 @@
 general:
   productiveBranch: 'consumer-test'
   collectTelemetryData: false
+  maven:
+    dockerImage: maven:3.6.3-jdk-11
 stages:
   npmAudit:
     auditedAdvisories:
@@ -30,3 +32,7 @@ steps:
     space: infra-testing
     appName: 'devops-docker-images-IT'
     manifest: manifest.yml
+  artifactPrepareVersion:
+    dockerImage: 'maven:3.6.3-jdk-11'
+  mavenExecute:
+    dockerImage: 'maven:3.6.3-jdk-11'

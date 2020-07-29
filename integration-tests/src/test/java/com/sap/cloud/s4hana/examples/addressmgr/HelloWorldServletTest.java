@@ -1,4 +1,4 @@
-package com.sap.cloud.s4hana.examples.addressmgr;
+package com.sap.cloud.sdk.examples.addressmgr;
 
 import io.restassured.RestAssured;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -11,8 +11,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import java.net.URL;
 
-import com.sap.cloud.s4hana.examples.addressmgr.HelloWorldServlet;
+import com.sap.cloud.sdk.examples.addressmgr.HelloWorldServlet;
+import com.sap.cloud.s4hana.examples.addressmgr.TestUtil;
 import com.sap.cloud.sdk.testutil.MockUtil;
+
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
