@@ -3,6 +3,7 @@ const app = express();
 
 const bupaApi = require('./business-partner/business-partner-api.js');
 const socialMediaApi = require('./social-media-accounts/social-media-accounts-api.js');
+const timeSheetApi = require('./timeSheetEntryCollection/timeSheetEntryCollection-api.js');
 
 const logRequests = function(req, res, next) {
     console.log(`Request: ${req.method} ${req.originalUrl}`)
@@ -20,6 +21,7 @@ app.use(sendFakeCsrfToken)
 
 app.use('/sap/opu/odata/sap/API_BUSINESS_PARTNER', bupaApi);
 app.use('/sap/opu/odata/sap/YY1_BPSOCIALMEDIA_CDS', socialMediaApi);
+app.use('/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET', timeSheetApi);
 
 app.get('/', function(req, res) {
     res.set('Content-Type', 'text/html');
@@ -30,6 +32,7 @@ app.get('/', function(req, res) {
     <body>
         <div>OData mock service for Business Partner API of SAP S/4HANA Cloud is running at <a href="/sap/opu/odata/sap/API_BUSINESS_PARTNER">/sap/opu/odata/sap/API_BUSINESS_PARTNER</a>.</div>
         <div>OData mock service for Business Partner Social Media custom API is running at <a href="/sap/opu/odata/sap/YY1_BPSOCIALMEDIA_CDS">/sap/opu/odata/sap/YY1_BPSOCIALMEDIA_CDS</a>.</div>
+        <div>OData mock service for Timesheet API is running at <a href="/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET">/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET</a>.</div>
     </body>
 </html>`);
 });
