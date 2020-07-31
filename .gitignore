@@ -11,8 +11,7 @@ target/
 s4hana_pipeline/
 
 business-partner/API_BUSINESS_PARTNER.edmx
-social-media-accounts\YY1_BPSOCIALMEDIA_CDS.edmx
-timeSheetEntryCollection\API_MANAGE_WORKFORCE_TIMESHEET.edmx
+timeSheetEntryCollection/API_MANAGE_WORKFORCE_TIMESHEET.edmx
 
 vdm-output-tmp/
 .DS_Store
