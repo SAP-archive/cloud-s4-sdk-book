@@ -1,7 +1,0 @@
-{
-  "API_MANAGE_WORKFORCE_TIMESHEET": {
-    "directoryName": "manage-workforce-timesheet-service",
-    "servicePath": "/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET",
-    "npmPackageName": "manage-workforce-timesheet-service"
-  }
-}

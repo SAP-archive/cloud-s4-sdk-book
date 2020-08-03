@@ -1,7 +1,0 @@
-{
-  "out": "documentation",
-  "exclude": [
-    "node_modules/",
-    "dist/"
-  ]
-}
