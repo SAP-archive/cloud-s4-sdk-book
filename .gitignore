@@ -11,8 +11,8 @@ target/
 s4hana_pipeline/
 
 business-partner/API_BUSINESS_PARTNER.edmx
-time-off\ECTimeOff.edmx
-timeSheetEntryCollection\API_MANAGE_WORKFORCE_TIMESHEET.edmx
+time-off/ECTimeOff.edmx
+timeSheetEntryCollection/API_MANAGE_WORKFORCE_TIMESHEET.edmx
 integration-tests/time-off/
 integration-tests/timeSheetEntryCollection/
 
