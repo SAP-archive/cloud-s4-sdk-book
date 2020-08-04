@@ -33,12 +33,17 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.sap.cloud.s4hana.cloudplatform</groupId>
+            <groupId>com.sap.cloud.sdk.cloudplatform</groupId>
             <artifactId>scp-cf</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sap.cloud.s4hana</groupId>
+            <groupId>com.sap.cloud.sdk.s4hana</groupId>
             <artifactId>s4hana-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.cloud.sdk.cloudplatform</groupId>
+            <artifactId>security-servlet</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
@@ -75,7 +80,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>3.2.3</version>
                 <configuration>
                     <attachClasses>true</attachClasses>
                 </configuration>
@@ -84,20 +89,21 @@
             <plugin>
                 <groupId>org.apache.tomee.maven</groupId>
                 <artifactId>tomee-maven-plugin</artifactId>
-                <version>7.0.5</version>
+                <version>8.0.1</version>
                 <configuration>
                     <tomeeClassifier>webprofile</tomeeClassifier>
                     <context>ROOT</context>
                     <libs>
                         <lib>remove:slf4j-jdk14</lib>
                     </libs>
+                    <tomeeShutdownPort>8006</tomeeShutdownPort>
                 </configuration>
             </plugin>
 
             <plugin>
-                <groupId>com.sap.cloud.s4hana.plugins</groupId>
-                <artifactId>s4sdk-maven-plugin</artifactId>
-                <version>2.9.0</version>
+                <groupId>com.sap.cloud.sdk.plugins</groupId>
+                <artifactId>usage-analytics-maven-plugin</artifactId>
+                <version>3.24.0</version>
                 <executions>
                     <execution>
                         <goals>

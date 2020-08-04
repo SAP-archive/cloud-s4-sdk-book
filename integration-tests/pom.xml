@@ -55,23 +55,18 @@
         </dependency>
 
         <dependency>
-            <groupId>com.sap.cloud.s4hana.cloudplatform</groupId>
+            <groupId>com.sap.cloud.sdk.cloudplatform</groupId>
             <artifactId>scp-cf</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sap.cloud.s4hana</groupId>
+            <groupId>com.sap.cloud.sdk.s4hana</groupId>
             <artifactId>s4hana-all</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.sap.cloud.s4hana</groupId>
-            <artifactId>testutil</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sap.cloud.s4hana.quality</groupId>
-            <artifactId>listeners-all</artifactId>
+            <groupId>com.sap.cloud.sdk.testutil</groupId>
+            <artifactId>testutil-core</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -100,11 +95,21 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
+            <version>4.0.0</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
                     <groupId>commons-logging</groupId>
                     <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <!-- hamcrest libraries excluded here due to dependency conflict with JUnit -->
+                <exclusion>
+                    <groupId>org.hamcrest</groupId>
+                    <artifactId>hamcrest-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.hamcrest</groupId>
+                    <artifactId>hamcrest-library</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -141,7 +146,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.2</version>
+                <version>0.8.5</version>
                 <configuration>
                     <destFile>${jacoco.executionDataFile}</destFile>
                     <dataFile>${jacoco.executionDataFile}</dataFile>
@@ -161,7 +166,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M1</version>
+                <version>3.0.0-M4</version>
                 <configuration>
                     <skipTests>${surefire.skipTests}</skipTests>
                     <includes>
