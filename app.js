@@ -23,7 +23,7 @@ app.use(sendFakeCsrfToken)
 app.use('/sap/opu/odata/sap/API_BUSINESS_PARTNER', bupaApi);
 app.use('/sap/opu/odata/sap/YY1_BPSOCIALMEDIA_CDS', socialMediaApi);
 app.use('/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET', timeSheetApi);
-app.use('/sap/opu/odata/sap/ECTimeOff', timeOff);
+app.use('/odata/v2', timeOff);
 
 app.get('/', function(req, res) {
     res.set('Content-Type', 'text/html');
@@ -35,7 +35,7 @@ app.get('/', function(req, res) {
         <div>OData mock service for Business Partner API of SAP S/4HANA Cloud is running at <a href="/sap/opu/odata/sap/API_BUSINESS_PARTNER">/sap/opu/odata/sap/API_BUSINESS_PARTNER</a>.</div>
         <div>OData mock service for Business Partner Social Media custom API is running at <a href="/sap/opu/odata/sap/YY1_BPSOCIALMEDIA_CDS">/sap/opu/odata/sap/YY1_BPSOCIALMEDIA_CDS</a>.</div>
         <div>OData mock service for Timesheet API is running at <a href="/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET">/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET</a>.</div>
-        <div>OData mock service for Time off API is running at <a href="/sap/opu/odata/sap/ECTimeOff">/sap/opu/odata/sap/ECTimeOff</a>.</div>
+        <div>OData mock service for Employee Central Time Off service of SAP SuccessFactors is running at <a href="/odata/v2/EmployeeTime">/odata/v2/EmployeeTime</a>.</div>
     </body>
 </html>`);
 });
