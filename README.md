@@ -52,8 +52,11 @@ destinations=[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username:
 The following tools need to be installed on your local machine.
 * [Cloud Foundry command line interface (CLI)](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
 
-#### Launch the mock server
-Execute the following commands (this assumes that you have set up your Cloud Foundry account at region EU10):
+#### Deploy the mock server
+
+Open the SAP [Cloud Platform Cockpit](https://account.hana.ondemand.com/) and navigate to the subaccount you are planning to deploy your application to. Click on “Overview” on the left and you can see the URL of the API endpoint.
+
+Execute the following commands (replace the following URL with your API endpoint):
 ```
 cf api https://api.cf.eu10.hana.ondemand.com
 cf login
