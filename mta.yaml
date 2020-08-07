@@ -1,0 +1,14 @@
+_schema-version: '3.1'
+ID: "mta-js-demo"
+version: 1.0.0
+
+build-parameters:
+  before-all:
+   - builder: custom
+     commands:
+      - npm install
+
+modules:
+  - name: "app"
+    type: nodejs
+    path: .

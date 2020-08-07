@@ -1,0 +1,29 @@
+{
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "reporters": [
+    "default",
+    [
+      "jest-junit",
+      {
+        "suiteName": "backend unit tests",
+        "outputDirectory": "./s4hana_pipeline/reports/backend-integration"
+      }
+    ]
+  ],
+  "collectCoverage": true,
+  "coverageReporters": [
+    "text",
+    "cobertura"
+  ],
+  "coverageDirectory": "../s4hana_pipeline/reports/coverage-reports/backend-integration"
+}

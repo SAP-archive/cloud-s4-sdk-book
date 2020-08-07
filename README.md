@@ -1,65 +1,67 @@
-# Extending SAP S/4HANA - Source Code for the Book
-This GitHub repository hosts the sample source code for the book _Extending SAP S/4HANA. Side-by-Side Extensions with the SAP S/4HANA Cloud SDK_ available [from SAP Press](https://www.sap-press.com/extending-sap-s4hana_4655/). The book uses the Business Partner Address Manager sample application contained in this repository to explain how to build side-by-side extensions that extend SAP S/4HANA and SAP S/4HANA Cloud.
+<a href="https://community.sap.com/topics/cloud-sdk"><img src="https://help.sap.com/doc/2324e9c3b28748a4ae2ad08166d77675/1.0/en-US/logo-with-js.svg" alt="SAP Cloud SDK for JavaScript Logo" height="122.92" width="226.773"/></a>
 
-This repository is relevant for you if you want to follow the example application described in the book and compare your results with the sample code. For more information, please consult the [public documentation](https://sap.github.io/cloud-s4-sdk-book/) that accompanies this repository.
+# Welcome to Your Application!
 
-## Requirements
-You will need the following on your local machine to work with the source code and run the application:
-* Java Development Kit (JDK), version 8 (1.8.0), or above
-* Apache Maven, version 3.5.0, or above
+This is your **SAP Cloud Platform Cloud Foundry** application powered by the [SAP Cloud SDK for JavaScript](https://community.sap.com/topics/cloud-sdk) and [NestJS](https://nestjs.com/) using Multitarget application (mta) packaging.
 
-Additionally, to run the tests and the application, you need access to an SAP S/4HANA system, or alternatively setup a mock server as explained in the [documentation](https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html). In the SAP S/4HANA system, you need a technical communication user for integration scenario `SAP_COM_0008`. The example application has been tested with SAP S/4HANA Cloud 1805.
+## Getting started
 
-## Download and Installation
-Follow the instructions below to quickly build and launch the example application on your local machine.
-For more detailed step-by-step instructions and advanced use cases, consult the corresponding sections in the book.
+Everything is ready to go.
 
-### 1. Prepare
-Start with the following:
-* Clone or download this repository.
-* Navigate to the folder where you cloned or downloaded the repository. All of the steps mentioned below happen relative to this root folder. Execute all commands mentioned in the following in the root folder (which contains, besides others, this README file).
+```bash
+# Run the application locally
+$ npm run start:dev
 
-### 2. Build and test
-Then, you need to build the project, which also includes testing. For the integration tests, you need to provide the URL and credentials of your SAP S/4HANA system.
-* Open the file `integration-tests/src/test/resources/systems.yml`. Uncomment the following two lines (remove the `#` found in the original file) and supply the URL to your SAP S/4HANA system.
-```
-    - alias: "ERP_SYSTEM"
-      uri: "https://myXXXXXX.s4hana.ondemand.com"
-```
-* Create a `credentials.yml`file used during tests with the following content, insert  the credentials of your communication user in your SAP S/4HANA Cloud system.
-```
----
-credentials:
-- alias: "ERP_SYSTEM"
-  username: "<USERNAME>"
-  password: "<PASSWORD>"
-```
-* Run the following command to build and test the application.
-```
-mvn clean install "-Dtest.credentials=//absolute/path/to/credentials.yml"
+# Open the application in your default browser
+$ open http://localhost:3000/
 ```
 
-### 3. Deploy locally
-After you have successfully built the project, you can deploy it locally as follows. This will start a local server that hosts your application.
-* Configure your local environment by setting the following environment variables. Replace the URL and credentials with the appropriate values for your SAP S/4HANA Cloud system.
-  * Adapt the below commands for setting environment variables as appropriate for your operating system. The following commands are for the Windows command line.
-```
-set destinations="[{name: 'ErpQueryEndpoint', url: '<URL>', username: '<USERNAME>', password: '<PASSWORD>'"
-set ALLOW_MOCKED_AUTH_HEADER="true"
-```
-* Run the following commands to deploy the application on a local server.
-```
-mvn tomee:run -pl application
-```
-* Open the URL http://localhost:8080/address-manager in your browser to see the frontend of the launched application.
+## Testing
 
-## Known Issues
-None.
+The project comes with unit and end-to-end tests.
+Unit tests are located in the `src/` folder next to the modules and controllers, while end-to-end tests are in the `test/` folder.
 
-## How to Obtain Support
-Please reach out to us and the community with your questions on [Stack Overflow](https://stackoverflow.com/tags/s4sdk) (tag: `s4sdk`).
-If you have found a bug in the _sample source code_ hosted in this repository, please open an Issue in this GitHub repository.
+```bash
+# Run unit tests
+$ npm run test
 
-## License
+# Run e2e tests
+$ npm run test:e2e
+```
+
+## Continuous Integration
+
+This project is preconfigured to run with the [SAP Cloud SDK Pipeline](https://github.com/SAP/cloud-s4-sdk-pipeline).
+To get the installer follow the short [guide](https://github.com/SAP/cloud-s4-sdk-pipeline#download-and-installation).
+
+```bash
+# If you have the SAP Cloud SDK CLI installed, it can download the install script for you
+sap-cloud-sdk add-cx-server
+
+# Execute the script to start the Jenkins server
+$ ./cx-server start
+```
+
+Point the new Jenkins to your repository and it will automatically run the pipeline.
+If the pipeline should deploy your application as well, you need to modify the `.pipeline/config.yml`.
+
+## NestJS
+
+NestJS is a progressive [Node.js](http://nodejs.org) framework for building efficient and scalable server-side applications, heavily inspired by [Angular](https://angular.io).
+
+The [Nest CLI](https://docs.nestjs.com/cli/usages) is a powerful tool and can help you create new controllers, modules and interfaces.
+
+## Support
+
+If you need support with the SAP Cloud SDK, the SAP Cloud SDK CLI or this project scaffold, feel free to open an issue on [GitHub](https://github.com/SAP/cloud-sdk-cli) or ask a question on [stackoverflow with tag [sap-cloud-sdk]](https://stackoverflow.com/questions/tagged/sap-cloud-sdk).
+
+## License and Notice
+
 Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
 This file is licensed under the Apache Software License, v. 2 except as noted otherwise in the [LICENSE](LICENSE) file.
+
+The SAP Cloud SDK CLI is licensed under the [Apache Software License, v. 2](https://github.com/SAP/cloud-sdk-cli/blob/master/LICENSE).
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+The SAP Cloud SDK is in no way affiliated with or endorsed by Nest and its maintainers.
+While Nest is our recommendation, the SAP Cloud SDK can be used with any framework, so you are free to choose what you are comfortable with.
