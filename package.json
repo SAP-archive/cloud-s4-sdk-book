@@ -9,7 +9,6 @@
     "test": "npx jest",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "generate-test-resources:social-media": "npx generate-odata-client -i social-media-accounts -o integration-tests/social-media-accounts/odata-client -s ./integration-tests/social-media-accounts/service-mapping.json --forceOverwrite",
-    "generate-test-resources:timesheet": "npx generate-odata-client -i timeSheetEntryCollection/ -o integration-tests/timeSheetEntryCollection/odata-client -s ./integration-tests/timeSheetEntryCollection/service-mapping.json --forceOverwrite",
     "generate-test-resources:time-off": "npx generate-odata-client -i time-off/ -o integration-tests/time-off/odata-client -s ./integration-tests/time-off/service-mapping.json --forceOverwrite"
   },
   "author": "SAP",
