@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
-    <name>address-manager - Integration Tests</name>
-    <description>address-manager - Integration Tests</description>
+    <name>mta-spring-example - Integration Tests</name>
+    <description>mta-spring-example - Integration Tests</description>
 
-    <artifactId>address-manager-integration-tests</artifactId>
+    <artifactId>mta-spring-example-integration-tests</artifactId>
     <version>1.0</version>
 
     <parent>
         <groupId>com.sap.cloud.s4hana.examples</groupId>
-        <artifactId>address-manager</artifactId>
+        <artifactId>mta-spring-example</artifactId>
         <version>1.0</version>
     </parent>
 
@@ -25,68 +23,91 @@
         <surefire.groups/>
         <surefire.excludedGroups/>
         <surefire.maxMemorySize>1024m</surefire.maxMemorySize>
-        <surefire.maxPermSize>512m</surefire.maxPermSize>
-        <surefire.defaultLogLevel>warn</surefire.defaultLogLevel>
+        <surefire.logLevel>info</surefire.logLevel>
 
-        <jacoco.destFile>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.destFile>
-        <jacoco.outputDirectory>${project.reporting.outputDirectory}/jacoco</jacoco.outputDirectory>
+        <!--
+        Use the argLine property to define the arguments for the JVMs that are forked by the surefire plugin.
+        This avoids the need to use late property evaluation for configuring the jacoco plugin.
+        Relying on late evaluation of properties such as @{argLine} can result in issues with certain IDEs.
+
+        For more details, visit:
+        https://www.eclemma.org/jacoco/trunk/doc/prepare-agent-mojo.html
+        -->
+        <argLine>-Xmx${surefire.maxMemorySize} -Dorg.slf4j.simpleLogger.defaultLogLevel=${surefire.logLevel}</argLine>
+
+        <jacoco.executionDataFile>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.executionDataFile>
+        <jacoco.includes>*</jacoco.includes>
+        <jacoco.excludes>org.apache.*</jacoco.excludes>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.sap.cloud.s4hana.examples</groupId>
-            <artifactId>address-manager-application</artifactId>
-            <classifier>classes</classifier>
+            <artifactId>mta-spring-example-application</artifactId>
             <version>1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
-            <groupId>com.sap.cloud.s4hana.cloudplatform</groupId>
-            <artifactId>scp-cf</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sap.cloud.s4hana</groupId>
-            <artifactId>s4hana-all</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sap.cloud.s4hana</groupId>
-            <artifactId>testutil</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sap.cloud.s4hana.quality</groupId>
-            <artifactId>listeners-all</artifactId>
+            <groupId>com.sap.cloud.sdk.testutil</groupId>
+            <artifactId>testutil-core</artifactId>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test-autoconfigure</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.openejb</groupId>
-            <artifactId>arquillian-tomee-embedded</artifactId>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.openejb</groupId>
-            <artifactId>tomee-embedded</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.openejb</groupId>
-            <artifactId>tomee-jaxrs</artifactId>
-            <scope>test</scope>
+            <exclusions>
+                <!-- exclude android-json to avoid conflict with org.json:json -->
+                <!-- see also: https://github.com/spring-projects/spring-boot/issues/8706 -->
+                <exclusion>
+                    <groupId>com.vaadin.external.google</groupId>
+                    <artifactId>android-json</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
@@ -95,27 +116,19 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.9</version>
+                <version>0.8.5</version>
                 <configuration>
-                    <destFile>${jacoco.destFile}</destFile>
-                    <dataFile>${jacoco.destFile}</dataFile>
+                    <destFile>${jacoco.executionDataFile}</destFile>
+                    <dataFile>${jacoco.executionDataFile}</dataFile>
+                    <includes>${jacoco.includes}</includes>
+                    <excludes>${jacoco.excludes}</excludes>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>pre-unit-test</id>
+                        <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
-                    </execution>
-                    <execution>
-                        <id>post-unit-test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${jacoco.outputDirectory}</outputDirectory>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -123,14 +136,8 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20</version>
+                <version>3.0.0-M4</version>
                 <configuration>
-                    <argLine>@{argLine}
-                        -Xmx${surefire.maxMemorySize}
-                        -XX:MaxPermSize=${surefire.maxPermSize}
-                        -Dorg.slf4j.simpleLogger.defaultLogLevel=${surefire.defaultLogLevel}
-                        -Djava.io.tmpdir=target/arquillian-working-dir/${surefire.forkNumber}/
-                    </argLine>
                     <skipTests>${surefire.skipTests}</skipTests>
                     <includes>
                         <include>${surefire.include}</include>
@@ -142,6 +149,9 @@
                     <reuseForks>false</reuseForks>
                     <groups>${surefire.groups}</groups>
                     <excludedGroups>${surefire.excludedGroups}</excludedGroups>
+                    <systemPropertyVariables>
+                        <surefire.forkDir>${project.build.directory}/surefire-fork/${surefire.forkNumber}/</surefire.forkDir>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>

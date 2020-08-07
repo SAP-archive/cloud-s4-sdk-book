@@ -1,0 +1,14 @@
+ID: demo
+_schema-version: '3.1'
+version: 0.0.1
+
+modules:
+  - name: demo-srv
+    type: java
+    path: application
+    parameters:
+      memory: 1024M
+      disk-quota: 256M
+    build-parameters:
+      builder: maven
+      build-result: target/*.jar
