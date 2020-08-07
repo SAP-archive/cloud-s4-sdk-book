@@ -14,12 +14,12 @@ When you have cloned this repository, checkout the branch `mock-server`.
 Alternatively, download [this archive](https://github.com/SAP/cloud-s4-sdk-book/archive/mock-server.zip) and unzip it to your local machine.
 All of the following steps shall happen in this folder where you checked out or extraced the code of the mock server.
 
-Before you can launch the mock server, you need to manually put the metadata EDMX document of the business partner OData service into the folder `business-partner` and prepare the document:
-* Go to the description of the [Business Partner API in the SAP API Business Hub](https://api.sap.com/shell/discover/contentpackage/SAPS4HANACloud/api/API_BUSINESS_PARTNER).
+Before you can launch the mock server, you need to manually put metadata EDMX documents of the [business partner](https://api.sap.com/api/API_BUSINESS_PARTNER/resource), [time off](https://api.sap.com/api/API_MANAGE_WORKFORCE_TIMESHEET/overview) and [timesheet](https://api.sap.com/api/ECTimeOff/overview) OData services respectively into the folders `business-partner`, `time-off` and `timeSheetEntry`:
+* Go to the description of the [business partner](https://api.sap.com/api/API_BUSINESS_PARTNER/resource), [time off](https://api.sap.com/api/API_MANAGE_WORKFORCE_TIMESHEET/overview) and [timesheet](https://api.sap.com/api/ECTimeOff/overview) APIs in the SAP API Business Hub.
 * Click on *Log On* and log in with your credentials (you may need to register beforehand).
 * Click on *Details* and *Download Specification* and choose *EDMX*.
-* Store the downloaded file with the name `API_BUSINESS_PARTNER.edmx` in the subfolder `business-partner` of the mock server folder.
-* Open the metadata document and locate the entity type `A_BusinessPartnerType`. Within the `EntityType` item with that name, add the following two lines behind the line that contains `</Key>`:
+* Store the downloaded files with the names `API_BUSINESS_PARTNER.edmx`, `ECTimeOff.edmx` and `API_MANAGE_WORKFORCE_TIMESHEET.edmx` respectively in the subfolders `business-partner`, `time-off` and `timeSheetEntry` of the mock server folder.
+* Open the `API_BUSINESS_PARTNER.edmx` document and locate the entity type `A_BusinessPartnerType`. Within the `EntityType` item with that name, add the following two lines behind the line that contains `</Key>`:
 ```
 <Property Name="YY1_AddrLastCheckedOn_bus" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Addresses Last Checked On"/>
 <Property Name="YY1_AddrLastCheckedBy_bus" Type="Edm.String" MaxLength="50" sap:label="Addresses Last Checked By"/>
@@ -40,7 +40,7 @@ npm install
 npm start
 ```
 
-Wait until you see the output `Mock server started`. Access the mock OData service at [http://localhost:3000/sap/opu/odata/sap/API_BUSINESS_PARTNER](http://localhost:3000/sap/opu/odata/sap/API_BUSINESS_PARTNER) (no credentials required).
+Wait until you see the output `Mock server started`. Access the list of mock OData services at http://localhost:3000 (no credentials required).
 
 Use `http://localhost:3000` as the URL for your destination `ErpQueryEndpoint` with any dummy user and password, for example:
 ```
@@ -52,8 +52,11 @@ destinations=[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username:
 The following tools need to be installed on your local machine.
 * [Cloud Foundry command line interface (CLI)](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
 
-#### Launch the mock server
-Execute the following commands (this assumes that you have set up your Cloud Foundry account at region EU10):
+#### Deploy the mock server
+
+Open the SAP [Cloud Platform Cockpit](https://account.hana.ondemand.com/) and navigate to the subaccount you are planning to deploy your application to. Click on “Overview” on the left and you can see the URL of the API endpoint.
+
+Execute the following commands (replace the following URL with your API endpoint):
 ```
 cf api https://api.cf.eu10.hana.ondemand.com
 cf login
