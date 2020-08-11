@@ -1,4 +1,4 @@
-package com.sap.cloud.s4hana.examples.addressmgr;
+package com.sap.cloud.s4hana.examples;
 
 import org.junit.Test;
 
