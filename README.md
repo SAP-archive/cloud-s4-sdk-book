@@ -59,7 +59,3 @@ None.
 ## How to Obtain Support
 Please reach out to us and the community with your questions on [Stack Overflow](https://stackoverflow.com/tags/sap-cloud-sdk) (tag: `sap-cloud-sdk`).
 If you have found a bug in the _sample source code_ hosted in this repository, please open an Issue in this GitHub repository.
-
-## License
-Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
-This file is licensed under the Apache Software License, v. 2 except as noted otherwise in the [LICENSE](LICENSE) file.
