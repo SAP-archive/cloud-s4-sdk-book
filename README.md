@@ -14,8 +14,8 @@ When you have cloned this repository, checkout the branch `mock-server`.
 Alternatively, download [this archive](https://github.com/SAP/cloud-s4-sdk-book/archive/mock-server.zip) and unzip it to your local machine.
 All of the following steps shall happen in this folder where you checked out or extraced the code of the mock server.
 
-Before you can launch the mock server, you need to manually put metadata EDMX documents of the [business partner](https://api.sap.com/api/API_BUSINESS_PARTNER/resource), [time off](https://api.sap.com/api/API_MANAGE_WORKFORCE_TIMESHEET/overview) and [timesheet](https://api.sap.com/api/ECTimeOff/overview) OData services respectively into the folders `business-partner`, `time-off` and `timeSheetEntry`:
-* Go to the description of the [business partner](https://api.sap.com/api/API_BUSINESS_PARTNER/resource), [time off](https://api.sap.com/api/API_MANAGE_WORKFORCE_TIMESHEET/overview) and [timesheet](https://api.sap.com/api/ECTimeOff/overview) APIs in the SAP API Business Hub.
+Before you can launch the mock server, you need to manually put metadata EDMX documents of the [business partner](https://api.sap.com/api/API_BUSINESS_PARTNER/resource), [time off](https://api.sap.com/api/ECTimeOff/overview) and [timesheet](https://api.sap.com/api/API_MANAGE_WORKFORCE_TIMESHEET/overview) OData services respectively into the folders `business-partner`, `time-off` and `timeSheetEntry`:
+* Go to the description of the [business partner](https://api.sap.com/api/API_BUSINESS_PARTNER/resource), [time off](https://api.sap.com/api/ECTimeOff/overview) and [timesheet](https://api.sap.com/api/API_MANAGE_WORKFORCE_TIMESHEET/overview) APIs in the SAP API Business Hub.
 * Click on *Log On* and log in with your credentials (you may need to register beforehand).
 * Click on *Details* and *Download Specification* and choose *EDMX*.
 * Store the downloaded files with the names `API_BUSINESS_PARTNER.edmx`, `ECTimeOff.edmx` and `API_MANAGE_WORKFORCE_TIMESHEET.edmx` respectively in the subfolders `business-partner`, `time-off` and `timeSheetEntry` of the mock server folder.
@@ -67,7 +67,7 @@ Watch the output of the command for the URL of the Cloud Foundry app. Look for a
 ```
 routes: bupa-mock-odata-<random-route>.cfapps.eu10.hana.ondemand.com
 ```
-Access the mock OData service at that URL, by appending the path `/sap/opu/odata/sap/API_BUSINESS_PARTNER`.
+Access the business partner mock OData service at that URL, by appending the path `/sap/opu/odata/sap/API_BUSINESS_PARTNER`.
 
 Use your specific URL like `https://bupa-mock-odata-<random-route>.cfapps.eu10.hana.ondemand.com` as the URL for your destination `ErpQueryEndpoint` with any dummy user and password (or choose _No Authentication_ when defining the destination with the destination service on SAP Cloud Platform).
 
