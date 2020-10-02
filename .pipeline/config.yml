@@ -2,12 +2,6 @@ general:
   productiveBranch: 'consumer-test'
   collectTelemetryData: false
 stages:
-  npmAudit:
-    auditedAdvisories:
-      - 803
-      - 1068
-      - 1070
-      - 1184
   productionDeployment:
     cfCreateServices:
       - serviceManifest: 'services-manifest.yml'
