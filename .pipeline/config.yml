@@ -28,6 +28,8 @@ steps:
   tmsUpload:
     namedUser: 'CLOUD_SDK_PIPELINE'
 stages:
+  Confirm:
+    manualConfirmation: false
   Release:
     lockingResource: 'release'
     stageLocking: true
