@@ -38,7 +38,6 @@
 
     <modules>
         <module>application</module>
-        <module>unit-tests</module>
         <module>integration-tests</module>
     </modules>
 
