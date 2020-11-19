@@ -1,6 +1,6 @@
 general:
   inferBuildTool: true
-  productiveBranch: 'consumer-test'
+  productiveBranch: 'consumer-test-gpp'
   collectTelemetryData: false
 stages:
   Release:
