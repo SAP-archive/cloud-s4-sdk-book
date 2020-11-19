@@ -23,16 +23,10 @@ steps:
     buildTarget: 'CF'
     mtaBuildTool: 'cloudMbt'
     installArtifacts: true
-  piperStageWrapper:
-    stageLocking: false
-  tmsUpload:
-    namedUser: 'CLOUD_SDK_PIPELINE'
 stages:
   Confirm:
     manualConfirmation: false
   Release:
-    lockingResource: 'release'
-    stageLocking: true
     cfCreateServices:
       - serviceManifest: 'services-manifest.yml'
         space: 'infra-testing'
