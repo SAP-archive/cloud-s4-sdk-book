@@ -1,9 +1,35 @@
 general:
   inferBuildTool: true
+  inferProjectName: true
   productiveBranch: 'consumer-test-gpp'
   collectTelemetryData: false
+steps:
+  artifactPrepareVersion:
+    versioningType: 'cloud_noTag'
+  cloudFoundryDeploy:
+    dockerImage: 'ppiper/cf-cli:v2'
+    keepOldInstance: true
+    useGoStep: true
+    apiEndpoint: 'https://api.cf.eu10.hana.ondemand.com'
+    deployTool: cf_native
+    deployType: standard
+    org: piper
+    space: infra-testing
+    appName: 'devops-docker-images-IT'
+    manifest: manifest.yml
+  mavenExecute:
+    dockerImage: 'maven:3.6.3-jdk-11'
+  mtaBuild:
+    buildTarget: 'CF'
+    mtaBuildTool: 'cloudMbt'
+    installArtifacts: true
+  piperStageWrapper:
+    stageLocking: false
+  tmsUpload:
+    namedUser: 'CLOUD_SDK_PIPELINE'
 stages:
   Release:
+    lockingResource: 'release'
     cfCreateServices:
       - serviceManifest: 'services-manifest.yml'
         space: 'infra-testing'
@@ -16,16 +42,3 @@ stages:
         appName: 'devops-docker-images-IT'
         manifest: 'manifest.yml'
         credentialsId: 'devops-docker-images-IT-cf'
-steps:
-  artifactPrepareVersion:
-    versioningType: 'cloud_noTag'
-  cloudFoundryDeploy:
-    apiEndpoint: 'https://api.cf.eu10.hana.ondemand.com'
-    deployTool: cf_native
-    deployType: standard
-    org: piper
-    space: infra-testing
-    appName: 'devops-docker-images-IT'
-    manifest: manifest.yml
-  mavenExecute:
-    dockerImage: 'maven:3.6.3-jdk-11'
