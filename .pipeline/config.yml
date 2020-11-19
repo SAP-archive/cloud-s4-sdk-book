@@ -17,6 +17,8 @@ stages:
         manifest: 'manifest.yml'
         credentialsId: 'devops-docker-images-IT-cf'
 steps:
+  artifactPrepareVersion:
+    versioningType: 'cloud_noTag'
   cloudFoundryDeploy:
     apiEndpoint: 'https://api.cf.eu10.hana.ondemand.com'
     deployTool: cf_native
