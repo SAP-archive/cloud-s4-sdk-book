@@ -1,8 +1,9 @@
 general:
+  inferBuildTool: true
   productiveBranch: 'consumer-test'
   collectTelemetryData: false
 stages:
-  productionDeployment:
+  Release:
     cfCreateServices:
       - serviceManifest: 'services-manifest.yml'
         space: 'infra-testing'
