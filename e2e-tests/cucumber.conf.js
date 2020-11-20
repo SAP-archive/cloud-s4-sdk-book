@@ -28,6 +28,23 @@ BeforeAll(async () => {
   };
   await startWebDriver(options);
   await createSession(options);
+  const loginPage = client.page.login();
+  await loginPage.navigate().loginWithForm(false);
+});
+
+AfterAll(async () => {
+  await closeSession();
+  await stopWebDriver();
+
+  setTimeout(() => {
+    reporter.generate({
+      theme: "bootstrap",
+      jsonFile: reportsDirectory + "/cucumber_report.json",
+      output: reportsDirectory + "/cucumber_report.html",
+      reportSuiteAsScenarios: true,
+      launchReport: false,
+    });
+  }, 0);
 });
 
 AfterAll(async () => {

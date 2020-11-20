@@ -18,6 +18,8 @@ module.exports = {
         retryAssertionTimeout: 10000,
         waitForConditionTimeout: 10000,
         asyncHookTimeout: 10000,
+        user: "${e2e_username}",
+        pass: "${e2e_password}"
       },
       screenshots: {
         enabled: true,
