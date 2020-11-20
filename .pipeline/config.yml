@@ -21,6 +21,14 @@ steps:
 stages:
   "Confirm":
     manualConfirmation: false
+ 
+  "Additional Unit Tests":
+    karmaExecuteTests: false
+    junit:
+      active: true
+      allowEmptyResults: true
+      pattern: 's4hana_pipeline/reports/frontend-unit/**/Test*.xml'
+
 #  Integration:
 #    credentials:
 #      - alias: 'mySystemAlias'
