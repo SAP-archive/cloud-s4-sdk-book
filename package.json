@@ -1,0 +1,20 @@
+{
+    "name": "businesspartner-manager-cf",
+    "version": "1.0.0",
+    "description": "Frontend Tests",
+    "scripts": {
+        "ci-frontend-unit-test": "karma start frontend-unit-tests/karma.conf.js --watch=false --single-run=true"
+    },
+    "author": "SAP",
+    "private": true,
+    "devDependencies": {
+        "yargs": "^6.6.0",
+        "jasmine": "^2.99.0",
+        "karma": "^3.1.4",
+        "karma-chrome-launcher": "^2.1.1",
+        "karma-coverage": "^1.1.1",
+        "karma-jasmine": "^1.1.2",
+        "karma-junit-reporter": "^1.2.0",
+        "karma-openui5": "^0.2.3"
+    }
+}
