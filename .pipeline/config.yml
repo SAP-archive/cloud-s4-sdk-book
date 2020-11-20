@@ -17,6 +17,9 @@ steps:
   artifactPrepareVersion:
     versioningType: cloud_noTag
 
+  npmExecuteScripts:
+    dockerImage: 'ppiper/node-browsers:v3'
+
 ### Stage-specific configuration
 stages:
   "Confirm":
