@@ -80,9 +80,9 @@ Before running your application using the SAP S/4HANA Cloud SDK locally, you nee
 Username and password can have any value. 
 The URL should point to the location of your mock server instance, e.g. the local URL (`http://localhost:3000`) or the URL of hte deployment of the mock server to SAP Cloud Platform.
 
-* Windows command prompt: `set destinations=[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]`
-* Windows PowerShell: `$Env:destinations="[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]"`
-* Linux / MacOS: `export destinations="[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]"`
+* Windows command prompt: `set destinations=[{'name': 'ErpQueryEndpoint', 'url': 'http://localhost:3000', 'username': 'DUMMY', 'password': 'dummy'}]`
+* Windows PowerShell: `$Env:destinations="[{'name': 'ErpQueryEndpoint', 'url': 'http://localhost:3000', 'username': 'DUMMY', 'password': 'dummy'}]"`
+* Linux / MacOS: `export destinations="[{'name': 'ErpQueryEndpoint', 'url': 'http://localhost:3000', 'username': 'DUMMY', 'password': 'dummy'}]"`
 
 Afterwards, start the application in the same session with `mvn clean package tomee:run` (within the `application` folder).
 
@@ -96,7 +96,7 @@ applications:
 ....
 env:
   ...
-  destinations: [{name: 'ErpQueryEndpoint', url: 'http://url.hana.ondemand.com', username: 'DUMMY', password: 'dummy'}]
+  destinations: [{'name': 'ErpQueryEndpoint', 'url': 'http://url.hana.ondemand.com', 'username': 'DUMMY', 'password': 'dummy'}]
 
 ```
 
