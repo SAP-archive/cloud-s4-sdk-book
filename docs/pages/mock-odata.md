@@ -78,7 +78,7 @@ Use your specific URL like `https://bupa-mock-odata-<random-route>.cfapps.eu10.h
 ### Run the application locally
 Before running your application using the SAP S/4HANA Cloud SDK locally, you need to set the environment variable `destinations` as follows to connect the application to the mock server.
 Username and password can have any value. 
-The URL should point to the location of your mock server instance, e.g. the local URL (`http://localhost:3000`) or the URL of hte deployment of the mock server to SAP Cloud Platform.
+The URL should point to the location of your mock server instance, e.g. the local URL (`http://localhost:3000`) or the URL of the deployment of the mock server to SAP Cloud Platform.
 
 * Windows command prompt: `set destinations=[{'name': 'ErpQueryEndpoint', 'url': 'http://localhost:3000', 'username': 'DUMMY', 'password': 'dummy'}]`
 * Windows PowerShell: `$Env:destinations="[{'name': 'ErpQueryEndpoint', 'url': 'http://localhost:3000', 'username': 'DUMMY', 'password': 'dummy'}]"`
