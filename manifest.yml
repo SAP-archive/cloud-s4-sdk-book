@@ -4,4 +4,5 @@ applications:
   memory: 64M
   buildpacks:
   - nodejs_buildpack
-  random-route: true
+  routes:
+      - route: 'odata-mock-server.internal.cfapps.sap.hana.ondemand.com'
