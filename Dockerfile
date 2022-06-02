@@ -21,7 +21,6 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm config set @sap:registry https://npm.sap.com
 RUN npm install
 
 COPY . .
