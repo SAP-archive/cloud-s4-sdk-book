@@ -25,7 +25,7 @@ Before you can launch the mock server, you need to manually put metadata EDMX do
 <Property Name="YY1_AddrLastCheckedBy_bus" Type="Edm.String" MaxLength="50" sap:label="Addresses Last Checked By"/>
 ```
 
-After you have thus prepared the mock server,  you can run the mock server on your local machine (at http://localhost:3000) or on SAP Cloud Platform, Cloud Foundry, as described in either of the following two sections.
+After you have thus prepared the mock server,  you can run the mock server on your local machine (at http://localhost:3000) or on SAP Business Technology Platform, Cloud Foundry, as described in either of the following two sections.
 
 ### Locally
 #### Prerequisites
@@ -47,14 +47,29 @@ Use `http://localhost:3000` as the URL for your destination `ErpQueryEndpoint` w
 destinations=[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]
 ```
 
-### On SAP Cloud Platform, Cloud Foundry
+#### Docker
+You can also use docker to build a container image and run it locally. The Dockerfile expects an argument - API_KEY. Therefore, you will need to provide a valid SAP API Business Hub API Key as an argument to build the image. 
+
+> You can get your API Key by navigating to [https://api.sap.com/settings](https://api.sap.com/settings) and clicking the _Show API Key_ button.
+
+```
+# Remember to get the API Key from the API Business Hub
+
+# Build the container image
+docker build --build-arg API_KEY=[YOUR_API_BUSINESS_HUB_API_KEY] --tag s4-mock-server .
+
+# Run the image
+docker run -p 8080:8080 s4-mock-server
+```
+
+### On SAP Business Technology Platform, Cloud Foundry
 #### Prerequisites
 The following tools need to be installed on your local machine.
 * [Cloud Foundry command line interface (CLI)](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
 
 #### Deploy the mock server
 
-Open the SAP [Cloud Platform Cockpit](https://account.hana.ondemand.com/) and navigate to the subaccount you are planning to deploy your application to. Click on “Overview” on the left and you can see the URL of the API endpoint.
+Open the SAP [BTP Cockpit](https://account.hana.ondemand.com/) and navigate to the subaccount you are planning to deploy your application to. Click on “Overview” on the left and you can see the URL of the API endpoint.
 
 Execute the following commands (replace the following URL with your API endpoint):
 ```
@@ -69,7 +84,7 @@ routes: bupa-mock-odata-<random-route>.cfapps.eu10.hana.ondemand.com
 ```
 Access the business partner mock OData service at that URL, by appending the path `/sap/opu/odata/sap/API_BUSINESS_PARTNER`.
 
-Use your specific URL like `https://bupa-mock-odata-<random-route>.cfapps.eu10.hana.ondemand.com` as the URL for your destination `ErpQueryEndpoint` with any dummy user and password (or choose _No Authentication_ when defining the destination with the destination service on SAP Cloud Platform).
+Use your specific URL like `https://bupa-mock-odata-<random-route>.cfapps.eu10.hana.ondemand.com` as the URL for your destination `ErpQueryEndpoint` with any dummy user and password (or choose _No Authentication_ when defining the destination with the destination service on SAP BTP).
 
 ## Limitations
 As a mock server, the functionality of the mock OData service is limited to the most essential features. It is by no means a complete OData service compliant with the OData v2 specification. Also, it is beyond the plain API not comparable with the business partner API of SAP S/4HANA Cloud.
