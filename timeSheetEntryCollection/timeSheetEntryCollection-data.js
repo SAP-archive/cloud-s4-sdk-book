@@ -5,13 +5,14 @@
  * - for multi-valued propeties: { "results": [] }
  * - for single-valued properties: null
  */
-
+const moment = require('moment');
+const yearMonth = moment().format('YYYY.MM');
  module.exports = {
         data: [
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001492')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001492')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001492')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001492')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -39,11 +40,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_1",
+                "PersonWorkAgreementExternalID": "bdavis",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001492",
                 "PersonWorkAgreement": "50000485",
-                "TimeSheetDate": "/Date(1567123200000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1567123200000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -52,8 +53,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_2',CompanyCode='1010',TimeSheetRecord='000000001493')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_2',CompanyCode='1010',TimeSheetRecord='000000001493')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='cgrant',CompanyCode='1010',TimeSheetRecord='000000001493')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='cgrant',CompanyCode='1010',TimeSheetRecord='000000001493')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -81,11 +82,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_2",
+                "PersonWorkAgreementExternalID": "cgrant",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001493",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1567036800000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1567036800000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -94,8 +95,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_3',CompanyCode='1010',TimeSheetRecord='000000001494')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_3',CompanyCode='1010',TimeSheetRecord='000000001494')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='smormony',CompanyCode='1010',TimeSheetRecord='000000001494')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='smormony',CompanyCode='1010',TimeSheetRecord='000000001494')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -123,11 +124,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_3",
+                "PersonWorkAgreementExternalID": "smormony",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001494",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1568246400000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1568246400000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -136,8 +137,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001498')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001498')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001498')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001498')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -165,11 +166,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_1",
+                "PersonWorkAgreementExternalID": "bdavis",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001498",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1570060800000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1570060800000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -178,8 +179,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_4',CompanyCode='1010',TimeSheetRecord='000000001495')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_4',CompanyCode='1010',TimeSheetRecord='000000001495')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='mhoff',CompanyCode='1010',TimeSheetRecord='000000001495')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='mhoff',CompanyCode='1010',TimeSheetRecord='000000001495')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -207,11 +208,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_4",
+                "PersonWorkAgreementExternalID": "mhoff",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001495",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1570492800000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1570492800000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -220,8 +221,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001496')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001496')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001496')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001496')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -249,11 +250,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_1",
+                "PersonWorkAgreementExternalID": "bdavis",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001496",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1571097600000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1571097600000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -262,8 +263,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_3',CompanyCode='1010',TimeSheetRecord='000000001498')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_3',CompanyCode='1010',TimeSheetRecord='000000001498')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='smormony',CompanyCode='1010',TimeSheetRecord='000000001498')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='smormony',CompanyCode='1010',TimeSheetRecord='000000001498')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -291,11 +292,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_3",
+                "PersonWorkAgreementExternalID": "smormony",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001498",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1572307200000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1572307200000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -304,8 +305,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_2',CompanyCode='1010',TimeSheetRecord='000000001497')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_2',CompanyCode='1010',TimeSheetRecord='000000001497')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='cgrant',CompanyCode='1010',TimeSheetRecord='000000001497')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='cgrant',CompanyCode='1010',TimeSheetRecord='000000001497')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -333,11 +334,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_2",
+                "PersonWorkAgreementExternalID": "cgrant",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001497",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1572998400000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1572998400000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -346,8 +347,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001499')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001499')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001499')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001499')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -375,11 +376,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_3",
+                "PersonWorkAgreementExternalID": "smormony",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001499",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1569283200000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1569283200000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -388,8 +389,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001500')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001500')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001500')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001500')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -417,11 +418,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_3",
+                "PersonWorkAgreementExternalID": "smormony",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001500",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1569369600000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1569369600000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -430,8 +431,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001501')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001501')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001501')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001501')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -459,11 +460,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_3",
+                "PersonWorkAgreementExternalID": "smormony",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001501",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1569456000000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1569456000000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -472,8 +473,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001502')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001502')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001502')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001502')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -501,11 +502,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_3",
+                "PersonWorkAgreementExternalID": "smormony",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001502",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1569542400000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1569542400000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -514,8 +515,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001503')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001503')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001503')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001503')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -543,11 +544,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_1",
+                "PersonWorkAgreementExternalID": "bdavis",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001503",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1570492800000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1570492800000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -556,8 +557,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001504')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001504')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001504')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001504')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -585,11 +586,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_1",
+                "PersonWorkAgreementExternalID": "bdavis",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001504",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1570579200000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1570579200000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -598,8 +599,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001505')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001505')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001505')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001505')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -627,11 +628,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_1",
+                "PersonWorkAgreementExternalID": "bdavis",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001505",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1570665600000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1570665600000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -640,8 +641,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001506')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001506')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001506')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001506')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -669,11 +670,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_1",
+                "PersonWorkAgreementExternalID": "bdavis",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001506",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1573603200000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1573603200000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -682,8 +683,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001507')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001507')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001507')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001507')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -711,11 +712,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_1",
+                "PersonWorkAgreementExternalID": "bdavis",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001507",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1573689600000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1573689600000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
@@ -724,8 +725,8 @@
             },
             {
                 "__metadata": {
-                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001508')",
-                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='TESTER_1',CompanyCode='1010',TimeSheetRecord='000000001508')",
+                    "id": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001508')",
+                    "uri": "https://{host}:{port}/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET/TimeSheetEntryCollection(PersonWorkAgreementExternalID='bdavis',CompanyCode='1010',TimeSheetRecord='000000001508')",
                     "type": "API_MANAGE_WORKFORCE_TIMESHEET.TimeSheetEntry"
                 },
                 "TimeSheetDataFields": {
@@ -753,11 +754,11 @@
                     "TimeSheetWrkLocCode": "",
                     "TimeSheetOvertimeCategory": ""
                 },
-                "PersonWorkAgreementExternalID": "TESTER_1",
+                "PersonWorkAgreementExternalID": "bdavis",
                 "CompanyCode": "1010",
                 "TimeSheetRecord": "000000001508",
                 "PersonWorkAgreement": "50000486",
-                "TimeSheetDate": "/Date(1573776000000)/",
+                "TimeSheetDate": `/Date(${new Date( moment(1573776000000).format(yearMonth + ".DD") ).getTime()})/`,
                 "TimeSheetIsReleasedOnSave": false,
                 "TimeSheetPredecessorRecord": "string",
                 "TimeSheetStatus": "30",
