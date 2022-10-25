@@ -21,7 +21,7 @@
     "moment": "^2.29.1"
   },
   "engines": {
-    "node": "^12.16.1"
+    "node": "^16.16.0"
   },
   "devDependencies": {
     "@sap/cloud-sdk-generator": "^1.13.1",
