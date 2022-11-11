@@ -36,6 +36,14 @@ function applyFilter(result, singleFilter) {
         const filterRegex = /^\(?(\w+) le datetime'(.*)'\)?$/;
         const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
         return applyLeFilter(result, filterProperty, transformDateTime(filterValue));
+    } else if (singleFilter.includes(' gt datetime\'')) {
+        const filterRegex = /^\(?(\w+) gt datetime'(.*)'\)?$/;
+        const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
+        return applyGtFilter(result, filterProperty, transformDateTime(filterValue));
+    } else if (singleFilter.includes(' lt datetime\'')) {
+        const filterRegex = /^\(?(\w+) lt datetime'(.*)'\)?$/;
+        const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
+        return applyLtFilter(result, filterProperty, transformDateTime(filterValue));
     }
 }
 
@@ -63,6 +71,14 @@ function applyGeFilter(result, filterProperty, filterValue) {
 
 function applyLeFilter(result, filterProperty, filterValue) {
     return result.filter(item => item[filterProperty] <= filterValue);
+}
+
+function applyGtFilter(result, filterProperty, filterValue) {
+    return result.filter(item => item[filterProperty] > filterValue);
+}
+
+function applyLtFilter(result, filterProperty, filterValue) {
+    return result.filter(item => item[filterProperty] < filterValue);
 }
 
 /**
