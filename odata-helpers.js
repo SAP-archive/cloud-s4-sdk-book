@@ -21,21 +21,29 @@ function removeFirstNavigationPath(propertyName) {
  */
 function applyFilter(result, singleFilter) {
     if (singleFilter.includes(' eq \'')) {
-        const filterRegex = /^\(?(\w+) eq '(.*)'\)?$/;
+        const filterRegex = /^\(*(\w+) eq '(.*)'\)*$/;
         const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
         return applyEqFilter(result, filterProperty, filterValue);
     } else if (singleFilter.includes(' ne \'')) {
-        const filterRegex = /^\(?(\w+) ne '(.*)'\)?$/;
+        const filterRegex = /^\(*(\w+) ne '(.*)'\)*$/;
         const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
         return applyNeFilter(result, filterProperty, filterValue);
     } else if (singleFilter.includes(' ge datetime\'')) {
-        const filterRegex = /^\(?(\w+) ge datetime'(.*)'\)?$/;
+        const filterRegex = /^\(*(\w+) ge datetime'(.*)'\)*$/;
         const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
         return applyGeFilter(result, filterProperty, transformDateTime(filterValue));
     } else if (singleFilter.includes(' le datetime\'')) {
-        const filterRegex = /^\(?(\w+) le datetime'(.*)'\)?$/;
+        const filterRegex = /^\(*(\w+) le datetime'(.*)'\)*$/;
         const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
         return applyLeFilter(result, filterProperty, transformDateTime(filterValue));
+    } else if (singleFilter.includes(' gt datetime\'')) {
+        const filterRegex = /^\(*(\w+) gt datetime'(.*)'\)*$/;
+        const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
+        return applyGtFilter(result, filterProperty, transformDateTime(filterValue));
+    } else if (singleFilter.includes(' lt datetime\'')) {
+        const filterRegex = /^\(*(\w+) lt datetime'(.*)'\)*$/;
+        const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
+        return applyLtFilter(result, filterProperty, transformDateTime(filterValue));
     }
 }
 
@@ -63,6 +71,14 @@ function applyGeFilter(result, filterProperty, filterValue) {
 
 function applyLeFilter(result, filterProperty, filterValue) {
     return result.filter(item => item[filterProperty] <= filterValue);
+}
+
+function applyGtFilter(result, filterProperty, filterValue) {
+    return result.filter(item => item[filterProperty] > filterValue);
+}
+
+function applyLtFilter(result, filterProperty, filterValue) {
+    return result.filter(item => item[filterProperty] < filterValue);
 }
 
 /**
@@ -130,7 +146,7 @@ const reduceEntityToSelect = function(entity, selectedProperties = []) {
     return Object.entries(entity).reduce(function(result, [key, value]) {
         const isNavProperty = isNavigationProperty(key);
         if('__metadata' === key || selectedProperties.includes(key) ||
-                (selectedProperties.includes('*')) && !isNavProperty) {
+                (selectedProperties.filter(a => a.includes("*")).length > 0) && !isNavProperty){
             result[key] = value;
         }
         else if(isNavProperty) {
