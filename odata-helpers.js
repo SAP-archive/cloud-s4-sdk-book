@@ -146,7 +146,7 @@ const reduceEntityToSelect = function(entity, selectedProperties = []) {
     return Object.entries(entity).reduce(function(result, [key, value]) {
         const isNavProperty = isNavigationProperty(key);
         if('__metadata' === key || selectedProperties.includes(key) ||
-                (selectedProperties.includes('*')) && !isNavProperty) {
+                (selectedProperties.filter(a => a.includes("*")).length > 0) && !isNavProperty){
             result[key] = value;
         }
         else if(isNavProperty) {
