@@ -21,27 +21,27 @@ function removeFirstNavigationPath(propertyName) {
  */
 function applyFilter(result, singleFilter) {
     if (singleFilter.includes(' eq \'')) {
-        const filterRegex = /^\(?(\w+) eq '(.*)'\)?$/;
+        const filterRegex = /^\(*(\w+) eq '(.*)'\)*$/;
         const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
         return applyEqFilter(result, filterProperty, filterValue);
     } else if (singleFilter.includes(' ne \'')) {
-        const filterRegex = /^\(?(\w+) ne '(.*)'\)?$/;
+        const filterRegex = /^\(*(\w+) ne '(.*)'\)*$/;
         const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
         return applyNeFilter(result, filterProperty, filterValue);
     } else if (singleFilter.includes(' ge datetime\'')) {
-        const filterRegex = /^\(?(\w+) ge datetime'(.*)'\)?$/;
+        const filterRegex = /^\(*(\w+) ge datetime'(.*)'\)*$/;
         const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
         return applyGeFilter(result, filterProperty, transformDateTime(filterValue));
     } else if (singleFilter.includes(' le datetime\'')) {
-        const filterRegex = /^\(?(\w+) le datetime'(.*)'\)?$/;
+        const filterRegex = /^\(*(\w+) le datetime'(.*)'\)*$/;
         const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
         return applyLeFilter(result, filterProperty, transformDateTime(filterValue));
     } else if (singleFilter.includes(' gt datetime\'')) {
-        const filterRegex = /^\(?(\w+) gt datetime'(.*)'\)?$/;
+        const filterRegex = /^\(*(\w+) gt datetime'(.*)'\)*$/;
         const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
         return applyGtFilter(result, filterProperty, transformDateTime(filterValue));
     } else if (singleFilter.includes(' lt datetime\'')) {
-        const filterRegex = /^\(?(\w+) lt datetime'(.*)'\)?$/;
+        const filterRegex = /^\(*(\w+) lt datetime'(.*)'\)*$/;
         const [, filterProperty, filterValue] = filterRegex.exec(singleFilter);
         return applyLtFilter(result, filterProperty, transformDateTime(filterValue));
     }
